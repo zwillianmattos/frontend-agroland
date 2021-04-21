@@ -1,0 +1,55 @@
+name: app_inside
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http:
+  cupertino_icons: ^1.0.2
+  flutter_modular: ^3.1.0
+  flutter_mobx:
+  flutter_triple:
+  mobx_triple: ^1.0.2
+  mobx:
+  modal_bottom_sheet: ^2.0.0
+  custom_pop_up_menu: ^1.2.0
+  shared_preferences:
+
+dev_dependencies:
+  flutter_modular_test:
+  modular_codegen:
+  build_runner:
+  mocktail:
+  flutter_test:
+    sdk: flutter
+flutter:
+
+  uses-material-design: true
+  assets:
+      - assets/aa.json
+      - assets/nvi.json
+      - assets/logo.png
+      - assets/acf.json
+  fonts:
+    - family: Product Sans
+      fonts:
+        - asset: fonts/Product Sans Regular.ttf
+        - asset: fonts/Product Sans Italic.ttf
+        - asset: fonts/Product Sans Bold.ttf
+        - asset: fonts/Product Sans Bold Italic.ttf
+vars:
+  clean: flutter clean
+  get: flutter pub get
+  runner: flutter pub run build_runner
+scripts:
+  mobx_build: $clean & $get & $runner build --delete-conflicting-outputs
+  mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
+
+  #  flutter pub run build_runner  watch --delete-conflicting-outputs
