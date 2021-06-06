@@ -17,7 +17,7 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @action
   changePage(index) {
-    if (currentIndex == index) return;
+    // if (currentIndex == index) return;
 
     currentIndex = index;
 
@@ -25,7 +25,7 @@ abstract class _BottomNavigatorStoreBase with Store {
       Modular.to.navigate('/home');
     } else if (index == 1) {
       Modular.to.navigate('/community');
-    } else if (index == 3) {
+    } else if (index == 4) {
       Modular.to.navigate('/configurations');
     }
   }

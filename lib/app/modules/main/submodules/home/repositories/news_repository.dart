@@ -22,7 +22,7 @@ class NewsRepository extends Disposable {
 
     // var data = response.data['articles'];
     var response = jsonDecode(MOCK_NEWS);
-    print(response);
+
     if (response == null) {
       return <NewsModel>[];
     }

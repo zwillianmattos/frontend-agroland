@@ -179,7 +179,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
 
                       return ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 5,
+                          itemCount: 10,
                           shrinkWrap: true,
                           physics: ScrollPhysics(),
                           itemBuilder: (context, index) {

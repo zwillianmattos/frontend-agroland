@@ -40,6 +40,10 @@ class BottomNavigatorPageState
               label: 'Cursos',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Typicons.calculator),
+              label: 'Marketplace',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Typicons.cog),
               label: 'Settings',
             ),
