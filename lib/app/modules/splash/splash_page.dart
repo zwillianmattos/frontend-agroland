@@ -15,12 +15,12 @@ class SplashPage extends StatelessWidget {
             duration: Duration(milliseconds: 600),
             tween: _scaleTween,
             child: Image.asset(
-              'assets/logo.png',
-              scale: 5,
+              'images/logo.png',
+              scale: 15,
             ),
             onEnd: () {
               Future.delayed(Duration(seconds: 1), () {
-                Modular.to.pushReplacementNamed('/bible');
+                Modular.to.pushReplacementNamed('/');
               });
             }),
       ),

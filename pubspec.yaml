@@ -1,4 +1,4 @@
-name: app_inside
+name: plant_care
 description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -21,7 +21,18 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   custom_pop_up_menu: ^1.2.0
   shared_preferences:
-
+  dio:
+  nb_utils:
+  flutter_svg:
+  camera: ^0.8.1
+  tflite: ^1.1.2
+  weather: ^2.0.0
+  geolocator: ^7.0.3
+  fluttericon: ^2.0.0
+  flutter_html: ^2.0.0
+  relative_scale: ^2.0.0
+  flutter_quill: ^1.3.3
+  
 dev_dependencies:
   flutter_modular_test:
   modular_codegen:
@@ -29,14 +40,13 @@ dev_dependencies:
   mocktail:
   flutter_test:
     sdk: flutter
+  mobx_codegen: ^2.0.1
 flutter:
 
   uses-material-design: true
   assets:
-      - assets/aa.json
-      - assets/nvi.json
-      - assets/logo.png
-      - assets/acf.json
+    - images/
+    - images/logo.png
   fonts:
     - family: Product Sans
       fonts:

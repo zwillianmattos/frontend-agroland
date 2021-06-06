@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(app_inside LANGUAGES CXX)
+project(plant_care LANGUAGES CXX)
 
-set(BINARY_NAME "app_inside")
+set(BINARY_NAME "plant_care")
 
 cmake_policy(SET CMP0063 NEW)
 

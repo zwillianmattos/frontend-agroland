@@ -1,4 +1,4 @@
-# app_inside
+# plant_care
 
 A new Flutter project.
 

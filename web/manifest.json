@@ -1,6 +1,6 @@
 {
-    "name": "app_inside",
-    "short_name": "app_inside",
+    "name": "plant_care",
+    "short_name": "plant_care",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
