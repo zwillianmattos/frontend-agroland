@@ -37,7 +37,7 @@ class BottomNavigatorPageState
             ),
             BottomNavigationBarItem(
               icon: Icon(Typicons.bookmark),
-              label: 'Cursos',
+              label: 'Educação',
             ),
             BottomNavigationBarItem(
               icon: Icon(Typicons.calculator),

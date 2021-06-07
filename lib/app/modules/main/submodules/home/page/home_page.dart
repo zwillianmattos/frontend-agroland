@@ -135,10 +135,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                   SizedBox(height: 8),
                   appLabelViewAll("Ferramentas"),
                   SizedBox(
-                    height: width > 400 ?  sy(80) : 120,
+                    height: width > 400 ? sy(80) : 120,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount:6,
+                        itemCount: 6,
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
                         itemBuilder: (context, index) {
@@ -146,7 +146,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                             padding: EdgeInsets.only(
                                 left: 16, right: 16, bottom: 16, top: 16),
                             child: Container(
-                              width:  sx(92) ,
+                              width: sx(92),
                               height: sy(92),
                               decoration: BoxDecoration(
                                 borderRadius:
@@ -162,7 +162,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                   ),
                                 ],
                               ),
-                              child: Icon(Typicons.leaf, size:  sy(12)),
+                              child: Icon(Typicons.leaf, size: sy(12)),
                               alignment: Alignment.center,
                             ),
                           );
@@ -215,7 +215,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                     ),
                                   ],
                                 ),
-                                width:  width > 400 ? sx(150) : sx(width) ,
+                                width: width > 400 ? sx(150) : sx(width),
                                 child: Align(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),

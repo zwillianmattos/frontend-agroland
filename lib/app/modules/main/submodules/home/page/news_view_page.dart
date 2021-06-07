@@ -33,7 +33,9 @@ class _NewsViewPageState extends State<NewsViewPage> {
                 child: Column(
                   children: [
                     Text(widget.news!.title!),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(widget.news!.author!),
                     Text(widget.news!.publishedAt!.toIso8601String()),
                   ],

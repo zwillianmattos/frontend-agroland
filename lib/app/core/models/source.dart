@@ -1,4 +1,3 @@
-
 class Source {
   final dynamic id;
   final String? name;

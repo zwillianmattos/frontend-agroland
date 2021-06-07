@@ -50,8 +50,12 @@ abstract class ThreadViewStorePageBase with Store {
   startComment() => comment = !comment;
 
   @action
-  sendComment({ required String comment, required Thread thread }) async {
-    await repository.send( replie: new Replies(body: comment, ), thread: thread);
+  sendComment({required String comment, required Thread thread}) async {
+    await repository.send(
+        replie: new Replies(
+          body: comment,
+        ),
+        thread: thread);
     await _loadThreadDetail();
   }
 }

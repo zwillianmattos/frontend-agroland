@@ -1,4 +1,3 @@
-
 import '../../../../../core/models/source.dart';
 
 class NewsModel {

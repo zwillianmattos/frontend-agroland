@@ -24,7 +24,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Community"),
+        title: text("Community"),
         backgroundColor: color_colorPrimary,
       ),
       body: Observer(
@@ -250,8 +250,9 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                                       icon: Icon(
                                                           Typicons.comment),
                                                       onPressed: () {
-                                                        controller.startCommentThread(
-                                                            index);
+                                                        controller
+                                                            .startCommentThread(
+                                                                index);
                                                       })
                                                 ],
                                               ),
@@ -282,9 +283,11 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                                   ),
                                                   readOnly: false,
                                                   onSubmitted: (value) {
-                                                    controller.sendCommentThread(
-                                                        comment: value,
-                                                        thread: list[index]);
+                                                    controller
+                                                        .sendCommentThread(
+                                                            comment: value,
+                                                            thread:
+                                                                list[index]);
                                                   });
                                             return Container();
                                           })

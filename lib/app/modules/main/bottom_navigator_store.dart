@@ -25,6 +25,8 @@ abstract class _BottomNavigatorStoreBase with Store {
       Modular.to.navigate('/home');
     } else if (index == 1) {
       Modular.to.navigate('/community');
+    } else if (index == 2) {
+      Modular.to.navigate('/education/ebook');
     } else if (index == 4) {
       Modular.to.navigate('/configurations');
     }
