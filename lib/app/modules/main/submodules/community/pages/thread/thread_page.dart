@@ -159,15 +159,15 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                     top: 8.0),
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
+                                      BorderRadius.all(Radius.circular(sx(10))),
                                   color: white,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.06),
-                                      spreadRadius: 5,
-                                      blurRadius: 10,
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 1,
                                       offset: Offset(
-                                          0, 0), // changes position of shadow
+                                          0, 2), // changes position of shadow
                                     ),
                                   ],
                                 ),
@@ -175,8 +175,8 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                   padding: const EdgeInsets.only(
                                       left: 16.0,
                                       right: 16.0,
-                                      bottom: 16.0,
-                                      top: 16.0),
+                                      bottom: 8.0,
+                                      top: 8.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -188,10 +188,37 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
-                                          Text(list[index]
-                                              .user!
-                                              .name
-                                              .toString()),
+                                          Container(
+                                            padding: const EdgeInsets.only(
+                                                left: 4.0,
+                                                top: 16.0,
+                                                right: 8.0,
+                                                bottom: 16.0),
+                                            child: Image.network(
+                                              "https://conder.sc.gov.br/wp-content/uploads/2019/08/avatar.png",
+                                              width: 30,
+                                            ),
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(list[index]
+                                                  .user!
+                                                  .name
+                                                  .toString()),
+                                              Text(
+                                                list[index]
+                                                    .createdAt
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 11.0),
+                                              ),
+                                            ],
+                                          ),
                                           Spacer(),
                                           Spacer(),
                                           // IconButton(
@@ -201,16 +228,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                           // )
                                         ],
                                       ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 16.0),
-                                        child: Text(
-                                          list[index].createdAt.toString(),
-                                          style: TextStyle(
-                                              color: Colors.grey,
-                                              fontSize: 11.0),
-                                        ),
-                                      ),
+
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -218,30 +236,39 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                             MainAxisAlignment.spaceAround,
                                         children: <Widget>[
                                           // Posted Timestamp
-                                          Text(
-                                            list[index].title.toString(),
-                                            textAlign: TextAlign.justify,
-                                          ),
+                                          if( list[index].title != null )
+                                            Text(
+                                              list[index].title.toString(),
+                                              textAlign: TextAlign.justify,
+                                            ),
                                           Html(
                                             data: list[index].body,
                                             shrinkWrap: true,
                                           ),
-
+                                          Divider(),
                                           // butttons
                                           Observer(builder: (_) {
                                             return Padding(
                                               padding: const EdgeInsets.only(
-                                                  top: 16.0),
+                                                  top: 1.0),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: [
                                                   IconButton(
+                                                      iconSize: 20,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
                                                       icon:
                                                           Icon(Typicons.heart),
                                                       onPressed: () {}),
                                                   IconButton(
+                                                      iconSize: 20,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              2.0),
                                                       color: controller
                                                                   .commentIndex ==
                                                               index
