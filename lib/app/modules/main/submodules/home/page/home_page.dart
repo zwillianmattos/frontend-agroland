@@ -1,15 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
 import 'package:plant_care/app/modules/main/submodules/home/stores/home_store.dart';
 import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
-import 'package:weather/weather.dart';
+import '../widgets/weather/page/weather_widget.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -39,83 +41,28 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
         backgroundColor: color_app_background,
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
+            return [
               SliverAppBar(
-                expandedHeight: expandHeight,
+                backgroundColor: color_colorPrimary,
                 floating: true,
-                forceElevated: innerBoxIsScrolled,
                 pinned: false,
-                titleSpacing: 16,
-                backgroundColor: innerBoxIsScrolled
-                    ? color_colorPrimary
-                    : color_colorPrimary,
-                actionsIconTheme: IconThemeData(opacity: 0.0),
-                title: innerBoxIsScrolled
-                    ? text("PlantCare",
-                        textColor: color_white,
-                        fontSize: textSizeLarge,
-                        fontFamily: fontFamilyBoldGlobal)
-                    : null,
+                collapsedHeight: 100,
+                expandedHeight: 100,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Container(
-                    height: 100,
-                    color: color_colorPrimary,
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          top: 20, bottom: 20, left: 16, right: 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                flex: 6,
-                                child: text("Ola Fulano",
-                                    textColor: color_white,
-                                    fontSize: textSizeLarge,
-                                    fontFamily: fontFamilyBoldGlobal),
-                              ),
-                              Expanded(
-                                  child: IconButton(
-                                icon: Icon(Typicons.bell),
-                                color: Colors.white,
-                                onPressed: () {},
-                              )),
-                              Expanded(
-                                  child: IconButton(
-                                      icon: Icon(Typicons.user),
-                                      color: Colors.white,
-                                      onPressed: () {}))
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ];
-          },
-          body: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
+                  centerTitle: true,
+                  title: Padding(
                     padding: EdgeInsets.only(left: 10, right: 16, top: 16),
                     child: Container(
+                      height: 45,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
+                        borderRadius: BorderRadius.all(Radius.circular(3100)),
                         color: white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.06),
-                            spreadRadius: 5,
-                            blurRadius: 10,
-                            offset: Offset(0, 0), // changes position of shadow
+                            color: Colors.grey.withOpacity(0.15),
+                            spreadRadius: 2,
+                            blurRadius: 19,
+                            offset: Offset(4, 6), // changes position of shadow
                           ),
                         ],
                       ),
@@ -132,41 +79,110 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                       alignment: Alignment.center,
                     ),
                   ),
-                  SizedBox(height: 8),
-                  appLabelViewAll("Ferramentas"),
+                ),
+              ),
+            ];
+          },
+          body: Container(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  SizedBox(height: 20),
                   SizedBox(
                     height: width > 400 ? sy(80) : 120,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 6,
-                        shrinkWrap: true,
-                        physics: ScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(
-                                left: 16, right: 16, bottom: 16, top: 16),
-                            child: Container(
-                              width: sx(92),
-                              height: sy(92),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                color: white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.06),
-                                    spreadRadius: 5,
-                                    blurRadius: 10,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Icon(Typicons.leaf, size: sy(12)),
-                              alignment: Alignment.center,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 16, right: 16, bottom: 16, top: 16),
+                          child: Container(
+                            width: sx(128),
+                            height: sy(92),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(3)),
+                              color: white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.15),
+                                  spreadRadius: 2,
+                                  blurRadius: 19,
+                                  offset: Offset(
+                                      4, 6), // changes position of shadow
+                                ),
+                              ],
                             ),
-                          );
-                        }),
+                            child: Icon(
+                              Typicons.camera,
+                              size: sy(12),
+                              color: color_colorPrimary,
+                            ),
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 16, right: 16, bottom: 16, top: 16),
+                          child: Container(
+                            width: sx(128),
+                            height: sy(92),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(3)),
+                              color: white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.15),
+                                  spreadRadius: 2,
+                                  blurRadius: 19,
+                                  offset: Offset(
+                                      4, 6), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Typicons.leaf,
+                              size: sy(12),
+                              color: color_colorPrimary,
+                            ),
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 16, right: 16, bottom: 16, top: 16),
+                          child: Container(
+                            width: sx(128),
+                            height: sy(92),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(3)),
+                              color: white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.15),
+                                  spreadRadius: 2,
+                                  blurRadius: 19,
+                                  offset: Offset(
+                                      4, 6), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Typicons.bookmark,
+                              size: sy(12),
+                              color: color_colorPrimary,
+                            ),
+                            alignment: Alignment.center,
+                          ),
+                        ),
+                      ],
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
+                    ),
                   ),
                   appLabelViewAll("Noticias"),
                   SizedBox(
@@ -179,46 +195,43 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
 
                       return ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: 10,
+                          itemCount: 5,
                           shrinkWrap: true,
                           physics: ScrollPhysics(),
                           itemBuilder: (context, index) {
                             NewsModel item = controller.newsList[index];
 
-                            return InkWell(
-                              onTap: () {
-                                // String slug = item.title!.trim()..toSlug();
-                                Modular.to
-                                    .pushNamed("/home/news", arguments: item);
-
-                                return;
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    left: 16, right: 16, bottom: 16, top: 16),
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  color: white,
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        item.urlToImage.toString()),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.06),
-                                      spreadRadius: 5,
-                                      blurRadius: 10,
-                                      offset: Offset(
-                                          0, 0), // changes position of shadow
-                                    ),
-                                  ],
+                            return Container(
+                              margin: EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 24, top: 16),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3)),
+                                color: white,
+                                image: DecorationImage(
+                                  image:
+                                      NetworkImage(item.urlToImage.toString()),
+                                  fit: BoxFit.cover,
                                 ),
-                                width: width > 400 ? sx(150) : sx(width),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.15),
+                                    spreadRadius: 2,
+                                    blurRadius: 19,
+                                    offset: Offset(
+                                        4, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              width: sx(width),
+                              child: InkWell(
+                                onTap: () {
+                                  Modular.to
+                                      .pushNamed("/home/news", arguments: item);
+                                },
                                 child: Align(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(16.0),
                                     child: Text(
                                       item.title.toString(),
                                       style: TextStyle(color: Colors.white),
@@ -232,46 +245,8 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                     }),
                   ),
                   appLabelViewAll("Previsao do Tempo"),
-                  SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16, right: 16, top: 16),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          color: white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.06),
-                              spreadRadius: 5,
-                              blurRadius: 10,
-                              offset:
-                                  Offset(0, 0), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(top: 35.0),
-                              child: Center(
-                                child: Location(location: "Agudos"),
-                              ),
-                            ),
-                            Center(
-                              child: LastUpdated(dateTime: DateTime.now()),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 50.0),
-                              child: Center(
-                                child: CombinedWeatherTemperature(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16)
+                  WeatherWidget(),
+                  SizedBox(height: 20),
                 ],
               ),
             ),
@@ -282,188 +257,162 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
   }
 }
 
-class Location extends StatelessWidget {
-  final String location;
-
-  Location({required this.location});
+class _Search extends StatefulWidget {
+  _Search({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Text(
-      location,
-      style: TextStyle(
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
-        color: blackColor,
-      ),
-    );
-  }
+  __SearchState createState() => __SearchState();
 }
 
-class LastUpdated extends StatelessWidget {
-  final DateTime dateTime;
-
-  LastUpdated({required this.dateTime});
+class __SearchState extends State<_Search> {
+  TextEditingController? _editingController;
 
   @override
-  Widget build(BuildContext context) {
-    return Text(
-      'Updated: ${TimeOfDay.fromDateTime(dateTime).format(context)}',
-      style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w200,
-        color: blackColor,
-      ),
-    );
+  void initState() {
+    super.initState();
+    _editingController = TextEditingController();
   }
-}
-
-class CombinedWeatherTemperature extends StatelessWidget {
-  // final Weather weather;
-
-  CombinedWeatherTemperature();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Container(
-                child: Text("asdasd"),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 5),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _editingController,
+              // textAlignVertical: TextAlignVertical.center,
+              onChanged: (_) => setState(() {}),
+              decoration: InputDecoration(
+                hintText: 'Search',
+                hintStyle: TextStyle(
+                    color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
               ),
-              //  WeatherConditions(condition: WeatherCondition.hail),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Temperature(
-                temperature: 30,
-                high: 2,
-                low: 2,
-              ),
-            ),
-          ],
-        ),
-        Center(
-          child: Text(
-            "teste",
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.w200,
-              color: blackColor,
             ),
           ),
-        ),
-      ],
+          _editingController!.text.trim().isEmpty
+              ? IconButton(
+                  icon: Icon(Icons.search,
+                      color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                  onPressed: null)
+              : IconButton(
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  icon: Icon(Icons.clear,
+                      color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                  onPressed: () => setState(
+                    () {
+                      _editingController!.clear();
+                    },
+                  ),
+                ),
+        ],
+      ),
     );
   }
 }
 
-class WeatherConditions extends StatelessWidget {
-  final WeatherCondition condition;
+class SearchHeader {
+  final double minTopBarHeight = 100;
+  final double maxTopBarHeight = 200;
+  final String? title;
+  final IconData? icon;
+  final Widget? search;
 
-  WeatherConditions({required this.condition});
-
-  @override
-  Widget build(BuildContext context) => _mapConditionToImage(condition);
-
-  Image _mapConditionToImage(WeatherCondition condition) {
-    Image image;
-    switch (condition) {
-      case WeatherCondition.clear:
-      case WeatherCondition.lightCloud:
-        image = Image.asset('assets/clear.png');
-        break;
-      case WeatherCondition.hail:
-      case WeatherCondition.snow:
-      case WeatherCondition.sleet:
-        image = Image.asset('assets/snow.png');
-        break;
-      case WeatherCondition.heavyCloud:
-        image = Image.asset('assets/cloudy.png');
-        break;
-      case WeatherCondition.heavyRain:
-      case WeatherCondition.lightRain:
-      case WeatherCondition.showers:
-        image = Image.asset('assets/rainy.png');
-        break;
-      case WeatherCondition.thunderstorm:
-        image = Image.asset('assets/thunderstorm.png');
-        break;
-      case WeatherCondition.unknown:
-        image = Image.asset('assets/clear.png');
-        break;
-    }
-    return image;
-  }
-}
-
-enum WeatherCondition {
-  snow,
-  sleet,
-  hail,
-  thunderstorm,
-  heavyRain,
-  lightRain,
-  showers,
-  heavyCloud,
-  lightCloud,
-  clear,
-  unknown
-}
-
-class Temperature extends StatelessWidget {
-  final double temperature;
-  final double low;
-  final double high;
-
-  Temperature({
-    required this.temperature,
-    required this.low,
-    required this.high,
+  SearchHeader({
+    @required this.title,
+    this.icon,
+    this.search,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: Text(
-            '${_formattedTemperature(temperature)}°',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w600,
-              color: blackColor,
-            ),
-          ),
-        ),
-        Column(
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    var shrinkFactor = min(1, shrinkOffset / (maxExtent - minExtent));
+
+    var topBar = Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: Container(
+        alignment: Alignment.center,
+        height:
+            max(maxTopBarHeight * (1 - shrinkFactor * 1.45), minTopBarHeight),
+        width: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'max: ${_formattedTemperature(high)}°',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w100,
-                color: blackColor,
-              ),
+              title!,
             ),
-            Text(
-              'min: ${_formattedTemperature(low)}°',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w100,
-                color: blackColor,
-              ),
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              icon,
+              size: 40,
+              color: Colors.white,
             )
           ],
-        )
-      ],
+        ),
+        decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(36),
+              bottomRight: Radius.circular(36),
+            )),
+      ),
+    );
+    return Container(
+      height: max(maxExtent - shrinkOffset, minExtent),
+      child: Stack(
+        fit: StackFit.loose,
+        children: [
+          if (shrinkFactor <= 0.5) topBar,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: 10,
+              ),
+              child: Container(
+                alignment: Alignment.center,
+                child: search,
+                width: 200,
+                height: 50,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(0, 10),
+                        blurRadius: 10,
+                        color: Colors.green.withOpacity(0.23),
+                      )
+                    ]),
+              ),
+            ),
+          ),
+          if (shrinkFactor > 0.5) topBar,
+        ],
+      ),
     );
   }
 
-  int _formattedTemperature(double t) => t.round();
+  @override
+  double get maxExtent => 230;
+
+  @override
+  double get minExtent => 100;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

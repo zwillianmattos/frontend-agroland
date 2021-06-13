@@ -102,7 +102,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: EdgeInsets.all(16),
+                                  margin: EdgeInsets.all(8),
                                   decoration: boxDecoration(
                                       bgColor: color_edit_background,
                                       color: color_edit_background,
@@ -159,15 +159,15 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                     top: 8.0),
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(sx(10))),
+                                      BorderRadius.all(Radius.circular(3)),
                                   color: white,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      spreadRadius: 1,
-                                      blurRadius: 1,
+                                      color: Colors.grey.withOpacity(0.15),
+                                      spreadRadius: 2,
+                                      blurRadius: 19,
                                       offset: Offset(
-                                          0, 2), // changes position of shadow
+                                          4, 6), // changes position of shadow
                                     ),
                                   ],
                                 ),
@@ -236,7 +236,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                             MainAxisAlignment.spaceAround,
                                         children: <Widget>[
                                           // Posted Timestamp
-                                          if( list[index].title != null )
+                                          if (list[index].title != null)
                                             Text(
                                               list[index].title.toString(),
                                               textAlign: TextAlign.justify,

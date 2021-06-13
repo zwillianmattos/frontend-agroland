@@ -52,27 +52,31 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
               Container(
                 // height: screen.height,
                 decoration: BoxDecoration(
-                    color: color_light_gray,
+                    // color: color_light_gray,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(22),
                         topRight: Radius.circular(22))),
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 16),
-                      text("Log in",
-                          fontSize: textSizeLarge, fontFamily: fontBold),
                       SizedBox(height: 16),
                       Form(
                         key: _form,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               margin: EdgeInsets.only(
-                                  left: 24.0,
-                                  right: 24.0,
-                                  top: 10.0,
-                                  bottom: 10),
+                                  left: 24.0, right: 24.0, top: 5.0, bottom: 5),
+                              child: text("Entrar",
+                                  fontSize: textSizeXXLarge,
+                                  fontFamily: fontBold),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: 24.0, right: 24.0, top: 5.0, bottom: 5),
                               decoration: boxDecoration(
                                   bgColor: color_edit_background,
                                   color: color_edit_background,
@@ -92,10 +96,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                             ),
                             Container(
                               margin: EdgeInsets.only(
-                                  left: 24.0,
-                                  right: 24.0,
-                                  top: 10.0,
-                                  bottom: 10),
+                                  left: 24.0, right: 24.0, top: 5.0, bottom: 5),
                               decoration: boxDecoration(
                                   bgColor: color_edit_background,
                                   color: color_edit_background,
@@ -116,11 +117,17 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 30),
                       Container(
-                        child: Column(
+                          margin: EdgeInsets.all(24.0),
+                          child: appButton(
+                              textContent: "Entrar", onPressed: _loginBtn)),
+                      SizedBox(height: 10),
+                      Container(
+                        margin: EdgeInsets.all(24.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            text("nao tenho conta"),
+                            text("nao tenho conta ?"),
                             text("criar conta",
                                 textColor: color_colorPrimary,
                                 fontFamily: fontSemibold),
@@ -129,14 +136,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginStore> {
                       ).onTap(() {
                         Modular.to.pushNamed('/account/register');
                       }),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                          margin: EdgeInsets.all(24.0),
-                          child: appButton(
-                              textContent: "Entrar", onPressed: _loginBtn)),
-                      SizedBox(height: 10),
                     ]),
               )
             ],

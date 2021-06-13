@@ -60,5 +60,4 @@ class EbookRepository with Store implements EbookDatasource {
     // TODO: implement store
     throw UnimplementedError();
   }
-
 }

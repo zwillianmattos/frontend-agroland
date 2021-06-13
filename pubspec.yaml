@@ -35,6 +35,10 @@ dependencies:
   flutter_cached_pdfview: ^0.4.0-nullsafety
   flutter_pdfview: ^1.1.0
   flutter_cache_manager: ^3.1.1
+  url_launcher: ^6.0.6
+  dio_cache_interceptor: ^2.3.1
+  location: ^4.2.3
+  sqlite3_flutter_libs: ^0.5.0
   
 dev_dependencies:
   flutter_modular_test:
@@ -73,3 +77,6 @@ scripts:
   mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
 
   #  flutter pub run build_runner  watch --delete-conflicting-outputs
+
+  # flutter build apk
+  # adb install -r build/app/outputs/flutter-apk/app-release.apk

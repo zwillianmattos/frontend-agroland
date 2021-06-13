@@ -29,66 +29,36 @@ class RegisterPage extends StatelessWidget {
           color: color_app_background,
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 20),
-                text("cadastrar",
-                        textColor: color_textColorSecondary,
-                        isLongText: true,
-                        isCentered: true)
-                    .center(),
                 Container(
-                  margin: EdgeInsets.all(24.0),
-                  decoration: boxDecoration(
-                      bgColor: color_white,
-                      color: color_white,
-                      showShadow: true,
-                      radius: 10),
-                  child: appEditTextStyle("Nome", isPassword: false),
+                  margin: EdgeInsets.only(
+                      left: 24.0, right: 24.0, top: 5.0, bottom: 5),
+                  child: text("Cadastrar",
+                      fontSize: textSizeXXLarge, fontFamily: fontBold),
                 ),
                 Container(
-                  margin: EdgeInsets.all(24.0),
-                  decoration: boxDecoration(
-                      bgColor: color_white,
-                      color: color_white,
-                      showShadow: true,
-                      radius: 10),
-                  child: appEditTextStyle("Email", isPassword: false),
-                ),
+                    margin: EdgeInsets.only(
+                        left: 24.0, right: 24.0, top: 5.0, bottom: 5),
+                    child: appEditTextStyle("Nome", isPassword: false)),
                 Container(
-                  margin: EdgeInsets.all(24.0),
-                  decoration: boxDecoration(
-                      bgColor: color_white,
-                      color: color_white,
-                      showShadow: true,
-                      radius: 10),
-                  child: appEditTextStyle("Senha", isPassword: true),
-                ),
+                    margin: EdgeInsets.only(
+                        left: 24.0, right: 24.0, top: 5.0, bottom: 5),
+                    child: appEditTextStyle("Email", isPassword: false)),
                 Container(
-                  margin: EdgeInsets.all(24.0),
-                  decoration: boxDecoration(
-                      bgColor: color_white,
-                      color: color_white,
-                      showShadow: true,
-                      radius: 10),
-                  child: appEditTextStyle("Repetir senha", isPassword: true),
-                ),
-                SizedBox(height: 20),
+                    margin: EdgeInsets.only(
+                        left: 24.0, right: 24.0, top: 5.0, bottom: 5),
+                    child: appEditTextStyle("Senha", isPassword: true)),
                 Container(
-                  child: Column(
-                    children: <Widget>[
-                      text("ja tem conta ?"),
-                      text("fazer login",
-                          textColor: color_colorPrimary, textAllCaps: true),
-                    ],
-                  ),
-                ).onTap(() {
-                  Navigator.of(context).pop();
-                }),
-                SizedBox(height: 20),
+                    margin: EdgeInsets.only(
+                        left: 24.0, right: 24.0, top: 5.0, bottom: 5),
+                    child: appEditTextStyle("Repetir senha", isPassword: true)),
+                SizedBox(height: 10),
                 Container(
                   margin: EdgeInsets.all(24.0),
                   child: appButton(
-                    textContent: "continuar",
+                    textContent: "Cadastrar",
                     onPressed: () {
                       Modular.to.pushReplacementNamed('/dashboard');
                     },

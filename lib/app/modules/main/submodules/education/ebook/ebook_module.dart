@@ -16,8 +16,9 @@ class EbookModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, __) => EbookPage()),
-    ChildRoute('view/:id', child: (_, __) => EbookViewPage(
-      ebook: __.data,
-    )),
+    ChildRoute('view/:id',
+        child: (_, __) => EbookViewPage(
+              ebook: __.data,
+            )),
   ];
 }

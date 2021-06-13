@@ -21,15 +21,18 @@ class NewsRepository extends Disposable {
     // }
 
     // var data = response.data['articles'];
-    var response = jsonDecode(MOCK_NEWS);
+    // var response = jsonDecode(MOCK_NEWS);
 
-    if (response == null) {
-      return <NewsModel>[];
-    }
-    var data = response['articles'];
+    Response response = await _http.get('/news',
+        options: Options(headers: {
+          'Origin': 'http://localhost',
+        }));
+    var data = response.data;
 
-    List<NewsModel> list =
-        List<NewsModel>.from(data.map((model) => NewsModel.fromJson(model)));
+    if (data == null) return <NewsModel>[];
+
+    List<NewsModel> list = List<NewsModel>.from(
+        data['articles'].map((model) => NewsModel.fromJson(model)));
     return list;
   }
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:fluttericon/typicons_icons.dart';
+import 'package:plant_care/app/core/consts/colors.dart';
+import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsViewPage extends StatefulWidget {
   final NewsModel? news;
@@ -14,61 +17,66 @@ class NewsViewPage extends StatefulWidget {
 class _NewsViewPageState extends State<NewsViewPage> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          title: Text(widget.news!.title!),
-          backgroundColor: Colors.green,
-          expandedHeight: 200.0,
-          flexibleSpace: FlexibleSpaceBar(
-            background:
-                Image.network(widget.news!.urlToImage!, fit: BoxFit.cover),
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            backgroundColor: color_colorPrimary,
+            expandedHeight: 200.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background:
+                  Image.network(widget.news!.urlToImage!, fit: BoxFit.cover),
+            ),
           ),
+        ];
+      },
+      body: Container(
+        color: color_app_background,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.news!.title!,
+                    style: TextStyle(
+                        fontFamily: fontBold,
+                        fontSize: textSizeNormal,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(widget.news?.author ?? "-"),
+                  Text(widget.news?.publishedAt?.toIso8601String() ?? "-"),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                widget.news!.content!,
+                textAlign: TextAlign.justify,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: Icon(Typicons.forward_outline),
+                    onPressed: () async {},
+                  ),
+                  IconButton(
+                    icon: Icon(Typicons.heart),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              Container(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Text(widget.news!.title!),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(widget.news!.author!),
-                    Text(widget.news!.publishedAt!.toIso8601String()),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(16.0),
-                child: Text(
-                  widget.news!.content!,
-                  textAlign: TextAlign.justify,
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    IconButton(
-                      icon: Icon(Typicons.forward_outline),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(Typicons.heart),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+      ),
     );
-    ;
   }
 }

@@ -13,8 +13,9 @@ TextFormField appEditTextStyle(var hintText,
     obscureText: isPassword,
     decoration: InputDecoration(
       contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+      labelText: hintText,
       hintText: hintText,
-      border: InputBorder.none,
+      // border: InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
     onSaved: onSaved,
@@ -54,7 +55,7 @@ class appButtonState extends State<appButton> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: Container(
-          decoration: boxDecoration(bgColor: color_colorPrimary, radius: 16),
+          decoration: boxDecoration(bgColor: color_colorPrimary, radius: 3),
           padding: EdgeInsets.fromLTRB(16, 10, 16, 10),
           child: Stack(
             alignment: Alignment.center,
@@ -65,23 +66,23 @@ class appButtonState extends State<appButton> {
                     fontFamily: fontMedium,
                     textAllCaps: false),
               ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: color_colorPrimaryDark),
-                  width: 35,
-                  height: 35,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: t8_white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //         shape: BoxShape.circle, color: color_colorPrimaryDark),
+              //     width: 35,
+              //     height: 35,
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: Icon(
+              //         Icons.arrow_forward,
+              //         color: t8_white,
+              //         size: 20,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           )),
     );
@@ -99,6 +100,7 @@ Widget text(
   bool textAllCaps = false,
   var isLongText = false,
   bool lineThrough = false,
+  bool bold = false,
 }) {
   return Text(
     textAllCaps ? text.toUpperCase() : text,
@@ -108,6 +110,7 @@ Widget text(
     style: TextStyle(
       fontFamily: fontFamily ?? null,
       fontSize: fontSize,
+      fontWeight: bold ? FontWeight.bold : null,
       color: textColor,
       height: 1.5,
       letterSpacing: latterSpacing,
@@ -360,13 +363,7 @@ Widget appLabelViewAll(var texto) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         text(texto,
-            textColor: color_colorPrimaryDark,
-            fontSize: textSizeNormal,
-            fontFamily: fontBold),
-
-        // Text(text, style: TextStyle(fontSize: 18, color: color_colorPrimaryDark, fontFamily: fontMedium)),
-        Text("ver tudo",
-            style: TextStyle(fontSize: 14, color: color_textColorSecondary)),
+            textColor: black, fontSize: textSizeNormal, fontFamily: fontBold),
       ],
     ),
   );

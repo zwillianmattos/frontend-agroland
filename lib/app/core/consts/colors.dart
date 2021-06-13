@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-const color_colorPrimary = Color(0xFF4F8104);
-const color_colorPrimaryDark = Color(0xFF5fb20f);
+const color_colorPrimary = Color(0xFF2DDA93);
+const color_colorPrimaryDark = Color(0xFF2DDA93);
 const color_colorAccent = Color(0xFF8cc125);
 
 const color_color_red = Color(0xFFF12727);
 const color_textColorPrimary = Color(0xFF333333);
 const color_textColorSecondary = Color(0xFF918F8F);
 
-const color_app_background = Color(0xFFf9f9f9);
+const color_app_background = Color(0xFFFBFDFF);
 const color_view_color = Color(0xFFf2f0e5);
 
 const color_white = Color(0xFFffffff);

@@ -29,5 +29,4 @@ abstract class _EbookPageStoreBase with Store {
     ebooks = data!.asObservable();
     isLoading = false;
   }
-
 }

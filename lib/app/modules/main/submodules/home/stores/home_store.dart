@@ -7,17 +7,17 @@ part 'home_store.g.dart';
 class HomeStore = _HomeStoreBase with _$HomeStore;
 
 abstract class _HomeStoreBase with Store {
-  final NewsRepository repository;
+  final NewsRepository newsRepository;
 
   @observable
   ObservableList<NewsModel> newsList = ObservableList<NewsModel>.of([]);
 
-  _HomeStoreBase(this.repository) {
+  _HomeStoreBase(this.newsRepository) {
     loadNews();
   }
 
   @action
   loadNews() async {
-    newsList = ObservableList<NewsModel>.of(await repository.getAll());
+    newsList = ObservableList<NewsModel>.of(await newsRepository.getAll());
   }
 }
