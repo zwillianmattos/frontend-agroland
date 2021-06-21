@@ -17,7 +17,6 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @computed
   get currentPage => currentIndex;
-
   @action
   changePage(index) {
     // if (currentIndex == index) return;

@@ -31,6 +31,20 @@ mixin _$NewsStore on _NewsStoreBase, Store {
     return _$loadNewsAsyncAction.run(() => super.loadNews());
   }
 
+  final _$_HomeStoreBaseActionController =
+      ActionController(name: '_HomeStoreBase');
+
+  @override
+  dynamic ebookPage() {
+    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
+        name: '_HomeStoreBase.ebookPage');
+    try {
+      return super.ebookPage();
+    } finally {
+      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
