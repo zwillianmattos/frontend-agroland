@@ -7,15 +7,22 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 
 TextFormField appEditTextStyle(var hintText,
-    {isPassword = true, onSaved, onValidation, readonly = false, controller}) {
+    {isPassword = true, onSaved, 
+    onValidation, 
+    readonly = false, 
+    controller, 
+    enableLabel = true, 
+    maxLines = 1,
+    enableBorder = true}) {
   return TextFormField(
+    maxLines: maxLines,
     style: TextStyle(fontSize: textSizeMedium, fontFamily: fontRegular),
     obscureText: isPassword,
     decoration: InputDecoration(
       contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
-      labelText: hintText,
-      hintText: hintText,
-      // border: InputBorder.none,
+      labelText: enableLabel ? hintText : null,
+      hintText:  hintText,
+      border: enableBorder ? null : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
     onSaved: onSaved,

@@ -39,6 +39,8 @@ dependencies:
   dio_cache_interceptor: ^2.3.1
   location: ^4.2.3
   sqlite3_flutter_libs: ^0.5.0
+  banner_carousel: ^1.0.1
+  flutter_local_notifications: ^5.0.0+4
   
 dev_dependencies:
   flutter_modular_test:
