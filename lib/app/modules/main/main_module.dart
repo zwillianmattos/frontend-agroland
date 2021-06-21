@@ -5,6 +5,7 @@ import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/core/services/location/location_service.dart';
 import 'package:plant_care/app/modules/main/submodules/home/home_module.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/repositories/weather_repository.dart';
+import 'package:plant_care/app/modules/main/submodules/marketplace/marketplace_module.dart';
 import 'bottom_navigator_store.dart';
 import 'bottom_navigator_widget.dart';
 import 'submodules/community/community_module.dart';
@@ -37,6 +38,7 @@ class MainModule extends Module {
           ModuleRoute('/home', module: HomeModule()),
           ModuleRoute('/community', module: CommunityModule()),
           ModuleRoute('/education', module: EducationModule()),
+          ModuleRoute('/marketplace', module: MarketplaceModule()),
           ChildRoute('/configurations', child: (_, __) => ConfigurationPage()),
         ]),
   ];

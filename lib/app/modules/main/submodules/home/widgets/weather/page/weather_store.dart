@@ -17,7 +17,12 @@ abstract class _WeatherStoreBase with Store {
   }
 
   @action
-  loadWeather() async {
-    wheater = await weatherRepository.get();
+  loadWeather() {
+    weatherRepository
+        .get()
+        .then((value) => wheater = value)
+        .catchError((error) {
+      print(error);
+    });
   }
 }
