@@ -151,32 +151,37 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                             alignment: Alignment.center,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16, top: 16),
-                          child: Container(
-                            width: sx(128),
-                            height: sy(92),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
-                              color: white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.15),
-                                  spreadRadius: 2,
-                                  blurRadius: 19,
-                                  offset: Offset(
-                                      4, 6), // changes position of shadow
-                                ),
-                              ],
+                        InkWell(
+                          onTap: () {
+                            controller.notify();
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: 16, right: 16, bottom: 16, top: 16),
+                            child: Container(
+                              width: sx(128),
+                              height: sy(92),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3)),
+                                color: white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.15),
+                                    spreadRadius: 2,
+                                    blurRadius: 19,
+                                    offset: Offset(
+                                        4, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Typicons.bookmark,
+                                size: sy(12),
+                                color: color_colorPrimary,
+                              ),
+                              alignment: Alignment.center,
                             ),
-                            child: Icon(
-                              Typicons.bookmark,
-                              size: sy(12),
-                              color: color_colorPrimary,
-                            ),
-                            alignment: Alignment.center,
                           ),
                         ),
                       ],

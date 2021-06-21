@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/core/services/location/location_service.dart';
+import 'package:plant_care/app/core/services/notification/notification_service.dart';
 import 'package:plant_care/app/modules/main/submodules/home/home_module.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/repositories/weather_repository.dart';
 import 'bottom_navigator_store.dart';

@@ -1,4 +1,6 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/services/notification/notification_service.dart';
 import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
 import 'package:plant_care/app/modules/main/submodules/home/repositories/news_repository.dart';
 
@@ -14,6 +16,12 @@ abstract class _HomeStoreBase with Store {
 
   _HomeStoreBase(this.newsRepository) {
     loadNews();
+  }
+
+  @action
+  notify() {
+    NotificationService notifyService = Modular.get<NotificationService>();
+    notifyService.notify();
   }
 
   @action

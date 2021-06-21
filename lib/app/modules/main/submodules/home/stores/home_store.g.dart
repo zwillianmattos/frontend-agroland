@@ -31,6 +31,20 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     return _$loadNewsAsyncAction.run(() => super.loadNews());
   }
 
+  final _$_HomeStoreBaseActionController =
+      ActionController(name: '_HomeStoreBase');
+
+  @override
+  dynamic notify() {
+    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
+        name: '_HomeStoreBase.notify');
+    try {
+      return super.notify();
+    } finally {
+      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
