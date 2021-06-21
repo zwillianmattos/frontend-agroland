@@ -11,6 +11,7 @@ import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
 import 'package:plant_care/app/modules/main/submodules/home/stores/home_store.dart';
 import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
+import '../../../bottom_navigator_store.dart';
 import '../widgets/weather/page/weather_widget.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -154,29 +155,32 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                         Padding(
                           padding: EdgeInsets.only(
                               left: 16, right: 16, bottom: 16, top: 16),
-                          child: Container(
-                            width: sx(128),
-                            height: sy(92),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
-                              color: white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.15),
-                                  spreadRadius: 2,
-                                  blurRadius: 19,
-                                  offset: Offset(
-                                      4, 6), // changes position of shadow
-                                ),
-                              ],
+                          child: InkWell(
+                            onTap: controller.ebookPage,
+                            child: Container(
+                              width: sx(128),
+                              height: sy(92),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3)),
+                                color: white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.15),
+                                    spreadRadius: 2,
+                                    blurRadius: 19,
+                                    offset: Offset(
+                                        4, 6), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                Typicons.bookmark,
+                                size: sy(12),
+                                color: color_colorPrimary,
+                              ),
+                              alignment: Alignment.center,
                             ),
-                            child: Icon(
-                              Typicons.bookmark,
-                              size: sy(12),
-                              color: color_colorPrimary,
-                            ),
-                            alignment: Alignment.center,
                           ),
                         ),
                       ],
@@ -226,8 +230,8 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                               width: sx(width),
                               child: InkWell(
                                 onTap: () {
-                                  Modular.to
-                                      .pushNamed("/home/news", arguments: item);
+                                  Modular.to.pushNamed("/home/news",
+                                      arguments: item, forRoot: true);
                                 },
                                 child: Align(
                                   child: Padding(

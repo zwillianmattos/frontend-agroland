@@ -48,7 +48,7 @@ class BottomNavigatorPageState
               label: 'Settings',
             ),
           ],
-          currentIndex: controller.currentIndex,
+          currentIndex: controller.currentPage,
           selectedItemColor: color_colorPrimary,
           backgroundColor: Colors.white,
           unselectedItemColor: Colors.black,

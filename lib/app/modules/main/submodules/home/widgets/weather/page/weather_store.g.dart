@@ -24,11 +24,18 @@ mixin _$WeatherStore on _WeatherStoreBase, Store {
     });
   }
 
-  final _$loadWeatherAsyncAction = AsyncAction('_WeatherStoreBase.loadWeather');
+  final _$_WeatherStoreBaseActionController =
+      ActionController(name: '_WeatherStoreBase');
 
   @override
-  Future loadWeather() {
-    return _$loadWeatherAsyncAction.run(() => super.loadWeather());
+  dynamic loadWeather() {
+    final _$actionInfo = _$_WeatherStoreBaseActionController.startAction(
+        name: '_WeatherStoreBase.loadWeather');
+    try {
+      return super.loadWeather();
+    } finally {
+      _$_WeatherStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
