@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
@@ -11,6 +9,7 @@ import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
+import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../widgets.dart';
@@ -22,9 +21,7 @@ class MarketplaceHomePage extends StatefulWidget {
   _MarketplaceHomePageState createState() => _MarketplaceHomePageState();
 }
 
-class _MarketplaceHomePageState
-    extends ModularState<MarketplaceHomePage, MarketplaceHomeStore>
-    with SingleTickerProviderStateMixin {
+class _MarketplaceHomePageState extends State<MarketplaceHomePage> {
   @override
   Widget build(BuildContext context) {
     final List<String> categorias = [
@@ -56,7 +53,7 @@ class _MarketplaceHomePageState
                 phone: "14 991935302",
                 marketName: 'Biochar Brasil',
                 imgLogo:
-                    "https://http2.mlstatic.com/D_NQ_NP_834341-MLB44075965720_112020-O.webp"),
+                    "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/198781480_324028702683014_6189260925580481660_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=awBgwY86kdAAX9Gc_-E&_nc_ht=scontent.fbau4-1.fna&oh=5f81dc8e8253a1a034c434a4ef0ff694&oe=60D2CB6C"),
             category: ClassificadoCategoria(
               description: 'Adubos',
             ),
@@ -160,7 +157,7 @@ class _MarketplaceHomePageState
             classificadoFotos: [
               ClassificadoFotos(
                 imgPath:
-                    "https://static.cestasmichelli.com.br/images/product/19580gg.jpg?_nc_cat=105&ccb=1-3&_nc_sid=843cd7&_nc_ohc=53XMfQEr5-EAX9Ootd5&_nc_oc=AQmpHMPS3hteZq5Mc6OWJdsaxa1fx6m_NKosztiW0jJi7IDvFpw_bP4turU_EYi9KUmDCL4RO4PHh27td5QkNDAb&_nc_ht=scontent.fbau4-1.fna&tp=7&oh=9fefb79b753abcb9764c30794f57bf23&oe=60D341B2",
+                    "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/s960x960/201525529_4193531880727403_8206749806483935957_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=843cd7&_nc_ohc=53XMfQEr5-EAX9Ootd5&_nc_oc=AQmpHMPS3hteZq5Mc6OWJdsaxa1fx6m_NKosztiW0jJi7IDvFpw_bP4turU_EYi9KUmDCL4RO4PHh27td5QkNDAb&_nc_ht=scontent.fbau4-1.fna&tp=7&oh=9fefb79b753abcb9764c30794f57bf23&oe=60D341B2",
               ),
             ],
           ),
@@ -203,7 +200,7 @@ WhatsApp <br/>
             classificadoFotos: [
               ClassificadoFotos(
                 imgPath:
-                    "https://static.cestasmichelli.com.br/images/product/19580gg.jpg",
+                    "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/p720x720/154773725_4066638186734277_4728295538000872802_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=3b2858&_nc_ohc=W8TtkXKY9qwAX--eGFN&_nc_ht=scontent.fbau4-1.fna&tp=6&oh=c21499ddff584b99604047d47577fed0&oe=60D29176",
               ),
             ],
           ),
@@ -443,315 +440,64 @@ Dimensões da Embalagem: [A x L x P] cm: 20X11X31
           ])
     ];
 
-    final List<Tab> tabs = [
-      "Produtos",
-      "Nutrição Animal",
-      "Proteção",
-      "Nutrição de Cultivos",
-      "Sementes",
-      "Mudas",
-      "Limpeza",
-      "Desinfecção",
-      "Acessórios",
-      "Cuidados Gerais",
-      "Motores",
-      "Peças",
-      "Equipamentos",
-      "Maquinários"
-    ]
-        .map((e) => Tab(
-              text: e,
-            ))
-        .toList();
-
-    @protected
-    @mustCallSuper
-    void initState() {
-      super.initState();
-    }
-
-    return DefaultTabController(
-      length: tabs.length,
-      // The Builder widget is used to have a different BuildContext to access
-      // closest DefaultTabController.
-      child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context)!;
-
-        tabController.addListener(() {
-          if (!tabController.indexIsChanging) {
-            // Your code goes here.
-            // To get index of current tab use tabController.index
-          }
-        });
-        return Observer(builder: (_) {
-          return Scaffold(
-            drawer: new Drawer(
-              child: ListView(
-                // Important: Remove any padding from the ListView.
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(
-                      color: color_colorPrimary,
-                    ),
-                    accountName: Text("Willian Mattos"),
-                    accountEmail: Text("willian_mattos@hotmail.com"),
-                    currentAccountPicture: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Text(
-                        "W",
-                        style: TextStyle(fontSize: 40.0),
-                      ),
-                    ),
+    return RelativeBuilder(
+      builder: (context, height, width, sy, sx) {
+        return Scaffold(
+          backgroundColor: color_white,
+          appBar: AppBar(
+            backgroundColor: color_colorPrimary,
+            title: Text("Marketplace"),
+          ),
+          body: ListView(
+            children: [
+              BuscaWidget(),
+              SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: categorias
+                        .map((value) => CategoriaWidget(description: value))
+                        .toList(),
                   ),
-                  ListTile(
-                      leading: Icon(Icons.home),
-                      title: Text("Inicio"),
-                      onTap: () {
-                        debugPrint('toquei no drawer');
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.search),
-                      title: Text("Buscar"),
-                      onTap: () {
-                        debugPrint('toquei no drawer');
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.notifications),
-                      title: Text("Notificacoes"),
-                      onTap: () {
-                        debugPrint('toquei no drawer');
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.favorite),
-                      title: Text("Favoritos"),
-                      onTap: () {
-                        debugPrint('toquei no drawer');
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text("Minha conta"),
-                      onTap: () {
-                        debugPrint('toquei no drawer');
-                      }),
-                  ListTile(
-                      leading: Icon(Icons.money),
-                      title: Text("Vender"),
-                      onTap: () {
-                        debugPrint('toquei no drawer');
-                      }),
-                ],
+                ),
               ),
-            ),
-            appBar: AppBar(
-              backgroundColor: color_colorPrimary,
-              title: Text("Marketplace"),
-              bottom: TabBar(
-                isScrollable: true,
-                controller: tabController,
-                tabs: tabs,
-              ),
-              actions: [
-                IconButton(
-                    icon: SvgPicture.asset(
-                      "images/buy_bulk.svg",
-                      color: color_white,
-                    ),
-                    onPressed: () {})
-              ],
-            ),
-            body: TabBarView(
-              children: tabs.map((Tab tab) {
-                return ListView(
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 300,
-                              height: 160,
-                              margin: EdgeInsets.only(
-                                  left: 13, right: 13, bottom: 16, top: 16),
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 16, top: 16),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: color_white,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/4e8586365b.png"),
-                                  fit: BoxFit.fitWidth,
+              if (classificados.isNotEmpty)
+                Column(
+                    children: classificados
+                        .map((classificadoSecao) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: text(
+                                      classificadoSecao.categoria.description),
                                 ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xff000000).withOpacity(0.15),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GridView.count(
+                                    crossAxisCount:2,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    children: List.generate(
+                                      classificadoSecao.classificados.length,
+                                      (index) {
+                                        return CardAnuncio(
+                                          classificado: classificadoSecao
+                                              .classificados[index],
+                                        );
+                                      },
+                                    ),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 300,
-                              height: 160,
-                              margin: EdgeInsets.only(
-                                  left: 13, right: 13, bottom: 16, top: 16),
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 16, top: 16),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: color_white,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png"),
-                                  fit: BoxFit.fitWidth,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xff000000).withOpacity(0.15),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 300,
-                              height: 160,
-                              margin: EdgeInsets.only(
-                                  left: 13, right: 13, bottom: 16, top: 16),
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 16, top: 16),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: color_white,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/bdfdd8dd71.png"),
-                                  fit: BoxFit.fitWidth,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xff000000).withOpacity(0.15),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 300,
-                              height: 160,
-                              margin: EdgeInsets.only(
-                                  left: 13, right: 13, bottom: 16, top: 16),
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 16, top: 16),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: color_white,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://http2.mlstatic.com/D_NQ_NP_801971-MLA46483020534_062021-C.webp"),
-                                  fit: BoxFit.fitWidth,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xff000000).withOpacity(0.15),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 300,
-                              height: 160,
-                              margin: EdgeInsets.only(
-                                  left: 13, right: 13, bottom: 16, top: 16),
-                              padding: EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 16, top: 16),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                                color: color_white,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://http2.mlstatic.com/D_NQ_NP_663015-MLA46468719096_062021-B.webp"),
-                                  fit: BoxFit.fitHeight,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0xff000000).withOpacity(0.15),
-                                    spreadRadius: 1,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (classificados.isNotEmpty)
-                        Column(
-                            children: classificados
-                                .map((classificadoSecao) => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: text(
-                                              classificadoSecao
-                                                  .categoria.description,
-                                              maxLine: 2,
-                                              fontFamily: fontBold),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: GridView.count(
-                                            crossAxisCount: 2,
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            children: List.generate(
-                                              classificadoSecao
-                                                  .classificados.length,
-                                              (index) {
-                                                return CardAnuncio(
-                                                  classificado:
-                                                      classificadoSecao
-                                                          .classificados[index],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ))
-                                .toList()),
-                    ]);
-              }).toList(),
-            ),
-          );
-        });
-      }),
+                                )
+                              ],
+                            ))
+                        .toList()),
+            ],
+          ),
+        );
+      },
     );
   }
 }

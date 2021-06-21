@@ -84,55 +84,7 @@ class _MarketplaceViewAccountPageState
           classificadoFotos: [
             ClassificadoFotos(
               imgPath:
-                  "https://static.cestasmichelli.com.br/images/product/19580gg.jpg?_nc_cat=105&ccb=1-3&_nc_sid=843cd7&_nc_ohc=53XMfQEr5-EAX9Ootd5&_nc_oc=AQmpHMPS3hteZq5Mc6OWJdsaxa1fx6m_NKosztiW0jJi7IDvFpw_bP4turU_EYi9KUmDCL4RO4PHh27td5QkNDAb&_nc_ht=scontent.fbau4-1.fna&tp=7&oh=9fefb79b753abcb9764c30794f57bf23&oe=60D341B2",
-            ),
-          ],
-        ),
-        Classificado(
-          title:
-              "Sementes Milheto Adr500 Muito Mais Leite E Carne 25kg Kit 2 Unid",
-          description: """ 
-Descrição do produto<br/>
-Sementes de Milheto Adr500 Muito Mais Leite E Carne 25kg Kit 2 Unidades<br/>
-
-Observações e Condições<br/>
-Antes de efetuar a compra tire todas suas dúvidas no campo perguntas.<br/>
-Confirme a aplicação com seu técnico antes de efetuar a compra.<br/>
-Verifique o modo de recebimento da compra (retira o produto no local do fornecedor ou receba o produto no endereço escolhido pelo comprador).<br/>
-Efetue a compra com CPF ou CNPJ para a emissão da Nota Fiscal. Os impostos estarão inclusos no valor total da venda fornecido por conta do fornecedor.<br/>
-Mantenha seus dados e endereços atualizados no site Agro2Business.<br/>
-Suporte e Horários de Atendimento<br/>
-Temos Equipe de Atendimento e Suporte Técnico Especializado à Disposição.<br/>
-Atendimento via plataforma Agro2Business de Seg. a Sex. das 8:30 às 17:30.<br/>
-Perguntas Frequentes<br/>
-Quanto fica o frete para o meu endereço?<br/>
-Acesse no seu menu endereços e clique em novos endereços. Após cadastrar o seu endereço, você já poderá orçar e comprar o que você precisa já com o prazo de entrega estimado, tudo de forma online.<br/>
-Como eu faço para orçar e comprar uma quantidade maior do que está no anúncio?<br/>
-O lote é a quantidade mínima para compra do anúncio. você pode aumentar a quantidade, para isso, quando estiver no detalhe do anúncio, clique em adicionar no carrinho e edite a quantidade de lotes. a quantidade total será múltipla do lote. exemplo lote de 900kg, se inserir 3 lotes, a quantidade total será de 2.700kg.
-Como eu faço para comprar?<br/>
-Após adicionar o anúncio no carrinho, você deve escolher o tipo de transporte e clicar em avançar. Pronto, basta selecionar a forma de pagamento, cartão ou boleto e clicar em finalizar compra. Você recebera um e-mail confirmando a sua operação.
-Como funciona a compra protegida?<br/>
-Após a realização da compra, nós do marketplace Agro2Business.com monitoramos a entrega e a satisfação do comprador com o recebimento do produto. Somente após a confirmação do comprador o pagamento é transferido para o vendedor. O comprador tem até 14 dias após a confirmação do pagamento para demonstrar se algo não foi entregue conforme o esperado.
-Quero devolver a compra que realizei, o que eu faço?<br/>
-É bem simples, você deve acessar na plataforma suas compras, selecionar a compra desejada e clicar em ações. Clique em abrir reclamação. Pronto! Nosso time fará a mediação e o entendimento da ação desejada.<br/>
-              """,
-          price: 405.84,
-          logista: Logista(
-            cnpj: '70.044.310/0001-93',
-            description: 'Super sementes',
-            phone: '(14) 991935302',
-            user: User(
-              name: 'Ze Neto',
-            ),
-            marketName: 'Super sementes',
-          ),
-          category: ClassificadoCategoria(
-            description: 'Sementes e Mudas',
-          ),
-          classificadoFotos: [
-            ClassificadoFotos(
-              imgPath:
-                  "https://res.cloudinary.com/dxz4ivhm8/image/upload/v1624119588/plant-care/marketplace_mock/6.jpg",
+                  "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/s960x960/201525529_4193531880727403_8206749806483935957_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=843cd7&_nc_ohc=53XMfQEr5-EAX9Ootd5&_nc_oc=AQmpHMPS3hteZq5Mc6OWJdsaxa1fx6m_NKosztiW0jJi7IDvFpw_bP4turU_EYi9KUmDCL4RO4PHh27td5QkNDAb&_nc_ht=scontent.fbau4-1.fna&tp=7&oh=9fefb79b753abcb9764c30794f57bf23&oe=60D341B2",
             ),
           ],
         ),
@@ -144,7 +96,6 @@ Quero devolver a compra que realizei, o que eu faço?<br/>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color_colorPrimary,
           // title: Text(widget.logista.marketName),
           ),
       body: ListView(
@@ -153,7 +104,7 @@ Quero devolver a compra que realizei, o que eu faço?<br/>
             height: 150,
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-              color: color_colorPrimary,
+              color: Colors.grey,
               image: DecorationImage(
                 image: NetworkImage(""),
                 fit: BoxFit.cover,
