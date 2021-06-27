@@ -24,7 +24,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: text("Community"),
+        title: text("Comunidade"),
         backgroundColor: color_colorPrimary,
       ),
       body: Observer(
