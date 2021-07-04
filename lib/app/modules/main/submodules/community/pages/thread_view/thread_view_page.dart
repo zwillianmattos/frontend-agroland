@@ -49,9 +49,9 @@ class _ThreadViewPageState
                     color: white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.06),
-                        spreadRadius: 5,
-                        blurRadius: 10,
+                        color: Colors.grey.withOpacity(0.15),
+                        spreadRadius: 0,
+                        blurRadius: 5,
                         offset: Offset(0, 0), // changes position of shadow
                       ),
                     ],
@@ -182,14 +182,14 @@ class _ThreadViewPageState
                                             padding: EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(12)),
+                                                  Radius.circular(3)),
                                               color: white,
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.grey
-                                                      .withOpacity(0.06),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 10,
+                                                      .withOpacity(0.15),
+                                                  spreadRadius: 0,
+                                                  blurRadius: 5,
                                                   offset: Offset(0,
                                                       0), // changes position of shadow
                                                 ),

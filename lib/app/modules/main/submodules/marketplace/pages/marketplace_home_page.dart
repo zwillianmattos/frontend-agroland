@@ -471,7 +471,7 @@ Dimensões da Embalagem: [A x L x P] cm: 20X11X31
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: text(
-                                      classificadoSecao.categoria.description),
+                                      classificadoSecao.categoria.description, maxLine: 2, fontFamily: fontBold),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),

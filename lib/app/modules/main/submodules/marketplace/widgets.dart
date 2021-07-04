@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/typicons_icons.dart';
@@ -79,73 +80,81 @@ class CardAnuncio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
-      return Container(
-        height: 100,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(3)),
-          boxShadow: [
-            // BoxShadow(
-            //   color: Colors.grey.withOpacity(0.15),
-            //   spreadRadius: 2,
-            //   blurRadius: 19,
-            //   offset: Offset(4, 6), // changes position of shadow
-            // ),
-          ],
-        ),
-        child: InkWell(
-          onTap: () {
-            Modular.to.pushNamed('/marketplace/view',
-                arguments: classificado, forRoot: true);
-          },
-          child: Card(
-            color: color_white,
-            semanticContainer: true,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: sy(80),
-                  width: width,
-                  child: FadeInImage(
-                    image: NetworkImage(
-                        classificado.classificadoFotos![0].imgPath),
-                    fit: BoxFit.contain,
-                    imageErrorBuilder: (context, error, stackTrace) {
-                      return Image.network(
-                          "https://i.pinimg.com/originals/13/9a/19/139a190b930b8efdecfdd5445cae7754.png");
-                    },
-                    placeholder: NetworkImage(
-                        "https://ak.picdn.net/shutterstock/videos/1039407446/thumb/1.jpg"),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      text("R\$ ${classificado.price}",
-                          fontSize: textSizeSmall, fontFamily: fontBold),
-                      text(classificado.title,
-                          fontSize: textSizeSmall, maxLine: 2),
-                      if (classificado.location != null)
-                        text(
-                          classificado.location.toString(),
+      return InkWell(
+        onTap: () {
+          Modular.to.pushNamed('/marketplace/view',
+              arguments: classificado, forRoot: true);
+        },
+        child: Container(
+          padding: EdgeInsets.all(6.0),
+          margin: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(3)),
+            color: white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.15),
+                spreadRadius: 0,
+                blurRadius: 5,
+                offset: Offset(0, 0), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex:2,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          left: spacing_control, right: spacing_control),
+                      decoration: boxDecoration(
+                          radius: spacing_control, bgColor: color_light_gray),
+                      child: text(classificado.category.description,
                           fontSize: textSizeSmall,
-                          textColor: Colors.grey,
-                        ),
-                    ],
+                          isCentered: true,
+                          isLongText: true),
+                    ),
                   ),
+                  Expanded(child: Container()),
+                  Expanded(
+                      child:
+                          Icon(Icons.favorite_border, color: color_icon_color))
+                ],
+              ),
+              SizedBox(height: 4),
+              Align(
+                alignment: Alignment.center,
+                child: CachedNetworkImage(
+                  placeholder: (context, url) => Image.asset(
+                      'images/LikeButton/image/grey.jpg',
+                      fit: BoxFit.cover),
+                  imageUrl: classificado.classificadoFotos![0].imgPath,
+                  fit: BoxFit.contain,
+                  height: sy(width) * 0.15,
+                  width: sx(width),
                 ),
-              ],
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(3),
-            ),
-            elevation: 0,
-            // margin: EdgeInsets.all(5),
+              ),
+              SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.only(left: 4, right: 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    text("R\$ ${classificado.price}",
+                        fontSize: textSizeSmall,
+                        textColor: color_textColorSecondary,
+                        maxLine: 2),
+                    text(classificado.title, maxLine: 1, fontSize: 12.0),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       );
