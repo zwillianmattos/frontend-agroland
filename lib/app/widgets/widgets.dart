@@ -7,21 +7,24 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 
 TextFormField appEditTextStyle(var hintText,
-    {isPassword = true, onSaved, 
-    onValidation, 
-    readonly = false, 
-    controller, 
-    enableLabel = true, 
+    {isPassword = true,
+    onSaved,
+    onValidation,
+    readonly = false,
+    controller,
+    enableLabel = true,
     maxLines = 1,
-    enableBorder = true}) {
+    enableBorder = true,
+    keyboardType = TextInputType.text,
+    textInputAction = TextInputAction.next}) {
   return TextFormField(
     maxLines: maxLines,
     style: TextStyle(fontSize: textSizeMedium, fontFamily: fontRegular),
     obscureText: isPassword,
     decoration: InputDecoration(
-      contentPadding: EdgeInsets.fromLTRB(16, 22, 16, 22),
+      contentPadding: EdgeInsets.fromLTRB(16, 8, 4, 8),
       labelText: enableLabel ? hintText : null,
-      hintText:  hintText,
+      hintText: hintText,
       border: enableBorder ? null : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
@@ -29,6 +32,7 @@ TextFormField appEditTextStyle(var hintText,
     validator: onValidation,
     readOnly: readonly,
     controller: controller,
+    textInputAction: textInputAction,
   );
 }
 
@@ -374,4 +378,91 @@ Widget appLabelViewAll(var texto) {
       ],
     ),
   );
+}
+
+class appButton2 extends StatefulWidget {
+  static String tag = '/dpButton';
+  var textContent;
+  VoidCallback onPressed;
+  var isStroked = false;
+  var height = 50.0;
+  var radius = 5.0;
+  Color? bgColors = color_colorPrimary;
+  Color? color = color_colorPrimary;
+
+  appButton2(
+      {required this.textContent,
+      required this.onPressed,
+      this.isStroked = false,
+      this.height = 50.0,
+      this.radius = 5.0,
+      this.color,
+      this.bgColors = color_colorPrimary});
+
+  @override
+  appButtonState2 createState() => appButtonState2();
+}
+
+class appButtonState2 extends State<appButton2> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onPressed,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 6, 16, 6),
+        alignment: Alignment.center,
+        child: text(widget.textContent,
+            textColor: widget.isStroked ? color_textColorPrimary : color_white,
+            fontSize: textSizeLargeMedium,
+            isCentered: true,
+            fontFamily: fontSemibold,
+            textAllCaps: true),
+        decoration: widget.isStroked
+            ? boxDecoration(
+                bgColor: Colors.transparent, color: color_colorPrimary)
+            : boxDecoration(bgColor: widget.bgColors, radius: widget.radius),
+      ),
+    );
+  }
+}
+
+class appButton3 extends StatefulWidget {
+  static String tag = '/dpButton';
+  var textContent;
+  VoidCallback onPressed;
+  var isStroked = false;
+  var height = 50.0;
+
+  appButton3(
+      {required this.textContent,
+      required this.onPressed,
+      this.isStroked = false,
+      this.height = 50.0});
+
+  @override
+  appButton3State createState() => appButton3State();
+}
+
+class appButton3State extends State<appButton3> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: widget.onPressed,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(16, 6, 16, 6),
+        alignment: Alignment.center,
+        child: text(widget.textContent,
+            textColor: widget.isStroked
+                ? color_textColorPrimary
+                : color_textColorSecondary,
+            fontSize: textSizeLargeMedium,
+            isCentered: true,
+            fontFamily: fontSemibold,
+            textAllCaps: false),
+        decoration: widget.isStroked
+            ? boxDecoration(bgColor: color_white, color: color_white)
+            : boxDecoration(bgColor: color_white, radius: 5.0),
+      ),
+    );
+  }
 }

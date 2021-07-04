@@ -36,9 +36,9 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.15),
-                    spreadRadius: 2,
-                    blurRadius: 19,
-                    offset: Offset(4, 6), // changes position of shadow
+                    spreadRadius: 0,
+                    blurRadius: 5,
+                    offset: Offset(0, 0), // changes position of shadow
                   ),
                 ],
               ),
