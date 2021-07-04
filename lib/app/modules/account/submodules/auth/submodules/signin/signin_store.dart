@@ -1,24 +1,21 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/interfaces/user_interface.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
 import 'package:plant_care/app/modules/account/repositories/account_repository.dart';
 
-part 'login_store.g.dart';
+part 'signin_store.g.dart';
 
-class LoginStore = LoginStoreBase with _$LoginStore;
+class SignInStore = SignInStoreBase with _$SignInStore;
 
-abstract class LoginStoreBase with Store {
+abstract class SignInStoreBase with Store {
   final AccountRepository _repository;
 
-  LoginStoreBase(this._repository);
+  SignInStoreBase(this._repository);
 
   @observable
   bool isLoading = false;
 
-  login(User user) async {
+  signIn(User user) async {
     try {
       isLoading = true;
 
@@ -27,8 +24,6 @@ abstract class LoginStoreBase with Store {
       print(account);
 
       isLoading = false;
-      // Modular.to.pushReplacementNamed('/dashboard');
-
     } catch (e) {
       print(e);
     }

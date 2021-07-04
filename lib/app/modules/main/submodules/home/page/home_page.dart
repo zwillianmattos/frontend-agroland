@@ -61,9 +61,9 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.15),
-                            spreadRadius: 2,
-                            blurRadius: 19,
-                            offset: Offset(4, 6), // changes position of shadow
+                            spreadRadius: 0,
+                            blurRadius: 5,
+                            offset: Offset(0, 0), // changes position of shadow
                           ),
                         ],
                       ),
@@ -109,10 +109,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.15),
-                                  spreadRadius: 2,
-                                  blurRadius: 19,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
                                   offset: Offset(
-                                      4, 6), // changes position of shadow
+                                      0, 0), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -137,10 +137,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.15),
-                                  spreadRadius: 2,
-                                  blurRadius: 19,
+                                  spreadRadius: 0,
+                                  blurRadius: 5,
                                   offset: Offset(
-                                      4, 6), // changes position of shadow
+                                      0, 0), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -167,10 +167,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.15),
-                                    spreadRadius: 2,
-                                    blurRadius: 19,
+                                    spreadRadius: 0,
+                                    blurRadius: 5,
                                     offset: Offset(
-                                        4, 6), // changes position of shadow
+                                        0, 0), // changes position of shadow
                                   ),
                                 ],
                               ),
@@ -220,10 +220,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.15),
-                                    spreadRadius: 2,
-                                    blurRadius: 19,
+                                    spreadRadius: 0,
+                                    blurRadius: 5,
                                     offset: Offset(
-                                        4, 6), // changes position of shadow
+                                        0, 0), // changes position of shadow
                                   ),
                                 ],
                               ),
@@ -397,10 +397,11 @@ class SearchHeader {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        offset: Offset(0, 10),
-                        blurRadius: 10,
-                        color: Colors.green.withOpacity(0.23),
-                      )
+                        color: Colors.grey.withOpacity(0.15),
+                        spreadRadius: 0,
+                        blurRadius: 5,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
                     ]),
               ),
             ),

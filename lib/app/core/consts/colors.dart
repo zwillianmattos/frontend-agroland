@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const color_colorPrimary = Color(0xFF2DDA93);
+const color_colorPrimary = Color(0xFF00c97b);
+const grocery_colorPrimary_light = Color(0xFFE7FAEE);
 const color_colorPrimaryDark = Color(0xFF2DDA93);
 const color_colorAccent = Color(0xFF8cc125);
 

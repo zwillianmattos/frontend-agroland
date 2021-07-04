@@ -41,6 +41,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.0
   banner_carousel: ^1.0.1
   flutter_local_notifications: ^5.0.0+4
+  cached_network_image: ^3.0.0
   
 dev_dependencies:
   flutter_modular_test:
@@ -63,6 +64,8 @@ flutter:
   assets:
     - images/
     - images/logo.png
+    - images/background.jpg
+    - images/LikeButton/image/grey.jpg
   fonts:
     - family: Product Sans
       fonts:
@@ -70,6 +73,27 @@ flutter:
         - asset: fonts/Product Sans Italic.ttf
         - asset: fonts/Product Sans Bold.ttf
         - asset: fonts/Product Sans Bold Italic.ttf
+
+    - family: Andina
+      fonts:
+        - asset: fonts/andina.ttf
+
+    - family: Regular
+      fonts:
+        - asset: fonts/googlesansregular.ttf
+
+    - family: Medium
+      fonts:
+        - asset: fonts/googlesansmedium.ttf
+
+    - family: Semibold
+      fonts:
+        - asset: fonts/googlesansmedium.ttf
+
+    - family: Bold
+      fonts:
+        - asset: fonts/googlesansebold.ttf
+
 vars:
   clean: flutter clean
   get: flutter pub get
