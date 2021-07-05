@@ -72,6 +72,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
             ];
           },
           body: Container(
+            width: width > 500 ? sx(250) : width,
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,7 +80,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 children: <Widget>[
                   WeatherWidget(),
                   SizedBox(
-                    height: width > 400 ? sy(80) : 100,
+                    height: width > 500 ? sy(60) : 100,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
@@ -105,7 +106,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                   ),
                   appLabelViewAll("Notícias"),
                   SizedBox(
-                    height: width > 400 ? sy(150) : 200,
+                    height: width > 500 ? sy(120) : 200,
                     child: Observer(builder: (context) {
                       if (controller.newsList.length <= 0)
                         return Center(
@@ -142,7 +143,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                   ),
                                 ],
                               ),
-                              width: sx(width),
+                              width:width > 500 ? sx(100) : sx(width),
                               child: InkWell(
                                 onTap: () {
                                   Modular.to.pushNamed("/home/news",
@@ -367,7 +368,7 @@ class CardButton extends StatelessWidget {
       return Container(
         margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
         padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
-        width: sx(width / 1.8),
+        width: sx(width) > 500 ?  sx(100) : sx(width / 1.8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           color: color_colorPrimary,

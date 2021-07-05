@@ -30,8 +30,8 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
           Weather w = controller.wheater!;
 
           return SizedBox(
-            width: width,
-            height: width > 400 ? sy(160) : 130,
+            width:  width > 400 ? width : width,
+            height: width > 400 ? sy(120) : 130,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -84,18 +84,18 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Container(
-                                  width: 150,
+                                  width: width > 400 ? sx(250) : 150,
                                   child: text(
                                     "${w.results!.temp!}°c",
                                     fontSize: 32.0,
                                   ),
                                 ),
                                 Container(
-                                  width: 70,
-                                  height: 10,
+                                  width: width > 400 ? 70 : 70,
+                                  height: width > 400 ? sy(5)  : 10,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      scale: 1.7,
+                                      scale:width > 400 ? sx(0.3) : 1.7,
                                       centerSlice: Rect.fromLTRB(1, 1, 1, 1),
                                       fit: BoxFit.fitHeight,
                                       alignment: Alignment.centerLeft,

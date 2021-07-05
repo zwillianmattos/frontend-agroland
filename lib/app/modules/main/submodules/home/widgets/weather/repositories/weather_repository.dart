@@ -35,7 +35,6 @@ class WeatherRepository extends Disposable {
 
   Future<Weather> get() async {
     LocationData location = await _locationService.locationData;
-    print(location);
 
     Response response = await _http.get(
         'https://api.hgbrasil.com/weather?key=2b81ac59&lat=${location.latitude}&lon=${location.longitude}&user_ip=remote',
@@ -55,7 +54,6 @@ class WeatherRepository extends Disposable {
 
   @override
   void dispose() async {
-    this.dispose();
     await cacheStore.close();
   }
 }

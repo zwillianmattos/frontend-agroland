@@ -18,6 +18,5 @@ class AccountRepository extends Disposable {
 
   @override
   void dispose() {
-    this.dispose();
   }
 }

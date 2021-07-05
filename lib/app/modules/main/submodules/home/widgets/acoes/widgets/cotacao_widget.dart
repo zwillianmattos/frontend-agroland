@@ -77,7 +77,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: const EdgeInsets.only(left:8.0, right: 8.0),
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                 child: Row(
                   children: cotacoes
                       .map(
@@ -127,7 +127,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
           Observer(builder: (_) {
             if (controller.loading) {
               return Container(
-                width: width,
+                width: sx(width) > 400 ? sx(width) / 2 : width,
                 margin:
                     EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
                 decoration: BoxDecoration(
@@ -151,7 +151,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
 
             return Column(children: [
               Container(
-                width: width,
+                width: sx(width) > 400 ? sx(width) / 2 : width,
                 margin:
                     EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
                 decoration: BoxDecoration(
