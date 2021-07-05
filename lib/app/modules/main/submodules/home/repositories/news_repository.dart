@@ -38,6 +38,5 @@ class NewsRepository extends Disposable {
 
   @override
   void dispose() {
-    this.dispose();
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import './ebook_page_store.dart';
 import './../models/ebook_model.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';

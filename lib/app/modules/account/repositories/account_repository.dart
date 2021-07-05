@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_triple/flutter_triple.dart';
 import 'package:plant_care/app/core/interfaces/user_interface.dart';
 import 'package:plant_care/app/core/models/account.dart';
 

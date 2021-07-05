@@ -16,7 +16,7 @@ class SplashPage extends StatelessWidget {
             tween: _scaleTween,
             child: Image.asset(
               'images/logo.png',
-              scale: 15,
+              scale: 2,
             ),
             onEnd: () {
               Future.delayed(Duration(seconds: 1), () {

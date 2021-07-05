@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/submodules/auth/submodules/signin/signin_widget.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 import 'auth_store.dart';
 import 'submodules/signup/signup_widget.dart';
 

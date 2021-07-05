@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/submodules/auth/submodules/signin/signin_store.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignInWidget extends StatefulWidget {

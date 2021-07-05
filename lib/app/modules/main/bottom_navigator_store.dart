@@ -17,7 +17,7 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @computed
   get currentPage => currentIndex;
-  
+
   @action
   changePage(index) {
     // if (currentIndex == index) return;
@@ -27,13 +27,11 @@ abstract class _BottomNavigatorStoreBase with Store {
     if (index == 0) {
       Modular.to.navigate('/home');
     } else if (index == 1) {
-      Modular.to.navigate('/community');
-    } else if (index == 2) {
-      Modular.to.navigate('/education/ebook');
-    } else if (index == 3) {
       Modular.to.navigate('/marketplace');
-    } else if (index == 4) {
-      Modular.to.navigate('/configurations');
+    } else if (index == 2) {
+      Modular.to.navigate('/community');
+    } else if (index == 3) {
+      Modular.to.navigate('/education/ebook');
     }
   }
 }

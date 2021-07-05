@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
 import 'package:plant_care/app/modules/main/submodules/home/stores/home_store.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../../../bottom_navigator_store.dart';
 import '../widgets/weather/page/weather_widget.dart';
+import '../widgets/acoes/widgets/cotacao_widget.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -34,9 +36,6 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
 
   @override
   Widget build(BuildContext context) {
-    double expandHeight = 150;
-    double w = MediaQuery.of(context).size.width;
-
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return Scaffold(
         backgroundColor: color_app_background,
@@ -44,43 +43,31 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverAppBar(
-                backgroundColor: color_colorPrimary,
-                floating: true,
+                backgroundColor: color_app_background,
+                floating: false,
                 pinned: false,
-                collapsedHeight: 100,
-                expandedHeight: 100,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Padding(
-                    padding: EdgeInsets.only(left: 10, right: 16, top: 16),
-                    child: Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(3100)),
-                        color: white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.15),
-                            spreadRadius: 0,
-                            blurRadius: 5,
-                            offset: Offset(0, 0), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                            fillColor: color_white,
-                            hintText: "Buscar",
-                            border: InputBorder.none,
-                            prefixIcon: Icon(Typicons.search_outline),
-                            contentPadding: EdgeInsets.only(
-                                left: 26.0, bottom: 8.0, top: 8.0, right: 50.0),
-                          )),
-                      alignment: Alignment.center,
+                leading: IconButton(
+                    icon: SvgPicture.asset(
+                      "images/user_broken.svg",
                     ),
-                  ),
+                    onPressed: () {}),
+                centerTitle: true,
+                title: Image.asset(
+                  'images/logo.png',
+                  scale: 2.5,
                 ),
+                actions: [
+                  IconButton(
+                      icon: SvgPicture.asset(
+                        "images/search_broken.svg",
+                      ),
+                      onPressed: () {}),
+                  IconButton(
+                      icon: SvgPicture.asset(
+                        "images/notification_broken.svg",
+                      ),
+                      onPressed: () {})
+                ],
               ),
             ];
           },
@@ -90,105 +77,33 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  WeatherWidget(),
                   SizedBox(
-                    height: width > 400 ? sy(80) : 120,
+                    height: width > 400 ? sy(80) : 100,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16, top: 16),
-                          child: Container(
-                            width: sx(128),
-                            height: sy(92),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
-                              color: white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.15),
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 0), // changes position of shadow
-                                ),
-                              ],
+                        CardButton(
+                            icon: SvgPicture.asset(
+                              "images/camera_bulk.svg",
                             ),
-                            child: Icon(
-                              Typicons.camera,
-                              size: sy(12),
-                              color: color_colorPrimary,
+                            description: "Camera"),
+                        CardButton(
+                            icon: SvgPicture.asset(
+                              "images/document_bulk.svg",
                             ),
-                            alignment: Alignment.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16, top: 16),
-                          child: Container(
-                            width: sx(128),
-                            height: sy(92),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(3)),
-                              color: white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.15),
-                                  spreadRadius: 0,
-                                  blurRadius: 5,
-                                  offset: Offset(
-                                      0, 0), // changes position of shadow
-                                ),
-                              ],
+                            description: "Ebooks"),
+                        CardButton(
+                            icon: SvgPicture.asset(
+                              "images/folder_bulk.svg",
                             ),
-                            child: Icon(
-                              Typicons.leaf,
-                              size: sy(12),
-                              color: color_colorPrimary,
-                            ),
-                            alignment: Alignment.center,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16, top: 16),
-                          child: InkWell(
-                            onTap: controller.ebookPage,
-                            child: Container(
-                              width: sx(128),
-                              height: sy(92),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(3)),
-                                color: white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.15),
-                                    spreadRadius: 0,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        0, 0), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Icon(
-                                Typicons.bookmark,
-                                size: sy(12),
-                                color: color_colorPrimary,
-                              ),
-                              alignment: Alignment.center,
-                            ),
-                          ),
-                        ),
+                            description: "Courses"),
                       ],
                       shrinkWrap: true,
                       physics: ScrollPhysics(),
                     ),
                   ),
-                  appLabelViewAll("Noticias"),
+                  appLabelViewAll("Notícias"),
                   SizedBox(
                     height: width > 400 ? sy(150) : 200,
                     child: Observer(builder: (context) {
@@ -207,10 +122,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
 
                             return Container(
                               margin: EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 24, top: 16),
+                                  left: 16, right: 16, bottom: 24, top: 0),
                               decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(3)),
+                                    BorderRadius.all(Radius.circular(8)),
                                 color: white,
                                 image: DecorationImage(
                                   image:
@@ -233,24 +148,41 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                   Modular.to.pushNamed("/home/news",
                                       arguments: item, forRoot: true);
                                 },
-                                child: Align(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Text(
-                                      item.title.toString(),
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    gradient: LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                        stops: [
+                                          0.1,
+                                          0.7
+                                        ],
+                                        colors: [
+                                          Colors.black.withOpacity(0.8),
+                                          Colors.transparent
+                                        ]),
                                   ),
-                                  alignment: Alignment.bottomCenter,
+                                  child: Align(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Text(
+                                        item.title.toString(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    alignment: Alignment.bottomCenter,
+                                  ),
                                 ),
                               ),
                             );
                           });
                     }),
                   ),
-                  appLabelViewAll("Previsao do Tempo"),
-                  WeatherWidget(),
-                  SizedBox(height: 20),
+                  appLabelViewAll("Cotação"),
+                  CotacaoWidget(),
+                  SizedBox(height: 40),
                 ],
               ),
             ),
@@ -420,4 +352,44 @@ class SearchHeader {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
+}
+
+class CardButton extends StatelessWidget {
+  final Widget icon;
+  final String description;
+
+  const CardButton({Key? key, required this.icon, required this.description})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RelativeBuilder(builder: (context, height, width, sy, sx) {
+      return Container(
+        margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
+        padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
+        width: sx(width / 1.8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          color: color_colorPrimary,
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xff000000).withOpacity(0.15),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            icon,
+            text(description, textColor: color_white, fontSize: 15.0),
+          ],
+        ),
+        alignment: Alignment.center,
+      );
+    });
+  }
 }

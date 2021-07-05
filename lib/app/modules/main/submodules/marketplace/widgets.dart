@@ -5,8 +5,8 @@ import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 class CategoriaWidget extends StatefulWidget {
@@ -87,9 +87,9 @@ class CardAnuncio extends StatelessWidget {
         },
         child: Container(
           padding: EdgeInsets.all(6.0),
-          margin: EdgeInsets.all(8.0),
+          margin: EdgeInsets.all(8.0),  
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(3)),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
             color: white,
             boxShadow: [
               BoxShadow(

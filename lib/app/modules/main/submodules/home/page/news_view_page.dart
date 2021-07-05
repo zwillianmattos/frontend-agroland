@@ -18,18 +18,29 @@ class _NewsViewPageState extends State<NewsViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: NestedScrollView(
-            
+      body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              pinned: true,
-              title: innerBoxIsScrolled ?  Text(widget.news!.title!) : null,
+              pinned: false,
+              title: innerBoxIsScrolled ? Text(widget.news!.title!) : null,
               backgroundColor: color_colorPrimary,
-              expandedHeight: 200.0,
-              flexibleSpace: FlexibleSpaceBar(
-                background:
-                    Image.network(widget.news!.urlToImage!, fit: BoxFit.cover),
+              expandedHeight: 250.0,
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(widget.news!.urlToImage!),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          stops: [0.1, 0.3],
+                          colors: [color_app_background.withOpacity(1), Colors.transparent,])),
+                ),
               ),
             ),
           ];

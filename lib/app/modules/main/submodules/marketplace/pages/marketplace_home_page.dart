@@ -6,9 +6,9 @@ import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../widgets.dart';

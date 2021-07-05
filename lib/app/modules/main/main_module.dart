@@ -19,15 +19,6 @@ class MainModule extends Module {
   @override
   final List<Bind> binds = [
     BindInject((i) => BottomNavigatorStore()),
-    BindInject(
-        (i) => NewsRepository(new Dio(BaseOptions(baseUrl: API_ENDPOINT)))),
-    BindInject((i) => WeatherRepository(
-        new Dio(BaseOptions(baseUrl: 'https://api.hgbrasil.com/weather')),
-        i<LocationService>())),
-    BindInject((i) => WeatherStore(i<WeatherRepository>())),
-    BindInject(
-      (i) => HomeStore(i<NewsRepository>()),
-    ),
   ];
 
   @override
