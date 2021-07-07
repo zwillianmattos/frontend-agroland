@@ -9,6 +9,7 @@ import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
+import 'package:plant_care/app/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 import '../widgets.dart';
@@ -52,7 +53,7 @@ class _MarketplaceHomePageState extends State<MarketplaceHomePage> {
                 phone: "14 991935302",
                 marketName: 'Biochar Brasil',
                 imgLogo:
-                    "https://http2.mlstatic.com/D_NQ_NP_834341-MLB44075965720_112020-O.webp"),
+                    "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/198781480_324028702683014_6189260925580481660_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=awBgwY86kdAAX9Gc_-E&_nc_ht=scontent.fbau4-1.fna&oh=5f81dc8e8253a1a034c434a4ef0ff694&oe=60D2CB6C"),
             category: ClassificadoCategoria(
               description: 'Adubos',
             ),
@@ -156,7 +157,7 @@ class _MarketplaceHomePageState extends State<MarketplaceHomePage> {
             classificadoFotos: [
               ClassificadoFotos(
                 imgPath:
-                    "https://static.cestasmichelli.com.br/images/product/19580gg.jpg?_nc_cat=105&ccb=1-3&_nc_sid=843cd7&_nc_ohc=53XMfQEr5-EAX9Ootd5&_nc_oc=AQmpHMPS3hteZq5Mc6OWJdsaxa1fx6m_NKosztiW0jJi7IDvFpw_bP4turU_EYi9KUmDCL4RO4PHh27td5QkNDAb&_nc_ht=scontent.fbau4-1.fna&tp=7&oh=9fefb79b753abcb9764c30794f57bf23&oe=60D341B2",
+                    "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/s960x960/201525529_4193531880727403_8206749806483935957_n.jpg?_nc_cat=105&ccb=1-3&_nc_sid=843cd7&_nc_ohc=53XMfQEr5-EAX9Ootd5&_nc_oc=AQmpHMPS3hteZq5Mc6OWJdsaxa1fx6m_NKosztiW0jJi7IDvFpw_bP4turU_EYi9KUmDCL4RO4PHh27td5QkNDAb&_nc_ht=scontent.fbau4-1.fna&tp=7&oh=9fefb79b753abcb9764c30794f57bf23&oe=60D341B2",
               ),
             ],
           ),
@@ -199,7 +200,7 @@ WhatsApp <br/>
             classificadoFotos: [
               ClassificadoFotos(
                 imgPath:
-                    "https://static.cestasmichelli.com.br/images/product/19580gg.jpg",
+                    "https://scontent.fbau4-1.fna.fbcdn.net/v/t1.6435-9/p720x720/154773725_4066638186734277_4728295538000872802_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=3b2858&_nc_ohc=W8TtkXKY9qwAX--eGFN&_nc_ht=scontent.fbau4-1.fna&tp=6&oh=c21499ddff584b99604047d47577fed0&oe=60D29176",
               ),
             ],
           ),
@@ -471,7 +472,7 @@ Dimensões da Embalagem: [A x L x P] cm: 20X11X31
                                 Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: text(
-                                      classificadoSecao.categoria.description, maxLine: 2, fontFamily: fontBold),
+                                      classificadoSecao.categoria.description),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
