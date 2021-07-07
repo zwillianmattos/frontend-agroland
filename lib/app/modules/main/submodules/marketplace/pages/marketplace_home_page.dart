@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
@@ -20,7 +22,9 @@ class MarketplaceHomePage extends StatefulWidget {
   _MarketplaceHomePageState createState() => _MarketplaceHomePageState();
 }
 
-class _MarketplaceHomePageState extends State<MarketplaceHomePage> {
+class _MarketplaceHomePageState
+    extends ModularState<MarketplaceHomePage, MarketplaceHomeStore>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final List<String> categorias = [
@@ -439,64 +443,315 @@ Dimensões da Embalagem: [A x L x P] cm: 20X11X31
           ])
     ];
 
-    return RelativeBuilder(
-      builder: (context, height, width, sy, sx) {
-        return Scaffold(
-          backgroundColor: color_white,
-          appBar: AppBar(
-            backgroundColor: color_colorPrimary,
-            title: Text("Marketplace"),
-          ),
-          body: ListView(
-            children: [
-              BuscaWidget(),
-              SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: categorias
-                        .map((value) => CategoriaWidget(description: value))
-                        .toList(),
+    final List<Tab> tabs = [
+      "Produtos",
+      "Nutrição Animal",
+      "Proteção",
+      "Nutrição de Cultivos",
+      "Sementes",
+      "Mudas",
+      "Limpeza",
+      "Desinfecção",
+      "Acessórios",
+      "Cuidados Gerais",
+      "Motores",
+      "Peças",
+      "Equipamentos",
+      "Maquinários"
+    ]
+        .map((e) => Tab(
+              text: e,
+            ))
+        .toList();
+
+    @protected
+    @mustCallSuper
+    void initState() {
+      super.initState();
+    }
+
+    return DefaultTabController(
+      length: tabs.length,
+      // The Builder widget is used to have a different BuildContext to access
+      // closest DefaultTabController.
+      child: Builder(builder: (BuildContext context) {
+        final TabController tabController = DefaultTabController.of(context)!;
+
+        tabController.addListener(() {
+          if (!tabController.indexIsChanging) {
+            // Your code goes here.
+            // To get index of current tab use tabController.index
+          }
+        });
+        return Observer(builder: (_) {
+          return Scaffold(
+            drawer: new Drawer(
+              child: ListView(
+                // Important: Remove any padding from the ListView.
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      color: color_colorPrimary,
+                    ),
+                    accountName: Text("Willian Mattos"),
+                    accountEmail: Text("willian_mattos@hotmail.com"),
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Text(
+                        "W",
+                        style: TextStyle(fontSize: 40.0),
+                      ),
+                    ),
                   ),
-                ),
+                  ListTile(
+                      leading: Icon(Icons.home),
+                      title: Text("Inicio"),
+                      onTap: () {
+                        debugPrint('toquei no drawer');
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.search),
+                      title: Text("Buscar"),
+                      onTap: () {
+                        debugPrint('toquei no drawer');
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.notifications),
+                      title: Text("Notificacoes"),
+                      onTap: () {
+                        debugPrint('toquei no drawer');
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.favorite),
+                      title: Text("Favoritos"),
+                      onTap: () {
+                        debugPrint('toquei no drawer');
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text("Minha conta"),
+                      onTap: () {
+                        debugPrint('toquei no drawer');
+                      }),
+                  ListTile(
+                      leading: Icon(Icons.money),
+                      title: Text("Vender"),
+                      onTap: () {
+                        debugPrint('toquei no drawer');
+                      }),
+                ],
               ),
-              if (classificados.isNotEmpty)
-                Column(
-                    children: classificados
-                        .map((classificadoSecao) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: text(
-                                      classificadoSecao.categoria.description, maxLine: 2, fontFamily: fontBold),
+            ),
+            appBar: AppBar(
+              backgroundColor: color_colorPrimary,
+              title: Text("Marketplace"),
+              bottom: TabBar(
+                isScrollable: true,
+                controller: tabController,
+                tabs: tabs,
+              ),
+              actions: [
+                IconButton(
+                    icon: SvgPicture.asset(
+                      "images/buy_bulk.svg",
+                      color: color_white,
+                    ),
+                    onPressed: () {})
+              ],
+            ),
+            body: TabBarView(
+              children: tabs.map((Tab tab) {
+                return ListView(
+                    physics: BouncingScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 300,
+                              height: 160,
+                              margin: EdgeInsets.only(
+                                  left: 13, right: 13, bottom: 16, top: 16),
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16, top: 16),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: color_white,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/4e8586365b.png"),
+                                  fit: BoxFit.fitWidth,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GridView.count(
-                                    crossAxisCount:2,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    children: List.generate(
-                                      classificadoSecao.classificados.length,
-                                      (index) {
-                                        return CardAnuncio(
-                                          classificado: classificadoSecao
-                                              .classificados[index],
-                                        );
-                                      },
-                                    ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff000000).withOpacity(0.15),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 0), // changes position of shadow
                                   ),
-                                )
-                              ],
-                            ))
-                        .toList()),
-            ],
-          ),
-        );
-      },
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              height: 160,
+                              margin: EdgeInsets.only(
+                                  left: 13, right: 13, bottom: 16, top: 16),
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16, top: 16),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: color_white,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png"),
+                                  fit: BoxFit.fitWidth,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff000000).withOpacity(0.15),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 0), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              height: 160,
+                              margin: EdgeInsets.only(
+                                  left: 13, right: 13, bottom: 16, top: 16),
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16, top: 16),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: color_white,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/bdfdd8dd71.png"),
+                                  fit: BoxFit.fitWidth,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff000000).withOpacity(0.15),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 0), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              height: 160,
+                              margin: EdgeInsets.only(
+                                  left: 13, right: 13, bottom: 16, top: 16),
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16, top: 16),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: color_white,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://http2.mlstatic.com/D_NQ_NP_801971-MLA46483020534_062021-C.webp"),
+                                  fit: BoxFit.fitWidth,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff000000).withOpacity(0.15),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 0), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              height: 160,
+                              margin: EdgeInsets.only(
+                                  left: 13, right: 13, bottom: 16, top: 16),
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, bottom: 16, top: 16),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8)),
+                                color: color_white,
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      "https://http2.mlstatic.com/D_NQ_NP_663015-MLA46468719096_062021-B.webp"),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xff000000).withOpacity(0.15),
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(
+                                        0, 0), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (classificados.isNotEmpty)
+                        Column(
+                            children: classificados
+                                .map((classificadoSecao) => Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(16.0),
+                                          child: text(
+                                              classificadoSecao
+                                                  .categoria.description,
+                                              maxLine: 2,
+                                              fontFamily: fontBold),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: GridView.count(
+                                            crossAxisCount: 2,
+                                            physics:
+                                                NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            children: List.generate(
+                                              classificadoSecao
+                                                  .classificados.length,
+                                              (index) {
+                                                return CardAnuncio(
+                                                  classificado:
+                                                      classificadoSecao
+                                                          .classificados[index],
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ))
+                                .toList()),
+                    ]);
+              }).toList(),
+            ),
+          );
+        });
+      }),
     );
   }
 }
