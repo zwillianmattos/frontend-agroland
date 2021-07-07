@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 
 import '../models.dart';
 import '../widgets.dart';

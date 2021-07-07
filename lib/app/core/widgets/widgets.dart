@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:relative_scale/relative_scale.dart';
 
 TextFormField appEditTextStyle(var hintText,
     {isPassword = true,
@@ -464,5 +465,111 @@ class appButton3State extends State<appButton3> {
             : boxDecoration(bgColor: color_white, radius: 5.0),
       ),
     );
+  }
+}
+
+
+class ClippedPartsWidget extends StatelessWidget {
+  final Widget top;
+  final Widget bottom;
+  final double Function(Size, double) splitFunction;
+
+  ClippedPartsWidget({
+    required this.top,
+    required this.bottom,
+    required this.splitFunction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: <Widget>[
+          // I'm putting unmodified top widget to back. I wont cut it.
+          // Instead I'll overlay it with clipped bottom widget.
+          Container(child: top),
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ClipPath(
+              clipper: FunctionClipper(splitFunction: splitFunction),
+              child: Container(child: bottom),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FunctionClipper extends CustomClipper<Path> {
+  final double Function(Size, double) splitFunction;
+
+  FunctionClipper({required this.splitFunction}) : super();
+
+  Path getClip(Size size) {
+    final path = Path();
+
+    // move to split line starting point
+    path.moveTo(0, splitFunction(size, 0));
+
+    // draw split line
+    for (double x = 1; x <= size.width; x++) {
+      path.lineTo(x, splitFunction(size, x));
+    }
+    path.quadraticBezierTo(size.width, size.height, size.width, size.height);
+
+    // close bottom part of screen
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    // I'm returning fixed 'true' value here for simplicity, it's not the part of actual question
+    // basically that means that clipping will be redrawn on any changes
+    return true;
+  }
+}
+
+class CardButton extends StatelessWidget {
+  final Widget icon;
+  final String description;
+
+  const CardButton({Key? key, required this.icon, required this.description})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RelativeBuilder(builder: (context, height, width, sy, sx) {
+      return Container(
+        margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
+        padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
+        width: sx(width) > 500 ? sx(100) : sx(width / 1.8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          color: color_colorPrimary,
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xff000000).withOpacity(0.15),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            icon,
+            text(description, textColor: color_white, fontSize: 15.0),
+          ],
+        ),
+        alignment: Alignment.center,
+      );
+    });
   }
 }

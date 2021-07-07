@@ -1,4 +1,4 @@
-import '../../../../../core/models/source.dart';
+import 'source.dart';
 
 class NewsModel {
   final Source? source;

@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:location/location.dart';
+import 'dart:io' show Platform;
 
 class LocationService implements Disposable {
   Location location = new Location();
@@ -11,7 +12,12 @@ class LocationService implements Disposable {
 
   getLocation() async {
     try {
-
+      if (Platform.isWindows) {
+        return _locationData = LocationData.fromMap({
+          "latitude": -22.2877973,
+          "longitude": -49.2306352,
+        });
+      }
       print("Location Service");
 
       _serviceEnabled = await location.serviceEnabled();
@@ -42,6 +48,5 @@ class LocationService implements Disposable {
 
   @override
   void dispose() {
-    this.dispose();
   }
 }

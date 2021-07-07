@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
@@ -23,36 +24,48 @@ class BottomNavigatorPageState
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       return Scaffold(
-        backgroundColor: Colors.white,
+        extendBody: true,
+        backgroundColor: Colors.transparent,
         body: RouterOutlet(),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Typicons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Typicons.users),
-              label: 'Comunidade',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Typicons.bookmark),
-              label: 'Educação',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Typicons.calculator),
-              label: 'Marketplace',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Typicons.cog),
-              label: 'Settings',
-            ),
-          ],
-          currentIndex: controller.currentPage,
-          selectedItemColor: color_colorPrimary,
-          backgroundColor: Colors.white,
-          unselectedItemColor: Colors.black,
-          onTap: controller.changePage,
+        bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+          child: BottomNavigationBar(
+            elevation: 10.0,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  "images/home_bulk.svg",
+                ),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  "images/buy_bulk.svg",
+                ),
+                label: 'Marketplace',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  "images/message_bulk.svg",
+                ),
+                label: 'Comunidade',
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(
+                  "images/folder_bulk_black.svg",
+                ),
+                label: 'Educação',
+              ),
+            ],
+            currentIndex: controller.currentPage,
+            selectedItemColor: Colors.black,
+            backgroundColor: Colors.white,
+            unselectedItemColor: Colors.black,
+            onTap: controller.changePage,
+          ),
         ),
       );
     });

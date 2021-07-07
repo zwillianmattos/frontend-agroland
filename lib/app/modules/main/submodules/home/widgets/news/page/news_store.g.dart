@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_store.dart';
+part of 'news_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'home_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$HomeStore on _HomeStoreBase, Store {
-  final _$newsListAtom = Atom(name: '_HomeStoreBase.newsList');
+mixin _$NewsStore on _NewsStoreBase, Store {
+  final _$newsListAtom = Atom(name: '_NewsStoreBase.newsList');
 
   @override
   ObservableList<NewsModel> get newsList {
@@ -24,7 +24,7 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
-  final _$loadNewsAsyncAction = AsyncAction('_HomeStoreBase.loadNews');
+  final _$loadNewsAsyncAction = AsyncAction('_NewsStoreBase.loadNews');
 
   @override
   Future loadNews() {

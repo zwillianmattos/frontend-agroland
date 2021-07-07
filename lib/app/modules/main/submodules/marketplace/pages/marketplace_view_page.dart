@@ -5,9 +5,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
-import 'package:plant_care/app/widgets/widgets.dart';
 import 'dart:convert';
 
 class MarketplaceClassificadoViewPage extends StatefulWidget {

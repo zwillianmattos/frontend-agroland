@@ -15,8 +15,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_modular: ^3.1.0
   flutter_mobx:
-  flutter_triple:
-  mobx_triple: ^1.0.2
   mobx:
   modal_bottom_sheet: ^2.0.0
   custom_pop_up_menu: ^1.2.0
@@ -63,6 +61,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/
+    - images/cotacao/
     - images/logo.png
     - images/background.jpg
     - images/LikeButton/image/grey.jpg
