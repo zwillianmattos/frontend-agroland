@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
+import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsViewPage extends StatefulWidget {

@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:relative_scale/relative_scale.dart';
 
 TextFormField appEditTextStyle(var hintText,
     {isPassword = true,
@@ -530,5 +531,45 @@ class FunctionClipper extends CustomClipper<Path> {
     // I'm returning fixed 'true' value here for simplicity, it's not the part of actual question
     // basically that means that clipping will be redrawn on any changes
     return true;
+  }
+}
+
+class CardButton extends StatelessWidget {
+  final Widget icon;
+  final String description;
+
+  const CardButton({Key? key, required this.icon, required this.description})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RelativeBuilder(builder: (context, height, width, sy, sx) {
+      return Container(
+        margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
+        padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
+        width: sx(width) > 500 ? sx(100) : sx(width / 1.8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          color: color_colorPrimary,
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xff000000).withOpacity(0.15),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, 0), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            icon,
+            text(description, textColor: color_white, fontSize: 15.0),
+          ],
+        ),
+        alignment: Alignment.center,
+      );
+    });
   }
 }
