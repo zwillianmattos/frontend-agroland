@@ -1,8 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/home/models/news.dart';
-import 'package:plant_care/app/modules/main/submodules/home/repositories/news_repository.dart';
-
+import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:plant_care/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
 import '../../../bottom_navigator_store.dart';
 
 part 'home_store.g.dart';

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'news_store.dart';
+part of 'home_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,8 @@ part of 'news_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$NewsStore on _NewsStoreBase, Store {
-  final _$newsListAtom = Atom(name: '_NewsStoreBase.newsList');
+mixin _$HomeStore on _HomeStoreBase, Store {
+  final _$newsListAtom = Atom(name: '_HomeStoreBase.newsList');
 
   @override
   ObservableList<NewsModel> get newsList {
@@ -24,11 +24,25 @@ mixin _$NewsStore on _NewsStoreBase, Store {
     });
   }
 
-  final _$loadNewsAsyncAction = AsyncAction('_NewsStoreBase.loadNews');
+  final _$loadNewsAsyncAction = AsyncAction('_HomeStoreBase.loadNews');
 
   @override
   Future loadNews() {
     return _$loadNewsAsyncAction.run(() => super.loadNews());
+  }
+
+  final _$_HomeStoreBaseActionController =
+      ActionController(name: '_HomeStoreBase');
+
+  @override
+  dynamic ebookPage() {
+    final _$actionInfo = _$_HomeStoreBaseActionController.startAction(
+        name: '_HomeStoreBase.ebookPage');
+    try {
+      return super.ebookPage();
+    } finally {
+      _$_HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
