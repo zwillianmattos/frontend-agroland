@@ -12,7 +12,7 @@ class LocationService implements Disposable {
 
   getLocation() async {
     try {
-      if (Platform.isWindows) {
+      if (Platform.isWindows || (!Platform.isAndroid || Platform.isIOS)) {
         return _locationData = LocationData.fromMap({
           "latitude": -22.2877973,
           "longitude": -49.2306352,
@@ -47,6 +47,5 @@ class LocationService implements Disposable {
   get locationData async => await getLocation();
 
   @override
-  void dispose() {
-  }
+  void dispose() {}
 }

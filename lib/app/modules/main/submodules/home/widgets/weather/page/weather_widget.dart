@@ -30,7 +30,7 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
           Weather w = controller.wheater!;
 
           return SizedBox(
-            width:  width > 400 ? width : width,
+            width: width > 400 ? width : width,
             height: width > 400 ? sy(120) : 130,
             child: Container(
               decoration: BoxDecoration(
@@ -64,8 +64,7 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                       // normalizing x to make it exactly one wave
                       final normalizedX = x / size.width * 2 * pi;
                       final waveHeight = size.height / 2;
-                      final y =
-                          size.height / 2 - sin(normalizedX) * waveHeight;
+                      final y = size.height / 2 - sin(normalizedX) * waveHeight;
 
                       return y;
                     },
@@ -92,10 +91,10 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                                 ),
                                 Container(
                                   width: width > 400 ? 70 : 70,
-                                  height: width > 400 ? sy(5)  : 10,
+                                  height: width > 400 ? sy(5) : 10,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      scale:width > 400 ? sx(0.3) : 1.7,
+                                      scale: width > 400 ? sx(0.3) : 1.7,
                                       centerSlice: Rect.fromLTRB(1, 1, 1, 1),
                                       fit: BoxFit.fitHeight,
                                       alignment: Alignment.centerLeft,

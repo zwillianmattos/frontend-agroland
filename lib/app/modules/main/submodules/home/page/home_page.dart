@@ -6,10 +6,10 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import './home_store.dart';
 import 'package:relative_scale/relative_scale.dart';
-import '../../../bottom_navigator_store.dart';
 import '../widgets/weather/page/weather_widget.dart';
 import '../widgets/acoes/widgets/cotacao_widget.dart';
 import '../widgets/news/page/news_widget.dart';
+import 'dart:io' show Platform;
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -19,36 +19,36 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
   @override
   Widget build(BuildContext context) {
-    return RelativeBuilder(builder: (context, height, width, sy, sx) {
-      final Widget buttons = SizedBox(
-        height: width > 500 ? sy(60) : 100,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            CardButton(
-                icon: SvgPicture.asset(
-                  "images/camera_bulk.svg",
-                ),
-                description: "Camera"),
-            CardButton(
-                icon: SvgPicture.asset(
-                  "images/document_bulk.svg",
-                ),
-                description: "Ebooks"),
-            CardButton(
-                icon: SvgPicture.asset(
-                  "images/folder_bulk.svg",
-                ),
-                description: "Courses"),
-          ],
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-        ),
-      );
+    return Scaffold(
+      backgroundColor: color_app_background,
+      body: RelativeBuilder(builder: (context, height, width, sy, sx) {
+        final Widget buttons = SizedBox(
+          height: width > 500 ? sy(60) : 100,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              CardButton(
+                  icon: SvgPicture.asset(
+                    "images/camera_bulk.svg",
+                  ),
+                  description: "Camera"),
+              CardButton(
+                  icon: SvgPicture.asset(
+                    "images/document_bulk.svg",
+                  ),
+                  description: "Ebooks"),
+              CardButton(
+                  icon: SvgPicture.asset(
+                    "images/folder_bulk.svg",
+                  ),
+                  description: "Courses"),
+            ],
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+          ),
+        );
 
-      return Scaffold(
-        backgroundColor: color_app_background,
-        body: NestedScrollView(
+        return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverAppBar(
@@ -87,7 +87,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  WeatherWidget(),
+                  if (Platform.isAndroid || Platform.isIOS) WeatherWidget(),
                   buttons,
                   appLabelViewAll("Notícias"),
                   NewsWidget(),
@@ -98,8 +98,8 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
               ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 }

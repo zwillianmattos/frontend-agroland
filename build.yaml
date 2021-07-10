@@ -1,0 +1,9 @@
+targets:
+  $default:
+    builders:
+      mobx_codegen|mobx_generator:
+        generate_for:
+          - "lib/**_store.dart"
+          - "lib/**_controller.dart"
+          - "lib/**_service.dart"
+          - "lib/**_model.dart"

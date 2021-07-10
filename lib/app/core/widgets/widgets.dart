@@ -468,7 +468,6 @@ class appButton3State extends State<appButton3> {
   }
 }
 
-
 class ClippedPartsWidget extends StatelessWidget {
   final Widget top;
   final Widget bottom;

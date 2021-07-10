@@ -43,14 +43,18 @@ class _SignUpWidgetState extends ModularState<SignUpWidget, SignUpStore> {
             "Senha",
             isPassword: true,
           ).paddingAll(spacing_standard_new),
-          appEditTextStyle(
-            "Repetir Senha",
-            isPassword: true,
-          ).paddingAll(spacing_standard_new),
+          appEditTextStyle("Repetir Senha", isPassword: true,
+              onValidation: (text) {
+            if (text.length < 6 || text == null || text.length == 0)
+              return "A senha deve ter no mínimo 6 caracteres";
+
+            return null;
+          }).paddingAll(spacing_standard_new),
           Align(
             alignment: Alignment.centerRight,
             child: FittedBox(
               child: appButton2(
+                radius: 8,
                 textContent: "Próximo",
                 onPressed: (() {
                   // GroceryAddNumber().launch(context);
