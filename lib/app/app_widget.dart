@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 
@@ -9,6 +10,7 @@ class AppWidget extends StatelessWidget {
       title: 'Agro Land',
       initialRoute: '/splash',
       debugShowCheckedModeBanner: false,
+      builder: EasyLoading.init(),
       theme: ThemeData(
         primaryColor: color_colorPrimary,
         primarySwatch: Colors.green,

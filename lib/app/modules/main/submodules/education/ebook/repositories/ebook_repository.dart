@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import '../models/ebook_model.dart';
 
 part 'ebook_repository.g.dart';
@@ -31,18 +32,15 @@ class EbookRepository with Store implements EbookDatasource {
     List<Ebook> listaEbooks = [];
     try {
       Response response = await _http.get('/ebooks',
-          options: Options(headers: {
-            'Origin': 'http://localhost',
-            'Authorization':
-                'authorization eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZVVzZXIiOjEsImlhdCI6MTYxOTkwNTg4MX0.NL0t-7DPe8JZ7IDyLDBX5okn0z7IjPJrs4MYk3zNOj8'
-          }));
+          options: await Modular.get<UserPreferencesStore>().authHeader
+          );
 
       if (response.statusCode != 200) throw Error();
 
       print(response.realUri);
       var jsonResponse = response.data;
 
-      List<dynamic> list = jsonResponse['data'];
+      List<dynamic> list = jsonResponse['data']['items'];
       if (list != null) {
         list.asMap().forEach((key, value) {
           listaEbooks.add(Ebook.fromJson(value));

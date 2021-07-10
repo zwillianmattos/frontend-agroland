@@ -10,7 +10,7 @@ import 'core/env/variables.dart';
 
 class AppModule extends Module {
   final List<Bind> binds = [
-    BindInject((i) => UserPreferencesStore(), isSingleton: true),
+    BindInject((i) => UserPreferencesStore(), isSingleton: true, isLazy: false),
     BindInject(
       (i) => Dio(BaseOptions(baseUrl: API_ENDPOINT)),
     ),

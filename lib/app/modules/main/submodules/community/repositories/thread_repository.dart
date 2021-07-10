@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/modules/main/submodules/community/models/replies_model.dart';
 import '../models/thread_model.dart';
 
@@ -27,11 +28,7 @@ class ThreadRepository implements ThreadDatasource {
       print(dio.options.baseUrl);
 
       Response response = await dio.get('/threads',
-          options: Options(headers: {
-            'Origin': 'http://localhost',
-            'Authorization':
-                'authorization eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZVVzZXIiOjEsImlhdCI6MTYxOTkwNTg4MX0.NL0t-7DPe8JZ7IDyLDBX5okn0z7IjPJrs4MYk3zNOj8'
-          }));
+          options: await Modular.get<UserPreferencesStore>().authHeader);
 
       print(response.realUri);
       var jsonResponse = response.data;
@@ -63,11 +60,7 @@ class ThreadRepository implements ThreadDatasource {
 
     try {
       Response response = await dio.get("threads/${channel}/${threadId}",
-          options: Options(headers: {
-            'Origin': 'http://localhost',
-            'Authorization':
-                'authorization eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZVVzZXIiOjEsImlhdCI6MTYxOTkwNTg4MX0.NL0t-7DPe8JZ7IDyLDBX5okn0z7IjPJrs4MYk3zNOj8'
-          }));
+          options: await Modular.get<UserPreferencesStore>().authHeader);
       print(response.realUri);
       var jsonResponse = response.data;
 
@@ -98,14 +91,10 @@ class ThreadRepository implements ThreadDatasource {
     Replies? replieData;
 
     try {
-      Response response =
-          await dio.post("threads/${thread.channel}/${thread.id}/replies",
-              options: Options(headers: {
-                'Origin': 'http://localhost',
-                'Authorization':
-                    'authorization eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidHlwZVVzZXIiOjEsImlhdCI6MTYxOTkwNTg4MX0.NL0t-7DPe8JZ7IDyLDBX5okn0z7IjPJrs4MYk3zNOj8'
-              }),
-              data: {
+      Response response = await dio.post(
+          "threads/${thread.channel}/${thread.id}/replies",
+          options: Modular.get<UserPreferencesStore>().authHeader,
+          data: {
             'body': replie.body,
           });
 

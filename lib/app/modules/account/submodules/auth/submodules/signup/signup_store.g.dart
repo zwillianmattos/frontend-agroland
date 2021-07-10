@@ -24,10 +24,26 @@ mixin _$SignUpStore on SignUpStoreBase, Store {
     });
   }
 
+  final _$userAtom = Atom(name: 'SignUpStoreBase.user');
+
+  @override
+  User get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(User value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+user: ${user}
     ''';
   }
 }

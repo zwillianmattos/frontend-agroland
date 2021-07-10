@@ -96,7 +96,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                   left: 0.0,
                                 ),
                                 child: Image.network(
-                                  "https://conder.sc.gov.br/wp-content/uploads/2019/08/avatar.png",
+                                  "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
                                   width: 30,
                                 ),
                               ),
@@ -195,7 +195,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                                 right: 8.0,
                                                 bottom: 16.0),
                                             child: Image.network(
-                                              "https://conder.sc.gov.br/wp-content/uploads/2019/08/avatar.png",
+                                              "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
                                               width: 30,
                                             ),
                                           ),

@@ -14,58 +14,100 @@ class SignUpWidget extends StatefulWidget {
 class _SignUpWidgetState extends ModularState<SignUpWidget, SignUpStore> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          // text("Bem-vindo ao PlantCare",
-          //         fontSize: textSizeLarge, fontFamily: fontBold, maxLine: 5)
-          //     .paddingOnly(
-          //         top: spacing_standard_new,
-          //         left: spacing_standard_new,
-          //         right: spacing_standard_new),
-          // text("Vamos começar",
-          //         textColor: color_textColorSecondary,
-          //         fontSize: textSizeLargeMedium,
-          //         fontFamily: fontRegular, maxLine: 5)
-          //     .paddingOnly(
-          //         left: spacing_standard_new, right: spacing_standard_new),
-          appEditTextStyle(
-            "Nome",
-            isPassword: false,
-          ).paddingAll(spacing_standard_new),
-          appEditTextStyle(
-            "Email",
-            isPassword: false,
-            keyboardType: TextInputType.emailAddress,
-          ).paddingAll(spacing_standard_new),
-          appEditTextStyle(
-            "Senha",
-            isPassword: true,
-          ).paddingAll(spacing_standard_new),
-          appEditTextStyle("Repetir Senha", isPassword: true,
+    return Form(
+      key: controller.formKey,
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // text("Bem-vindo ao PlantCare",
+            //         fontSize: textSizeLarge, fontFamily: fontBold, maxLine: 5)
+            //     .paddingOnly(
+            //         top: spacing_standard_new,
+            //         left: spacing_standard_new,
+            //         right: spacing_standard_new),
+            // text("Vamos começar",
+            //         textColor: color_textColorSecondary,
+            //         fontSize: textSizeLargeMedium,
+            //         fontFamily: fontRegular, maxLine: 5)
+            //     .paddingOnly(
+            //         left: spacing_standard_new, right: spacing_standard_new),
+            appEditTextStyle(
+              "Nome",
+              isPassword: false,
+              onSaved: (text) {
+                controller.user.name = text;
+              },
               onValidation: (text) {
-            if (text.length < 6 || text == null || text.length == 0)
-              return "A senha deve ter no mínimo 6 caracteres";
+                // Check name is null
+                if (text == null || text.length == 0) return "Nome inválido";
+              },
+            ).paddingAll(spacing_standard_new),
+            appEditTextStyle(
+              "Email",
+              isPassword: false,
+              keyboardType: TextInputType.emailAddress,
+              onValidation: (email) {
+                // Simple validator for email
+                if (email == null || email.length == 0) {
+                  return "Email nao informado";
+                }
 
-            return null;
-          }).paddingAll(spacing_standard_new),
-          SizedBox(
-            height: 10,
-          ),
-          Align(
-              alignment: Alignment.centerRight,
-              child: FittedBox(
-                child: appButton2(
-                  radius: 8,
-                  textContent: "Próximo",
-                  onPressed: (() {
-                    // GroceryAddNumber().launch(context);
-                  }),
-                ).paddingOnly(
-                    right: spacing_standard_new, bottom: spacing_standard_new),
-              ))
-        ],
+                // Validate email address
+                bool emailValid = RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                    .hasMatch(email);
+
+                if (!emailValid) {
+                  return "Email inválido";
+                }
+              },
+              onSaved: (text) {
+                controller.user.email = text;
+              },
+            ).paddingAll(spacing_standard_new),
+            appEditTextStyle(
+              "Senha",
+              isPassword: true,
+              onValidation: (text) {
+                if (text.length < 6 || text == null || text.length == 0)
+                  return "A senha deve ter no mínimo 6 caracteres";
+
+                return null;
+              },
+              onSaved: (text) {
+                controller.user.password = text;
+              },
+            ).paddingAll(spacing_standard_new),
+            appEditTextStyle(
+              "Repetir Senha",
+              isPassword: true,
+              onValidation: (text) {
+                if (text.length < 6 || text == null || text.length == 0)
+                  return "A senha deve ter no mínimo 6 caracteres";
+
+                return null;
+              },
+            ).paddingAll(spacing_standard_new),
+            SizedBox(
+              height: 10,
+            ),
+            Align(
+                alignment: Alignment.centerRight,
+                child: FittedBox(
+                  child: appButton2(
+                    radius: 8,
+                    textContent: "Registrar",
+                    onPressed: (() {
+                      controller.signUp();
+                      // GroceryAddNumber().launch(context);
+                    }),
+                  ).paddingOnly(
+                      right: spacing_standard_new,
+                      bottom: spacing_standard_new),
+                ))
+          ],
+        ),
       ),
     );
   }

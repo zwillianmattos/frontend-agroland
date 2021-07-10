@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/models/account.dart';
@@ -21,14 +22,16 @@ abstract class SignInStoreBase with Store {
   @observable
   User user = new User();
 
-  SignInStoreBase(this._repository) {}
+  SignInStoreBase(this._repository) {
+    
+  }
 
   @observable
   bool isLoading = false;
 
   signIn() async {
     try {
-      isLoading = true;
+      EasyLoading.show(status: 'Carregando...');
 
       // check form is valid
       if (!formKey.currentState!.validate()) {
@@ -49,10 +52,10 @@ abstract class SignInStoreBase with Store {
       }
       // redirect to home
 
-      isLoading = false;
+      EasyLoading.dismiss();
     } catch (e) {
       print(e);
-      isLoading = false;
+      EasyLoading.showError(e.toString(), duration: Duration(seconds: 4));
     }
 
     return true;

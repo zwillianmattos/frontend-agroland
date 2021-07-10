@@ -42,6 +42,7 @@ class _ThreadViewPageState
           }
 
           return SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 Container(
@@ -169,7 +170,7 @@ class _ThreadViewPageState
                                             left: 0.0,
                                           ),
                                           child: Image.network(
-                                            "https://conder.sc.gov.br/wp-content/uploads/2019/08/avatar.png",
+                                            "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
                                             width: 30,
                                           ),
                                         ),
@@ -182,7 +183,7 @@ class _ThreadViewPageState
                                             padding: EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(3)),
+                                                  Radius.circular(8)),
                                               color: white,
                                               boxShadow: [
                                                 BoxShadow(
@@ -229,6 +230,9 @@ class _ThreadViewPageState
                           .toList(),
                     ),
                   ),
+                  SizedBox(
+                    height: 42,
+                  )
               ],
             ),
           );

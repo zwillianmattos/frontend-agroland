@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
@@ -20,6 +21,12 @@ abstract class _UserPreferencesStoreBase with Store {
   set setUser(AccountModel user) => this.accountModel = user;
 
   User? get getUser => this.accountModel?.user;
+
+  get authHeader async => Options(headers: {
+        'Origin': 'http://localhost',
+        'Authorization':
+            'authorization ${this.accountModel!.token}'
+      });
 
   isAuth() async {
     String account = await LocalStorage.getValue<String>("user");
