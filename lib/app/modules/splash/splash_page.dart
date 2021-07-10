@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/core/models/account.dart';
+import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
   Tween<double> _scaleTween = Tween<double>(begin: 1, end: 2);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +31,9 @@ class SplashPage extends StatelessWidget {
               'images/logo.png',
               scale: 2,
             ),
-            onEnd: () {
-              Future.delayed(Duration(seconds: 1), () {
-                Modular.to.pushReplacementNamed('/');
-              });
+            onEnd: () async {
+              Modular.to.pushReplacementNamed('/');
+              
             }),
       ),
     );

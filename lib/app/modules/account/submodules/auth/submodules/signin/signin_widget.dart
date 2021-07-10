@@ -20,21 +20,24 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
           key: controller.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              text("Faça login no aplicativo",
-                      maxLine: 5, fontSize: textSizeLarge, fontFamily: fontBold)
-                  .paddingOnly(
-                      top: spacing_standard_new,
-                      left: spacing_standard_new,
-                      right: spacing_standard_new),
-              text(
-                "Digite o email e a senha para continuar",
-                textColor: textSecondaryColor,
-                fontSize: textSizeLargeMedium,
-              ).paddingOnly(
-                  left: spacing_standard_new, right: spacing_standard_new),
+              // text("Faça login no aplicativo",
+              //         maxLine: 5, fontSize: textSizeLarge, fontFamily: fontBold)
+              //     .paddingOnly(
+              //         top: spacing_standard_new,
+              //         left: spacing_standard_new,
+              //         right: spacing_standard_new),
+              // text(
+              //   "Digite o email e a senha para continuar",
+              //   textColor: textSecondaryColor,
+              //   fontSize: textSizeLargeMedium,
+              //   maxLine: 5
+              // ).paddingOnly(
+              //     left: spacing_standard_new, right: spacing_standard_new),
               appEditTextStyle("Email",
-                  isPassword: false, keyboardType: TextInputType.emailAddress,
+                  isPassword: false, 
+                  keyboardType: TextInputType.emailAddress,
                   onValidation: (email) {
                 // Simple validator for email
                 if (email == null || email.length == 0) {
@@ -64,19 +67,22 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
               }, onSaved: (text) {
                 controller.user.password = text;
               }).paddingAll(spacing_standard_new),
+              SizedBox(
+                height: 10,
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  text(
-                    "Esqueci a senha",
-                    fontSize: textSizeLargeMedium,
-                    fontFamily: fontMedium,
-                  )
-                      .paddingOnly(
-                          left: spacing_standard_new,
-                          right: spacing_standard_new,
-                          bottom: spacing_standard_new)
-                      .onTap(() {}),
+                  // text(
+                  //   "Esqueci a senha",
+                  //   fontSize: textSizeLargeMedium,
+                  //   fontFamily: fontMedium,
+                  // )
+                  //     .paddingOnly(
+                  //         left: spacing_standard_new,
+                  //         right: spacing_standard_new,
+                  //         bottom: spacing_standard_new)
+                  //     .onTap(() {}),
                   appButton2(
                     radius: 8,
                     textContent: "Entrar",
@@ -86,9 +92,6 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
                   )
                       .paddingOnly(
                           right: spacing_standard_new,
-                          bottom: spacing_standard_new)
-                      .paddingOnly(
-                          top: spacing_standard_new,
                           bottom: spacing_standard_new)
                 ],
               )

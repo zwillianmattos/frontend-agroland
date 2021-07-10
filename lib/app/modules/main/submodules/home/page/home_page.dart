@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
+import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import './home_store.dart';
 import 'package:relative_scale/relative_scale.dart';
@@ -59,7 +63,13 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                     icon: SvgPicture.asset(
                       "images/user_broken.svg",
                     ),
-                    onPressed: () {}),
+                    onPressed: () async {
+                      if (Modular.get<UserPreferencesStore>().getUser != null) {
+                        Modular.to.pushNamed('/account/profile');
+                      } else {
+                        Modular.to.pushNamed('/account/auth');
+                      }
+                    }),
                 centerTitle: true,
                 title: Image.asset(
                   'images/logo.png',
@@ -83,11 +93,15 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
           body: Container(
             width: width > 500 ? sx(250) : width,
             child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  if (Platform.isAndroid || Platform.isIOS) WeatherWidget(),
+                  if (Platform.isAndroid ||
+                      Platform.isIOS ||
+                      Platform.isWindows)
+                    WeatherWidget(),
                   buttons,
                   appLabelViewAll("Notícias"),
                   NewsWidget(),

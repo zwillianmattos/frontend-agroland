@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -56,38 +57,58 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
 
     return Scaffold(
       backgroundColor: color_app_background,
+      appBar: AppBar(
+        leading: BackButton(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Image.asset(
+          'images/logo.png',
+          scale: 2.5,
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: spacing_xxLarge,
-            ),
-            Container(
-              width: width,
-              decoration: BoxDecoration(
-                color: color_white,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20.0),
-                  bottomRight: const Radius.circular(20.0),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: spacing_xxLarge,
+              ),
+              Container(
+                width: width,
+                decoration: BoxDecoration(
+                  color: color_white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8.0),
+                    bottomRight: const Radius.circular(8.0),
+                    topLeft: Radius.circular(8.0),
+                    topRight: const Radius.circular(8.0),
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                        color: color_ShadowColor,
+                        blurRadius: 20.0,
+                        offset: Offset(0.0, 0.9)),
+                  ],
                 ),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: color_ShadowColor,
-                      blurRadius: 20.0,
-                      offset: Offset(0.0, 0.9)),
-                ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    optionsMenu,
+                    Observer(builder: (_) {
+                      return controller.isSignUp ? signUp : signIn;
+                    }),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  optionsMenu,
-                  Observer(builder: (_) {
-                    return controller.isSignUp ? signUp : signIn;
-                  }),
-                ],
+              SizedBox(
+                height: spacing_xxLarge,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -5,7 +5,18 @@ import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;

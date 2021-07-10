@@ -18,18 +18,18 @@ class _SignUpWidgetState extends ModularState<SignUpWidget, SignUpStore> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          text("Bem-vindo ao PlantCare",
-                  fontSize: textSizeLarge, fontFamily: fontBold)
-              .paddingOnly(
-                  top: spacing_standard_new,
-                  left: spacing_standard_new,
-                  right: spacing_standard_new),
-          text("Vamos começar",
-                  textColor: color_textColorSecondary,
-                  fontSize: textSizeLargeMedium,
-                  fontFamily: fontRegular)
-              .paddingOnly(
-                  left: spacing_standard_new, right: spacing_standard_new),
+          // text("Bem-vindo ao PlantCare",
+          //         fontSize: textSizeLarge, fontFamily: fontBold, maxLine: 5)
+          //     .paddingOnly(
+          //         top: spacing_standard_new,
+          //         left: spacing_standard_new,
+          //         right: spacing_standard_new),
+          // text("Vamos começar",
+          //         textColor: color_textColorSecondary,
+          //         fontSize: textSizeLargeMedium,
+          //         fontFamily: fontRegular, maxLine: 5)
+          //     .paddingOnly(
+          //         left: spacing_standard_new, right: spacing_standard_new),
           appEditTextStyle(
             "Nome",
             isPassword: false,
@@ -50,20 +50,21 @@ class _SignUpWidgetState extends ModularState<SignUpWidget, SignUpStore> {
 
             return null;
           }).paddingAll(spacing_standard_new),
+          SizedBox(
+            height: 10,
+          ),
           Align(
-            alignment: Alignment.centerRight,
-            child: FittedBox(
-              child: appButton2(
-                radius: 8,
-                textContent: "Próximo",
-                onPressed: (() {
-                  // GroceryAddNumber().launch(context);
-                }),
-              ).paddingOnly(
-                  right: spacing_standard_new, bottom: spacing_standard_new),
-            ).paddingOnly(
-                top: spacing_standard_new, bottom: spacing_standard_new),
-          )
+              alignment: Alignment.centerRight,
+              child: FittedBox(
+                child: appButton2(
+                  radius: 8,
+                  textContent: "Próximo",
+                  onPressed: (() {
+                    // GroceryAddNumber().launch(context);
+                  }),
+                ).paddingOnly(
+                    right: spacing_standard_new, bottom: spacing_standard_new),
+              ))
         ],
       ),
     );

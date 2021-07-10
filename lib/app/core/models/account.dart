@@ -1,13 +1,15 @@
+import 'package:plant_care/app/modules/account/models/user.dart';
+
 class AccountModel {
   String? token;
-  Map<String, dynamic>? user;
+  User? user;
 
   AccountModel({this.token, this.user});
 
   AccountModel.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     if (json['user'] != null) {
-      user = json['user'];
+      user = User.fromJson(json['user']);
     } else {
       user = null;
     }
