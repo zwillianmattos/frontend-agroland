@@ -5,7 +5,6 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import './ebook_page_store.dart';
 import './../models/ebook_model.dart';
-import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class EbookPage extends StatefulWidget {
   const EbookPage({Key? key}) : super(key: key);
