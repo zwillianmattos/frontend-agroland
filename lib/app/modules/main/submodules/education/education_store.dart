@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/models/models/paginate_model.dart';
 import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
 import 'package:plant_care/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
 
@@ -10,20 +12,72 @@ abstract class _EducationStoreBase with Store {
   final EbookRepository repository;
 
   @observable
-  bool isLoading = false;
+  ScrollController? ebooksController;
 
   @observable
-  ObservableList<Ebook>? ebooks;
+  bool isLoading = false;
+
+  int currentPage = 0;
+  int totalPage = 0;
+
+  late PaginateModel paginateModel;
+
+  @observable
+  ObservableList<Ebook> ebooks = <Ebook>[].asObservable();
+
+  @observable
+  ObservableList<Ebook> ebooksList = <Ebook>[].asObservable();
 
   _EducationStoreBase(this.repository) {
+    ebooksController = new ScrollController()..addListener(_scrollListener);
     load();
+    loadPage();
   }
 
   @action
-  load() async {
+  void _scrollListener() {
+    print(ebooksController!.position.extentAfter);
+    if (ebooksController!.position.extentAfter < 500 && isLoading == false) {
+      // Request next Page
+      print("loading next Page $currentPage");
+
+      if (currentPage < paginateModel.totalPages!) {
+        currentPage++;
+        loadPage();
+      }
+    }
+  }
+
+  @action
+  loadPage({
+    query: "?size=10",
+  }) async {
     isLoading = true;
-    var data = await repository.load();
-    ebooks = data!.asObservable();
+    paginateModel = await repository.load(
+      query: "?size=10&page=$currentPage",
+    );
+
+    if (paginateModel.items is List<Ebook>) {
+      var data = paginateModel.items;
+      ebooksList.addAll(data as List<Ebook>);
+    }
+    isLoading = false;
+  }
+
+  @action
+  load({
+    query: "?size=10",
+  }) async {
+    isLoading = true;
+
+    PaginateModel _paginateModel = await repository.load(
+      query: "?size=5",
+    );
+
+    if (_paginateModel.items is List<Ebook>) {
+      var data = _paginateModel.items;
+      ebooks.addAll(data as List<Ebook>);
+    }
     isLoading = false;
   }
 }

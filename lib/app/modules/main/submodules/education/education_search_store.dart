@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/models/models/paginate_model.dart';
 import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
 
 import 'ebook/models/debouncer.dart';
@@ -18,6 +19,8 @@ abstract class _EducationSearchStoreBase with Store {
 
   @observable
   TextEditingController searchController = TextEditingController();
+
+  late PaginateModel paginateModel;
 
   @observable
   var searchText = "";
@@ -50,8 +53,14 @@ abstract class _EducationSearchStoreBase with Store {
     isLoading = true;
     searchResults.clear();
     if (searchText.isNotEmpty || searchText != "") {
-      var data = await repository.load(query: "?q=$searchText&?size=20");
-      searchResults = data!.asObservable();
+      paginateModel = await repository.load(
+        query: "?q=$searchText&?size=100",
+      );
+
+      if (paginateModel.items is List<Ebook>) {
+        var data = paginateModel.items;
+        searchResults = (data as List<Ebook>).asObservable();
+      }
     }
     isLoading = false;
   }

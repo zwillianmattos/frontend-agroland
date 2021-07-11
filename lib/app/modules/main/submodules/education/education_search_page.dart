@@ -90,7 +90,7 @@ class _EducationSearchPageState
           children: <Widget>[
             SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-                          child: Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   text("Resultado da busca: ${controller.searchText}",
@@ -106,46 +106,90 @@ class _EducationSearchPageState
                       ? Center(
                           child: CircularProgressIndicator(),
                         )
-                      : Container(
-                          child: GridView.builder(
-                            itemCount: controller.searchResults.length,
-                            shrinkWrap: true,
-                            padding: EdgeInsets.only(left: 12, right: 12),
-                            physics: BouncingScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2, childAspectRatio: 9 / 13),
-                            scrollDirection: Axis.vertical,
-                            controller: ScrollController(keepScrollOffset: false),
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  Modular.to.pushNamed(
-                                      'ebook/view/${controller.searchResults[index].id}',
-                                      arguments: controller.searchResults[index],
-                                      forRoot: true);
-                                },
-                                child: Card(
-                                  semanticContainer: true,
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  elevation: spacing_control_half,
-                                  margin: EdgeInsets.all(0),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(spacing_control)),
-                                  child: CachedNetworkImage(
-                                    imageUrl: controller.searchResults[index].file
-                                        .toString()
-                                        .replaceFirst('.pdf', '.jpg'),
-                                    width: 150,
-                                    height: double.infinity,
-                                    fit: BoxFit.fitHeight,
-                                  ),
-                                ),
-                              ).paddingAll(spacing_control);
-                            },
-                          ),
-                        ),
+                      : controller.searchResults.length > 0
+                          ? ListView(
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              children: controller.searchResults
+                                  .map((element) => ListTile(
+                                        onTap: () {
+                                          print("clicando");
+                                          Modular.to.pushNamed(
+                                              'ebook/view/${element.id}',
+                                              arguments: element,
+                                              forRoot: true);
+                                        },
+                                        minVerticalPadding: 20,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 20.0, vertical: 5.0),
+                                        leading: AspectRatio(
+                                          aspectRatio: 1,
+                                          child: Container(
+                                            width: 50,
+                                            height: 160,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                    element.file
+                                                        .toString()
+                                                        .replaceFirst(
+                                                            '.pdf', '.jpg'),
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
+                                        title: text(element.name.toString(),
+                                            fontSize: 14.0, maxLine: 10),
+                                        subtitle: text(
+                                            element.description.toString(),
+                                            fontSize: 12.0),
+                                      ))
+                                  .toList(),
+                            )
+                          : Container(),
+                  // : Container(
+                  //     child: GridView.builder(
+                  //       itemCount: controller.searchResults.length,
+                  //       shrinkWrap: true,
+                  //       padding: EdgeInsets.only(left: 12, right: 12),
+                  //       physics: BouncingScrollPhysics(),
+                  //       gridDelegate:
+                  //           SliverGridDelegateWithFixedCrossAxisCount(
+                  //               crossAxisCount: 2, childAspectRatio: 9 / 13),
+                  //       scrollDirection: Axis.vertical,
+                  //       controller: ScrollController(keepScrollOffset: false),
+                  //       itemBuilder: (context, index) {
+                  //         return InkWell(
+                  //           onTap: () {
+                  //             Modular.to.pushNamed(
+                  //                 'ebook/view/${controller.searchResults[index].id}',
+                  //                 arguments: controller.searchResults[index],
+                  //                 forRoot: true);
+                  //           },
+                  //           child: Card(
+                  //             semanticContainer: true,
+                  //             clipBehavior: Clip.antiAliasWithSaveLayer,
+                  //             elevation: spacing_control_half,
+                  //             margin: EdgeInsets.all(0),
+                  //             shape: RoundedRectangleBorder(
+                  //                 borderRadius:
+                  //                     BorderRadius.circular(spacing_control)),
+                  //             child: CachedNetworkImage(
+                  //               imageUrl: controller.searchResults[index].file
+                  //                   .toString()
+                  //                   .replaceFirst('.pdf', '.jpg'),
+                  //               width: 150,
+                  //               height: double.infinity,
+                  //               fit: BoxFit.fitHeight,
+                  //             ),
+                  //           ),
+                  //         ).paddingAll(spacing_control);
+                  //       },
+                  //     ),
+                  //   ),
                 ],
               ),
             ),

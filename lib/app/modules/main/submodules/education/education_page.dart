@@ -117,7 +117,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                             height: (width * 0.28) * 8.8 / 6,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: controller.ebooks!.length,
+                              itemCount: controller.ebooks.length,
                               shrinkWrap: true,
                               padding: EdgeInsets.only(
                                   left: spacing_standard,
@@ -151,12 +151,11 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                               ],
                                             ),
                                             child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.all(
-                                                      Radius.circular(8)),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(8)),
                                               child: CachedNetworkImage(
                                                 imageUrl: controller
-                                                    .ebooks![index].file
+                                                    .ebooks[index].file
                                                     .toString()
                                                     .replaceFirst(
                                                         '.pdf', '.jpg'),
@@ -171,8 +170,8 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                     ),
                                     onTap: () async {
                                       Modular.to.pushNamed(
-                                          'ebook/view/${controller.ebooks![index].id}',
-                                          arguments: controller.ebooks![index],
+                                          'ebook/view/${controller.ebooks[index].id}',
+                                          arguments: controller.ebooks[index],
                                           forRoot: true);
                                     },
                                     radius: spacing_control,
@@ -216,9 +215,45 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 ),
               ],
             ),
-            ListView(
-              children: [],
-            ),
+            Observer(builder: (_) {
+              return ListView(
+                physics: BouncingScrollPhysics(),
+                controller: controller.ebooksController,
+                children: controller.ebooksList
+                    .map((element) => ListTile(
+                          onTap: () {
+                            print("clicando");
+                            Modular.to.pushNamed('ebook/view/${element.id}',
+                                arguments: element, forRoot: true);
+                          },
+                          minVerticalPadding: 20,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 5.0),
+                          leading: AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              width: 50,
+                              height: 160,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      element.file
+                                          .toString()
+                                          .replaceFirst('.pdf', '.jpg'),
+                                    ),
+                                  )),
+                            ),
+                          ),
+                          title: text(element.name.toString(),
+                              fontSize: 14.0, maxLine: 10),
+                          subtitle: text(element.description.toString(),
+                              fontSize: 12.0),
+                        ))
+                    .toList(),
+              );
+            }),
             ListView(
               children: [],
             ),

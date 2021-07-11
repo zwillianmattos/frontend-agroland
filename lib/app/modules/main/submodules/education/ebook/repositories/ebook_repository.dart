@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/models/models/paginate_model.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import '../models/ebook_model.dart';
 
 part 'ebook_repository.g.dart';
 
 abstract class EbookDatasource {
-  Future<List<Ebook>?> load();
+  Future<PaginateModel> load();
   Future<List<Ebook>?> store();
   Future<List<Ebook>?> delete();
 }
@@ -28,18 +29,14 @@ class EbookRepository with Store implements EbookDatasource {
   }
 
   @override
-  Future<List<Ebook>?> load({
-    query: ""
-  }) async {
+  Future<PaginateModel> load({query: ""}) async {
     List<Ebook> listaEbooks = [];
     try {
       Response response = await _http.get('/ebooks$query',
-          options: await Modular.get<UserPreferencesStore>().authHeader
-          );
+          options: await Modular.get<UserPreferencesStore>().authHeader);
 
       if (response.statusCode != 200) throw Error();
 
-      print(response.realUri);
       var jsonResponse = response.data;
 
       List<dynamic> list = jsonResponse['data']['items'];
@@ -48,11 +45,21 @@ class EbookRepository with Store implements EbookDatasource {
           listaEbooks.add(Ebook.fromJson(value));
         });
       }
-    } catch (e) {
-      print(e);
-    }
 
-    return listaEbooks;
+      print(listaEbooks);
+
+      return PaginateModel(
+          currentPage: jsonResponse['data']['currentPage'],
+          totalPages: jsonResponse['data']['totalPages'],
+          totalItems: jsonResponse['data']['totalItems'],
+          items: listaEbooks);
+    } catch (e) {
+      print("erro");
+      print(e);
+
+      return PaginateModel(
+          currentPage: 0, totalPages: 0, totalItems: 0, items: []);
+    }
   }
 
   @override

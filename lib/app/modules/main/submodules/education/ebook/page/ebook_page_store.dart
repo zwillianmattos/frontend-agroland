@@ -16,15 +16,5 @@ abstract class _EbookPageStoreBase with Store {
   @observable
   ObservableList<Ebook>? ebooks;
 
-  _EbookPageStoreBase(this.repository) {
-    load();
-  }
-
-  @action
-  load() async {
-    isLoading = true;
-    var data = await repository.load();
-    ebooks = data!.asObservable();
-    isLoading = false;
-  }
+  _EbookPageStoreBase(this.repository);
 }
