@@ -105,3 +105,6 @@ scripts:
 
   # flutter build apk
   # adb install -r build/app/outputs/flutter-apk/app-release.apk
+
+
+  #  flutter build apk && adb install -r build/app/outputs/flutter-apk/app-release.apk

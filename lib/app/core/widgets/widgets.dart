@@ -7,6 +7,15 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:relative_scale/relative_scale.dart';
 
+
+Widget logoTitle(context) {
+  return Image.asset(
+    'images/logo.png',
+    width: MediaQuery.of(context).size.width * 0.3,
+    height: 53,
+  );
+}
+
 TextFormField appEditTextStyle(var hintText,
     {isPassword = true,
     onSaved,

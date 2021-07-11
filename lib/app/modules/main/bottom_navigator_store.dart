@@ -30,7 +30,7 @@ abstract class _BottomNavigatorStoreBase with Store {
     } else if (index == 2) {
       Modular.to.navigate('/community');
     } else if (index == 3) {
-      Modular.to.navigate('/education/ebook');
+      Modular.to.navigate('/education');
     }
   }
 }

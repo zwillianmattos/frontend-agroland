@@ -27,10 +27,12 @@ class EbookRepository with Store implements EbookDatasource {
   }
 
   @override
-  Future<List<Ebook>?> load() async {
+  Future<List<Ebook>?> load({
+    query: ""
+  }) async {
     List<Ebook> listaEbooks = [];
     try {
-      Response response = await _http.get('/ebooks',
+      Response response = await _http.get('/ebooks$query',
           options: Options(headers: {
             'Origin': 'http://localhost',
             'Authorization':
@@ -42,7 +44,7 @@ class EbookRepository with Store implements EbookDatasource {
       print(response.realUri);
       var jsonResponse = response.data;
 
-      List<dynamic> list = jsonResponse['data'];
+      List<dynamic> list = jsonResponse['data']['items'];
       if (list != null) {
         list.asMap().forEach((key, value) {
           listaEbooks.add(Ebook.fromJson(value));
