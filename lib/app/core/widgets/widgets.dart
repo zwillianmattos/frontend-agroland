@@ -58,13 +58,14 @@ Divider appDivider() {
 class appButton extends StatefulWidget {
   var textContent;
 
-  //   var icon;
+  IconData? icon;
   VoidCallback onPressed;
+
 
   appButton({
     required this.textContent,
     required this.onPressed,
-    //   @required this.icon,
+    this.icon,
   });
 
   @override
@@ -88,23 +89,24 @@ class appButtonState extends State<appButton> {
                     fontFamily: fontMedium,
                     textAllCaps: false),
               ),
-              // Align(
-              //   alignment: Alignment.topRight,
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //         shape: BoxShape.circle, color: color_colorPrimaryDark),
-              //     width: 35,
-              //     height: 35,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(8.0),
-              //       child: Icon(
-              //         Icons.arrow_forward,
-              //         color: t8_white,
-              //         size: 20,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              widget.icon != null ? Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  padding: EdgeInsets.only(left:5.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle),
+                  width: 35,
+                  height: 35,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      widget.icon,
+                      color: t8_white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ) : Container(),
             ],
           )),
     );
