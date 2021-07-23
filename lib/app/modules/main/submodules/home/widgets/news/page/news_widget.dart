@@ -19,6 +19,7 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return SizedBox(
         height: width > 500 ? sy(120) : 200,
+        width: width >= 1024 ? 1024 : width,
         child: Observer(builder: (context) {
           if (controller.newsList.length <= 0)
             return Center(
@@ -35,7 +36,7 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
 
                 return Container(
                   margin:
-                      EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
+                      EdgeInsets.only(left: width >= 1024 && index == 0 ? 0 : 16, right: 16, bottom: 24, top: 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     color: white,

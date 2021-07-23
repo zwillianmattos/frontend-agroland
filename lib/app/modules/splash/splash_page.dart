@@ -31,9 +31,8 @@ class _SplashPageState extends State<SplashPage> {
               'images/logo.png',
               scale: 2,
             ),
-            onEnd: () async {
+            onEnd: () {
               Modular.to.pushReplacementNamed('/');
-              
             }),
       ),
     );

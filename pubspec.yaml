@@ -102,10 +102,15 @@ scripts:
   mobx_build: $clean & $get & $runner build --delete-conflicting-outputs
   mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
 
-  # flutter pub run build_runner  watch --delete-conflicting-outputs
+# Build Runner
+# flutter pub run build_runner  watch --delete-conflicting-outputs
 
-  # flutter build apk
-  # adb install -r build/app/outputs/flutter-apk/app-release.apk
+# build Web 
+#flutter build web --release --web-renderer html --dart-define=FLUTTER_WEB_USE_SKIA=true 
 
 
-  #  flutter build apk && adb install -r build/app/outputs/flutter-apk/app-release.apk
+
+# build Android
+# flutter build apk
+# adb install -r build/app/outputs/flutter-apk/app-release.apk
+#  flutter build apk && adb install -r build/app/outputs/flutter-apk/app-release.apk

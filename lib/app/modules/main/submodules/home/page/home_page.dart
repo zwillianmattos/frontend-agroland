@@ -13,7 +13,7 @@ import 'package:relative_scale/relative_scale.dart';
 import '../widgets/weather/page/weather_widget.dart';
 import '../widgets/acoes/widgets/cotacao_widget.dart';
 import '../widgets/news/page/news_widget.dart';
-import 'dart:io' show Platform;
+import 'package:plant_care/app/core/widgets/widgets.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -28,23 +28,22 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
       body: RelativeBuilder(builder: (context, height, width, sy, sx) {
         final Widget buttons = SizedBox(
           height: width > 500 ? sy(60) : 100,
+          width: width >= 1024 ? 1024 : width,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
               CardButton(
-                  icon: SvgPicture.asset(
-                    "images/camera_bulk.svg",
-                  ),
-                  description: "Camera"),
+                icon: PlatformSvg.asset("images/camera_bulk.svg",
+                    context: context),
+                description: "Camera",
+              ),
               CardButton(
-                  icon: SvgPicture.asset(
-                    "images/document_bulk.svg",
-                  ),
+                  icon: PlatformSvg.asset("images/document_bulk.svg",
+                      context: context),
                   description: "Ebooks"),
               CardButton(
-                  icon: SvgPicture.asset(
-                    "images/folder_bulk.svg",
-                  ),
+                  icon: PlatformSvg.asset("images/folder_bulk.svg",
+                      context: context),
                   description: "Courses"),
             ],
             shrinkWrap: true,
@@ -60,9 +59,8 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 floating: false,
                 pinned: false,
                 leading: IconButton(
-                    icon: SvgPicture.asset(
-                      "images/user_broken.svg",
-                    ),
+                    icon: PlatformSvg.asset("images/user_broken.svg",
+                        context: context),
                     onPressed: () async {
                       if (Modular.get<UserPreferencesStore>().getUser != null) {
                         Modular.to.pushNamed('/account/profile');
@@ -77,14 +75,12 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 ),
                 actions: [
                   IconButton(
-                      icon: SvgPicture.asset(
-                        "images/search_broken.svg",
-                      ),
+                      icon: PlatformSvg.asset("images/search_broken.svg",
+                          context: context),
                       onPressed: () {}),
                   IconButton(
-                      icon: SvgPicture.asset(
-                        "images/notification_broken.svg",
-                      ),
+                      icon: PlatformSvg.asset("images/notification_broken.svg",
+                          context: context),
                       onPressed: () {})
                 ],
               ),
@@ -98,14 +94,11 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  if (Platform.isAndroid ||
-                      Platform.isIOS ||
-                      Platform.isWindows)
-                    WeatherWidget(),
+                  WeatherWidget(),
                   buttons,
-                  appLabelViewAll("Notícias"),
+                  appLabelViewAll("Notícias", limiter: true),
                   NewsWidget(),
-                  appLabelViewAll("Cotação"),
+                  appLabelViewAll("Cotação", limiter: true),
                   CotacaoWidget(),
                   SizedBox(height: 40),
                 ],

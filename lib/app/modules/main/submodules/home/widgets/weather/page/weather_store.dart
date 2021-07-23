@@ -10,6 +10,9 @@ abstract class _WeatherStoreBase with Store {
   final WeatherRepository weatherRepository;
 
   @observable
+  bool isLoading = false;
+
+  @observable
   Weather? wheater;
 
   _WeatherStoreBase(this.weatherRepository) {
@@ -17,12 +20,18 @@ abstract class _WeatherStoreBase with Store {
   }
 
   @action
-  loadWeather() {
-    weatherRepository
-        .get()
-        .then((value) => wheater = value)
-        .catchError((error) {
-      print(error);
-    });
+  loadWeather() async {
+    try {
+      print("CARREGANDO TEMPO");
+      print(this.isLoading);
+      print(this.wheater);
+      this.isLoading = true;
+      this.wheater = await weatherRepository.get();
+    } catch (e) {
+      this.isLoading = false;
+      print(e);
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
