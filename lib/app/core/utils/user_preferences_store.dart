@@ -22,11 +22,18 @@ abstract class _UserPreferencesStoreBase with Store {
 
   User? get getUser => this.accountModel?.user;
 
-  get authHeader async => Options(headers: {
+  get authHeader async {
+    if( this.accountModel == null ) {
+      return Options(headers: {
+        'Origin': 'http://localhost',
+      });
+    }
+    return Options(headers: {
         'Origin': 'http://localhost',
         'Authorization':
             'authorization ${this.accountModel!.token}'
       });
+  }
 
   isAuth() async {
     String account = await LocalStorage.getValue<String>("user");
