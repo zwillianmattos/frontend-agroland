@@ -7,6 +7,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/community/community_module.dart';
 import 'package:relative_scale/relative_scale.dart';
 
@@ -36,26 +37,26 @@ class BottomNavigatorPageState
             elevation: 10.0,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  "images/home_bulk.svg",
+                icon: PlatformSvg.asset(
+                  "images/home_bulk.svg", context: _,
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  "images/buy_bulk.svg",
+                icon: PlatformSvg.asset(
+                  "images/buy_bulk.svg", context: _,
                 ),
                 label: 'Marketplace',
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  "images/message_bulk.svg",
+                icon: PlatformSvg.asset(
+                  "images/message_bulk.svg", context: _,
                 ),
                 label: 'Comunidade',
               ),
               BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  "images/folder_bulk_black.svg",
+                icon: PlatformSvg.asset(
+                  "images/folder_bulk_black.svg", context: _,
                 ),
                 label: 'Educação',
               ),

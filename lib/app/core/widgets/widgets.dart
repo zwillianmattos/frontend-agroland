@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:relative_scale/relative_scale.dart';
-
 
 Widget logoTitle(context) {
   return Image.asset(
@@ -383,16 +384,23 @@ BoxDecoration boxDecoration(
   );
 }
 
-Widget appLabelViewAll(var texto) {
-  return Padding(
-    padding: EdgeInsets.all(16.0),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        text(texto,
-            textColor: black, fontSize: textSizeNormal, fontFamily: fontBold),
-      ],
-    ),
+Widget appLabelViewAll(var texto, {bool limiter = false}) {
+  return RelativeBuilder(
+    builder: (context, height, width, sy, sx) {
+      return Container(
+        width: width >= 1024 && limiter ? 1024 : width,
+        padding: width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            text(texto,
+                textColor: black,
+                fontSize: textSizeNormal,
+                fontFamily: fontBold),
+          ],
+        ),
+      );
+    },
   );
 }
 
@@ -585,5 +593,38 @@ class CardButton extends StatelessWidget {
         alignment: Alignment.center,
       );
     });
+  }
+}
+
+class PlatformSvg {
+  static Widget asset(
+    String assetName, {
+    required BuildContext context,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    Color? color,
+    alignment = Alignment.center,
+    String? semanticsLabel,
+  }) {
+    double? _width = width ?? textSizeMedium;
+    double? _height = height ?? textSizeMedium;
+
+    if (kIsWeb) {
+      return Image.network("/assets/$assetName",
+          fit: fit,
+          color: color,
+          alignment: alignment,
+          semanticLabel: semanticsLabel);
+    }
+
+    return SvgPicture.asset(assetName,
+        width: MediaQuery.of(context).size.width * _width,
+        height: MediaQuery.of(context).size.width * _height,
+        fit: fit,
+        color: color,
+        allowDrawingOutsideViewBox: true,
+        alignment: alignment,
+        semanticsLabel: semanticsLabel);
   }
 }

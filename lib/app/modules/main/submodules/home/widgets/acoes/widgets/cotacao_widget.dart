@@ -127,7 +127,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
           Observer(builder: (_) {
             if (controller.loading) {
               return Container(
-                width: sx(width) > 400 ? sx(width) / 2 : width,
+                width: width >= 1024 ? 1024 : width,
                 margin:
                     EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
                 decoration: BoxDecoration(
@@ -151,7 +151,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
 
             return Column(children: [
               Container(
-                width: sx(width) > 400 ? sx(width) / 2 : width,
+                width: width >= 1024 ? 1024 : width,
                 margin:
                     EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
                 decoration: BoxDecoration(

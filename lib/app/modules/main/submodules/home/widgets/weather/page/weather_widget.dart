@@ -22,16 +22,24 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
   Widget build(BuildContext context) {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return Container(
+        width:width >= 1024 ?  1024 : width,
         margin: EdgeInsets.all(16),
         child: Observer(builder: (_) {
-          if (controller.wheater == null)
+          if (controller.isLoading)
             return Center(child: CircularProgressIndicator());
 
+          if (controller.wheater == null)
+            return Container(
+              child: appButton(
+                textContent: "Tentar novamente",
+                onPressed: controller.loadWeather,
+              ),
+            );
           Weather w = controller.wheater!;
 
           return SizedBox(
-            width: width > 400 ? width : width,
-            height: width > 400 ? sy(120) : 130,
+            width: width,
+            height: width >= 1024 ? sy(120) : 130,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -83,18 +91,18 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Container(
-                                  width: width > 400 ? sx(250) : 150,
+                                  width: width >= 1024 ? sx(180) : 150,
                                   child: text(
                                     "${w.results!.temp!}°c",
                                     fontSize: 32.0,
                                   ),
                                 ),
                                 Container(
-                                  width: width > 400 ? 70 : 70,
-                                  height: width > 400 ? sy(5) : 10,
+                                  width: width >= 1024 ? 70 : 70,
+                                  height: width >= 1024 ? sy(5) : 10,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                      scale: width > 400 ? sx(0.3) : 1.7,
+                                      scale: width >= 1024 ? sx(0.3) : 1.7,
                                       centerSlice: Rect.fromLTRB(1, 1, 1, 1),
                                       fit: BoxFit.fitHeight,
                                       alignment: Alignment.centerLeft,
