@@ -23,7 +23,6 @@ dependencies:
   nb_utils:
   flutter_svg:
   camera: ^0.8.1
-  tflite: ^1.1.2
   weather: ^2.0.0
   geolocator: ^7.0.3
   fluttericon: ^2.0.0

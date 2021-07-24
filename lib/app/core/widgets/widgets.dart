@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -458,12 +456,13 @@ class appButton3 extends StatefulWidget {
   VoidCallback onPressed;
   var isStroked = false;
   var height = 50.0;
-
+  var fontSize = textSizeLargeMedium;
   appButton3(
       {required this.textContent,
       required this.onPressed,
       this.isStroked = false,
-      this.height = 50.0});
+      this.height = 50.0,
+      this.fontSize = textSizeLargeMedium});
 
   @override
   appButton3State createState() => appButton3State();
@@ -481,7 +480,7 @@ class appButton3State extends State<appButton3> {
             textColor: widget.isStroked
                 ? color_textColorPrimary
                 : color_textColorSecondary,
-            fontSize: textSizeLargeMedium,
+            fontSize: widget.fontSize,
             isCentered: true,
             fontFamily: fontSemibold,
             textAllCaps: false),

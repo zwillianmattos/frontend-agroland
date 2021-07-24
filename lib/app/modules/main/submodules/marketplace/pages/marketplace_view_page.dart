@@ -238,20 +238,22 @@ class _MarketplaceClassificadoViewPageState
                         fontSize: textSizeNormal),
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (widget.classificado.producerUser.imgLogo !=
                                 null)
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Image.network(
-                                  widget.classificado.producerUser.imgLogo!,
-                                  width: 60,
+                                child: ClipOval(
+                                  child: Image.network(
+                                    widget.classificado.producerUser.imgLogo!,
+                                    width: 42,
+                                  ),
                                 ),
                               ),
                             Padding(
@@ -277,19 +279,16 @@ class _MarketplaceClassificadoViewPageState
                                   ]),
                             ),
                           ]),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            FlatButton(
-                                onPressed: () {
-                                  Modular.to.pushNamed('/marketplace/account',
-                                      arguments: widget.classificado.producerUser,
-                                      forRoot: true);
-                                },
-                                child: Text("Ver loja"))
-                          ],
-                        ),
+                      Column(
+                        children: [
+                          FlatButton(
+                              onPressed: () {
+                                Modular.to.pushNamed('/marketplace/account',
+                                    arguments: widget.classificado.producerUser,
+                                    forRoot: true);
+                              },
+                              child: Text("Ver loja"))
+                        ],
                       )
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'package:plant_care/app/core/env/variables.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/pages/marketplace_home_store.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/pages/marketplace_view_account_page.dart';
+import 'package:plant_care/app/modules/main/submodules/marketplace/pages/marketplace_view_account_store.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/pages/marketplace_view_page.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
 import './pages/marketplace_home_page.dart';
@@ -15,6 +16,7 @@ class MarketplaceModule extends Module {
     ),
     BindInject((i) => MarketplaceRepository((i<Dio>()))),
     BindInject((i) => MarketplaceHomeStore(i<MarketplaceRepository>())),
+    BindInject((i) => MarketplaceViewAccoutStore(i<MarketplaceRepository>())),
   ];
 
   @override
@@ -28,9 +30,7 @@ class MarketplaceModule extends Module {
     ),
     ChildRoute(
       '/account',
-      child: (_, __) => MarketplaceViewAccountPage(
-        logista: __.data,
-      ),
+      child: (_, __) => MarketplaceViewAccountPage(),
     )
   ];
 }
