@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -607,9 +609,7 @@ class PlatformSvg {
     alignment = Alignment.center,
     String? semanticsLabel,
   }) {
-    double? _width = width ?? textSizeMedium;
-    double? _height = height ?? textSizeMedium;
-
+    
     if (kIsWeb) {
       return Image.network("/assets/$assetName",
           fit: fit,
@@ -619,8 +619,6 @@ class PlatformSvg {
     }
 
     return SvgPicture.asset(assetName,
-        width: MediaQuery.of(context).size.width * _width,
-        height: MediaQuery.of(context).size.width * _height,
         fit: fit,
         color: color,
         allowDrawingOutsideViewBox: true,

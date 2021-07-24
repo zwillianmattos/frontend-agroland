@@ -457,8 +457,7 @@ class _MarketplaceHomePageState
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Observer(builder: (_) {
+                  Observer(builder: (_) {
                       if (controller.products == null) {
                         return Center(
                           child: CircularProgressIndicator(),
@@ -480,11 +479,12 @@ class _MarketplaceHomePageState
                               CardAnuncio(
                             classificado: items[index],
                           ),
-                          staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
+                          staggeredTileBuilder: (index) => width > 500
+                              ? const StaggeredTile.fit(1)
+                              : const StaggeredTile.fit(2),
                         ),
                       );
                     }),
-                  ),
                 ],
               ),
             ),

@@ -38,25 +38,29 @@ class BottomNavigatorPageState
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: PlatformSvg.asset(
-                  "images/home_bulk.svg", context: _,
+                  "images/home_bulk.svg",
+                  context: context,
                 ),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: PlatformSvg.asset(
-                  "images/buy_bulk.svg", context: _,
+                  "images/buy_bulk.svg",
+                  context: context,
                 ),
                 label: 'Marketplace',
               ),
               BottomNavigationBarItem(
                 icon: PlatformSvg.asset(
-                  "images/message_bulk.svg", context: _,
+                  "images/message_bulk.svg",
+                  context: context,
                 ),
                 label: 'Comunidade',
               ),
               BottomNavigationBarItem(
                 icon: PlatformSvg.asset(
-                  "images/folder_bulk_black.svg", context: _,
+                  "images/folder_bulk_black.svg",
+                  context: context,
                 ),
                 label: 'Educação',
               ),

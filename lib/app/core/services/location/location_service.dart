@@ -1,8 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:location/location.dart';
 import 'dart:io' as IO;
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:html';
 
 class LocationService implements Disposable {
   Location location = new Location();
