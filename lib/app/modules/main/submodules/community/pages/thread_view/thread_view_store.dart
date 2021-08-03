@@ -27,22 +27,17 @@ abstract class ThreadViewStorePageBase with Store {
   QuillController commentController = QuillController.basic();
 
   ThreadViewStorePageBase(this.repository) {
-    _loadThreadDetail();
+    loadThreadDetail();
   }
 
   @action
-  _loadThreadDetail() async {
+  loadThreadDetail() async {
     isLoading = true;
-
     var param = Modular.args!.params;
-
-    print(param['channel']);
-    print(param['thread']);
     thread = await this
         .repository
         .find(channel: param['channel'], threadId: param['thread']);
-    print(thread);
-
+    print(param);
     isLoading = false;
   }
 
@@ -56,6 +51,6 @@ abstract class ThreadViewStorePageBase with Store {
           body: comment,
         ),
         thread: thread);
-    await _loadThreadDetail();
+    await loadThreadDetail();
   }
 }

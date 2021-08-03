@@ -7,13 +7,16 @@ import 'package:plant_care/app/modules/splash/splash_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'core/env/variables.dart';
+import 'modules/account/repositories/account_repository.dart';
 
 class AppModule extends Module {
   final List<Bind> binds = [
-    BindInject((i) => UserPreferencesStore(), isSingleton: true, isLazy: false),
     BindInject(
       (i) => Dio(BaseOptions(baseUrl: API_ENDPOINT)),
     ),
+    BindInject((i) => AccountRepository(i<Dio>())),
+    BindInject((i) => UserPreferencesStore(i<AccountRepository>()),
+        isSingleton: true, isLazy: false),
     BindInject((i) => LocationService()),
   ];
 

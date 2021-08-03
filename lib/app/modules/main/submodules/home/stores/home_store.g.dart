@@ -24,13 +24,6 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
-  final _$loadNewsAsyncAction = AsyncAction('_HomeStoreBase.loadNews');
-
-  @override
-  Future loadNews() {
-    return _$loadNewsAsyncAction.run(() => super.loadNews());
-  }
-
   final _$_HomeStoreBaseActionController =
       ActionController(name: '_HomeStoreBase');
 

@@ -7,14 +7,14 @@ class NewsRepository extends Disposable {
 
   NewsRepository(this._http);
 
-  Future<List<NewsModel>> getAll() async {
+  Future<List<NewsModel>?> getAll() async {
     Response response = await _http.get('/news',
         options: Options(headers: {
           'Origin': 'http://localhost',
         }));
     var data = response.data;
 
-    if (data == null) return <NewsModel>[];
+    if (data == null || data['articles'].isEmpty) return null;
 
     List<NewsModel> list = List<NewsModel>.from(
         data['articles'].map((model) => NewsModel.fromJson(model)));

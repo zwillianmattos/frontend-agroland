@@ -27,15 +27,32 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
   final _$threadsAtom = Atom(name: 'ThreadStorePageBase.threads');
 
   @override
-  ObservableList<Thread>? get threads {
+  ObservableList<Thread> get threads {
     _$threadsAtom.reportRead();
     return super.threads;
   }
 
   @override
-  set threads(ObservableList<Thread>? value) {
+  set threads(ObservableList<Thread> value) {
     _$threadsAtom.reportWrite(value, super.threads, () {
       super.threads = value;
+    });
+  }
+
+  final _$threadScrollControllerAtom =
+      Atom(name: 'ThreadStorePageBase.threadScrollController');
+
+  @override
+  ScrollController? get threadScrollController {
+    _$threadScrollControllerAtom.reportRead();
+    return super.threadScrollController;
+  }
+
+  @override
+  set threadScrollController(ScrollController? value) {
+    _$threadScrollControllerAtom
+        .reportWrite(value, super.threadScrollController, () {
+      super.threadScrollController = value;
     });
   }
 
@@ -58,8 +75,8 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
       AsyncAction('ThreadStorePageBase.loadThreads');
 
   @override
-  Future loadThreads() {
-    return _$loadThreadsAsyncAction.run(() => super.loadThreads());
+  Future loadThreads({dynamic query = "?size=10"}) {
+    return _$loadThreadsAsyncAction.run(() => super.loadThreads(query: query));
   }
 
   final _$sendCommentThreadAsyncAction =
@@ -73,6 +90,17 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
 
   final _$ThreadStorePageBaseActionController =
       ActionController(name: 'ThreadStorePageBase');
+
+  @override
+  void _scrollListener() {
+    final _$actionInfo = _$ThreadStorePageBaseActionController.startAction(
+        name: 'ThreadStorePageBase._scrollListener');
+    try {
+      return super._scrollListener();
+    } finally {
+      _$ThreadStorePageBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic startCommentThread(dynamic index) {
@@ -90,6 +118,7 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
     return '''
 isLoading: ${isLoading},
 threads: ${threads},
+threadScrollController: ${threadScrollController},
 commentIndex: ${commentIndex}
     ''';
   }

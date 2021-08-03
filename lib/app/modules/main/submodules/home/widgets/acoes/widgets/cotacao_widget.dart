@@ -126,28 +126,27 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
           SizedBox(height: 20),
           Observer(builder: (_) {
             if (controller.loading) {
-              return Container(
-                width: width >= 1024 ? 1024 : width,
-                margin:
-                    EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.15),
-                      spreadRadius: 0,
-                      blurRadius: 5,
-                      offset: Offset(0, 0), // changes position of shadow
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (controller.cotacao == null)
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    text("Ocorreu um erro interno, tente novamente",
+                        maxLine: 5, isCentered: true),
+                    Divider(),
+                    Container(
+                      child: appButton(
+                        textContent: "Tentar novamente",
+                        onPressed: controller.loadCotacao,
+                      ),
                     ),
                   ],
                 ),
-                height: 200,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
               );
-            }
 
             return Column(children: [
               Container(

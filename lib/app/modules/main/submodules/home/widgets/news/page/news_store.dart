@@ -10,7 +10,10 @@ abstract class _NewsStoreBase with Store {
   final NewsRepository newsRepository;
 
   @observable
-  ObservableList<NewsModel> newsList = ObservableList<NewsModel>.of([]);
+  bool isLoading = false;
+
+  @observable
+  ObservableList<NewsModel>? newsList;
 
   _NewsStoreBase(this.newsRepository) {
     loadNews();
@@ -18,6 +21,9 @@ abstract class _NewsStoreBase with Store {
 
   @action
   loadNews() async {
-    newsList = ObservableList<NewsModel>.of(await newsRepository.getAll());
+    isLoading = true;
+    List<NewsModel>? list = await newsRepository.getAll();
+    if (list != null) newsList = ObservableList<NewsModel>.of(list);
+    isLoading = false;
   }
 }

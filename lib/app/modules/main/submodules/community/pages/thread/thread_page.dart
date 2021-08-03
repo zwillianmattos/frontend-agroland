@@ -34,7 +34,27 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
               child: CircularProgressIndicator(),
             );
           }
-          List<Thread> list = controller.threads!;
+
+          // if (controller.threads.length <= 0 ) {
+          //   return Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: Column(
+          //       children: [
+          //         text("Ocorreu um erro interno, tente novamente",
+          //             maxLine: 5, isCentered: true),
+          //         Divider(),
+          //         Container(
+          //           child: appButton(
+          //             textContent: "Tentar novamente",
+          //             onPressed: controller.loadThreads,
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   );
+          // }
+
+          List<Thread> list = controller.threads;
 
           return RelativeBuilder(builder: (context, height, width, sy, sx) {
             print(width);
@@ -140,10 +160,10 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                         await controller.loadThreads();
                       },
                       child: Container(
-                        width: width > 600 ? sx(300) : width,
+                        // width: width > 600 ? sx(300) : width,
                         child: ListView.builder(
-                          physics: const BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics()),
+                          controller: controller.threadScrollController,
+                          physics: BouncingScrollPhysics(),
                           itemCount: list.length,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(

@@ -26,9 +26,11 @@ TextFormField appEditTextStyle(var hintText,
     enableLabel = true,
     maxLines = 1,
     enableBorder = true,
+    initialValue = '',
     keyboardType = TextInputType.text,
     textInputAction = TextInputAction.next}) {
   return TextFormField(
+    initialValue: initialValue,
     maxLines: maxLines,
     style: TextStyle(fontSize: textSizeMedium, fontFamily: fontRegular),
     obscureText: isPassword,
@@ -483,7 +485,8 @@ class appButton3State extends State<appButton3> {
             fontSize: widget.fontSize,
             isCentered: true,
             fontFamily: fontSemibold,
-            textAllCaps: false),
+            textAllCaps: false,
+            maxLine: 1),
         decoration: widget.isStroked
             ? boxDecoration(bgColor: color_white, color: color_white)
             : boxDecoration(bgColor: color_white, radius: 5.0),

@@ -1,14 +1,12 @@
-class ProductSellCategories {
+class ProductCategories {
 	int? id;
-	int? productId;
 	String? description;
 	int? excluded;
 	String? createdAt;
 	String? updatedAt;
 
-	ProductSellCategories({
+	ProductCategories({
 		this.id, 
-		this.productId, 
 		this.description, 
 		this.excluded, 
 		this.createdAt, 
@@ -17,12 +15,11 @@ class ProductSellCategories {
 
 	@override
 	String toString() {
-		return 'ProductSellCategories(id: $id, productId: $productId, description: $description, excluded: $excluded, createdAt: $createdAt, updatedAt: $updatedAt)';
+		return 'ProductCategories(id: $id, description: $description, excluded: $excluded, createdAt: $createdAt, updatedAt: $updatedAt)';
 	}
 
-	factory ProductSellCategories.fromJson(Map<String, dynamic> json) => ProductSellCategories(
+	factory ProductCategories.fromJson(Map<String, dynamic> json) => ProductCategories(
 				id: json['id'] as int?,
-				productId: json['productId'] as int?,
 				description: json['description'] as String?,
 				excluded: json['excluded'] as int?,
 				createdAt: json['createdAt'] as String?,
@@ -31,14 +28,13 @@ class ProductSellCategories {
 
 	Map<String, dynamic> toJson() => {
 				'id': id,
-				'productId': productId,
 				'description': description,
 				'excluded': excluded,
 				'createdAt': createdAt,
 				'updatedAt': updatedAt,
 			};
 
-		ProductSellCategories copyWith({
+		ProductCategories copyWith({
 		int? id,
 		int? productId,
 		String? description,
@@ -46,9 +42,8 @@ class ProductSellCategories {
 		String? createdAt,
 		String? updatedAt,
 	}) {
-		return ProductSellCategories(
+		return ProductCategories(
 			id: id ?? this.id,
-			productId: productId ?? this.productId,
 			description: description ?? this.description,
 			excluded: excluded ?? this.excluded,
 			createdAt: createdAt ?? this.createdAt,

@@ -39,18 +39,67 @@ mixin _$MarketplaceHomeStore on _MarketplaceHomeStoreBase, Store {
     });
   }
 
+  final _$categoriesAtom = Atom(name: '_MarketplaceHomeStoreBase.categories');
+
+  @override
+  ObservableList<ProductCategories>? get categories {
+    _$categoriesAtom.reportRead();
+    return super.categories;
+  }
+
+  @override
+  set categories(ObservableList<ProductCategories>? value) {
+    _$categoriesAtom.reportWrite(value, super.categories, () {
+      super.categories = value;
+    });
+  }
+
+  final _$indexCategoryAtom =
+      Atom(name: '_MarketplaceHomeStoreBase.indexCategory');
+
+  @override
+  int get indexCategory {
+    _$indexCategoryAtom.reportRead();
+    return super.indexCategory;
+  }
+
+  @override
+  set indexCategory(int value) {
+    _$indexCategoryAtom.reportWrite(value, super.indexCategory, () {
+      super.indexCategory = value;
+    });
+  }
+
   final _$loadAsyncAction = AsyncAction('_MarketplaceHomeStoreBase.load');
 
   @override
-  Future load() {
-    return _$loadAsyncAction.run(() => super.load());
+  Future load({dynamic query = ""}) {
+    return _$loadAsyncAction.run(() => super.load(query: query));
+  }
+
+  final _$getCategoriesAsyncAction =
+      AsyncAction('_MarketplaceHomeStoreBase.getCategories');
+
+  @override
+  Future getCategories() {
+    return _$getCategoriesAsyncAction.run(() => super.getCategories());
+  }
+
+  final _$selectCategoryAsyncAction =
+      AsyncAction('_MarketplaceHomeStoreBase.selectCategory');
+
+  @override
+  Future selectCategory(dynamic element) {
+    return _$selectCategoryAsyncAction.run(() => super.selectCategory(element));
   }
 
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-products: ${products}
+products: ${products},
+categories: ${categories},
+indexCategory: ${indexCategory}
     ''';
   }
 }

@@ -5,6 +5,8 @@ import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
+import 'package:plant_care/app/modules/account/repositories/account_repository.dart';
+import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
 part 'user_preferences_store.g.dart';
 
 class UserPreferencesStore = _UserPreferencesStoreBase
@@ -13,7 +15,9 @@ class UserPreferencesStore = _UserPreferencesStoreBase
 abstract class _UserPreferencesStoreBase with Store {
   AccountModel? accountModel;
 
-  _UserPreferencesStoreBase() {
+  final AccountRepository accountRepository;
+
+  _UserPreferencesStoreBase(this.accountRepository) {
     print("[UserPreferences]: Initializing");
     this.isAuth();
   }
@@ -23,16 +27,15 @@ abstract class _UserPreferencesStoreBase with Store {
   User? get getUser => this.accountModel?.user;
 
   get authHeader async {
-    if( this.accountModel == null ) {
+    if (this.accountModel == null) {
       return Options(headers: {
         'Origin': 'http://localhost',
       });
     }
     return Options(headers: {
-        'Origin': 'http://localhost',
-        'Authorization':
-            'authorization ${this.accountModel!.token}'
-      });
+      'Origin': 'http://localhost',
+      'Authorization': 'authorization ${this.accountModel!.token}'
+    });
   }
 
   isAuth() async {
@@ -42,6 +45,13 @@ abstract class _UserPreferencesStoreBase with Store {
     // Convert data to json
     var data = jsonDecode(account);
     this.accountModel = AccountModel.fromJson(data);
+  }
+
+  refreshProducerUser(ProducerUser producerUser) {
+    if (this.accountModel != null) {
+      this.accountModel?.user?.producerUser = producerUser;
+      LocalStorage.setValue<String>("user", jsonEncode(this.accountModel?.toJson()));
+    }
   }
 
   logOff() async {

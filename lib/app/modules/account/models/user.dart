@@ -1,4 +1,5 @@
 import 'package:plant_care/app/core/interfaces/user_interface.dart';
+import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
 
 class User implements IUser {
   int? id;
@@ -6,8 +7,15 @@ class User implements IUser {
   String? email;
   String? password;
   String? imgProfile;
+  ProducerUser? producerUser;
 
-  User({this.id, this.name, this.email, this.password, this.imgProfile});
+  User(
+      {this.id,
+      this.name,
+      this.email,
+      this.password,
+      this.imgProfile,
+      this.producerUser});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -15,6 +23,8 @@ class User implements IUser {
     email = json['email'];
     password = json['password'];
     imgProfile = json['img_profile'];
+    if (json['ProducerUser'] != null)
+      producerUser = ProducerUser.fromJson(json['ProducerUser']);
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +34,7 @@ class User implements IUser {
     data['email'] = this.email;
     data['password'] = this.password;
     data['img_profile'] = this.imgProfile;
-    
+    data['ProducerUser'] = this.producerUser;
     return data;
   }
 }

@@ -70,12 +70,12 @@ mixin _$ThreadViewStorePage on ThreadViewStorePageBase, Store {
     });
   }
 
-  final _$_loadThreadDetailAsyncAction =
-      AsyncAction('ThreadViewStorePageBase._loadThreadDetail');
+  final _$loadThreadDetailAsyncAction =
+      AsyncAction('ThreadViewStorePageBase.loadThreadDetail');
 
   @override
-  Future _loadThreadDetail() {
-    return _$_loadThreadDetailAsyncAction.run(() => super._loadThreadDetail());
+  Future loadThreadDetail() {
+    return _$loadThreadDetailAsyncAction.run(() => super.loadThreadDetail());
   }
 
   final _$sendCommentAsyncAction =

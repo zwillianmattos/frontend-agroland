@@ -6,6 +6,8 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' as IO;
 
 class EbookViewPage extends StatefulWidget {
   final Ebook ebook;
@@ -29,18 +31,24 @@ class _EbookViewPageState extends State<EbookViewPage> {
         color: Colors.transparent,
         child: appButton(
           textContent: "Abrir ebook",
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (c) => Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: color_colorPrimary,
+          onPressed: () async {
+            if (IO.Platform.isAndroid || IO.Platform.isIOS) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (c) => Scaffold(
+                    appBar: AppBar(
+                      backgroundColor: color_colorPrimary,
+                    ),
+                    body: PDF().cachedFromUrl(widget.ebook.file!,),
                   ),
-                  body: PDF().cachedFromUrl(widget.ebook.file!),
                 ),
-              ),
-            );
+              );
+            } else {
+              await canLaunch(widget.ebook.file!)
+                  ? await launch(widget.ebook.file!)
+                  : throw 'Could not launch';
+            }
           },
         ),
       ),
@@ -109,9 +117,8 @@ class _EbookViewPageState extends State<EbookViewPage> {
                   Padding(
                     padding: EdgeInsets.only(top: 7, left: 20, right: 20),
                     child: text(widget.ebook.description.toString(),
-                      maxLine: 120, fontSize: 14.0),
+                        maxLine: 120, fontSize: 14.0),
                   ),
-                  
                 ],
               ),
             ),

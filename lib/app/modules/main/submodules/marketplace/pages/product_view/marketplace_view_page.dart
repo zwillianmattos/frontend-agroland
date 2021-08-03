@@ -245,13 +245,13 @@ class _MarketplaceClassificadoViewPageState
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            if (widget.classificado.producerUser.imgLogo !=
+                            if (widget.classificado.producerUser?.imgLogo !=
                                 null)
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ClipOval(
                                   child: Image.network(
-                                    widget.classificado.producerUser.imgLogo!,
+                                    widget.classificado.producerUser!.imgLogo!,
                                     width: 42,
                                   ),
                                 ),
@@ -264,15 +264,11 @@ class _MarketplaceClassificadoViewPageState
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     text(
-                                        "${widget.classificado.producerUser.corporateName}",
+                                        "${widget.classificado.producerUser!.fantasyName}",
+                                        isLongText: true,
                                         fontSize: textSizeNormal),
                                     text(
-                                      "${widget.classificado.producerUser.phone}",
-                                      fontSize: textSizeSmall,
-                                      isLongText: true,
-                                    ),
-                                    text(
-                                        "${widget.classificado.producerUser.cnpj}",
+                                        "${widget.classificado.producerUser!.cnpj}",
                                         fontSize: textSizeSmall,
                                         isLongText: true,
                                         maxLine: 5),
@@ -316,7 +312,7 @@ class _MarketplaceClassificadoViewPageState
                 child: CachedNetworkImage(
                   fit: BoxFit.cover,
                   imageUrl:
-                      "https://www.google.com/maps/api/staticmap?key=AIzaSyALrSTy6NpqdhIOUs3IQMfvjh71td2suzY&center=${widget.classificado.producerUser.location}8&zoom=12&size=600x300&markers=color:red%7Clabel:${widget.classificado.producerUser.corporateName}%7C${widget.classificado.producerUser.location}",
+                      "https://www.google.com/maps/api/staticmap?key=AIzaSyALrSTy6NpqdhIOUs3IQMfvjh71td2suzY&center=${widget.classificado.producerUser!.location}8&zoom=12&size=600x300&markers=color:red%7Clabel:${widget.classificado.producerUser!.corporateName}%7C${widget.classificado.producerUser!.location}",
                 ),
               ),
             ),
@@ -326,7 +322,6 @@ class _MarketplaceClassificadoViewPageState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                text("Descricao", fontSize: textSizeNormal),
                 Html(
                   data: widget.classificado.description,
                 ),

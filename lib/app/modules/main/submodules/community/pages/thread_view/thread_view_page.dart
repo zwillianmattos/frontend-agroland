@@ -7,6 +7,7 @@ import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/community/models/replies_model.dart';
 
 import 'thread_view_store.dart';
@@ -26,7 +27,7 @@ class _ThreadViewPageState
       appBar: AppBar(
         backgroundColor: color_colorPrimary,
         title: Observer(builder: (_) {
-          if (!controller.isLoading) {
+          if (!controller.isLoading && controller.thread != null) {
             return Text(controller.thread!.title!);
           }
 
@@ -40,6 +41,24 @@ class _ThreadViewPageState
               child: CircularProgressIndicator(),
             );
           }
+
+           if (controller.thread == null)
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    text("Ocorreu um erro interno, tente novamente",
+                        maxLine: 5, isCentered: true),
+                    Divider(),
+                    Container(
+                      child: appButton(
+                        textContent: "Tentar novamente",
+                        onPressed: controller.loadThreadDetail,
+                      ),
+                    ),
+                  ],
+                ),
+              );
 
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),

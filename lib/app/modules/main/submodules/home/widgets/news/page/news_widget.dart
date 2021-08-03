@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../models/news.dart';
 import './news_store.dart';
@@ -21,18 +22,36 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
         height: width > 500 ? sy(120) : 200,
         width: width >= 1024 ? 1024 : width,
         child: Observer(builder: (context) {
-          if (controller.newsList.length <= 0)
+          if (controller.isLoading)
             return Center(
               child: CircularProgressIndicator(),
             );
 
+          if (controller.newsList == null)
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    text("Ocorreu um erro interno, tente novamente",
+                        maxLine: 5, isCentered: true),
+                    Divider(),
+                    Container(
+                      child: appButton(
+                        textContent: "Tentar novamente",
+                        onPressed: controller.loadNews,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+
           return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: controller.newsList.length,
+              itemCount: controller.newsList!.length,
               shrinkWrap: true,
               physics: ScrollPhysics(),
               itemBuilder: (context, index) {
-                NewsModel item = controller.newsList[index];
+                NewsModel item = controller.newsList![index];
 
                 return Container(
                   margin:

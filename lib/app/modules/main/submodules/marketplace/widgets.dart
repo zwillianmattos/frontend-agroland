@@ -5,6 +5,8 @@ import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/models/account.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
@@ -109,21 +111,24 @@ class CardAnuncio extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        padding: EdgeInsets.only(
-                            left: spacing_control, right: spacing_control),
-                        decoration: boxDecoration(
-                            radius: spacing_control, bgColor: color_light_gray),
-                        child: text(
-                            classificado
-                                .productSellCategories!.first.description!,
-                            fontSize: textSizeSmall,
-                            isCentered: true,
-                            isLongText: true),
+                    if (classificado.productCategories!.length > 0)
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: spacing_control, right: spacing_control),
+                          decoration: boxDecoration(
+                              radius: spacing_control,
+                              bgColor: color_light_gray),
+                          child: text(
+                              classificado
+                                      .productCategories!.first.description ??
+                                  " - ",
+                              fontSize: textSizeSmall,
+                              isCentered: true,
+                              isLongText: true),
+                        ),
                       ),
-                    ),
                     Expanded(child: Container()),
                     Expanded(
                         child: Icon(Icons.favorite_border,
@@ -165,5 +170,132 @@ class CardAnuncio extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+class MarketplaceDrawer extends StatefulWidget {
+  const MarketplaceDrawer({Key? key}) : super(key: key);
+
+  @override
+  _MarketplaceDrawerState createState() => _MarketplaceDrawerState();
+}
+
+class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
+  late final AccountModel? accountModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    accountModel = Modular.get<UserPreferencesStore>().accountModel;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              color: color_colorPrimary,
+            ),
+            accountName: text(accountModel?.user?.name ?? "Bem Vindo"),
+            accountEmail: text(
+              accountModel?.user?.email ??
+                  "Entra na sua conta para ver suas compras, favoritos etc.",
+              maxLine: 2,
+              fontSize: 12.0,
+            ),
+            currentAccountPicture: accountModel?.user != null
+                ? CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Text(
+                      accountModel?.user?.name?[0] ?? "",
+                      style: TextStyle(fontSize: 40.0),
+                    ),
+                  )
+                : null,
+          ),
+          if (accountModel?.token == null)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  appButton(
+                    textContent: "Login",
+                    onPressed: () {
+                      Modular.to.pushNamed('/account/auth',
+                          forRoot: true,
+                          arguments: {
+                            'isSignIn': true,
+                            'isSignUp': false,
+                          });
+                    },
+                  ),
+                  Divider(),
+                  appButton3(
+                    textContent: "Crie sua conta",
+                    onPressed: () {
+                      Modular.to.pushNamed('/account/auth',
+                          forRoot: true,
+                          arguments: {
+                            'isSignIn': false,
+                            'isSignUp': true,
+                          });
+                    },
+                  ),
+                ],
+              ),
+            ),
+          // ListTile(
+          //     leading: Icon(Icons.home),
+          //     title: Text("Inicio"),
+          //     onTap: () {
+          //       debugPrint('toquei no drawer');
+          //     }),
+          // ListTile(
+          //     leading: Icon(Icons.search),
+          //     title: Text("Buscar"),
+          //     onTap: () {
+          //       debugPrint('toquei no drawer');
+          //     }),
+          // ListTile(
+          //     leading: Icon(Icons.notifications),
+          //     title: Text("Notificacoes"),
+          //     onTap: () {
+          //       debugPrint('toquei no drawer');
+          //     }),
+          ListTile(
+              leading: Icon(Icons.favorite),
+              title: Text("Favoritos"),
+              onTap: () {
+                debugPrint('toquei no drawer');
+              }),
+          ListTile(
+            leading: Icon(Icons.money),
+            title: Text("Vender"),
+            onTap: () {
+              if (accountModel?.token != null) {
+                if (accountModel?.user?.producerUser != null) {
+                  Modular.to.pushNamed('/marketplace/announces', forRoot: true,);
+                } else {
+                  Modular.to.pushNamed('/account/producer_user/register', forRoot: true,);
+                }
+              } else {
+                Modular.to.pushNamed('/account/auth', forRoot: true);
+              }
+            },
+          ),
+          if (Modular.get<UserPreferencesStore>().getUser != null)
+            ListTile(
+                leading: Icon(Icons.person),
+                title: Text("Minha conta"),
+                onTap: () {
+                  Modular.to.pushNamed('/account/profile', forRoot: true,);
+                }),
+        ],
+      ),
+    );
   }
 }

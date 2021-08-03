@@ -8,6 +8,9 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/education/education_store.dart';
+import 'dart:io' as IO;
+
+import 'package:url_launcher/url_launcher.dart';
 
 class EducationPage extends StatefulWidget {
   const EducationPage({Key? key}) : super(key: key);
@@ -222,7 +225,6 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 children: controller.ebooksList
                     .map((element) => ListTile(
                           onTap: () {
-                            print("clicando");
                             Modular.to.pushNamed('ebook/view/${element.id}',
                                 arguments: element, forRoot: true);
                           },

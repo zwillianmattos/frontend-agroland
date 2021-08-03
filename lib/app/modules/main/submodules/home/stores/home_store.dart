@@ -14,14 +14,7 @@ abstract class _HomeStoreBase with Store {
   @observable
   ObservableList<NewsModel> newsList = ObservableList<NewsModel>.of([]);
 
-  _HomeStoreBase(this.newsRepository) {
-    loadNews();
-  }
-
-  @action
-  loadNews() async {
-    newsList = ObservableList<NewsModel>.of(await newsRepository.getAll());
-  }
+  _HomeStoreBase(this.newsRepository) {}
 
   @action
   ebookPage() {

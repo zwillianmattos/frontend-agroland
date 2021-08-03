@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/interfaces/user_interface.dart';
 import 'package:plant_care/app/core/models/account.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 
 class AccountRepository extends Disposable {
   final Dio _http;
@@ -59,6 +60,26 @@ class AccountRepository extends Disposable {
         print(e.response!.requestOptions);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
+        print(e.requestOptions.data);
+        print(e.message);
+      }
+    }
+    return AccountModel();
+  }
+
+  Future<AccountModel> refresh() async {
+    try {
+      Response response = await _http.get('/user/profile',
+          options: await Modular.get<UserPreferencesStore>().authHeader);
+      var data = response.data;
+      AccountModel account = AccountModel.fromJson(data);
+      return account;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response!.data);
+        print(e.response!.headers);
+        print(e.response!.requestOptions);
+      } else {
         print(e.requestOptions.data);
         print(e.message);
       }

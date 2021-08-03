@@ -25,9 +25,10 @@ class BottomNavigatorPageState
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
       return Scaffold(
-        extendBody: true,
+        extendBody: false,
         backgroundColor: Colors.transparent,
         body: RouterOutlet(),
+      
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),

@@ -7,14 +7,13 @@ class CotacaoRepository extends Disposable {
 
   CotacaoRepository(this._http);
 
-  Future<CotacaoModel> get(String cultures) async {
+  Future<CotacaoModel?> get(String cultures) async {
     Response response = await _http.get('/finances?q=$cultures',
         options: Options(headers: {
           'Origin': 'http://localhost',
         }));
     var data = response.data;
-
-    if (data == null) return CotacaoModel();
+    if (data == null || data['finances'].isEmpty) return null;
 
     CotacaoModel list = CotacaoModel.fromJson(data['finances'][0]);
     return list;

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'news_store.dart';
+part of 'announce_view_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,8 +8,10 @@ part of 'news_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$NewsStore on _NewsStoreBase, Store {
-  final _$isLoadingAtom = Atom(name: '_NewsStoreBase.isLoading');
+mixin _$MarketplaceAnnounceViewStore
+    on _MarketplaceAnnounceViewStoreBase, Store {
+  final _$isLoadingAtom =
+      Atom(name: '_MarketplaceAnnounceViewStoreBase.isLoading');
 
   @override
   bool get isLoading {
@@ -24,33 +26,34 @@ mixin _$NewsStore on _NewsStoreBase, Store {
     });
   }
 
-  final _$newsListAtom = Atom(name: '_NewsStoreBase.newsList');
+  final _$productSellAtom =
+      Atom(name: '_MarketplaceAnnounceViewStoreBase.productSell');
 
   @override
-  ObservableList<NewsModel>? get newsList {
-    _$newsListAtom.reportRead();
-    return super.newsList;
+  ProductSell get productSell {
+    _$productSellAtom.reportRead();
+    return super.productSell;
   }
 
   @override
-  set newsList(ObservableList<NewsModel>? value) {
-    _$newsListAtom.reportWrite(value, super.newsList, () {
-      super.newsList = value;
+  set productSell(ProductSell value) {
+    _$productSellAtom.reportWrite(value, super.productSell, () {
+      super.productSell = value;
     });
   }
 
-  final _$loadNewsAsyncAction = AsyncAction('_NewsStoreBase.loadNews');
+  final _$addAsyncAction = AsyncAction('_MarketplaceAnnounceViewStoreBase.add');
 
   @override
-  Future loadNews() {
-    return _$loadNewsAsyncAction.run(() => super.loadNews());
+  Future add() {
+    return _$addAsyncAction.run(() => super.add());
   }
 
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-newsList: ${newsList}
+productSell: ${productSell}
     ''';
   }
 }

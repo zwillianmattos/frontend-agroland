@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/marketplace_view_account_store.dart';
+import 'package:plant_care/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_store.dart';
 
-import '../widgets.dart';
+import '../../widgets.dart';
 
 class MarketplaceViewAccountPage extends StatefulWidget {
   const MarketplaceViewAccountPage({Key? key}) : super(key: key);
@@ -52,15 +49,15 @@ class _MarketplaceViewAccountPageState extends ModularState<
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (controller.logista.imgLogo != null)
                               Padding(

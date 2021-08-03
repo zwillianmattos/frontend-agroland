@@ -1,3 +1,4 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
@@ -11,5 +12,13 @@ abstract class AuthStoreBase with Store {
   @observable
   bool isSignIn = true;
 
-  AuthStoreBase() {}
+  AuthStoreBase() {
+    if (Modular.args?.data == null || Modular.args?.data?['isSignIn'] == true) {
+      isSignIn = true;
+      isSignUp = false;
+    } else {
+      isSignIn = false;
+      isSignUp = true;
+    }
+  }
 }

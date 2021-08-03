@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/core/models/models/paginate_model.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/modules/main/submodules/community/models/replies_model.dart';
 import '../models/thread_model.dart';
@@ -10,7 +11,7 @@ import '../models/thread_model.dart';
 part 'thread_repository.g.dart';
 
 abstract class ThreadDatasource {
-  Future<List<dynamic>?> load();
+  Future<PaginateModel> load();
   Future<List<dynamic>?> store();
   Future<List<dynamic>?> delete();
 }
@@ -22,53 +23,53 @@ class ThreadRepository implements ThreadDatasource {
   ThreadRepository(this.dio);
 
   @override
-  Future<List<Thread>?> load() async {
+  Future<PaginateModel> load({query: ""}) async {
     List<Thread> lista = [];
     try {
-      print(dio.options.baseUrl);
+      Response response = await dio.get(
+        '/threads$query',
+      );
 
-      Response response = await dio.get('/threads',
-          options: await Modular.get<UserPreferencesStore>().authHeader);
+      if (response.statusCode != 200) throw Error();
 
-      print(response.realUri);
       var jsonResponse = response.data;
-      // var jsonResponse = null;
 
-      List<dynamic> list = jsonResponse;
+      List<dynamic> list = jsonResponse['data']['items'];
+
       if (list != null) {
         list.asMap().forEach((key, value) {
-          print(value);
           lista.add(Thread.fromJson(value));
         });
       }
 
-      // data.forEach((e) {
-      //   print(e);
-      //   return list.add(Thread.fromJson(e));
-      // });
-
-      print(lista);
+      return PaginateModel(
+          currentPage: jsonResponse['data']['currentPage'],
+          totalPages: jsonResponse['data']['totalPages'],
+          totalItems: jsonResponse['data']['totalItems'],
+          items: lista);
     } catch (e) {
+      print("erro");
       print(e);
+      return PaginateModel(
+          currentPage: 0, totalPages: 0, totalItems: 0, items: []);
     }
-
-    return lista;
   }
 
   find({required String channel, required String threadId}) async {
     Thread? thread;
 
     try {
-      Response response = await dio.get("threads/${channel}/${threadId}",
-          options: await Modular.get<UserPreferencesStore>().authHeader);
+      Response response = await dio.get(
+        "threads/${channel}/${threadId}",
+      );
       print(response.realUri);
       var jsonResponse = response.data;
 
       print(jsonResponse);
 
-      List<dynamic> list = jsonResponse;
+      List<dynamic> list = jsonResponse['data']['items'];
       if (list != null) {
-        thread = Thread.fromJson(list[0]);
+        thread = Thread.fromJson(list.first);
       }
     } catch (e) {
       print(e);

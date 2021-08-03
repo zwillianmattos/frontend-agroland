@@ -31,7 +31,7 @@ abstract class _MarketplaceViewAccoutStoreBase with Store {
   @action
   load() async {
     isLoading = true;
-    var data = await repository.load(query:"?producerUser=");
+    var data = await repository.load(query:"?producerUser=${logista.id}");
     products = data!.asObservable();
     isLoading = false;
   }
