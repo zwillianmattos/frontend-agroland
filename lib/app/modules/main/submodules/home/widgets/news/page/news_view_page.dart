@@ -38,8 +38,14 @@ class _NewsViewPageState extends State<NewsViewPage> {
                       gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
-                          stops: [0.1, 0.3],
-                          colors: [color_app_background.withOpacity(1), Colors.transparent,])),
+                          stops: [
+                        0.1,
+                        0.3
+                      ],
+                          colors: [
+                        color_app_background.withOpacity(1),
+                        Colors.transparent,
+                      ])),
                 ),
               ),
             ),

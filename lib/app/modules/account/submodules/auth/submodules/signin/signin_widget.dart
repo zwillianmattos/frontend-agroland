@@ -36,8 +36,7 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
               // ).paddingOnly(
               //     left: spacing_standard_new, right: spacing_standard_new),
               appEditTextStyle("Email",
-                  isPassword: false, 
-                  keyboardType: TextInputType.emailAddress,
+                  isPassword: false, keyboardType: TextInputType.emailAddress,
                   onValidation: (email) {
                 // Simple validator for email
                 if (email == null || email.length == 0) {
@@ -89,10 +88,8 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
                     onPressed: (() {
                       controller.signIn();
                     }),
-                  )
-                      .paddingOnly(
-                          right: spacing_standard_new,
-                          bottom: spacing_standard_new)
+                  ).paddingOnly(
+                      right: spacing_standard_new, bottom: spacing_standard_new)
                 ],
               )
             ],

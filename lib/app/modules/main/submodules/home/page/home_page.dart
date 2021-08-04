@@ -32,19 +32,26 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
+              // CardButton(
+              //   icon: PlatformSvg.asset("images/camera_bulk.svg",
+              //       context: context),
+              //   description: "Camera",
+              // ),
               CardButton(
-                icon: PlatformSvg.asset("images/camera_bulk.svg",
+                icon: PlatformSvg.asset("images/document_bulk.svg",
                     context: context),
-                description: "Camera",
+                description: "Ebooks",
+                onPressed: () {
+                  Modular.to.pushNamed('/education/ebook');
+                },
               ),
-              CardButton(
-                  icon: PlatformSvg.asset("images/document_bulk.svg",
-                      context: context),
-                  description: "Ebooks"),
               CardButton(
                   icon: PlatformSvg.asset("images/folder_bulk.svg",
                       context: context),
-                  description: "Courses"),
+                  description: "Culturas",
+                  onPressed: () {
+                    Modular.to.pushNamed('/cultures', forRoot: true);
+                  }),
             ],
             shrinkWrap: true,
             physics: ScrollPhysics(),

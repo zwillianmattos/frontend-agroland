@@ -64,7 +64,6 @@ class appButton extends StatefulWidget {
   IconData? icon;
   VoidCallback onPressed;
 
-
   appButton({
     required this.textContent,
     required this.onPressed,
@@ -92,24 +91,25 @@ class appButtonState extends State<appButton> {
                     fontFamily: fontMedium,
                     textAllCaps: false),
               ),
-              widget.icon != null ? Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  padding: EdgeInsets.only(left:5.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle),
-                  width: 35,
-                  height: 35,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      widget.icon,
-                      color: t8_white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-              ) : Container(),
+              widget.icon != null
+                  ? Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 5.0),
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        width: 35,
+                        height: 35,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            widget.icon,
+                            color: t8_white,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Container(),
             ],
           )),
     );
@@ -391,7 +391,8 @@ Widget appLabelViewAll(var texto, {bool limiter = false}) {
     builder: (context, height, width, sy, sx) {
       return Container(
         width: width >= 1024 && limiter ? 1024 : width,
-        padding: width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.all(16.0),
+        padding:
+            width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.all(16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -563,38 +564,46 @@ class FunctionClipper extends CustomClipper<Path> {
 class CardButton extends StatelessWidget {
   final Widget icon;
   final String description;
+  final Function()? onPressed;
 
-  const CardButton({Key? key, required this.icon, required this.description})
+  const CardButton(
+      {Key? key,
+      required this.icon,
+      required this.description,
+      required this.onPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
-      return Container(
-        margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
-        padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
-        width: sx(width) > 500 ? sx(100) : sx(width / 1.8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: color_colorPrimary,
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xff000000).withOpacity(0.15),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset(0, 0), // changes position of shadow
-            ),
-          ],
+      return InkWell(
+        onTap: onPressed,
+        child: Container(
+          margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
+          padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
+          width: sx(width) > 500 ? sx(100) : sx(width / 1.8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: color_colorPrimary,
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xff000000).withOpacity(0.15),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(0, 0), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              icon,
+              text(description, textColor: color_white, fontSize: 15.0),
+            ],
+          ),
+          alignment: Alignment.center,
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            icon,
-            text(description, textColor: color_white, fontSize: 15.0),
-          ],
-        ),
-        alignment: Alignment.center,
       );
     });
   }
@@ -611,7 +620,6 @@ class PlatformSvg {
     alignment = Alignment.center,
     String? semanticsLabel,
   }) {
-    
     if (kIsWeb) {
       return Image.network("/assets/$assetName",
           fit: fit,

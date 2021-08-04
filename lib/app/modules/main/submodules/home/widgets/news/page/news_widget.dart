@@ -28,22 +28,22 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
             );
 
           if (controller.newsList == null)
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    text("Ocorreu um erro interno, tente novamente",
-                        maxLine: 5, isCentered: true),
-                    Divider(),
-                    Container(
-                      child: appButton(
-                        textContent: "Tentar novamente",
-                        onPressed: controller.loadNews,
-                      ),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  text("Ocorreu um erro interno, tente novamente",
+                      maxLine: 5, isCentered: true),
+                  Divider(),
+                  Container(
+                    child: appButton(
+                      textContent: "Tentar novamente",
+                      onPressed: controller.loadNews,
                     ),
-                  ],
-                ),
-              );
+                  ),
+                ],
+              ),
+            );
 
           return ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -54,8 +54,11 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
                 NewsModel item = controller.newsList![index];
 
                 return Container(
-                  margin:
-                      EdgeInsets.only(left: width >= 1024 && index == 0 ? 0 : 16, right: 16, bottom: 24, top: 0),
+                  margin: EdgeInsets.only(
+                      left: width >= 1024 && index == 0 ? 0 : 16,
+                      right: 16,
+                      bottom: 24,
+                      top: 0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     color: white,

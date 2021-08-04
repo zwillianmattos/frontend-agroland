@@ -145,8 +145,9 @@ class _MarketplaceSearchPageState
                                         ),
                                         title: text(element.title.toString(),
                                             fontSize: 14.0, maxLine: 10),
-                                            subtitle: text(
-                                            element.producerUser!.fantasyName.toString(),
+                                        subtitle: text(
+                                            element.producerUser!.fantasyName
+                                                .toString(),
                                             fontSize: 12.0),
                                         trailing: text(
                                             "R\$ ${element.price.toString()}",

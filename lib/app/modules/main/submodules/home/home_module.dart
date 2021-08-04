@@ -31,6 +31,9 @@ class HomeModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, __) => DashboardPage()),
-    ChildRoute('/news', child: (_, __) => NewsViewPage(news: __.data,)),
+    ChildRoute('/news',
+        child: (_, __) => NewsViewPage(
+              news: __.data,
+            )),
   ];
 }

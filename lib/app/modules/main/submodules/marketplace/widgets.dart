@@ -278,9 +278,15 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
             onTap: () {
               if (accountModel?.token != null) {
                 if (accountModel?.user?.producerUser != null) {
-                  Modular.to.pushNamed('/marketplace/announces', forRoot: true,);
+                  Modular.to.pushNamed(
+                    '/marketplace/announces',
+                    forRoot: true,
+                  );
                 } else {
-                  Modular.to.pushNamed('/account/producer_user/register', forRoot: true,);
+                  Modular.to.pushNamed(
+                    '/account/producer_user/register',
+                    forRoot: true,
+                  );
                 }
               } else {
                 Modular.to.pushNamed('/account/auth', forRoot: true);
@@ -292,7 +298,10 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                 leading: Icon(Icons.person),
                 title: Text("Minha conta"),
                 onTap: () {
-                  Modular.to.pushNamed('/account/profile', forRoot: true,);
+                  Modular.to.pushNamed(
+                    '/account/profile',
+                    forRoot: true,
+                  );
                 }),
         ],
       ),

@@ -22,7 +22,7 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
   Widget build(BuildContext context) {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return Container(
-        width:width >= 1024 ?  1024 : width,
+        width: width >= 1024 ? 1024 : width,
         margin: EdgeInsets.all(16),
         child: Observer(builder: (_) {
           if (controller.isLoading)

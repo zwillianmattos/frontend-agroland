@@ -33,8 +33,8 @@ class _MarketplaceAnnouncesPageState
               title: Text(controller.announces![index].title.toString()),
               subtitle: Text("R\$ ${controller.announces![index].price}"),
               onTap: () async {
-                await Modular.to
-                    .pushNamed('/marketplace/announces/new', forRoot: true, arguments: controller.announces![index]);
+                await Modular.to.pushNamed('/marketplace/announces/new',
+                    forRoot: true, arguments: controller.announces![index]);
                 await controller.loadAnnounces();
               },
             );

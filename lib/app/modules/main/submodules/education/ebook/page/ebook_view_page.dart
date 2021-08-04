@@ -40,7 +40,9 @@ class _EbookViewPageState extends State<EbookViewPage> {
                     appBar: AppBar(
                       backgroundColor: color_colorPrimary,
                     ),
-                    body: PDF().cachedFromUrl(widget.ebook.file!,),
+                    body: PDF().cachedFromUrl(
+                      widget.ebook.file!,
+                    ),
                   ),
                 ),
               );

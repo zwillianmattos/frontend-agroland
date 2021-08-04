@@ -50,7 +50,8 @@ abstract class _UserPreferencesStoreBase with Store {
   refreshProducerUser(ProducerUser producerUser) {
     if (this.accountModel != null) {
       this.accountModel?.user?.producerUser = producerUser;
-      LocalStorage.setValue<String>("user", jsonEncode(this.accountModel?.toJson()));
+      LocalStorage.setValue<String>(
+          "user", jsonEncode(this.accountModel?.toJson()));
     }
   }
 

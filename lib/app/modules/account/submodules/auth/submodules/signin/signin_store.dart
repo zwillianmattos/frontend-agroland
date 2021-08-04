@@ -22,9 +22,7 @@ abstract class SignInStoreBase with Store {
   @observable
   User user = new User();
 
-  SignInStoreBase(this._repository) {
-    
-  }
+  SignInStoreBase(this._repository) {}
 
   @observable
   bool isLoading = false;

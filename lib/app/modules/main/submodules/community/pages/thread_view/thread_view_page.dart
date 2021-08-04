@@ -42,23 +42,23 @@ class _ThreadViewPageState
             );
           }
 
-           if (controller.thread == null)
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    text("Ocorreu um erro interno, tente novamente",
-                        maxLine: 5, isCentered: true),
-                    Divider(),
-                    Container(
-                      child: appButton(
-                        textContent: "Tentar novamente",
-                        onPressed: controller.loadThreadDetail,
-                      ),
+          if (controller.thread == null)
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  text("Ocorreu um erro interno, tente novamente",
+                      maxLine: 5, isCentered: true),
+                  Divider(),
+                  Container(
+                    child: appButton(
+                      textContent: "Tentar novamente",
+                      onPressed: controller.loadThreadDetail,
                     ),
-                  ],
-                ),
-              );
+                  ),
+                ],
+              ),
+            );
 
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -249,9 +249,9 @@ class _ThreadViewPageState
                           .toList(),
                     ),
                   ),
-                  SizedBox(
-                    height: 42,
-                  )
+                SizedBox(
+                  height: 42,
+                )
               ],
             ),
           );

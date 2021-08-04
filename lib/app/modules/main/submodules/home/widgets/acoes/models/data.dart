@@ -9,7 +9,9 @@ class AcoesData {
 
   factory AcoesData.fromJson(Map<String, dynamic> json) => AcoesData(
         city: json['city'] as String?,
-        price: json['price'] is int ? json['price'].toDouble() : json['price'] as double?,
+        price: json['price'] is int
+            ? json['price'].toDouble()
+            : json['price'] as double?,
       );
 
   Map<String, dynamic> toJson() => {

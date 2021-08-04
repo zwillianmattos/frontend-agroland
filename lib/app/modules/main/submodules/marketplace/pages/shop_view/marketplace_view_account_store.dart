@@ -1,4 +1,3 @@
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
@@ -11,7 +10,6 @@ class MarketplaceViewAccoutStore = _MarketplaceViewAccoutStoreBase
     with _$MarketplaceViewAccoutStore;
 
 abstract class _MarketplaceViewAccoutStoreBase with Store {
-  
   final MarketplaceRepository repository;
 
   late ProducerUser logista;
@@ -22,7 +20,7 @@ abstract class _MarketplaceViewAccoutStoreBase with Store {
   @observable
   ObservableList<ProductSell>? products;
 
-  _MarketplaceViewAccoutStoreBase(this.repository){
+  _MarketplaceViewAccoutStoreBase(this.repository) {
     print(Modular.args!.data);
     this.logista = Modular.args!.data as ProducerUser;
     load();
@@ -31,7 +29,7 @@ abstract class _MarketplaceViewAccoutStoreBase with Store {
   @action
   load() async {
     isLoading = true;
-    var data = await repository.load(query:"?producerUser=${logista.id}");
+    var data = await repository.load(query: "?producerUser=${logista.id}");
     products = data!.asObservable();
     isLoading = false;
   }

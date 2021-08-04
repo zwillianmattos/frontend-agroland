@@ -204,18 +204,22 @@ class _MarketplaceHomePageState
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: controller.categories!
-                            .map(( element) => appButton2(
-                                  onPressed: () {
-                                    controller.selectCategory(element);
-                                  },
-                                  textContent: element.description.toString(),
-                                  radius: 0.0,
-                                  bgColors: controller.indexCategory == controller.categories!.indexOf(element) ? color_colorPrimary : color_textColorPrimary,
-                                )).toList()
-                      ),
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: controller.categories!
+                              .map((element) => appButton2(
+                                    onPressed: () {
+                                      controller.selectCategory(element);
+                                    },
+                                    textContent: element.description.toString(),
+                                    radius: 0.0,
+                                    bgColors: controller.indexCategory ==
+                                            controller.categories!
+                                                .indexOf(element)
+                                        ? color_colorPrimary
+                                        : color_textColorPrimary,
+                                  ))
+                              .toList()),
                     ),
                   );
                 },

@@ -28,7 +28,6 @@ class BottomNavigatorPageState
         extendBody: false,
         backgroundColor: Colors.transparent,
         body: RouterOutlet(),
-      
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),

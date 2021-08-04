@@ -24,7 +24,6 @@ abstract class _MarketplaceAnnounceViewStoreBase with Store {
   late ProductSell productSell = new ProductSell();
 
   _MarketplaceAnnounceViewStoreBase(this.repository) {
-
     productSell = Modular.args?.data ?? new ProductSell();
   }
 

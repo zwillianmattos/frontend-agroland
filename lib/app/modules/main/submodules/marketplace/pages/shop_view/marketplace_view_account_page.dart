@@ -28,7 +28,6 @@ class _MarketplaceViewAccountPageState extends ModularState<
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        
       ),
       body: SingleChildScrollView(
         child: Column(
