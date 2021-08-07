@@ -6,6 +6,7 @@ import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../models/news.dart';
 import './news_store.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class NewsWidget extends StatefulWidget {
   const NewsWidget({Key? key}) : super(key: key);
@@ -79,7 +80,10 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
                   child: InkWell(
                     onTap: () {
                       Modular.to.pushNamed("/home/news",
-                          arguments: item, forRoot: true);
+                          arguments: item,
+                          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                              ? true
+                              : false);
                     },
                     child: Container(
                       decoration: BoxDecoration(

@@ -48,7 +48,7 @@ class _MarketplaceHomePageState
                   "images/search_broken.svg",
                 ),
                 onPressed: () {
-                  Modular.to.pushNamed('/marketplace/search', forRoot: true);
+                  Modular.to.pushNamed('/marketplace/search', forRoot: false);
                 }),
           ],
         ),

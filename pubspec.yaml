@@ -48,6 +48,7 @@ dependencies:
   youtube_player_iframe: ^2.2.1
   video_player: ^2.1.12
   youtube_player_flutter: ^8.0.0
+  flutter_zoom_drawer: ^2.1.0
   
 dev_dependencies:
   flutter_modular_test:

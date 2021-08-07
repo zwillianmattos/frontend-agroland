@@ -7,10 +7,10 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/community/models/replies_model.dart';
 import 'package:plant_care/app/modules/main/submodules/community/models/thread_model.dart';
 import 'package:plant_care/app/modules/main/submodules/community/pages/thread/thread_store.dart';
 import 'package:relative_scale/relative_scale.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class ThreadPage extends StatefulWidget {
   @override
@@ -170,7 +170,10 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                               onTap: () {
                                 Modular.to.pushNamed(
                                     "view/${list[index].channel!.id}/${list[index].id}",
-                                    forRoot: true);
+                                    forRoot: (IO.Platform.isAndroid ||
+                                            IO.Platform.isIOS)
+                                        ? true
+                                        : false);
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(

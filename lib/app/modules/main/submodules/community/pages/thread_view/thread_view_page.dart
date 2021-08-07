@@ -222,6 +222,7 @@ class _ThreadViewPageState
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: <Widget>[
+                                                text("${replie.user?.name}"),
                                                 Html(
                                                   style: {
                                                     "p": Style(

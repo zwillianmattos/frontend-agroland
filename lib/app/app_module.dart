@@ -3,7 +3,6 @@ import 'package:plant_care/app/core/services/location/location_service.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/modules/account/account_module.dart';
 import 'package:plant_care/app/modules/main/main_module.dart';
-import 'package:plant_care/app/modules/splash/splash_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'core/env/variables.dart';
@@ -23,7 +22,10 @@ class AppModule extends Module {
   @override
   final List<ModularRoute> routes = [
     // ChildRoute('/splash', child: (_, __) => SplashPage()),
-    ModuleRoute('/', module: MainModule()),
+    ModuleRoute(
+      '/',
+      module: MainModule(),
+    ),
     ModuleRoute('/account', module: AccountModule()),
   ];
 }
