@@ -33,18 +33,13 @@ mixin _$BottomNavigatorStore on _BottomNavigatorStoreBase, Store {
     });
   }
 
-  final _$_BottomNavigatorStoreBaseActionController =
-      ActionController(name: '_BottomNavigatorStoreBase');
+  final _$changePageAsyncAction =
+      AsyncAction('_BottomNavigatorStoreBase.changePage');
 
   @override
-  dynamic changePage(dynamic index) {
-    final _$actionInfo = _$_BottomNavigatorStoreBaseActionController
-        .startAction(name: '_BottomNavigatorStoreBase.changePage');
-    try {
-      return super.changePage(index);
-    } finally {
-      _$_BottomNavigatorStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Future changePage(dynamic index, {dynamic navigate = true}) {
+    return _$changePageAsyncAction
+        .run(() => super.changePage(index, navigate: navigate));
   }
 
   @override

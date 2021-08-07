@@ -8,7 +8,7 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/education/education_store.dart';
-import 'dart:io' as IO;
+import 'package:universal_io/io.dart' as IO;
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,11 +34,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
           centerTitle: true,
           title: text("Educação",
               fontSize: 20.0, textColor: color_textColorPrimary),
-          leading: IconButton(
-              icon: SvgPicture.asset(
-                "images/user_broken.svg",
-              ),
-              onPressed: () {}),
+
           actions: <Widget>[
             IconButton(
                 icon: SvgPicture.asset(
@@ -47,11 +43,6 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 onPressed: () {
                   Modular.to.pushNamed('/education/search', forRoot: true);
                 }),
-            IconButton(
-                icon: SvgPicture.asset(
-                  "images/notification_broken.svg",
-                ),
-                onPressed: () {})
           ],
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 45),
@@ -88,26 +79,39 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  child: BannerCarousel(
-                    height: 200,
-                    activeColor: Colors.green,
-                    disableColor: Colors.grey,
-                    animation: true,
-                    indicatorBottom: true,
-                    customizedBanners: [
-                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png",
-                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png",
-                      "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png",
-                    ]
-                        .map(
-                          (e) => Container(
-                            child: Image.network(e, fit: BoxFit.contain),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
+                Observer(builder: (_) {
+                  if (controller.isLoading == true)
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+
+                  return Container(
+                    child: BannerCarousel(
+                      height: 200,
+                      activeColor: Colors.green,
+                      disableColor: Colors.grey,
+                      animation: true,
+                      indicatorBottom: true,
+                      customizedBanners: [
+                        "https://res.cloudinary.com/dxz4ivhm8/image/upload/v1628109980/plant-care/ebooks/vender-no-agro-990x550.png",
+                      ]
+                          .map(
+                            (e) => InkWell(
+                              onTap: () {
+                                Modular.to.pushNamed(
+                                    'ebook/view/${controller.ebookBanners.first.id}',
+                                    arguments: controller.ebookBanners.first,
+                                    forRoot: true);
+                              },
+                              child: Container(
+                                child: Image.network(e, fit: BoxFit.contain),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  );
+                }),
                 appLabelViewAll("Ebooks"),
                 Observer(builder: (_) {
                   return Container(
@@ -190,7 +194,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                   height: ((width / 2) - 36) * (2.5 / 4),
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: [0, 1, 2].length,
+                    itemCount: controller.videosList.length,
                     padding: EdgeInsets.only(
                         left: spacing_standard, right: spacing_standard_new),
                     itemBuilder: (context, index) {
@@ -203,13 +207,15 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                               AspectRatio(
                                 aspectRatio: 4 / 2.5,
                                 child: Image.network(
-                                    "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png",
+                                    "https://i.ytimg.com/vi/${controller.videosList[index]}/hqdefault.jpg",
                                     width: double.infinity,
                                     height: double.infinity),
                               ),
                             ],
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Modular.to.pushNamed('videos/', arguments: controller.videosList[index], forRoot: true);
+                          },
                           radius: spacing_control,
                         ),
                       );
@@ -256,9 +262,44 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                     .toList(),
               );
             }),
-            ListView(
-              children: [],
-            ),
+            Observer(builder: (_) {
+              return ListView(
+                physics: BouncingScrollPhysics(),
+                controller: controller.ebooksController,
+                children: controller.ebooksList
+                    .map((element) => ListTile(
+                          onTap: () {
+                            Modular.to.pushNamed('ebook/view/${element.id}',
+                                arguments: element, forRoot: true);
+                          },
+                          minVerticalPadding: 20,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 5.0),
+                          leading: AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              width: 50,
+                              height: 160,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      element.file
+                                          .toString()
+                                          .replaceFirst('.pdf', '.jpg'),
+                                    ),
+                                  )),
+                            ),
+                          ),
+                          title: text(element.name.toString(),
+                              fontSize: 14.0, maxLine: 10),
+                          subtitle: text(element.description.toString(),
+                              fontSize: 12.0),
+                        ))
+                    .toList(),
+              );
+            }),
           ],
         ),
       ),

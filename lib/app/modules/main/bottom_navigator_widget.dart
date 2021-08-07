@@ -64,6 +64,13 @@ class BottomNavigatorPageState
                 ),
                 label: 'Educação',
               ),
+              BottomNavigationBarItem(
+                icon: PlatformSvg.asset(
+                  "images/user_bulk_black.svg",
+                  context: context,
+                ),
+                label: 'Minha Conta',
+              ),
             ],
             currentIndex: controller.currentPage,
             selectedItemColor: Colors.black,

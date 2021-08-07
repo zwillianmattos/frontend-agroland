@@ -70,6 +70,44 @@ mixin _$EducationStore on _EducationStoreBase, Store {
     });
   }
 
+  final _$ebookBannersAtom = Atom(name: '_EducationStoreBase.ebookBanners');
+
+  @override
+  ObservableList<Ebook> get ebookBanners {
+    _$ebookBannersAtom.reportRead();
+    return super.ebookBanners;
+  }
+
+  @override
+  set ebookBanners(ObservableList<Ebook> value) {
+    _$ebookBannersAtom.reportWrite(value, super.ebookBanners, () {
+      super.ebookBanners = value;
+    });
+  }
+
+  final _$videosListAtom = Atom(name: '_EducationStoreBase.videosList');
+
+  @override
+  ObservableList<String> get videosList {
+    _$videosListAtom.reportRead();
+    return super.videosList;
+  }
+
+  @override
+  set videosList(ObservableList<String> value) {
+    _$videosListAtom.reportWrite(value, super.videosList, () {
+      super.videosList = value;
+    });
+  }
+
+  final _$loadBannersAsyncAction =
+      AsyncAction('_EducationStoreBase.loadBanners');
+
+  @override
+  Future loadBanners() {
+    return _$loadBannersAsyncAction.run(() => super.loadBanners());
+  }
+
   final _$loadPageAsyncAction = AsyncAction('_EducationStoreBase.loadPage');
 
   @override
@@ -104,7 +142,9 @@ mixin _$EducationStore on _EducationStoreBase, Store {
 ebooksController: ${ebooksController},
 isLoading: ${isLoading},
 ebooks: ${ebooks},
-ebooksList: ${ebooksList}
+ebooksList: ${ebooksList},
+ebookBanners: ${ebookBanners},
+videosList: ${videosList}
     ''';
   }
 }

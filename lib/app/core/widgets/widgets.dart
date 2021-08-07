@@ -581,7 +581,7 @@ class CardButton extends StatelessWidget {
         child: Container(
           margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
           padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
-          width: sx(width) > 500 ? sx(100) : sx(width / 1.8),
+          width: sx(width) > 500 ? sx(100) : width / 2.35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8)),
             color: color_colorPrimary,

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/modules/main/submodules/education/cultures/page/culture_detail_view_store.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/page/cultures_list_page.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/page/cultures_list_store.dart';
 
@@ -17,6 +18,8 @@ class CulturesModule extends Module {
     BindInject((i) => CulturesListStore(i<CulturesRepository>())),
     BindInject((i) => CulturesCategoryStore(i<CulturesRepository>())),
     BindInject((i) => CulturesDetailStore(i<CulturesRepository>())),
+    BindInject((i) => CultureDetailViewStore(i<CulturesRepository>())),
+    
   ];
 
   @override
@@ -35,7 +38,7 @@ class CulturesModule extends Module {
     ),
     // View culture categorie item detail
     ChildRoute(
-      '/:culture/:category/item/:item/detail',
+      '/:culture/:category/item/:item/view',
       child: (_, __) => CultureDetailViewPage(),
     )
   ];

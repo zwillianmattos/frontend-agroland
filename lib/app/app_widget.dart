@@ -8,7 +8,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Agro Land',
-      initialRoute: '/splash',
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       theme: ThemeData(

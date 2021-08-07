@@ -169,7 +169,8 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                             return InkWell(
                               onTap: () {
                                 Modular.to.pushNamed(
-                                    "view/${list[index].channel!.id}/${list[index].id}");
+                                    "view/${list[index].channel!.id}/${list[index].id}",
+                                    forRoot: true);
                               },
                               child: Container(
                                 margin: const EdgeInsets.only(

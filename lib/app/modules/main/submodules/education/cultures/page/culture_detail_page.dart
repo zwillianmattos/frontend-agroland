@@ -42,7 +42,7 @@ class _CultureDetailPageState
                     "${controller.culturesCategoriesRels?.culturesContents?[i].description}"),
                 onTap: () {
                   Modular.to.pushNamed(
-                      "/cultures/${controller.culturesCategoriesRels?.culture}/${controller.culturesCategoriesRels?.cultureCategory}/item/${controller.culturesCategoriesRels?.culturesContents?[i].id}/detail",
+                      "/cultures/${controller.culturesCategoriesRels?.culture}/${controller.culturesCategoriesRels?.cultureCategory}/item/${controller.culturesCategoriesRels?.culturesContents?[i].id}/view",
                       forRoot: true,
                       arguments: controller
                           .culturesCategoriesRels?.culturesContents?[i]);

@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:location/location.dart';
-import 'dart:io' as IO;
+import 'package:universal_io/io.dart' as IO;
 
 class LocationService implements Disposable {
   Location location = new Location();

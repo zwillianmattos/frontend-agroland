@@ -28,10 +28,39 @@ abstract class _EducationStoreBase with Store {
   @observable
   ObservableList<Ebook> ebooksList = <Ebook>[].asObservable();
 
+  @observable
+  ObservableList<Ebook> ebookBanners = <Ebook>[].asObservable();
+
+
+  @observable
+  ObservableList<String> videosList = <String>[
+    "9f7uB081yxs",
+    "_ekYnxtgYCg",
+    "NvId36FE1mM",
+    "EiZNVylZz48"
+  ].asObservable();
+
   _EducationStoreBase(this.repository) {
     ebooksController = new ScrollController()..addListener(_scrollListener);
     load();
     loadPage();
+    loadBanners();
+  }
+
+
+  @action
+  loadBanners() async {
+    isLoading = true;
+
+    PaginateModel _paginateModel = await repository.load(
+      query: "?size=5&categoria=3",
+    );
+
+    if (_paginateModel.items is List<Ebook>) {
+      var data = _paginateModel.items;
+      ebookBanners.addAll(data as List<Ebook>);
+    }
+    isLoading = false;
   }
 
   @action
