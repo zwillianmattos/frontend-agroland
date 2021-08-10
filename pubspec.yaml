@@ -7,6 +7,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.2.3"
 
 dependencies:
   flutter_web_plugins:
@@ -116,7 +117,7 @@ scripts:
 # build Web 
 #flutter build web --release --web-renderer html --dart-define=FLUTTER_WEB_USE_SKIA=true 
 
-# flutter run -d chrome --release --web-renderer html --dart-define=FLUTTER_WEB_USE_SKIA=true 
+# flutter run -d chrome --web-renderer html --dart-define=FLUTTER_WEB_USE_SKIA=true 
 
 # build Android
 # flutter build apk
