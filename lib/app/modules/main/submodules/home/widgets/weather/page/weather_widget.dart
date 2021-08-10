@@ -29,12 +29,8 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
             return Center(child: CircularProgressIndicator());
 
           if (controller.wheater == null)
-            return Container(
-              child: appButton(
-                textContent: "Tentar novamente",
-                onPressed: controller.loadWeather,
-              ),
-            );
+            return RetryWidget(onRetry: controller.loadWeather,);
+          
           Weather w = controller.wheater!;
 
           return SizedBox(

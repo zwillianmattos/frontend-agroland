@@ -3,15 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
-import 'dart:convert';
-
+import 'package:universal_io/io.dart' as IO;
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
 
 class MarketplaceClassificadoViewPage extends StatefulWidget {
@@ -281,7 +277,10 @@ class _MarketplaceClassificadoViewPageState
                               onPressed: () {
                                 Modular.to.pushNamed('/marketplace/account',
                                     arguments: widget.classificado.producerUser,
-                                    forRoot: true);
+                                    forRoot: (IO.Platform.isAndroid ||
+                                            IO.Platform.isIOS)
+                                        ? true
+                                        : false);
                               },
                               child: Text("Ver loja"))
                         ],

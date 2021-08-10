@@ -25,6 +25,7 @@ class _ThreadViewPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: color_colorPrimary,
         title: Observer(builder: (_) {
           if (!controller.isLoading && controller.thread != null) {
@@ -43,22 +44,7 @@ class _ThreadViewPageState
           }
 
           if (controller.thread == null)
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  text("Ocorreu um erro interno, tente novamente",
-                      maxLine: 5, isCentered: true),
-                  Divider(),
-                  Container(
-                    child: appButton(
-                      textContent: "Tentar novamente",
-                      onPressed: controller.loadThreadDetail,
-                    ),
-                  ),
-                ],
-              ),
-            );
+            return RetryWidget(onRetry: controller.loadThreadDetail,);
 
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -222,6 +208,7 @@ class _ThreadViewPageState
                                                   MainAxisAlignment
                                                       .spaceBetween,
                                               children: <Widget>[
+                                                text("${replie.user?.name}"),
                                                 Html(
                                                   style: {
                                                     "p": Style(

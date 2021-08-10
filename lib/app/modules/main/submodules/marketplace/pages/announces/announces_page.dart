@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/pages/announces/announces_store.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class MarketplaceAnnouncesPage extends StatefulWidget {
   const MarketplaceAnnouncesPage({Key? key}) : super(key: key);
@@ -34,7 +35,10 @@ class _MarketplaceAnnouncesPageState
               subtitle: Text("R\$ ${controller.announces![index].price}"),
               onTap: () async {
                 await Modular.to.pushNamed('/marketplace/announces/new',
-                    forRoot: true, arguments: controller.announces![index]);
+                    forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                        ? true
+                        : false,
+                    arguments: controller.announces![index]);
                 await controller.loadAnnounces();
               },
             );
@@ -44,8 +48,9 @@ class _MarketplaceAnnouncesPageState
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          await Modular.to
-              .pushNamed('/marketplace/announces/new', forRoot: true);
+          await Modular.to.pushNamed('/marketplace/announces/new',
+              forRoot:
+                  (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
           await controller.loadAnnounces();
         },
         isExtended: true,

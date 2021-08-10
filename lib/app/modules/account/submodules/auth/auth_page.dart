@@ -29,28 +29,34 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          text("Entrar",
-                  textColor: controller.isSignIn == true
-                      ? color_colorPrimary
-                      : textPrimaryColor,
-                  fontSize: textSizeLargeMedium,
-                  fontFamily: fontBold)
-              .paddingAll(spacing_standard_new)
-              .onTap(() {
-            controller.isSignIn = true;
-            controller.isSignUp = false;
-          }),
-          text("Inscrever-se",
-                  textColor: controller.isSignUp == true
-                      ? color_colorPrimary
-                      : textPrimaryColor,
-                  fontSize: textSizeLargeMedium,
-                  fontFamily: fontBold)
-              .paddingAll(spacing_standard_new)
-              .onTap(() {
-            controller.isSignIn = false;
-            controller.isSignUp = true;
-          })
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: text("Entrar",
+                    textColor: controller.isSignIn == true
+                        ? color_colorPrimary
+                        : textPrimaryColor,
+                    fontSize: textSizeLargeMedium,
+                    fontFamily: fontBold)
+                .paddingAll(spacing_standard_new)
+                .onTap(() {
+              controller.isSignIn = true;
+              controller.isSignUp = false;
+            }),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: text("Inscrever-se",
+                    textColor: controller.isSignUp == true
+                        ? color_colorPrimary
+                        : textPrimaryColor,
+                    fontSize: textSizeLargeMedium,
+                    fontFamily: fontBold)
+                .paddingAll(spacing_standard_new)
+                .onTap(() {
+              controller.isSignIn = false;
+              controller.isSignUp = true;
+            }),
+          )
         ],
       );
     });
@@ -68,46 +74,48 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: spacing_xxLarge,
-              ),
-              Container(
-                width: width,
-                decoration: BoxDecoration(
-                  color: color_white,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: const Radius.circular(8.0),
-                    topLeft: Radius.circular(8.0),
-                    topRight: const Radius.circular(8.0),
+        child: Center(
+          child: Container(
+            padding: width <= 540 ?  EdgeInsets.zero : EdgeInsets.symmetric(horizontal: width * 0.350),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                SizedBox(
+                  height: spacing_xxLarge,
+                ),
+                Container(
+                  width: width,
+                  decoration: BoxDecoration(
+                    color: color_white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(8.0),
+                      bottomRight: const Radius.circular(8.0),
+                      topLeft: Radius.circular(8.0),
+                      topRight: const Radius.circular(8.0),
+                    ),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: color_ShadowColor,
+                          blurRadius: 20.0,
+                          offset: Offset(0.0, 0.9)),
+                    ],
                   ),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: color_ShadowColor,
-                        blurRadius: 20.0,
-                        offset: Offset(0.0, 0.9)),
-                  ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      optionsMenu,
+                      Observer(builder: (_) {
+                        return controller.isSignUp ? signUp : signIn;
+                      }),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    optionsMenu,
-                    Observer(builder: (_) {
-                      return controller.isSignUp ? signUp : signIn;
-                    }),
-                  ],
+                SizedBox(
+                  height: spacing_xxLarge,
                 ),
-              ),
-              SizedBox(
-                height: spacing_xxLarge,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,7 +6,7 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
-
+import 'package:universal_io/io.dart' as IO;
 import 'marketplace_search_store.dart';
 
 class MarketplaceSearchPage extends StatefulWidget {
@@ -118,7 +117,10 @@ class _MarketplaceSearchPageState
                                           Modular.to.pushNamed(
                                               '/marketplace/view',
                                               arguments: element,
-                                              forRoot: true);
+                                              forRoot: (IO.Platform.isAndroid ||
+                                                      IO.Platform.isIOS)
+                                                  ? true
+                                                  : false);
                                         },
                                         minVerticalPadding: 20,
                                         contentPadding: EdgeInsets.symmetric(
@@ -173,7 +175,7 @@ class _MarketplaceSearchPageState
                   //             Modular.to.pushNamed(
                   //                 'ebook/view/${controller.searchResults[index].id}',
                   //                 arguments: controller.searchResults[index],
-                  //                 forRoot: true);
+                  //                 forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
                   //           },
                   //           child: Card(
                   //             semanticContainer: true,
