@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/cultures_categories_rels.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/page/culture_detail_store.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class CultureDetailPage extends StatefulWidget {
   const CultureDetailPage({Key? key}) : super(key: key);
@@ -22,6 +22,7 @@ class _CultureDetailPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Observer(builder: (_) {
           return Text(
               '${controller.culturesCategoriesRels?.culturesCategory?.description ?? ""}');
@@ -43,7 +44,9 @@ class _CultureDetailPageState
                 onTap: () {
                   Modular.to.pushNamed(
                       "/cultures/${controller.culturesCategoriesRels?.culture}/${controller.culturesCategoriesRels?.cultureCategory}/item/${controller.culturesCategoriesRels?.culturesContents?[i].id}/view",
-                      forRoot: true,
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                          ? true
+                          : false,
                       arguments: controller
                           .culturesCategoriesRels?.culturesContents?[i]);
                 },

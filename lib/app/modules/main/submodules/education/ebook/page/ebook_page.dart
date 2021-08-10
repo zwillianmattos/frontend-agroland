@@ -5,6 +5,7 @@ import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import './ebook_page_store.dart';
 import './../models/ebook_model.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class EbookPage extends StatefulWidget {
   const EbookPage({Key? key}) : super(key: key);
@@ -48,7 +49,10 @@ class _EbookPageState extends ModularState<EbookPage, EbookPageStore> {
                   ),
                   onTap: () async {
                     Modular.to.pushNamed('view/${ebook.id}',
-                        arguments: ebook, forRoot: true);
+                        arguments: ebook,
+                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                            ? true
+                            : false);
                   },
                 );
               },

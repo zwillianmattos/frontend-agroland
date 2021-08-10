@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-
+import 'package:universal_io/io.dart' as IO;
 part 'bottom_navigator_store.g.dart';
 
 class BottomNavigatorStore = _BottomNavigatorStoreBase
@@ -17,11 +16,14 @@ abstract class _BottomNavigatorStoreBase with Store {
       print("PARAMETROS ${Modular.args?.params}");
       Modular.to.navigate(Modular.to.modulePath);
       Modular.to.pushNamed(Modular.to.path,
-          forRoot: Modular.to.path.contains("/view") ? true : false);
+          forRoot: Modular.to.path.contains("/view") &&
+                  (IO.Platform.isAndroid || IO.Platform.isIOS)
+              ? true
+              : false);
 
       changePage(_checkModule(Modular.to.path), navigate: false);
     } else {
-      changePage(0);
+      changePage(_checkModule(Modular.to.path));
     }
   }
 
@@ -42,12 +44,13 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @computed
   get currentPage => currentIndex;
+  
+
   @action
   changePage(index, {navigate = true}) async {
     // if (currentIndex == index) return;
 
     currentIndex = index;
-
     if (!navigate) return;
 
     if (index == 0) {
@@ -60,9 +63,13 @@ abstract class _BottomNavigatorStoreBase with Store {
       Modular.to.navigate('/education');
     } else if (index == 4) {
       if (Modular.get<UserPreferencesStore>().getUser != null) {
-        await Modular.to.pushNamed('/account/profile', forRoot: true);
+        await Modular.to.pushNamed('/account/profile',
+            forRoot:
+                (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
       } else {
-        await Modular.to.pushNamed('/account/auth', forRoot: true);
+        await Modular.to.pushNamed('/account/auth',
+            forRoot:
+                (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
       }
       currentIndex = 0;
       Modular.to.navigate('/home');

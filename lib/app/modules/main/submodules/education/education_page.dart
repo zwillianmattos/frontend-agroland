@@ -34,14 +34,16 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
           centerTitle: true,
           title: text("Educação",
               fontSize: 20.0, textColor: color_textColorPrimary),
-
           actions: <Widget>[
             IconButton(
                 icon: SvgPicture.asset(
                   "images/search_broken.svg",
                 ),
                 onPressed: () {
-                  Modular.to.pushNamed('/education/search', forRoot: true);
+                  Modular.to.pushNamed('/education/search',
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                          ? true
+                          : false);
                 }),
           ],
           bottom: PreferredSize(
@@ -87,13 +89,14 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
 
                   return Container(
                     child: BannerCarousel(
-                      height: 200,
+                      height: width <= 1000 ? 200 : (width * 0.28) * 6.8 / 6,
                       activeColor: Colors.green,
                       disableColor: Colors.grey,
                       animation: true,
                       indicatorBottom: true,
                       customizedBanners: [
                         "https://res.cloudinary.com/dxz4ivhm8/image/upload/v1628109980/plant-care/ebooks/vender-no-agro-990x550.png",
+                        "https://res.cloudinary.com/dxz4ivhm8/image/upload/v1628345707/Capturar.png"
                       ]
                           .map(
                             (e) => InkWell(
@@ -101,7 +104,10 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                 Modular.to.pushNamed(
                                     'ebook/view/${controller.ebookBanners.first.id}',
                                     arguments: controller.ebookBanners.first,
-                                    forRoot: true);
+                                    forRoot: (IO.Platform.isAndroid ||
+                                            IO.Platform.isIOS)
+                                        ? true
+                                        : false);
                               },
                               child: Container(
                                 child: Image.network(e, fit: BoxFit.contain),
@@ -121,7 +127,9 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                           )
                         : Container(
                             margin: EdgeInsets.symmetric(vertical: 5),
-                            height: (width * 0.28) * 8.8 / 6,
+                            height: width <= 1000
+                                ? (width * 0.28) * 8.8 / 6
+                                : (width * 0.28) * 2.8 / 6,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: controller.ebooks.length,
@@ -133,53 +141,55 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                 return Container(
                                   margin:
                                       EdgeInsets.only(left: spacing_standard),
-                                  width: width * 0.28,
+                                  width: width <= 1000
+                                      ? (width * 0.28)
+                                      : (width * 0.1),
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8)),
                                   ),
                                   child: InkWell(
-                                    child: AspectRatio(
-                                      aspectRatio: 6 / 8.8,
-                                      child: Stack(
-                                        alignment: Alignment.bottomLeft,
-                                        children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.15),
-                                                  spreadRadius: 0,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      0), // changes position of shadow
-                                                ),
-                                              ],
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(8)),
-                                              child: CachedNetworkImage(
-                                                imageUrl: controller
-                                                    .ebooks[index].file
-                                                    .toString()
-                                                    .replaceFirst(
-                                                        '.pdf', '.jpg'),
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.fitHeight,
-                                              ),
+                                    child: Stack(
+                                      alignment: Alignment.bottomLeft,
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            // boxShadow: [
+                                            //   BoxShadow(
+                                            //     color: Colors.grey
+                                            //         .withOpacity(0.15),
+                                            //     spreadRadius: 0,
+                                            //     blurRadius: 5,
+                                            //     offset: Offset(0,
+                                            //         0), // changes position of shadow
+                                            //   ),
+                                            // ],
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)),
+                                            child: CachedNetworkImage(
+                                              imageUrl: controller
+                                                  .ebooks[index].file
+                                                  .toString()
+                                                  .replaceFirst(
+                                                      '.pdf', '.jpg'),
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              fit: BoxFit.fitHeight,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                     onTap: () async {
                                       Modular.to.pushNamed(
                                           'ebook/view/${controller.ebooks[index].id}',
                                           arguments: controller.ebooks[index],
-                                          forRoot: true);
+                                          forRoot: (IO.Platform.isAndroid ||
+                                                  IO.Platform.isIOS)
+                                              ? true
+                                              : false);
                                     },
                                     radius: spacing_control,
                                   ),
@@ -214,7 +224,12 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                             ],
                           ),
                           onTap: () {
-                            Modular.to.pushNamed('videos/', arguments: controller.videosList[index], forRoot: true);
+                            Modular.to.pushNamed('videos/',
+                                arguments: controller.videosList[index],
+                                forRoot:
+                                    (IO.Platform.isAndroid || IO.Platform.isIOS)
+                                        ? true
+                                        : false);
                           },
                           radius: spacing_control,
                         ),
@@ -232,7 +247,11 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                     .map((element) => ListTile(
                           onTap: () {
                             Modular.to.pushNamed('ebook/view/${element.id}',
-                                arguments: element, forRoot: true);
+                                arguments: element,
+                                forRoot:
+                                    (IO.Platform.isAndroid || IO.Platform.isIOS)
+                                        ? true
+                                        : false);
                           },
                           minVerticalPadding: 20,
                           contentPadding: EdgeInsets.symmetric(
@@ -270,7 +289,11 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                     .map((element) => ListTile(
                           onTap: () {
                             Modular.to.pushNamed('ebook/view/${element.id}',
-                                arguments: element, forRoot: true);
+                                arguments: element,
+                                forRoot:
+                                    (IO.Platform.isAndroid || IO.Platform.isIOS)
+                                        ? true
+                                        : false);
                           },
                           minVerticalPadding: 20,
                           contentPadding: EdgeInsets.symmetric(

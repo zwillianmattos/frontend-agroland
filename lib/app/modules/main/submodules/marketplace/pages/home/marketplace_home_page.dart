@@ -48,7 +48,7 @@ class _MarketplaceHomePageState
                   "images/search_broken.svg",
                 ),
                 onPressed: () {
-                  Modular.to.pushNamed('/marketplace/search', forRoot: true);
+                  Modular.to.pushNamed('/marketplace/search', forRoot: false);
                 }),
           ],
         ),
@@ -233,21 +233,8 @@ class _MarketplaceHomePageState
                 }
 
                 if (controller.products == null)
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        text("Ocorreu um erro interno, tente novamente",
-                            maxLine: 5, isCentered: true),
-                        Divider(),
-                        Container(
-                          child: appButton(
-                            textContent: "Tentar novamente",
-                            onPressed: controller.load,
-                          ),
-                        ),
-                      ],
-                    ),
+                  return RetryWidget(
+                    onRetry: controller.load,
                   );
 
                 final List<ProductSell> items = controller.products!;

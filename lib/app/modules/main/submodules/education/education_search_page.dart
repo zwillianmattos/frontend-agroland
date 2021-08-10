@@ -8,6 +8,7 @@ import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/education/education_search_store.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class EducationSearchPage extends StatefulWidget {
   const EducationSearchPage({Key? key}) : super(key: key);
@@ -117,7 +118,10 @@ class _EducationSearchPageState
                                           Modular.to.pushNamed(
                                               'ebook/view/${element.id}',
                                               arguments: element,
-                                              forRoot: true);
+                                              forRoot: (IO.Platform.isAndroid ||
+                                                      IO.Platform.isIOS)
+                                                  ? true
+                                                  : false);
                                         },
                                         minVerticalPadding: 20,
                                         contentPadding: EdgeInsets.symmetric(
@@ -167,7 +171,7 @@ class _EducationSearchPageState
                   //             Modular.to.pushNamed(
                   //                 'ebook/view/${controller.searchResults[index].id}',
                   //                 arguments: controller.searchResults[index],
-                  //                 forRoot: true);
+                  //                 forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
                   //           },
                   //           child: Card(
                   //             semanticContainer: true,

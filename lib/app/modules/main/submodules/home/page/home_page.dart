@@ -1,19 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import './home_store.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../widgets/weather/page/weather_widget.dart';
 import '../widgets/acoes/widgets/cotacao_widget.dart';
 import '../widgets/news/page/news_widget.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -50,7 +45,10 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                       context: context),
                   description: "Culturas",
                   onPressed: () {
-                    Modular.to.pushNamed('/cultures', forRoot: true);
+                    Modular.to.pushNamed('/cultures',
+                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                            ? true
+                            : false);
                   }),
             ],
             shrinkWrap: true,
@@ -61,36 +59,36 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
         return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
-              SliverAppBar(
-                backgroundColor: color_app_background,
-                floating: false,
-                pinned: false,
-                leading: IconButton(
-                    icon: PlatformSvg.asset("images/user_broken.svg",
-                        context: context),
-                    onPressed: () async {
-                      if (Modular.get<UserPreferencesStore>().getUser != null) {
-                        Modular.to.pushNamed('/account/profile');
-                      } else {
-                        Modular.to.pushNamed('/account/auth');
-                      }
-                    }),
-                centerTitle: true,
-                title: Image.asset(
-                  'images/logo.png',
-                  scale: 2.5,
-                ),
-                actions: [
-                  IconButton(
-                      icon: PlatformSvg.asset("images/search_broken.svg",
-                          context: context),
-                      onPressed: () {}),
-                  IconButton(
-                      icon: PlatformSvg.asset("images/notification_broken.svg",
-                          context: context),
-                      onPressed: () {})
-                ],
-              ),
+              // SliverAppBar(
+              //   backgroundColor: color_app_background,
+              //   floating: false,
+              //   pinned: false,
+              //   leading: IconButton(
+              //       icon: PlatformSvg.asset("images/user_broken.svg",
+              //           context: context),
+              //       onPressed: () async {
+              //         if (Modular.get<UserPreferencesStore>().getUser != null) {
+              //           Modular.to.pushNamed('/account/profile');
+              //         } else {
+              //           Modular.to.pushNamed('/account/auth');
+              //         }
+              //       }),
+              //   centerTitle: true,
+              //   title: Image.asset(
+              //     'images/logo.png',
+              //     scale: 2.5,
+              //   ),
+              //   actions: [
+              //     IconButton(
+              //         icon: PlatformSvg.asset("images/search_broken.svg",
+              //             context: context),
+              //         onPressed: () {}),
+              //     IconButton(
+              //         icon: PlatformSvg.asset("images/notification_broken.svg",
+              //             context: context),
+              //         onPressed: () {})
+              //   ],
+              // ),
             ];
           },
           body: Container(

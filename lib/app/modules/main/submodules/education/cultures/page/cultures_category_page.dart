@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/page/cultures_list_store.dart';
-
+import 'package:universal_io/io.dart' as IO;
 import 'cultures_category_store.dart';
 
 class CulturesCategoryPage extends StatefulWidget {
@@ -19,6 +18,7 @@ class _CulturesCategoryPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Observer(builder: (_) {
           return Text('${controller.culture?.name ?? ""}');
         }),
@@ -39,7 +39,9 @@ class _CulturesCategoryPageState
                 onTap: () {
                   Modular.to.pushNamed(
                       "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].id}/items",
-                      forRoot: true,
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                          ? true
+                          : false,
                       arguments: _culture.culturesCategoriesRels?[index]);
                 },
               );

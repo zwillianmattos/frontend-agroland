@@ -7,6 +7,7 @@ import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
 import 'package:plant_care/app/modules/account/repositories/account_repository.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
+
 part 'user_preferences_store.g.dart';
 
 class UserPreferencesStore = _UserPreferencesStoreBase

@@ -5,8 +5,10 @@ import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/models/cultures_categories_rels.dart';
 
+part 'cultures_repository.g.dart';
+
 @Injectable(singleton: false)
-class CulturesRepository with Store {
+class CulturesRepository extends Disposable with Store {
   final Dio _http;
 
   CulturesRepository(this._http);

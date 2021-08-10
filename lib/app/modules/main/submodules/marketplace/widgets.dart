@@ -8,9 +8,9 @@ import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models.dart';
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
 import 'package:relative_scale/relative_scale.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class CategoriaWidget extends StatefulWidget {
   final String description;
@@ -87,7 +87,10 @@ class CardAnuncio extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Modular.to.pushNamed('/marketplace/view',
-                arguments: classificado, forRoot: true);
+                arguments: classificado,
+                forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                    ? true
+                    : false);
           },
           child: Container(
             padding: EdgeInsets.all(6.0),
@@ -226,7 +229,9 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                     textContent: "Login",
                     onPressed: () {
                       Modular.to.pushNamed('/account/auth',
-                          forRoot: true,
+                          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                              ? true
+                              : false,
                           arguments: {
                             'isSignIn': true,
                             'isSignUp': false,
@@ -238,7 +243,9 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                     textContent: "Crie sua conta",
                     onPressed: () {
                       Modular.to.pushNamed('/account/auth',
-                          forRoot: true,
+                          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                              ? true
+                              : false,
                           arguments: {
                             'isSignIn': false,
                             'isSignUp': true,
@@ -280,16 +287,23 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                 if (accountModel?.user?.producerUser != null) {
                   Modular.to.pushNamed(
                     '/marketplace/announces',
-                    forRoot: true,
+                    forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                        ? true
+                        : false,
                   );
                 } else {
                   Modular.to.pushNamed(
                     '/account/producer_user/register',
-                    forRoot: true,
+                    forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                        ? true
+                        : false,
                   );
                 }
               } else {
-                Modular.to.pushNamed('/account/auth', forRoot: true);
+                Modular.to.pushNamed('/account/auth',
+                    forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                        ? true
+                        : false);
               }
             },
           ),
@@ -300,7 +314,9 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                 onTap: () {
                   Modular.to.pushNamed(
                     '/account/profile',
-                    forRoot: true,
+                    forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                        ? true
+                        : false,
                   );
                 }),
         ],
