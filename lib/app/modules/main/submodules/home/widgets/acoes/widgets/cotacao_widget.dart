@@ -131,22 +131,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
               );
             }
             if (controller.cotacao == null)
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    text("Ocorreu um erro interno, tente novamente",
-                        maxLine: 5, isCentered: true),
-                    Divider(),
-                    Container(
-                      child: appButton(
-                        textContent: "Tentar novamente",
-                        onPressed: controller.loadCotacao,
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return RetryWidget(onRetry: controller.loadCotacao,);
 
             return Column(children: [
               Container(

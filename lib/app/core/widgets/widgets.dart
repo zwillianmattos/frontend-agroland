@@ -38,7 +38,9 @@ TextFormField appEditTextStyle(var hintText,
       contentPadding: EdgeInsets.fromLTRB(16, 8, 4, 8),
       labelText: enableLabel ? hintText : null,
       hintText: hintText,
-      border: enableBorder ? null : InputBorder.none,
+      border: enableBorder ? new OutlineInputBorder(
+      borderSide: new BorderSide(color: Colors.teal)
+    ) : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
     onSaved: onSaved,
@@ -138,7 +140,7 @@ Widget text(String text,
     maxLines: isLongText ? null : maxLine,
     overflow: TextOverflow.ellipsis,
     style: TextStyle(
-      fontFamily: fontFamily ?? null,
+      fontFamily: fontFamily ?? fontRegular,
       fontSize: fontSize,
       fontWeight: bold ? FontWeight.bold : null,
       color: textColor,
@@ -621,18 +623,86 @@ class PlatformSvg {
     String? semanticsLabel,
   }) {
     if (kIsWeb) {
-      return Image.network("/assets/$assetName",
-          fit: fit,
-          color: color,
-          alignment: alignment,
-          semanticLabel: semanticsLabel);
+      if (width == null || height == null) {
+        return Image.network("/assets/$assetName",
+            fit: fit,
+            color: color,
+            alignment: alignment,
+            semanticLabel: semanticsLabel);
+      }
+
+      return SizedBox(
+        width: width,
+        height: height,
+        child: Image.network("/assets/$assetName",
+            fit: fit,
+            color: color,
+            alignment: alignment,
+            semanticLabel: semanticsLabel),
+      );
     }
 
-    return SvgPicture.asset(assetName,
-        fit: fit,
-        color: color,
-        allowDrawingOutsideViewBox: true,
-        alignment: alignment,
-        semanticsLabel: semanticsLabel);
+    return SvgPicture.asset(
+      assetName,
+      fit: fit,
+      color: color,
+      allowDrawingOutsideViewBox: true,
+      alignment: alignment,
+      semanticsLabel: semanticsLabel,
+      width: width,
+      height: height,
+    );
+  }
+}
+
+class RetryWidget extends StatefulWidget {
+  final String? message;
+  final Function onRetry;
+  final String icon = "images/danger.svg";
+
+  const RetryWidget({Key? key, this.message, required this.onRetry})
+      : super(key: key);
+
+  @override
+  _RetryWidgetState createState() => _RetryWidgetState();
+}
+
+class _RetryWidgetState extends State<RetryWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (widget.message != null) text(widget.message!),
+            // Image error from the internet
+            PlatformSvg.asset(
+              widget.icon,
+              context: context,
+              width: 100,
+              height: 100,
+              color: Colors.black,
+            ),
+            SizedBox(
+              height: textSizeXLarge,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                appButton(
+                  textContent: "Tentar novamente",
+                  onPressed: () {
+                    widget.onRetry();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

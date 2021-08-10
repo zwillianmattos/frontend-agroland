@@ -23,7 +23,7 @@ abstract class _BottomNavigatorStoreBase with Store {
 
       changePage(_checkModule(Modular.to.path), navigate: false);
     } else {
-      changePage(0);
+      changePage(_checkModule(Modular.to.path));
     }
   }
 
@@ -44,12 +44,13 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @computed
   get currentPage => currentIndex;
+  
+
   @action
   changePage(index, {navigate = true}) async {
     // if (currentIndex == index) return;
 
     currentIndex = index;
-
     if (!navigate) return;
 
     if (index == 0) {

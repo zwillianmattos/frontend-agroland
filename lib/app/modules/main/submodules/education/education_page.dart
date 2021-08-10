@@ -143,48 +143,44 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                       EdgeInsets.only(left: spacing_standard),
                                   width: width <= 1000
                                       ? (width * 0.28)
-                                      : (width * 0.20),
+                                      : (width * 0.1),
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8)),
                                   ),
                                   child: InkWell(
-                                    child: AspectRatio(
-                                      aspectRatio:
-                                          width <= 1000 ? 6 / 8.8 : 2.8 / 8.8,
-                                      child: Stack(
-                                        alignment: Alignment.bottomLeft,
-                                        children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.15),
-                                                  spreadRadius: 0,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      0), // changes position of shadow
-                                                ),
-                                              ],
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(8)),
-                                              child: CachedNetworkImage(
-                                                imageUrl: controller
-                                                    .ebooks[index].file
-                                                    .toString()
-                                                    .replaceFirst(
-                                                        '.pdf', '.jpg'),
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.fitHeight,
-                                              ),
+                                    child: Stack(
+                                      alignment: Alignment.bottomLeft,
+                                      children: <Widget>[
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            // boxShadow: [
+                                            //   BoxShadow(
+                                            //     color: Colors.grey
+                                            //         .withOpacity(0.15),
+                                            //     spreadRadius: 0,
+                                            //     blurRadius: 5,
+                                            //     offset: Offset(0,
+                                            //         0), // changes position of shadow
+                                            //   ),
+                                            // ],
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)),
+                                            child: CachedNetworkImage(
+                                              imageUrl: controller
+                                                  .ebooks[index].file
+                                                  .toString()
+                                                  .replaceFirst(
+                                                      '.pdf', '.jpg'),
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                              fit: BoxFit.fitHeight,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                     onTap: () async {
                                       Modular.to.pushNamed(

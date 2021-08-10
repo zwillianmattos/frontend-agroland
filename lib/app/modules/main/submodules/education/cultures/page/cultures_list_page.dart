@@ -18,6 +18,7 @@ class _CulturesListPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text('Culturas'),
       ),
       body: Observer(builder: (_) {

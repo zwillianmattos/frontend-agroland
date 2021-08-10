@@ -100,7 +100,7 @@ abstract class _EducationStoreBase with Store {
     isLoading = true;
 
     PaginateModel _paginateModel = await repository.load(
-      query: "?size=5",
+      query: query,
     );
 
     if (_paginateModel.items is List<Ebook>) {

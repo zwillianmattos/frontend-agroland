@@ -29,22 +29,7 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
             );
 
           if (controller.newsList == null)
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  text("Ocorreu um erro interno, tente novamente",
-                      maxLine: 5, isCentered: true),
-                  Divider(),
-                  Container(
-                    child: appButton(
-                      textContent: "Tentar novamente",
-                      onPressed: controller.loadNews,
-                    ),
-                  ),
-                ],
-              ),
-            );
+            return RetryWidget(onRetry: controller.loadNews,);
 
           return ListView.builder(
               scrollDirection: Axis.horizontal,
