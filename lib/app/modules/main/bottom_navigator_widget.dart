@@ -39,7 +39,7 @@ class BottomNavigatorPageState
             Drawer(
               elevation: 0,
               child: Container(
-                color: color_app_background,
+                // color: color_app_background,
                 child: Row(
                   children: [
                     Expanded(
@@ -137,7 +137,6 @@ class BottomNavigatorPageState
                               onTap: () {
                                 controller.changePage(1);
                               },
-                              selectedTileColor: Colors.red,
                               selected: controller.currentPage == 1
                                   ? true
                                   : false,
@@ -206,7 +205,7 @@ class BottomNavigatorPageState
           Expanded(
             child: Scaffold(
               extendBody: false,
-              backgroundColor: Colors.transparent,
+              // backgroundColor: Colors.transparent,
               // appBar: AppBar(
               //   elevation: 0,
               //   backgroundColor: color_app_background,
@@ -263,9 +262,8 @@ class BottomNavigatorPageState
                           ),
                         ],
                         currentIndex: controller.currentPage,
-                        selectedItemColor: Colors.black,
-                        backgroundColor: Colors.white,
-                        unselectedItemColor: Colors.black,
+                        selectedItemColor: Theme.of(context).primaryTextTheme.button?.color,
+                        unselectedItemColor: Theme.of(context).primaryTextTheme.button?.color,
                         onTap: controller.changePage,
                       ),
                     )

@@ -62,7 +62,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
     });
 
     return Scaffold(
-      backgroundColor: color_app_background,
+      // backgroundColor: color_app_background,
       appBar: AppBar(
         leading: BackButton(),
         backgroundColor: Colors.transparent,

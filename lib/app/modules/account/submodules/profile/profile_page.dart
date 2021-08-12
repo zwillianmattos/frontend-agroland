@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
@@ -28,10 +30,19 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: Icon(CupertinoIcons.moon_stars),
-            onPressed: () {},
-          )
+          Observer(builder: (_) {
+            return IconButton(
+              icon: Icon(
+                CupertinoIcons.moon_stars,
+                color: Modular.get<UserPreferencesStore>().darkTheme
+                    ? color_white
+                    : blackColor,
+              ),
+              onPressed: () {
+                Modular.get<UserPreferencesStore>().darkMode();
+              },
+            );
+          })
         ],
       ),
       body: ListView(
@@ -50,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 24),
             decoration: BoxDecoration(
-              color: color_white,
+              color: Theme.of(context).backgroundColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(8.0),
                 bottomRight: const Radius.circular(8.0),
@@ -59,9 +70,9 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                    color: color_ShadowColor,
-                    blurRadius: 20.0,
-                    offset: Offset(0.0, 0.9)),
+                    color: Theme.of(context).shadowColor.withOpacity(0.2),
+                    blurRadius: 10.0,
+                    offset: Offset(0.0, 0.1)),
               ],
             ),
             child: Column(children: [
@@ -215,7 +226,7 @@ class NumberWidget extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 24),
           padding: EdgeInsets.all(5.0),
           decoration: BoxDecoration(
-            color: color_white,
+            color: Theme.of(context).backgroundColor,
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(8.0),
               bottomRight: const Radius.circular(8.0),
@@ -224,9 +235,9 @@ class NumberWidget extends StatelessWidget {
             ),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: color_ShadowColor,
-                  blurRadius: 20.0,
-                  offset: Offset(0.0, 0.9)),
+                  color: Theme.of(context).shadowColor.withOpacity(0.2),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 0.1)),
             ],
           ),
           child: Row(

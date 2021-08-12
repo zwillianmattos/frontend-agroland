@@ -15,8 +15,7 @@ class LocationService implements Disposable {
       "latitude": -22.2877973,
       "longitude": -49.2306352,
     });
-    print(_locationData);
-    return _locationData;
+    
     try {
       if (IO.Platform.isAndroid || IO.Platform.isIOS) {
         print("Location Service");

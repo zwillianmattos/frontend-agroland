@@ -38,7 +38,7 @@ class _MarketplaceHomePageState
         drawer: MarketplaceDrawer(),
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: color_app_background,
+          // backgroundColor: color_app_background,
           centerTitle: true,
           title: text("Marketplace",
               fontSize: 20.0, textColor: color_textColorPrimary),
@@ -75,7 +75,7 @@ class _MarketplaceHomePageState
                           left: 16, right: 16, bottom: 16, top: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: color_white,
+                        // color: color_white,
                         image: DecorationImage(
                           image: NetworkImage(
                               "https://cdn.awsli.com.br/400x400/1751/1751727/banner/4e8586365b.png"),
@@ -100,7 +100,7 @@ class _MarketplaceHomePageState
                           left: 16, right: 16, bottom: 16, top: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: color_white,
+                        // color: color_white,
                         image: DecorationImage(
                           image: NetworkImage(
                               "https://cdn.awsli.com.br/400x400/1751/1751727/banner/78628d4761.png"),
@@ -125,7 +125,7 @@ class _MarketplaceHomePageState
                           left: 16, right: 16, bottom: 16, top: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: color_white,
+                        // color: color_white,
                         image: DecorationImage(
                           image: NetworkImage(
                               "https://cdn.awsli.com.br/400x400/1751/1751727/banner/bdfdd8dd71.png"),
@@ -150,7 +150,7 @@ class _MarketplaceHomePageState
                           left: 16, right: 16, bottom: 16, top: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: color_white,
+                        // color: color_white,
                         image: DecorationImage(
                           image: NetworkImage(
                               "https://http2.mlstatic.com/D_NQ_NP_801971-MLA46483020534_062021-C.webp"),
@@ -175,7 +175,7 @@ class _MarketplaceHomePageState
                           left: 16, right: 16, bottom: 16, top: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        color: color_white,
+                        // color: color_white,
                         image: DecorationImage(
                           image: NetworkImage(
                               "https://http2.mlstatic.com/D_NQ_NP_663015-MLA46468719096_062021-B.webp"),
@@ -216,8 +216,8 @@ class _MarketplaceHomePageState
                                     bgColors: controller.indexCategory ==
                                             controller.categories!
                                                 .indexOf(element)
-                                        ? color_colorPrimary
-                                        : color_textColorPrimary,
+                                        ? Theme.of(context).colorScheme.secondary
+                                        : Theme.of(context).primaryColor,
                                   ))
                               .toList()),
                     ),

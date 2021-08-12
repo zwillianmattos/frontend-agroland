@@ -19,7 +19,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color_app_background,
+      // backgroundColor: color_app_background,
       body: RelativeBuilder(builder: (context, height, width, sy, sx) {
         final Widget buttons = SizedBox(
           height: width > 500 ? sy(60) : 100,

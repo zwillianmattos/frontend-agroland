@@ -28,7 +28,7 @@ class _MarketplaceClassificadoViewPageState
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: color_app_background,
+        // backgroundColor: color_app_background,
         centerTitle: true,
         title: text("Marketplace",
             fontSize: 20.0, textColor: color_textColorPrimary),

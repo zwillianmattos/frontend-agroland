@@ -18,9 +18,26 @@ abstract class _UserPreferencesStoreBase with Store {
 
   final AccountRepository accountRepository;
 
+  @observable
+  bool darkTheme = false;
+
   _UserPreferencesStoreBase(this.accountRepository) {
     print("[UserPreferences]: Initializing");
     this.isAuth();
+
+    // load data from local storage
+    _loadFromLocalStorage();
+  }
+
+  @action
+  Future<void> _loadFromLocalStorage() async {
+    var data = await LocalStorage.getValue<bool>('dark_theme');
+    print("buscou do banco $data");
+    if (data == null) {
+      darkTheme = false;
+    } else {
+      darkTheme = data;
+    }
   }
 
   set setUser(AccountModel user) => this.accountModel = user;
@@ -40,7 +57,7 @@ abstract class _UserPreferencesStoreBase with Store {
   }
 
   isAuth() async {
-    String account = await LocalStorage.getValue<String>("user");
+    String? account = await LocalStorage.getValue<String>("user");
     // Check token is not null
     if (account == '' || account == null) return false;
     // Convert data to json
@@ -59,5 +76,12 @@ abstract class _UserPreferencesStoreBase with Store {
   logOff() async {
     await LocalStorage.setValue("user", "");
     this.accountModel = null;
+  }
+
+  @action
+  darkMode() {
+    this.darkTheme = !this.darkTheme;
+    // save to local storage
+    LocalStorage.setValue<bool>("dark_theme", this.darkTheme);
   }
 }

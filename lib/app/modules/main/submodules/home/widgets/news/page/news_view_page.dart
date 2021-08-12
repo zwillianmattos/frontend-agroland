@@ -52,7 +52,7 @@ class _NewsViewPageState extends State<NewsViewPage> {
           ];
         },
         body: Container(
-          color: color_app_background,
+          // color: color_app_background,
           child: Column(
             children: [
               Container(

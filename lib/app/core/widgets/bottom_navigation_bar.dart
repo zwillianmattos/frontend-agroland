@@ -168,7 +168,7 @@ class AppBottomNavigationBar extends StatefulWidget {
   final bool? showSelectedLabels;
 
   static AppBottomNavigationBarType _type(
-    AppBottomNavigationBarType type,
+    AppBottomNavigationBarType? type,
     List<AppBottomNavigationBarItem> items,
   ) {
     if (type != null) {
@@ -649,7 +649,7 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar>
         themeColor = themeData.primaryColor;
         break;
       case Brightness.dark:
-        themeColor = themeData.accentColor;
+        themeColor = themeData.colorScheme.secondary;
         break;
     }
 

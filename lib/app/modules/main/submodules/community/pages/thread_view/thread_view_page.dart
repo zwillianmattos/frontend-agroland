@@ -26,7 +26,7 @@ class _ThreadViewPageState
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: color_colorPrimary,
+        // backgroundColor: color_colorPrimary,
         title: Observer(builder: (_) {
           if (!controller.isLoading && controller.thread != null) {
             return Text(controller.thread!.title!);
@@ -52,7 +52,7 @@ class _ThreadViewPageState
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: white,
+                    color:  Theme.of(context).backgroundColor,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.15),
@@ -189,10 +189,10 @@ class _ThreadViewPageState
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(8)),
-                                              color: white,
+                                              color: Theme.of(context).backgroundColor,
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: Colors.grey
+                                                  color: Theme.of(context).shadowColor
                                                       .withOpacity(0.15),
                                                   spreadRadius: 0,
                                                   blurRadius: 5,

@@ -30,7 +30,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: color_app_background,
+          // backgroundColor: color_app_background,
           centerTitle: true,
           title: text("Educação",
               fontSize: 20.0, textColor: color_textColorPrimary),
@@ -59,9 +59,9 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                   fontFamily: fontMedium,
                   fontSize: textSizeNormal,
                 ),
-                indicatorColor: color_colorPrimary,
-                unselectedLabelColor: color_textColorPrimary,
-                labelColor: color_colorPrimary,
+                indicatorColor: Theme.of(context).colorScheme.secondary,
+                unselectedLabelColor: Theme.of(context).secondaryHeaderColor,
+                labelColor: Theme.of(context).colorScheme.secondary,
                 labelPadding:
                     EdgeInsets.only(left: spacing_large, right: spacing_large),
                 tabs: [
@@ -154,17 +154,17 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                       children: <Widget>[
                                         Container(
                                           decoration: BoxDecoration(
-                                            // boxShadow: [
-                                            //   BoxShadow(
-                                            //     color: Colors.grey
-                                            //         .withOpacity(0.15),
-                                            //     spreadRadius: 0,
-                                            //     blurRadius: 5,
-                                            //     offset: Offset(0,
-                                            //         0), // changes position of shadow
-                                            //   ),
-                                            // ],
-                                          ),
+                                              // boxShadow: [
+                                              //   BoxShadow(
+                                              //     color: Colors.grey
+                                              //         .withOpacity(0.15),
+                                              //     spreadRadius: 0,
+                                              //     blurRadius: 5,
+                                              //     offset: Offset(0,
+                                              //         0), // changes position of shadow
+                                              //   ),
+                                              // ],
+                                              ),
                                           child: ClipRRect(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8)),
@@ -172,8 +172,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                               imageUrl: controller
                                                   .ebooks[index].file
                                                   .toString()
-                                                  .replaceFirst(
-                                                      '.pdf', '.jpg'),
+                                                  .replaceFirst('.pdf', '.jpg'),
                                               width: double.infinity,
                                               height: double.infinity,
                                               fit: BoxFit.fitHeight,

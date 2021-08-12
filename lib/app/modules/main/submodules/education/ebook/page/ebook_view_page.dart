@@ -31,7 +31,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
         height: 50,
-        color: Colors.transparent,
+        // color: Colors.transparent,
         child: Observer(builder: (_) {
           if (controller.isLoading) return Container();
 
@@ -46,7 +46,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
                   MaterialPageRoute(
                     builder: (c) => Scaffold(
                       appBar: AppBar(
-                        backgroundColor: color_colorPrimary,
+                        // backgroundColor: color_colorPrimary,
                       ),
                       body: PDF(
                         autoSpacing: true,
@@ -67,7 +67,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
           );
         }),
       ),
-      backgroundColor: color_app_background,
+      // backgroundColor: color_app_background,
       body: Observer(builder: (_) {
         if (controller.isLoading) return Container();
 
@@ -86,7 +86,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
                 ],
                 flexibleSpace: Container(
                   height: MediaQuery.of(context).size.height * 0.5,
-                  color: color_colorPrimary,
+                  // color: color_colorPrimary,
                   child: Stack(
                     children: [
                       Align(

@@ -26,7 +26,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
       appBar: AppBar(
         elevation: 0,
         title: text("Comunidade"),
-        backgroundColor: color_colorPrimary,
+        // backgroundColor: color_colorPrimary,
       ),
       body: Observer(
         builder: (_) {
@@ -65,7 +65,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    color: color_white,
+                    color: Theme.of(context).backgroundColor,
                     child: Padding(
                       padding: EdgeInsets.only(
                         left: 16,
@@ -125,8 +125,9 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                 child: Container(
                                   margin: EdgeInsets.all(8),
                                   decoration: boxDecoration(
-                                      bgColor: color_edit_background,
-                                      color: color_edit_background,
+                                      bgColor:
+                                          Theme.of(context).backgroundColor,
+                                      color: Theme.of(context).primaryColor,
                                       showShadow: false,
                                       radius: 4),
                                   child: TextField(
@@ -185,10 +186,12 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                 decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(3)),
-                                  color: white,
+                                  color: Theme.of(context).backgroundColor,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.15),
+                                      color: Theme.of(context)
+                                          .shadowColor
+                                          .withOpacity(0.15),
                                       spreadRadius: 0,
                                       blurRadius: 5,
                                       offset: Offset(

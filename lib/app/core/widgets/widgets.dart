@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 Widget logoTitle(context) {
@@ -38,9 +40,10 @@ TextFormField appEditTextStyle(var hintText,
       contentPadding: EdgeInsets.fromLTRB(16, 8, 4, 8),
       labelText: enableLabel ? hintText : null,
       hintText: hintText,
-      border: enableBorder ? new OutlineInputBorder(
-      borderSide: new BorderSide(color: Colors.teal)
-    ) : InputBorder.none,
+      border: enableBorder
+          ? new OutlineInputBorder(
+              borderSide: new BorderSide(color: Colors.teal))
+          : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
     onSaved: onSaved,
@@ -143,7 +146,7 @@ Widget text(String text,
       fontFamily: fontFamily ?? fontRegular,
       fontSize: fontSize,
       fontWeight: bold ? FontWeight.bold : null,
-      color: textColor,
+      // color:textSecondaryColor : textColor,
       height: 1.5,
       letterSpacing: latterSpacing,
       decoration:
@@ -626,7 +629,7 @@ class PlatformSvg {
       if (width == null || height == null) {
         return Image.network("/assets/$assetName",
             fit: fit,
-            color: color,
+            color: Theme.of(context).colorScheme.secondary,
             alignment: alignment,
             semanticLabel: semanticsLabel);
       }
@@ -636,7 +639,7 @@ class PlatformSvg {
         height: height,
         child: Image.network("/assets/$assetName",
             fit: fit,
-            color: color,
+            color: Theme.of(context).colorScheme.primary,
             alignment: alignment,
             semanticLabel: semanticsLabel),
       );
@@ -645,7 +648,7 @@ class PlatformSvg {
     return SvgPicture.asset(
       assetName,
       fit: fit,
-      color: color,
+      color: Theme.of(context).colorScheme.primary,
       allowDrawingOutsideViewBox: true,
       alignment: alignment,
       semanticsLabel: semanticsLabel,

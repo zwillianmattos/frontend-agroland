@@ -97,7 +97,7 @@ class CardAnuncio extends StatelessWidget {
             margin: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(8)),
-              color: white,
+              color: Theme.of(context).primaryColor,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.15),
@@ -122,7 +122,7 @@ class CardAnuncio extends StatelessWidget {
                               left: spacing_control, right: spacing_control),
                           decoration: boxDecoration(
                               radius: spacing_control,
-                              bgColor: color_light_gray),
+                              bgColor:  Theme.of(context).colorScheme.secondary,),
                           child: text(
                               classificado
                                       .productCategories!.first.description ??

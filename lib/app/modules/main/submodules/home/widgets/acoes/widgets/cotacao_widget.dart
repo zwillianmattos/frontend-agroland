@@ -89,11 +89,11 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50)),
                                 color: controller.slugSelected == e.slug
-                                    ? color_colorPrimary
-                                    : white,
+                                    ? Theme.of(context).accentColor
+                                    :  Theme.of(context).textTheme.bodyText1!.color,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.15),
+                                    color: Theme.of(context).shadowColor.withOpacity(0.15),
                                     spreadRadius: 0,
                                     blurRadius: 5,
                                     offset: Offset(
@@ -104,12 +104,10 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                               child: IconButton(
                                   tooltip: e.descricao,
                                   padding: EdgeInsets.all(16.0),
-                                  icon: SvgPicture.asset(
-                                    e.icon,
-                                    color: controller.slugSelected == e.slug
-                                        ? white
-                                        : black,
-                                  ),
+                                  icon: SvgPicture.asset(e.icon,
+                                      color: controller.slugSelected == e.slug
+                                          ? Theme.of(context).textTheme.bodyText1!.color
+                                          : Theme.of(context).textTheme.bodyText1!.color),
                                   onPressed: () {
                                     controller.selectCotacao(e.slug);
                                   }),
@@ -131,7 +129,9 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
               );
             }
             if (controller.cotacao == null)
-              return RetryWidget(onRetry: controller.loadCotacao,);
+              return RetryWidget(
+                onRetry: controller.loadCotacao,
+              );
 
             return Column(children: [
               Container(
@@ -140,10 +140,10 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                     EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: white,
+                  color: Theme.of(context).backgroundColor,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.15),
+                      color: Theme.of(context).shadowColor.withOpacity(0.15),
                       spreadRadius: 0,
                       blurRadius: 5,
                       offset: Offset(0, 0), // changes position of shadow
@@ -168,10 +168,13 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                     Container(
                                       child: text(e.description.toString(),
                                           fontFamily: fontBold,
-                                          textColor: color_white,
+                                          textColor: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
                                           fontSize: 16.0,
                                           maxLine: 5),
-                                      color: color_colorPrimary,
+                                      color: Theme.of(context).primaryColor,
                                       width: width,
                                       padding: EdgeInsets.all(8.0),
                                     ),

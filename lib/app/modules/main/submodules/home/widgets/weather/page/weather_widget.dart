@@ -39,10 +39,10 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
-                color: color_white,
+                color: Theme.of(context).backgroundColor,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.15),
+                    color: Theme.of(context).shadowColor.withOpacity(0.15),
                     spreadRadius: 1,
                     blurRadius: 5,
                     offset: Offset(0, 0), // changes position of shadow
@@ -55,13 +55,13 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                     top: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12)),
-                        color: color_white,
+                        color: Theme.of(context).backgroundColor,
                       ),
                     ),
                     bottom: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12)),
-                        color: color_colorPrimary.withOpacity(0.1),
+                        color: Theme.of(context).primaryColor.withOpacity(0.1),
                       ),
                     ),
                     splitFunction: (Size size, double x) {
