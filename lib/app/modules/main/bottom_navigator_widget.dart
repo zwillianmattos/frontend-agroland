@@ -50,148 +50,99 @@ class BottomNavigatorPageState
                             'images/logo.png',
                             scale: 2.5,
                           ),
-                          // UserAccountsDrawerHeader(
-                          //   decoration: BoxDecoration(
-                          //     color: color_colorPrimary,
-                          //   ),
-                          //   accountName:
-                          //       text(accountModel?.user?.name ?? "Bem Vindo"),
-                          //   accountEmail: text(
-                          //     accountModel?.user?.email ??
-                          //         "Entra na sua conta para ver suas compras, favoritos etc.",
-                          //     maxLine: 2,
-                          //     fontSize: 12.0,
-                          //   ),
-                          //   currentAccountPicture: accountModel?.user != null
-                          //       ? CircleAvatar(
-                          //           backgroundColor: Colors.white,
-                          //           child: Text(
-                          //             accountModel?.user?.name?[0] ?? "",
-                          //             style: TextStyle(fontSize: 40.0),
-                          //           ),
-                          //         )
-                          //       : null,
-                          // ),
-                          // if (accountModel?.token == null)
-                          //   Padding(
-                          //     padding: const EdgeInsets.all(16.0),
-                          //     child: Column(
-                          //       children: [
-                          //         appButton(
-                          //           textContent: "Login",
-                          //           onPressed: () {
-                          //             Modular.to.pushNamed('/account/auth',
-                          //                 forRoot: (IO.Platform.isAndroid ||
-                          //                         IO.Platform.isIOS)
-                          //                     ? true
-                          //                     : false,
-                          //                 arguments: {
-                          //                   'isSignIn': true,
-                          //                   'isSignUp': false,
-                          //                 });
-                          //           },
-                          //         ),
-                          //         Divider(),
-                          //         appButton3(
-                          //           textContent: "Crie sua conta",
-                          //           onPressed: () {
-                          //             Modular.to.pushNamed('/account/auth',
-                          //                 forRoot: (IO.Platform.isAndroid ||
-                          //                         IO.Platform.isIOS)
-                          //                     ? true
-                          //                     : false,
-                          //                 arguments: {
-                          //                   'isSignIn': false,
-                          //                   'isSignUp': true,
-                          //                 });
-                          //           },
-                          //         ),
-                          //       ],
+                          DrawerListTile(
+                            icon: 'images/home_bulk.svg',
+                            store: controller,
+                            index: 0,
+                            title: 'Home',
+                          ),
+                          DrawerListTile(
+                            icon: 'images/buy_bulk.svg',
+                            store: controller,
+                            index: 1,
+                            title: 'Marketplace',
+                          ),
+                          DrawerListTile(
+                            icon: 'images/message_bulk.svg',
+                            store: controller,
+                            index: 2,
+                            title: 'Comunidade',
+                          ),
+                          DrawerListTile(
+                            icon: 'images/folder_bulk_black.svg',
+                            store: controller,
+                            index: 3,
+                            title: 'Educação',
+                          ),
+                          DrawerListTile(
+                            icon: 'images/user_bulk_black.svg',
+                            store: controller,
+                            index: 4,
+                            title: 'Minha Conta',
+                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: ListTile(
+                          //     leading: PlatformSvg.asset(
+                          //       "images/buy_bulk.svg",
+                          //       context: context,
                           //     ),
+                          //     title:
+                          //         text('Marketplace', fontFamily: fontRegular),
+                          //     onTap: () {
+                          //       controller.changePage(1);
+                          //     },
+                          //     selected:
+                          //         controller.currentPage == 1 ? true : false,
                           //   ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListTile(
-                              leading: PlatformSvg.asset(
-                                "images/home_bulk.svg",
-                                context: context,
-                              ),
-                              title: text('Home', fontFamily: fontRegular),
-                              onTap: () {
-                                controller.changePage(0);
-                              },
-                              selected: controller.currentPage == 0
-                                    ? true
-                                    : false,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListTile(
-                              leading: PlatformSvg.asset(
-                                "images/buy_bulk.svg",
-                                context: context,
-                              ),
-                              title: text('Marketplace',
-                                  fontFamily: fontRegular),
-                              onTap: () {
-                                controller.changePage(1);
-                              },
-                              selected: controller.currentPage == 1
-                                  ? true
-                                  : false,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListTile(
-                              leading: PlatformSvg.asset(
-                                "images/message_bulk.svg",
-                                context: context,
-                              ),
-                              title:
-                                  text('Comunidade', fontFamily: fontRegular),
-                              onTap: () {
-                                controller.changePage(2);
-                              },
-                              selected: controller.currentPage == 2
-                                    ? true
-                                    : false,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListTile(
-                              leading: PlatformSvg.asset(
-                                "images/folder_bulk_black.svg",
-                                context: context,
-                              ),
-                              title: text('Educação', fontFamily: fontRegular),
-                              onTap: () {
-                                controller.changePage(3);
-                              },
-                              selected: controller.currentPage == 3
-                                    ? true
-                                    : false,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListTile(
-                              leading: PlatformSvg.asset(
-                                "images/user_bulk_black.svg",
-                                context: context,
-                              ),
-                              title:
-                                  text('Minha Conta', fontFamily: fontRegular),
-                              onTap: () {
-                                controller.changePage(4);
-                              },
-                              selected: controller.currentPage == 4
-                                    ? true
-                                    : false,
-                            ),
-                          ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: ListTile(
+                          //     leading: PlatformSvg.asset(
+                          //       "images/message_bulk.svg",
+                          //       context: context,
+                          //     ),
+                          //     title:
+                          //         text('Comunidade', fontFamily: fontRegular),
+                          //     onTap: () {
+                          //       controller.changePage(2);
+                          //     },
+                          //     selected:
+                          //         controller.currentPage == 2 ? true : false,
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: ListTile(
+                          //     leading: PlatformSvg.asset(
+                          //       "images/folder_bulk_black.svg",
+                          //       context: context,
+                          //     ),
+                          //     title: text('Educação', fontFamily: fontRegular),
+                          //     onTap: () {
+                          //       controller.changePage(3);
+                          //     },
+                          //     selected:
+                          //         controller.currentPage == 3 ? true : false,
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(16.0),
+                          //   child: ListTile(
+                          //     leading: PlatformSvg.asset(
+                          //       "images/user_bulk_black.svg",
+                          //       context: context,
+                          //     ),
+                          //     title:
+                          //         text('Minha Conta', fontFamily: fontRegular),
+                          //     onTap: () {
+                          //       controller.changePage(4);
+                          //     },
+                          //     selected:
+                          //         controller.currentPage == 4 ? true : false,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -262,8 +213,10 @@ class BottomNavigatorPageState
                           ),
                         ],
                         currentIndex: controller.currentPage,
-                        selectedItemColor: Theme.of(context).primaryTextTheme.button?.color,
-                        unselectedItemColor: Theme.of(context).primaryTextTheme.button?.color,
+                        selectedItemColor:
+                            Theme.of(context).colorScheme.secondary,
+                        unselectedItemColor:
+                            Theme.of(context).secondaryHeaderColor,
                         onTap: controller.changePage,
                       ),
                     )

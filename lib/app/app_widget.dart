@@ -11,28 +11,13 @@ class AppWidget extends StatelessWidget {
     return Observer(builder: (_) {
       UserPreferencesStore userStore = Modular.get<UserPreferencesStore>();
       print("darkMode: ${userStore.darkTheme}");
+
       final darkTheme = ThemeData(
         primarySwatch: Colors.grey,
-        primaryColor: color_colorPrimaryDark,
+        primaryColor: color_colorPrimary,
         brightness: Brightness.dark,
         backgroundColor: const Color(0xFF212121),
         accentColor: Colors.white,
-        colorScheme: ColorScheme(
-          primary: color_colorPrimaryDark,
-          primaryVariant: color_color_facebook,
-          secondary: color_colorPrimary,
-          error: color_colorPrimary,
-          onSurface: color_colorPrimary,
-          background: color_colorPrimary,
-          surface: color_colorPrimaryDark, 
-          brightness: Brightness.dark,
-          onBackground: Colors.red,
-          onError: Colors.red,
-          onPrimary:Colors.red,
-          onSecondary: Colors.red,
-          secondaryVariant: Colors.red,
-          
-        ),
         accentIconTheme: IconThemeData(color: Colors.black),
         dividerColor: Colors.black12,
         fontFamily: 'Product Sans',
@@ -48,7 +33,7 @@ class AppWidget extends StatelessWidget {
         primaryColor: color_colorPrimary,
         brightness: Brightness.light,
         backgroundColor: color_app_background,
-        accentColor: Colors.black,
+        accentColor: color_colorPrimary,
         accentIconTheme: IconThemeData(color: Colors.white),
         iconTheme: IconThemeData(color: Colors.white),
         dividerColor: Colors.white54,
@@ -58,7 +43,7 @@ class AppWidget extends StatelessWidget {
             headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Product Sans'),
           ),
-          
+
       );
 
       return MaterialApp(
@@ -66,8 +51,7 @@ class AppWidget extends StatelessWidget {
         initialRoute: '/',
         debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
-        theme: userStore.darkTheme ? darkTheme : lightTheme, 
-        darkTheme: userStore.darkTheme ? ThemeData.dark() : null,
+        theme: userStore.darkTheme ? darkTheme : lightTheme,
       ).modular();
     });
   }

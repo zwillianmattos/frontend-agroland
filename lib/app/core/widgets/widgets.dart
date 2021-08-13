@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,6 +10,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
 import 'package:relative_scale/relative_scale.dart';
 
 Widget logoTitle(context) {
@@ -121,38 +123,56 @@ class appButtonState extends State<appButton> {
   }
 }
 
-Widget text(String text,
-    {var fontSize = textSizeLargeMedium,
-    Color? textColor,
-    var fontFamily,
-    var isCentered = false,
-    var maxLine = 1,
-    var latterSpacing = 0.5,
-    bool textAllCaps = false,
-    var isLongText = false,
-    bool lineThrough = false,
-    bool bold = false,
-    bool justifyText = false}) {
-  return Text(
-    textAllCaps ? text.toUpperCase() : text,
-    textAlign: justifyText
-        ? TextAlign.justify
-        : isCentered
-            ? TextAlign.center
-            : TextAlign.start,
-    maxLines: isLongText ? null : maxLine,
-    overflow: TextOverflow.ellipsis,
-    style: TextStyle(
-      fontFamily: fontFamily ?? fontRegular,
-      fontSize: fontSize,
-      fontWeight: bold ? FontWeight.bold : null,
-      // color:textSecondaryColor : textColor,
-      height: 1.5,
-      letterSpacing: latterSpacing,
-      decoration:
-          lineThrough ? TextDecoration.lineThrough : TextDecoration.none,
-    ),
-  );
+class text extends StatelessWidget {
+  final String textString;
+  var fontSize = textSizeLargeMedium;
+  Color? textColor;
+  var fontFamily;
+  var isCentered = false;
+  var maxLine = 1;
+  var latterSpacing = 0.5;
+  bool textAllCaps = false;
+  var isLongText = false;
+  bool lineThrough = false;
+  bool bold = false;
+  bool justifyText = false;
+
+  text(this.textString,
+      {this.fontSize = textSizeLargeMedium,
+      this.textColor,
+      this.fontFamily,
+      this.isCentered = false,
+      this.maxLine = 1,
+      this.latterSpacing = 0.5,
+      this.textAllCaps = false,
+      this.isLongText = false,
+      this.lineThrough = false,
+      this.bold = false,
+      this.justifyText = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textAllCaps ? textString.toUpperCase() : textString,
+      textAlign: justifyText
+          ? TextAlign.justify
+          : isCentered
+              ? TextAlign.center
+              : TextAlign.start,
+      maxLines: isLongText ? null : maxLine,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        fontFamily: fontFamily ?? fontRegular,
+        fontSize: fontSize,
+        fontWeight: bold ? FontWeight.bold : null,
+        color: Theme.of(context).textTheme.button!.color,
+        height: 1.5,
+        letterSpacing: latterSpacing,
+        decoration:
+            lineThrough ? TextDecoration.lineThrough : TextDecoration.none,
+      ),
+    );
+  }
 }
 
 class AppTopBar extends StatefulWidget {
@@ -589,7 +609,7 @@ class CardButton extends StatelessWidget {
           width: sx(width) > 500 ? sx(100) : width / 2.35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8)),
-            color: color_colorPrimary,
+            color: Theme.of(context).primaryColor,
             boxShadow: [
               BoxShadow(
                 color: Color(0xff000000).withOpacity(0.15),
@@ -629,7 +649,7 @@ class PlatformSvg {
       if (width == null || height == null) {
         return Image.network("/assets/$assetName",
             fit: fit,
-            color: Theme.of(context).colorScheme.secondary,
+            color: color ?? Theme.of(context).textTheme.button!.color,
             alignment: alignment,
             semanticLabel: semanticsLabel);
       }
@@ -639,7 +659,7 @@ class PlatformSvg {
         height: height,
         child: Image.network("/assets/$assetName",
             fit: fit,
-            color: Theme.of(context).colorScheme.primary,
+            color: color ?? Theme.of(context).textTheme.button!.color,
             alignment: alignment,
             semanticLabel: semanticsLabel),
       );
@@ -648,7 +668,7 @@ class PlatformSvg {
     return SvgPicture.asset(
       assetName,
       fit: fit,
-      color: Theme.of(context).colorScheme.primary,
+      color: color ?? Theme.of(context).textTheme.button!.color,
       allowDrawingOutsideViewBox: true,
       alignment: alignment,
       semanticsLabel: semanticsLabel,
@@ -707,5 +727,41 @@ class _RetryWidgetState extends State<RetryWidget> {
         ),
       ),
     );
+  }
+}
+
+class DrawerListTile extends StatelessWidget {
+  final String icon;
+  final BottomNavigatorStore store;
+  final String title;
+  final int index;
+
+  const DrawerListTile(
+      {Key? key,
+      required this.icon,
+      required this.store,
+      required this.title,
+      required this.index})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(builder: (_) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListTile(
+          leading: PlatformSvg.asset(
+            icon,
+            context: context,
+          ),
+          title: text(title, fontFamily: fontRegular),
+          onTap: () {
+            store.changePage(index);
+          },
+          selected: store.currentPage == index ? true : false,
+          selectedTileColor: Theme.of(context).accentColor.withOpacity(0.1),
+        ),
+      );
+    });
   }
 }

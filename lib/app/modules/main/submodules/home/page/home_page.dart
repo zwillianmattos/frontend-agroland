@@ -34,7 +34,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
               // ),
               CardButton(
                 icon: PlatformSvg.asset("images/document_bulk.svg",
-                    context: context),
+                    context: context,),
                 description: "Ebooks",
                 onPressed: () {
                   Modular.to.pushNamed('/education/ebook');
@@ -42,7 +42,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
               ),
               CardButton(
                   icon: PlatformSvg.asset("images/folder_bulk.svg",
-                      context: context),
+                      context: context,),
                   description: "Culturas",
                   onPressed: () {
                     Modular.to.pushNamed('/cultures',

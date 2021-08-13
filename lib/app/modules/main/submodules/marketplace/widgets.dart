@@ -97,7 +97,7 @@ class CardAnuncio extends StatelessWidget {
             margin: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(8)),
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).backgroundColor,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.15),
@@ -122,14 +122,15 @@ class CardAnuncio extends StatelessWidget {
                               left: spacing_control, right: spacing_control),
                           decoration: boxDecoration(
                               radius: spacing_control,
-                              bgColor:  Theme.of(context).colorScheme.secondary,),
+                              bgColor:  Theme.of(context).primaryColor,),
                           child: text(
                               classificado
                                       .productCategories!.first.description ??
                                   " - ",
                               fontSize: textSizeSmall,
                               isCentered: true,
-                              isLongText: true),
+                              isLongText: true,
+                              textColor: Theme.of(context).textTheme.bodyText1!.color),
                         ),
                       ),
                     Expanded(child: Container()),

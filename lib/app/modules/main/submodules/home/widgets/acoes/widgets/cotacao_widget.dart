@@ -89,11 +89,15 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50)),
                                 color: controller.slugSelected == e.slug
-                                    ? Theme.of(context).accentColor
-                                    :  Theme.of(context).textTheme.bodyText1!.color,
+                                    ? Theme.of(context).backgroundColor.isDark()
+                                        ? Theme.of(context).accentColor
+                                        : Theme.of(context).primaryColor
+                                    : Theme.of(context).primaryColorLight,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Theme.of(context).shadowColor.withOpacity(0.15),
+                                    color: Theme.of(context)
+                                        .shadowColor
+                                        .withOpacity(0.15),
                                     spreadRadius: 0,
                                     blurRadius: 5,
                                     offset: Offset(
@@ -106,8 +110,14 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                   padding: EdgeInsets.all(16.0),
                                   icon: SvgPicture.asset(e.icon,
                                       color: controller.slugSelected == e.slug
-                                          ? Theme.of(context).textTheme.bodyText1!.color
-                                          : Theme.of(context).textTheme.bodyText1!.color),
+                                          ? Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color
+                                          : Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color),
                                   onPressed: () {
                                     controller.selectCotacao(e.slug);
                                   }),

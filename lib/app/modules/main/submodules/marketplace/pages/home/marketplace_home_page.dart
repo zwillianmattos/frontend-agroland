@@ -213,11 +213,12 @@ class _MarketplaceHomePageState
                                     },
                                     textContent: element.description.toString(),
                                     radius: 0.0,
+                                    color: Theme.of(context).textTheme.bodyText1!.color,
                                     bgColors: controller.indexCategory ==
                                             controller.categories!
                                                 .indexOf(element)
-                                        ? Theme.of(context).colorScheme.secondary
-                                        : Theme.of(context).primaryColor,
+                                        ? Theme.of(context).primaryColor
+                                        : Theme.of(context).backgroundColor,
                                   ))
                               .toList()),
                     ),

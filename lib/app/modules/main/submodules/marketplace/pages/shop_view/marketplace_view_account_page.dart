@@ -143,9 +143,10 @@ class _MarketplaceViewAccountPageState extends ModularState<
                         fontFamily: fontMedium,
                         fontSize: textSizeSMedium,
                       ),
-                      indicatorColor: color_colorPrimary,
-                      unselectedLabelColor: color_textColorPrimary,
-                      labelColor: color_colorPrimary,
+                      indicatorColor: Theme.of(context).colorScheme.secondary,
+                      unselectedLabelColor:
+                          Theme.of(context).secondaryHeaderColor,
+                      labelColor: Theme.of(context).colorScheme.secondary,
                       labelPadding: EdgeInsets.only(
                           left: spacing_large, right: spacing_large),
                       tabs: [
