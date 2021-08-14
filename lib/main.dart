@@ -7,11 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'app/app_module.dart';
 import 'app/app_widget.dart';
 
-import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-
 void main() {
-  // configureApp();
-
   runApp(ModularApp(module: AppModule(), child: AppWidget()));
   configLoading();
 }
