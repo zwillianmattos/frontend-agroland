@@ -14,6 +14,8 @@ class UserPreferencesStore = _UserPreferencesStoreBase
     with _$UserPreferencesStore;
 
 abstract class _UserPreferencesStoreBase with Store {
+  
+  @observable
   AccountModel? accountModel;
 
   final AccountRepository accountRepository;
@@ -40,8 +42,10 @@ abstract class _UserPreferencesStoreBase with Store {
     }
   }
 
-  set setUser(AccountModel user) => this.accountModel = user;
+  @action
+  setUser(AccountModel user) => this.accountModel = user;
 
+  @computed
   User? get getUser => this.accountModel?.user;
 
   get authHeader async {

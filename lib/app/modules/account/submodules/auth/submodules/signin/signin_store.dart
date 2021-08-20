@@ -45,7 +45,7 @@ abstract class SignInStoreBase with Store {
       // save account in local storage
       String data = jsonEncode(account.toJson());
       if (await LocalStorage.setValue("user", data) && data != null) {
-        Modular.get<UserPreferencesStore>().setUser = account;
+        Modular.get<UserPreferencesStore>().setUser(account);
         Modular.to.pushReplacementNamed('/');
       }
       // redirect to home

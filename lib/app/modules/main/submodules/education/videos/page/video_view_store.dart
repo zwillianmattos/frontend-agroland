@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -14,17 +15,20 @@ abstract class _VideoViewStoreBase with Store {
   @observable
   YoutubePlayerController? videoPlayerController;
 
+  @observable
+  late Movie movie;
+
   _VideoViewStoreBase() {
+    movie = Modular.args?.data as Movie;
+
     loadDataVideo();
   }
 
   loadDataVideo() {
     isLoading = true;
 
-    String id = Modular.args?.data;
-
     videoPlayerController = YoutubePlayerController(
-      initialVideoId: id,
+      initialVideoId: movie.id!,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,

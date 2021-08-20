@@ -9,8 +9,11 @@ import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/education/education_store.dart';
 import 'package:universal_io/io.dart' as IO;
+import 'package:nb_utils/nb_utils.dart';
 
 import 'package:url_launcher/url_launcher.dart';
+
+import 'videos/models/video_model.dart';
 
 class EducationPage extends StatefulWidget {
   const EducationPage({Key? key}) : super(key: key);
@@ -25,6 +28,112 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
+    var popularMovieList = <Movie>[
+      Movie(
+          id: "QCRTaWIxwHo",
+          title: "Aula 5 - Irrigação por Aspersão (Seleção dos Aspersores)",
+          slideImage: "https://i.ytimg.com/vi/QCRTaWIxwHo/hqdefault.jpg",
+          url: "https://www.youtube.com/watch?v=QCRTaWIxwHo"),
+      Movie(
+          id: "8FxzaTXu0Do",
+          title: "Aula 6 - Irrigação por Aspersão (Dimensionamento)",
+          slideImage: "https://i.ytimg.com/vi/8FxzaTXu0Do/hqdefault.jpg",
+          url: "https://www.youtube.com/watch?v=8FxzaTXu0Do"),
+      Movie(
+        id: "hG9vVN6pLZQ",
+        title: "Aula 7 - Irrigação por Aspersão (Dimensionamento)",
+        slideImage: "https://i.ytimg.com/vi/hG9vVN6pLZQ/hqdefault.jpg",
+        url: "https://www.youtube.com/watch?v=hG9vVN6pLZQ",
+      ),
+    ];
+
+    var playlists = <PlaylistMovie>[
+      PlaylistMovie(
+          id: "jhu8CVdzmVM",
+          title: "Irrigação e Drenagem",
+          author: "Professora Dra Alessandra Conceição de Oliveira",
+          subtitle:
+              "O curso visa capacitar o aluno a realizar o manejo da irrigação de forma racional, oferecendo subsídios para que se possa responder às três perguntas básicas do manejo, QUANDO, QUANTO e COMO IRRIGAR. Visando o nivelamento dos alunos, o curso abordará desde os aspectos mais básicos até as técnicas mais elaboradas, passando por assuntos práticos e teóricos. A carga horária será de 16 horas.",
+          listMovies: <Movie>[
+            Movie(
+                id: "jhu8CVdzmVM",
+                title: "Aula 1 - Manejo de irrigação",
+                slideImage: "https://i.ytimg.com/vi/jhu8CVdzmVM/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=jhu8CVdzmVM"),
+            Movie(
+                id: "_xNTvlabJhg",
+                title: "Aula 2 - Manejo de irrigação",
+                slideImage: "https://i.ytimg.com/vi/_xNTvlabJhg/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=_xNTvlabJhg"),
+            Movie(
+                id: "UD5o77JUHkg",
+                title: "Aula 3 - Inteira - Manejo de Irrigação",
+                slideImage: "https://i.ytimg.com/vi/UD5o77JUHkg/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=UD5o77JUHkg"),
+            Movie(
+                id: "8uskm-0p06U",
+                title:
+                    "Aula 4 - Irrigação por Aspersão (Seleção dos Aspersores)",
+                slideImage: "https://i.ytimg.com/vi/8uskm-0p06U/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=8uskm-0p06U"),
+            Movie(
+                id: "QCRTaWIxwHo",
+                title:
+                    "Aula 5 - Irrigação por Aspersão (Seleção dos Aspersores)",
+                slideImage: "https://i.ytimg.com/vi/QCRTaWIxwHo/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=QCRTaWIxwHo"),
+            Movie(
+                id: "8FxzaTXu0Do",
+                title: "Aula 6 - Irrigação por Aspersão (Dimensionamento)",
+                slideImage: "https://i.ytimg.com/vi/8FxzaTXu0Do/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=8FxzaTXu0Do"),
+            Movie(
+                id: "hG9vVN6pLZQ",
+                title: "Aula 7 - Irrigação por Aspersão (Dimensionamento)",
+                slideImage: "https://i.ytimg.com/vi/hG9vVN6pLZQ/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=hG9vVN6pLZQ"),
+          ],
+          slideImage: "https://i.ytimg.com/vi/jhu8CVdzmVM/hqdefault.jpg"),
+      PlaylistMovie(
+          id: "VG2ySy8aD8I",
+          title: "Irrigação e Drenagem",
+          author: "Professora Dra Alessandra Conceição de Oliveira",
+          subtitle:
+              "A química analítica é importante em quase todos os aspectos das nossas vidas porque esta disciplina se preocupa com a caracterização da matéria, isto é, praticamente tudo o que nos rodeia. A química analítica pode identificar a identidade e a quantidade de uma infinidade de compostos. Conhecer alguns dos termos mais utilizados dentro desta disciplina também é importante para uma comunicação científica adequada.",
+          listMovies: <Movie>[
+            Movie(
+                id: "VG2ySy8aD8I",
+                title: "Aula 1 - QUÍMICA ANALÍTICA: conceitos importantes",
+                slideImage: "https://i.ytimg.com/vi/VG2ySy8aD8I/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=VG2ySy8aD8I"),
+            Movie(
+                id: "IR3cMz-RdZA",
+                title:
+                    "Aula 2 - A IMPORTÂNCIA da QUÍMICA ANALÍTICA para o agrônomo",
+                slideImage: "https://i.ytimg.com/vi/IR3cMz-RdZA/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=IR3cMz-RdZA"),
+            Movie(
+                id: "7FtvFnxNJsk",
+                title: "Aula 3 - DIFERENÇA entre um ÁTOMO e um MOL de ÁTOMOS",
+                slideImage: "https://i.ytimg.com/vi/7FtvFnxNJsk/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=7FtvFnxNJsk"),
+          ],
+          slideImage: "https://i.ytimg.com/vi/VG2ySy8aD8I/hqdefault.jpg"),
+    ];
+
+    var mcontinueList = <Movie>[
+      Movie(
+          title: "Manejo de irrigação",
+          slideImage: "https://i.ytimg.com/vi/jhu8CVdzmVM/hqdefault.jpg",
+          isHD: true,
+          percent: 0.5),
+    ];
+
+    var continueWatchingList = mcontinueList.isNotEmpty
+        ? ItemProgressHorizontalList(
+            mcontinueList,
+          )
+        : Container();
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -199,42 +308,9 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                   );
                 }),
                 appLabelViewAll("Videos"),
-                Container(
-                  height: ((width / 2) - 36) * (2.5 / 4),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.videosList.length,
-                    padding: EdgeInsets.only(
-                        left: spacing_standard, right: spacing_standard_new),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(left: spacing_standard),
-                        width: (width / 2) - 36,
-                        child: InkWell(
-                          child: Column(
-                            children: [
-                              AspectRatio(
-                                aspectRatio: 4 / 2.5,
-                                child: Image.network(
-                                    "https://i.ytimg.com/vi/${controller.videosList[index]}/hqdefault.jpg",
-                                    width: double.infinity,
-                                    height: double.infinity),
-                              ),
-                            ],
-                          ),
-                          onTap: () {
-                            Modular.to.pushNamed('videos/',
-                                arguments: controller.videosList[index],
-                                forRoot:
-                                    (IO.Platform.isAndroid || IO.Platform.isIOS)
-                                        ? true
-                                        : false);
-                          },
-                          radius: spacing_control,
-                        ),
-                      );
-                    },
-                  ),
+                ItemHorizontalList(
+                  popularMovieList,
+                  isHorizontal: false,
                 ),
               ],
             ),
@@ -252,18 +328,17 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                                         ? true
                                         : false);
                           },
-                          minVerticalPadding: 20,
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 5.0),
+                              horizontal: 20.0, vertical: 10.0),
                           leading: AspectRatio(
                             aspectRatio: 1,
                             child: Container(
-                              width: 50,
-                              height: 160,
+                              width: (width * 0.28),
+                              height: ((width / 2) - 36) * (1.5 / 2),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   image: DecorationImage(
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fitHeight,
                                     image: NetworkImage(
                                       element.file
                                           .toString()
@@ -284,42 +359,26 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
               return ListView(
                 physics: BouncingScrollPhysics(),
                 controller: controller.ebooksController,
-                children: controller.ebooksList
-                    .map((element) => ListTile(
-                          onTap: () {
-                            Modular.to.pushNamed('ebook/view/${element.id}',
-                                arguments: element,
-                                forRoot:
-                                    (IO.Platform.isAndroid || IO.Platform.isIOS)
-                                        ? true
-                                        : false);
-                          },
-                          minVerticalPadding: 20,
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 5.0),
-                          leading: AspectRatio(
-                            aspectRatio: 1,
-                            child: Container(
-                              width: 50,
-                              height: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                      element.file
-                                          .toString()
-                                          .replaceFirst('.pdf', '.jpg'),
-                                    ),
-                                  )),
-                            ),
-                          ),
-                          title: text(element.name.toString(),
-                              fontSize: 14.0, maxLine: 10),
-                          subtitle: text(element.description.toString(),
-                              fontSize: 12.0),
-                        ))
-                    .toList(),
+                children: <Widget>[
+                  headingText(context, "Novidades da semana")
+                      .paddingAll(spacing_standard_new),
+                  ItemHorizontalList(
+                    popularMovieList,
+                    isHorizontal: true,
+                  ),
+                  headingText(context, "Continue assistindo").paddingOnly(
+                      left: spacing_standard_new,
+                      right: spacing_standard_new,
+                      top: 12,
+                      bottom: spacing_standard_new),
+                  continueWatchingList,
+                  headingText(context, "Cursos")
+                      .paddingAll(spacing_standard_new),
+                  ItemHorizontalList(
+                    playlists,
+                    isHorizontal: false,
+                  ),
+                ],
               );
             }),
           ],

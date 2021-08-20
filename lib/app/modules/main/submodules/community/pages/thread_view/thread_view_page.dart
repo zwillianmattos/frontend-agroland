@@ -7,6 +7,7 @@ import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/community/models/replies_model.dart';
 
@@ -175,7 +176,7 @@ class _ThreadViewPageState
                                             left: 0.0,
                                           ),
                                           child: Image.network(
-                                            "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
+                                            Modular.get<UserPreferencesStore>().getUser?.imgLogo ?? "",
                                             width: 30,
                                           ),
                                         ),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
@@ -8,6 +9,9 @@ class BottomNavigatorStore = _BottomNavigatorStoreBase
     with _$BottomNavigatorStore;
 
 abstract class _BottomNavigatorStoreBase with Store {
+  @observable
+  bool isMobile = false;
+
   @observable
   int currentIndex = 0;
 
@@ -44,7 +48,6 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @computed
   get currentPage => currentIndex;
-  
 
   @action
   changePage(index, {navigate = true}) async {
@@ -73,6 +76,15 @@ abstract class _BottomNavigatorStoreBase with Store {
       }
       currentIndex = 0;
       Modular.to.navigate('/home');
+    }
+  }
+
+  @action
+  checkScreenSize(context) {
+    if (MediaQuery.of(context).size.width <= 600) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
     }
   }
 }

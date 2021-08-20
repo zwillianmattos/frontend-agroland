@@ -4,6 +4,7 @@ import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
@@ -40,7 +41,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
           return appButton(
             textContent: "Abrir ebook",
             onPressed: () async {
-              if (IO.Platform.isAndroid || IO.Platform.isIOS) {
+              if ((IO.Platform.isAndroid || IO.Platform.isIOS) && !kIsWeb) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(

@@ -41,11 +41,27 @@ mixin _$VideoViewStore on _VideoViewStoreBase, Store {
     });
   }
 
+  final _$movieAtom = Atom(name: '_VideoViewStoreBase.movie');
+
+  @override
+  Movie get movie {
+    _$movieAtom.reportRead();
+    return super.movie;
+  }
+
+  @override
+  set movie(Movie value) {
+    _$movieAtom.reportWrite(value, super.movie, () {
+      super.movie = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
-videoPlayerController: ${videoPlayerController}
+videoPlayerController: ${videoPlayerController},
+movie: ${movie}
     ''';
   }
 }
