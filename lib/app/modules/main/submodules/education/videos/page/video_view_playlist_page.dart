@@ -27,39 +27,7 @@ class _VideoViewPlaylistPageState
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var buttons = Row(
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Expanded(
-            child: IconButton(
-                icon: Icon(
-                  Icons.thumb_up,
-                  size: 24,
-                  color: color_textColorPrimary,
-                ),
-                onPressed: () {})),
-        Expanded(
-            child: IconButton(
-          icon: Icon(
-            Icons.playlist_add,
-            size: 24,
-            color: color_textColorPrimary,
-          ),
-          onPressed: () {},
-        )),
-        Expanded(
-            child: IconButton(
-          icon: Icon(Icons.cloud_download,
-              size: 24, color: color_textColorPrimary),
-          onPressed: () {},
-        )),
-        Expanded(
-            child: IconButton(
-          icon: Icon(Icons.share, size: 24, color: color_textColorPrimary),
-          onPressed: () {},
-        )),
-      ],
-    ).paddingOnly();
+
     var episodesList = Container(
       height: width <= 1000
           ? ((width / 2) - 36) * (2.5 / 4) + 40
@@ -131,34 +99,6 @@ class _VideoViewPlaylistPageState
       }),
     );
 
-    var moviePoster = LayoutBuilder(builder: (context, constraints) {
-      if ((kIsWeb || IO.Platform.isWindows) && constraints.maxWidth > 800) {
-        return Observer(builder: (_) {
-          return Center(
-            child: SizedBox(
-                height: width <= 1000
-                    ? ((width / 2) - 36) * (2.5 / 4) + 40
-                    : (width * 0.60) * 2.8 / 6,
-                child: YoutubePlayerControllerProvider(
-                  // Provides controller to all the widget below it.
-                  controller: controller.videoController!,
-                  child: YoutubePlayerIFrame(),
-                )),
-          );
-        });
-      }
-  
-      return Observer(builder: (_) {
-        return YoutubePlayerControllerProvider(
-          // Provides controller to all the widget below it.
-          controller: controller.videoController!,
-          child: YoutubePlayerIFrame(
-            aspectRatio: 16 / 9,
-          ),
-        );
-      });
-    }).paddingAll(spacing_standard_new);
-
     return WillPopScope(
       onWillPop: () async {
         // return await controller.saveProgress();
@@ -186,7 +126,8 @@ class _VideoViewPlaylistPageState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Observer(builder: (_) {
-                          return Center(child: moviePoster);
+                          return Center(
+                              child: moviePost(controller.videoController));
                         }),
                         Row(
                           children: <Widget>[
@@ -223,10 +164,10 @@ class _VideoViewPlaylistPageState
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               itemSubTitle(context,
-                                  "${controller.playlistMovie?.subtitle}",
+                                  "${controller.currentMovie?.subtitle}",
                                   fontsize: textSizeSMedium, isLongText: false),
-                              itemSubTitle(context,
-                                  "${controller.playlistMovie?.author}",
+                              itemSubTitle(
+                                  context, "${controller.currentMovie?.author}",
                                   colorThird: true,
                                   fontsize: textSizeSMedium,
                                   isLongText: false),
@@ -236,7 +177,7 @@ class _VideoViewPlaylistPageState
                               right: spacing_standard_new,
                               bottom: spacing_standard_new);
                         }),
-                        buttons,
+                        buttonsVideo,
                         Divider(
                           thickness: 1,
                           height: 1,

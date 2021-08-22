@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -25,36 +27,78 @@ class _VideoViewPageState extends ModularState<VideoViewPage, VideoViewStore> {
       ),
       body: Observer(
         builder: (_) {
-          if (controller.isLoading)
+          if (!controller.isloaded)
             return Center(
               child: CircularProgressIndicator(),
             );
 
           return Column(
-            children: [
-              LayoutBuilder(builder: (context, constraints) {
-                print(constraints.maxWidth);
-                if ((kIsWeb || IO.Platform.isWindows) &&
-                    constraints.maxWidth > 800) {
-                  return Center(
-                    child: SizedBox(
-                        height: 800,
-                        child: YoutubePlayerControllerProvider(
-                          // Provides controller to all the widget below it.
-                          controller: controller.videoPlayerController!,
-                          child: YoutubePlayerIFrame(),
-                        )),
-                  );
-                }
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Observer(builder: (_) {
+                        return Center(
+                            child: moviePost(controller.videoPlayerController));
+                      }),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                              child: headingText(
+                            context,
+                            "${controller.movie?.title}",
+                          )),
+                          IconButton(
+                            icon: Icon(!controller.isExpanded
+                                ? Icons.arrow_drop_down
+                                : Icons.arrow_drop_up),
+                            onPressed: () {
+                              controller.changeExpanded();
+                            },
+                            color: color_textColorPrimary,
+                          )
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                      ).paddingOnly(
+                        left: spacing_standard_new,
+                        right: spacing_control_half,
+                      ),
+                      itemSubTitle(context, "${controller.movie?.title}",
+                              isLongText: false)
+                          .paddingOnly(
+                              left: spacing_standard_new,
+                              right: spacing_standard_new),
+                      Observer(builder: (x) {
+                        if (!controller.isExpanded) return Container();
 
-                return YoutubePlayerControllerProvider(
-                  // Provides controller to all the widget below it.
-                  controller: controller.videoPlayerController!,
-                  child: YoutubePlayerIFrame(
-                    aspectRatio: 16 / 9,
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            itemSubTitle(
+                                context, "${controller.movie?.subtitle}",
+                                fontsize: textSizeSMedium, isLongText: false),
+                            itemSubTitle(context, "${controller.movie?.author}",
+                                colorThird: true,
+                                fontsize: textSizeSMedium,
+                                isLongText: false),
+                          ],
+                        ).paddingOnly(
+                            left: spacing_standard_new,
+                            right: spacing_standard_new,
+                            bottom: spacing_standard_new);
+                      }),
+                      buttonsVideo,
+                      Divider(
+                        thickness: 1,
+                        height: 1,
+                      ).paddingTop(spacing_standard),
+                    ],
                   ),
-                );
-              }).paddingAll(spacing_standard_new),
+                ),
+              )
             ],
           );
         },

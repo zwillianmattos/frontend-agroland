@@ -45,6 +45,18 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
         slideImage: "https://i.ytimg.com/vi/hG9vVN6pLZQ/hqdefault.jpg",
         url: "https://www.youtube.com/watch?v=hG9vVN6pLZQ",
       ),
+      Movie(
+          id: "IR3cMz-RdZA",
+          title: "Aula 2 - A IMPORTÂNCIA da QUÍMICA ANALÍTICA para o agrônomo",
+          slideImage: "https://i.ytimg.com/vi/IR3cMz-RdZA/hqdefault.jpg",
+          url: "https://www.youtube.com/watch?v=IR3cMz-RdZA"),
+      Movie(
+          id: "dos2AH_1D0U",
+          title: "Aula 1 - Introdução ao Estudo do Solo",
+          slideImage: "https://i.ytimg.com/vi/dos2AH_1D0U/hqdefault.jpg",
+          url: "https://www.youtube.com/watch?v=dos2AH_1D0U",
+          subtitle:
+              "Aula sobre o tema Introdução ao Estudo do Solo, ministrada pelo Prof. Marcelo Ricardo de Lima na disciplina Formação e Caracterização dos Solos, do Departamento de Solos e Engenharia Agrícola da Universidade Federal do Paraná (UFPR).\nA apostila referente a este conteúdo está disponível no link: http://www.mrlima.agrarias.ufpr.br/FC..."),
     ];
 
     var playlists = <PlaylistMovie>[
@@ -119,6 +131,28 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 url: "https://www.youtube.com/watch?v=7FtvFnxNJsk"),
           ],
           slideImage: "https://i.ytimg.com/vi/VG2ySy8aD8I/hqdefault.jpg"),
+      PlaylistMovie(
+          id: "dos2AH_1D0U",
+          title: "Estudo do Solo",
+          slideImage: "https://i.ytimg.com/vi/dos2AH_1D0U/hqdefault.jpg",
+          subtitle: '',
+          listMovies: [
+            Movie(
+                id: "dos2AH_1D0U",
+                title: "Aula 1 - Introdução ao Estudo do Solo",
+                slideImage: "https://i.ytimg.com/vi/dos2AH_1D0U/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=dos2AH_1D0U",
+                subtitle:
+                    "Aula sobre o tema Introdução ao Estudo do Solo, ministrada pelo Prof. Marcelo Ricardo de Lima na disciplina Formação e Caracterização dos Solos, do Departamento de Solos e Engenharia Agrícola da Universidade Federal do Paraná (UFPR).\nA apostila referente a este conteúdo está disponível no link: http://www.mrlima.agrarias.ufpr.br/FC..."),
+            Movie(
+                id: "teNjVSqzb8Y",
+                title:
+                    "Aula 2 - Fatores limitantes e potenciais ao uso do solo",
+                slideImage: "https://i.ytimg.com/vi/teNjVSqzb8Y/hqdefault.jpg",
+                url: "https://www.youtube.com/watch?v=teNjVSqzb8Y",
+                subtitle:
+                    "Aula sobre o tema Fatores Limitantes e Potenciais ao Uso do Solo, ministrada pelo Prof. Marcelo Ricardo de Lima na disciplina Formação e Caracterização dos Solos, do Departamento de Solos e Engenharia Agrícola da Universidade Federal do Paraná (UFPR).\nA apostila referente a este conteúdo está disponível no link: http://www.mrlima.agrarias.ufpr.br/FC..."),
+          ])
     ];
 
     var mcontinueList = <Movie>[
@@ -312,6 +346,9 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                   popularMovieList,
                   isHorizontal: false,
                 ),
+                SizedBox(
+                  height: spacing_standard_new,
+                )
               ],
             ),
             Observer(builder: (_) {
@@ -360,24 +397,26 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 physics: BouncingScrollPhysics(),
                 controller: controller.ebooksController,
                 children: <Widget>[
-                  headingText(context, "Novidades da semana")
+                  appLabelViewAll("Novidades da semana")
                       .paddingAll(spacing_standard_new),
                   ItemHorizontalList(
                     popularMovieList,
                     isHorizontal: true,
                   ),
-                  headingText(context, "Continue assistindo").paddingOnly(
+                  appLabelViewAll("Continue assistindo").paddingOnly(
                       left: spacing_standard_new,
                       right: spacing_standard_new,
                       top: 12,
                       bottom: spacing_standard_new),
                   continueWatchingList,
-                  headingText(context, "Cursos")
-                      .paddingAll(spacing_standard_new),
+                  appLabelViewAll("Cursos").paddingAll(spacing_standard_new),
                   ItemHorizontalList(
                     playlists,
                     isHorizontal: false,
                   ),
+                  SizedBox(
+                    height: spacing_standard_new,
+                  )
                 ],
               );
             }),

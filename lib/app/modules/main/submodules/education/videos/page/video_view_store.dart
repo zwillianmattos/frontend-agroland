@@ -10,13 +10,16 @@ class VideoViewStore = _VideoViewStoreBase with _$VideoViewStore;
 
 abstract class _VideoViewStoreBase with Store {
   @observable
-  bool isLoading = false;
+  bool isloaded = false;
 
   @observable
   YoutubePlayerController? videoPlayerController;
 
   @observable
-  late Movie movie;
+  var isExpanded = false;
+
+  @observable
+  Movie? movie;
 
   _VideoViewStoreBase() {
     movie = Modular.args?.data as Movie;
@@ -25,10 +28,10 @@ abstract class _VideoViewStoreBase with Store {
   }
 
   loadDataVideo() {
-    isLoading = true;
+    isloaded = false;
 
     videoPlayerController = YoutubePlayerController(
-      initialVideoId: movie.id!,
+      initialVideoId: movie!.id!,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
@@ -41,6 +44,11 @@ abstract class _VideoViewStoreBase with Store {
     )
       ..hideTopMenu()
       ..hidePauseOverlay();
-    isLoading = false;
+    isloaded = true;
+  }
+
+  @action
+  changeExpanded() {
+    isExpanded = !isExpanded;
   }
 }

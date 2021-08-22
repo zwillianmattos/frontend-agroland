@@ -16,6 +16,7 @@ import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
 import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'percent_indicator.dart';
 
 Widget logoTitle(context) {
@@ -1014,7 +1015,7 @@ class ItemHorizontalList extends StatelessWidget {
           )
         : Container(
             height: width <= 1000
-                ?  (width * 0.28) * 6.8 / 6
+                ? (width * 0.28) * 6.8 / 6
                 : (width * 0.28) * 2.8 / 6,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -1033,6 +1034,11 @@ class ItemHorizontalList extends StatelessWidget {
                           .cornerRadiusWithClipRRect(8),
                     ),
                     onTap: () {
+                      Modular.to.pushNamed('videos/view/${list[index].id}',
+                          arguments: list[index],
+                          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                              ? true
+                              : false);
                       // Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(title: "Action")));
                     },
                     radius: spacing_control,
@@ -1097,3 +1103,71 @@ Widget loadingWidgetMaker() {
     ),
   );
 }
+
+Widget moviePost(videoController) {
+  return LayoutBuilder(builder: (context, constraints) {
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+
+    YoutubePlayerController controller = videoController;
+
+    if ((kIsWeb || IO.Platform.isWindows) && constraints.maxWidth > 800) {
+      return Observer(builder: (_) {
+        return Center(
+          child: SizedBox(
+              height: width <= 1000
+                  ? ((width / 2) - 36) * (2.5 / 4) + 40
+                  : (width * 0.60) * 2.8 / 6,
+              child: YoutubePlayerControllerProvider(
+                // Provides controller to all the widget below it.
+                controller: controller,
+                child: YoutubePlayerIFrame(),
+              )),
+        );
+      });
+    }
+
+    return Observer(builder: (_) {
+      return YoutubePlayerControllerProvider(
+        // Provides controller to all the widget below it.
+        controller: controller,
+        child: YoutubePlayerIFrame(
+          aspectRatio: 16 / 9,
+        ),
+      );
+    });
+  }).paddingAll(spacing_standard_new);
+}
+
+var buttonsVideo = Row(
+  mainAxisSize: MainAxisSize.max,
+  children: <Widget>[
+    Expanded(
+        child: IconButton(
+            icon: Icon(
+              Icons.thumb_up,
+              size: 24,
+              color: color_textColorPrimary,
+            ),
+            onPressed: () {})),
+    Expanded(
+        child: IconButton(
+      icon: Icon(
+        Icons.playlist_add,
+        size: 24,
+        color: color_textColorPrimary,
+      ),
+      onPressed: () {},
+    )),
+    Expanded(
+        child: IconButton(
+      icon: Icon(Icons.cloud_download, size: 24, color: color_textColorPrimary),
+      onPressed: () {},
+    )),
+    Expanded(
+        child: IconButton(
+      icon: Icon(Icons.share, size: 24, color: color_textColorPrimary),
+      onPressed: () {},
+    )),
+  ],
+).paddingOnly();
