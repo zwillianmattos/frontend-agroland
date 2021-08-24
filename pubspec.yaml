@@ -50,7 +50,6 @@ dependencies:
   video_player: ^2.1.12
   youtube_player_flutter: ^8.0.0
   flutter_zoom_drawer: ^2.1.0
-  image_picker: ^0.8.3+2
   
 dev_dependencies:
   flutter_modular_test: 1.0.1
@@ -111,3 +110,16 @@ vars:
 scripts:
   mobx_build: $clean & $get & $runner build --delete-conflicting-outputs
   mobx_watch: $clean & $get & $runner watch --delete-conflicting-outputs
+
+# Build Runner
+# flutter pub run build_runner  watch --delete-conflicting-outputs
+
+# build Web 
+#flutter build web --release --web-renderer html --dart-define=FLUTTER_WEB_USE_SKIA=true 
+
+# flutter run -d chrome --web-renderer html --dart-define=FLUTTER_WEB_USE_SKIA=true 
+
+# build Android
+# flutter build apk
+# adb install -r build/app/outputs/flutter-apk/app-release.apk
+#  flutter build apk && adb install -r build/app/outputs/flutter-apk/app-release.apk

@@ -1,12 +1,8 @@
-import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:universal_io/io.dart';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/interfaces/user_interface.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:http/http.dart' as http;
 
 class AccountRepository extends Disposable {
   final Dio _http;
@@ -71,12 +67,12 @@ class AccountRepository extends Disposable {
     return AccountModel();
   }
 
-  Future<User> refresh() async {
+  Future<AccountModel> refresh() async {
     try {
       Response response = await _http.get('/user/profile',
           options: await Modular.get<UserPreferencesStore>().authHeader);
       var data = response.data;
-      User account = User.fromJson(data);
+      AccountModel account = AccountModel.fromJson(data);
       return account;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -88,38 +84,7 @@ class AccountRepository extends Disposable {
         print(e.message);
       }
     }
-    return User();
-  }
-
-  Future<String> uploadProfilePicture(String filePath) async {
-    try {
-      var formData = FormData.fromMap(
-          {'file': await MultipartFile.fromFile(new File(filePath).path)});
-      print(formData);
-
-      Response response = await _http.post('/user/profile/photo',
-          data: formData,
-          options: await Modular.get<UserPreferencesStore>().authHeader);
-
-      print(response.realUri);
-
-      var data = response.data;
-      print(data);
-      if (data != null) {
-        return 'https://res.cloudinary.com/dxz4ivhm8/image/upload/c_thumb,g_face,h_200,w_200/${data['public_id']}.jpg';
-      }
-    } on DioError catch (e) {
-      if (e.response != null) {
-        print(e.response!.realUri);
-        print(e.response!.data);
-        print(e.response!.headers);
-        print(e.response!.requestOptions);
-      } else {
-        print(e.requestOptions.data);
-        print(e.message);
-      }
-    }
-    return "";
+    return AccountModel();
   }
 
   @override

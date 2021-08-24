@@ -9,18 +9,18 @@ part of 'video_view_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$VideoViewStore on _VideoViewStoreBase, Store {
-  final _$isloadedAtom = Atom(name: '_VideoViewStoreBase.isloaded');
+  final _$isLoadingAtom = Atom(name: '_VideoViewStoreBase.isLoading');
 
   @override
-  bool get isloaded {
-    _$isloadedAtom.reportRead();
-    return super.isloaded;
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
   }
 
   @override
-  set isloaded(bool value) {
-    _$isloadedAtom.reportWrite(value, super.isloaded, () {
-      super.isloaded = value;
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
     });
   }
 
@@ -41,57 +41,11 @@ mixin _$VideoViewStore on _VideoViewStoreBase, Store {
     });
   }
 
-  final _$isExpandedAtom = Atom(name: '_VideoViewStoreBase.isExpanded');
-
-  @override
-  bool get isExpanded {
-    _$isExpandedAtom.reportRead();
-    return super.isExpanded;
-  }
-
-  @override
-  set isExpanded(bool value) {
-    _$isExpandedAtom.reportWrite(value, super.isExpanded, () {
-      super.isExpanded = value;
-    });
-  }
-
-  final _$movieAtom = Atom(name: '_VideoViewStoreBase.movie');
-
-  @override
-  Movie? get movie {
-    _$movieAtom.reportRead();
-    return super.movie;
-  }
-
-  @override
-  set movie(Movie? value) {
-    _$movieAtom.reportWrite(value, super.movie, () {
-      super.movie = value;
-    });
-  }
-
-  final _$_VideoViewStoreBaseActionController =
-      ActionController(name: '_VideoViewStoreBase');
-
-  @override
-  dynamic changeExpanded() {
-    final _$actionInfo = _$_VideoViewStoreBaseActionController.startAction(
-        name: '_VideoViewStoreBase.changeExpanded');
-    try {
-      return super.changeExpanded();
-    } finally {
-      _$_VideoViewStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
-isloaded: ${isloaded},
-videoPlayerController: ${videoPlayerController},
-isExpanded: ${isExpanded},
-movie: ${movie}
+isLoading: ${isLoading},
+videoPlayerController: ${videoPlayerController}
     ''';
   }
 }

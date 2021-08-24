@@ -4,175 +4,271 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:plant_care/app/modules/account/submodules/profile/profile_store.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
+class _ProfilePageState extends State<ProfilePage> {
+  final User account = Modular.get<UserPreferencesStore>().getUser!;
+
+  bool silenciarNotificacoes = false;
+
+  bool disponivelOffiline = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: BackButton(),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          Observer(builder: (_) {
+            return IconButton(
+              icon: Icon(
+                CupertinoIcons.moon_stars,
+                color: Modular.get<UserPreferencesStore>().darkTheme
+                    ? color_white
+                    : blackColor,
+              ),
+              onPressed: () {
+                Modular.get<UserPreferencesStore>().darkMode();
+              },
+            );
+          })
+        ],
       ),
-      body: Observer(
-        builder: (_) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.only(
-                    left: spacing_standard_new,
-                    top: spacing_standard_new,
-                    right: 12,
-                    bottom: spacing_standard_new),
-                child: InkWell(
-                  onTap: () async {
-                    await Modular.to.pushNamed('/account/profile/edit');
-                    await controller.refresh();
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        children: [
+          ProfileWidget(
+              imagePath: account.imgProfile ??
+                  "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
+              onClicked: () async {}),
+          SizedBox(height: 24),
+          buildName(account),
+          SizedBox(height: 24),
+          NumberWidget(),
+          SizedBox(height: 24),
+
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 24),
+            decoration: BoxDecoration(
+              color: Theme.of(context).backgroundColor,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(8.0),
+                bottomRight: const Radius.circular(8.0),
+                topLeft: Radius.circular(8.0),
+                topRight: const Radius.circular(8.0),
+              ),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                    color: Theme.of(context).shadowColor.withOpacity(0.2),
+                    blurRadius: 10.0,
+                    offset: Offset(0.0, 0.1)),
+              ],
+            ),
+            child: Column(children: [
+              ListTile(
+                contentPadding: EdgeInsets.all(5.0),
+                title: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    child: text("Silenciar notificacoes", fontSize: 14.0)),
+                trailing: Switch(
+                  value: silenciarNotificacoes,
+                  onChanged: (value) {
+                    setState(() {
+                      silenciarNotificacoes = value;
+                    });
                   },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      ClipOval(
-                        child: networkImage(
-                          controller.userPhotoUrl,
-                          aWidth: 48.0,
-                          aHeight: 48.0,
-                        ),
-                      ).paddingRight(spacing_standard_new),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            text(
-                              controller.account!.name!,
-                              fontSize: textSizeNormal,
-                              fontFamily: fontBold,
-                              textColor: color_textColorPrimary,
-                            ),
-                            text(controller.account!.email!,
-                                fontSize: textSizeSmall,
-                                fontFamily: fontMedium,
-                                textColor: color_textColorSecondary)
-                          ],
-                        ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: 16,
-                        color: Modular.get<UserPreferencesStore>().darkTheme
-                            ? color_white
-                            : blackColor,
-                      ),
-                    ],
-                  ),
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      itemSubTitle(context, "Configurações", colorThird: false)
-                          .paddingOnly(
-                              left: spacing_standard_new,
-                              right: spacing_standard_new,
-                              top: 12,
-                              bottom: 12),
-                      subType(context, "Configurações de Conta", () {
-                        // AccountSettingsScreen().launch(context);
-                      },
-                          Icon(
-                            Icons.settings,
-                            color: Modular.get<UserPreferencesStore>().darkTheme
-                                ? color_white
-                                : blackColor,
-                          )),
-                      Row(
-                        children: <Widget>[
-                          Icon(
-                            CupertinoIcons.moon_stars,
-                            color: Modular.get<UserPreferencesStore>().darkTheme
-                                ? color_white
-                                : blackColor,
-                          ).paddingRight(spacing_standard),
-                          Expanded(child: itemTitle(context, "Modo escuro")),
-                          Theme(
-                            data: Theme.of(context).copyWith(
-                              unselectedWidgetColor: color_textColorPrimary,
-                            ),
-                            child: Checkbox(
-                              activeColor: color_colorPrimary,
-                              checkColor: color_app_background,
-                              value:
-                                  Modular.get<UserPreferencesStore>().darkTheme,
-                              onChanged: (value) {
-                                Modular.get<UserPreferencesStore>().darkMode();
-                              },
-                            ),
-                          )
-                        ],
-                      )
-                          .paddingOnly(
-                              left: spacing_standard_new,
-                              right: spacing_control,
-                              top: spacing_control,
-                              bottom: spacing_control)
-                          .onTap(() {
-                        Modular.get<UserPreferencesStore>().darkMode();
-                      }),
-                      subType(
-                          context,
-                          "Linguagem",
-                          () {},
-                          Icon(
-                            Icons.language,
-                            color: Modular.get<UserPreferencesStore>().darkTheme
-                                ? color_white
-                                : blackColor,
-                          )),
-                      subType(context, "Ajuda", () {
-                        // HelpScreen().launch(context);
-                      },
-                          Icon(
-                            Icons.help,
-                            color: Modular.get<UserPreferencesStore>().darkTheme
-                                ? color_white
-                                : blackColor,
-                          )),
-                      itemSubTitle(context, "Termos").paddingOnly(
-                          left: spacing_standard_new,
-                          right: 12,
-                          top: spacing_standard_new,
-                          bottom: spacing_control),
-                      subType(context, "Termos e Condições", () {
-                        // TermsConditionsScreen().launch(context);
-                      }, null),
-                      subType(context, "Política De Privacidade", () {
-                        // TermsConditionsScreen().launch(context);
-                      }, null),
-                      subType(context, "Sair", () {
-                        Modular.get<UserPreferencesStore>().logOff();
-                      }, null),
-                    ],
-                  ).paddingBottom(spacing_large),
+              ListTile(
+                contentPadding: EdgeInsets.all(5.0),
+                title: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    child: text("Disponivel offline", fontSize: 14.0)),
+                trailing: Switch(
+                  value: disponivelOffiline,
+                  onChanged: (value) {
+                    setState(() {
+                      disponivelOffiline = value;
+                    });
+                  },
                 ),
-              )
-            ],
-          );
-        },
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.all(5.0),
+                title: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    child: text("Limpar cache", fontSize: 14.0)),
+                onTap: () {},
+              ),
+              ListTile(
+                contentPadding: EdgeInsets.all(5.0),
+                title: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    child: text("Sair", fontSize: 14.0)),
+                onTap: () async {
+                  await Modular.get<UserPreferencesStore>().logOff();
+                  Modular.to.pop();
+                },
+              ),
+            ]),
+          ),
+
+          SizedBox(height: 24),
+          // buildAbout(account),
+          // SizedBox(height: 24),
+        ],
       ),
     );
   }
+
+  Widget buildAbout(User user) => Container(
+        padding: EdgeInsets.symmetric(horizontal: 48),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          text("Sobre", fontSize: 24.0),
+          SizedBox(height: 16),
+          text("", maxLine: 120, fontSize: 12.0, justifyText: true)
+        ]),
+      );
+
+  Widget buildName(User user) => Column(
+        children: [
+          text(user.name!),
+          SizedBox(height: 4),
+          text(user.email!, fontSize: 14.0),
+        ],
+      );
+}
+
+class ProfileWidget extends StatelessWidget {
+  final String imagePath;
+  final VoidCallback onClicked;
+
+  const ProfileWidget(
+      {Key? key, required this.imagePath, required this.onClicked})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(children: [
+        buildImage(),
+        Positioned(
+          child: buildEditIcon(),
+          bottom: 0,
+          right: 4,
+        ),
+      ]),
+    );
+  }
+
+  Widget buildCircle({
+    required Widget child,
+    required double all,
+    required Color color,
+  }) =>
+      ClipOval(
+        child: Container(
+          color: color,
+          child: child,
+          padding: EdgeInsets.all(all),
+        ),
+      );
+
+  Widget buildEditIcon() => buildCircle(
+        color: Colors.white,
+        all: 3,
+        child: buildCircle(
+          color: color_colorPrimary,
+          all: 8,
+          child: Icon(
+            Icons.edit,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      );
+
+  Widget buildImage() {
+    final image = NetworkImage(imagePath);
+
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+        child: Ink.image(
+          image: image,
+          fit: BoxFit.cover,
+          width: 128,
+          height: 128,
+          child: InkWell(
+            onTap: onClicked,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NumberWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => IntrinsicHeight(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            color: Theme.of(context).backgroundColor,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(8.0),
+              bottomRight: const Radius.circular(8.0),
+              topLeft: Radius.circular(8.0),
+              topRight: const Radius.circular(8.0),
+            ),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Theme.of(context).shadowColor.withOpacity(0.2),
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 0.1)),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              buildButton(context, '0', 'Perguntas'),
+              buildDivider(),
+              buildButton(context, '0', 'Comentarios'),
+              buildDivider(),
+              buildButton(context, '0', 'Avaliacoes')
+            ],
+          ),
+        ),
+      );
+
+  Widget buildButton(BuildContext context, String value, String textContent) =>
+      MaterialButton(
+        padding: EdgeInsets.symmetric(vertical: 4),
+        onPressed: () {},
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            text(value, fontSize: 14.0),
+            SizedBox(height: 2),
+            text(textContent, fontSize: 12.0),
+          ],
+        ),
+      );
+  Widget buildDivider() => Container(
+        child: VerticalDivider(),
+        height: 24,
+      );
 }

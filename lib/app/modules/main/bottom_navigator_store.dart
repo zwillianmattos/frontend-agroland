@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/utils/user_preferences_store.dart';
@@ -9,9 +8,6 @@ class BottomNavigatorStore = _BottomNavigatorStoreBase
     with _$BottomNavigatorStore;
 
 abstract class _BottomNavigatorStoreBase with Store {
-  @observable
-  bool isMobile = false;
-
   @observable
   int currentIndex = 0;
 
@@ -48,24 +44,25 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   @computed
   get currentPage => currentIndex;
+  
 
   @action
-  changePage(index, {navigate = true, dynamic arguments}) async {
+  changePage(index, {navigate = true}) async {
     // if (currentIndex == index) return;
 
     currentIndex = index;
     if (!navigate) return;
 
     if (index == 0) {
-      Modular.to.navigate('/home', arguments: arguments ?? {});
+      Modular.to.navigate('/home');
     } else if (index == 1) {
-      Modular.to.navigate('/marketplace', arguments: arguments ?? {});
+      Modular.to.navigate('/marketplace');
     } else if (index == 2) {
-      Modular.to.navigate('/community', arguments: arguments ?? {});
+      Modular.to.navigate('/community');
     } else if (index == 3) {
-      Modular.to.navigate('/education', arguments: arguments ?? {});
+      Modular.to.navigate('/education');
     } else if (index == 4) {
-      if (Modular.get<UserPreferencesStore>().getUser != null ) {
+      if (Modular.get<UserPreferencesStore>().getUser != null) {
         await Modular.to.pushNamed('/account/profile',
             forRoot:
                 (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
@@ -75,16 +72,7 @@ abstract class _BottomNavigatorStoreBase with Store {
                 (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
       }
       currentIndex = 0;
-      Modular.to.navigate('/home', arguments: arguments ?? {});
-    }
-  }
-
-  @action
-  checkScreenSize(context) {
-    if (MediaQuery.of(context).size.width <= 600) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
+      Modular.to.navigate('/home');
     }
   }
 }

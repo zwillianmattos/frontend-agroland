@@ -1,6 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -10,28 +9,22 @@ class VideoViewStore = _VideoViewStoreBase with _$VideoViewStore;
 
 abstract class _VideoViewStoreBase with Store {
   @observable
-  bool isloaded = false;
+  bool isLoading = false;
 
   @observable
   YoutubePlayerController? videoPlayerController;
 
-  @observable
-  var isExpanded = false;
-
-  @observable
-  Movie? movie;
-
   _VideoViewStoreBase() {
-    movie = Modular.args?.data as Movie;
-
     loadDataVideo();
   }
 
   loadDataVideo() {
-    isloaded = false;
+    isLoading = true;
+
+    String id = Modular.args?.data;
 
     videoPlayerController = YoutubePlayerController(
-      initialVideoId: movie!.id!,
+      initialVideoId: id,
       params: YoutubePlayerParams(
           showControls: true,
           showFullscreenButton: true,
@@ -44,11 +37,6 @@ abstract class _VideoViewStoreBase with Store {
     )
       ..hideTopMenu()
       ..hidePauseOverlay();
-    isloaded = true;
-  }
-
-  @action
-  changeExpanded() {
-    isExpanded = !isExpanded;
+    isLoading = false;
   }
 }

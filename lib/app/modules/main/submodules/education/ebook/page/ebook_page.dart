@@ -61,7 +61,7 @@ class _EbookPageState extends ModularState<EbookPage, EbookPageStore> {
           }
 
           return Center(
-            child: Text("Nenhum resultado"),
+            child: Text("nenhum resultado"),
           );
         },
       ),

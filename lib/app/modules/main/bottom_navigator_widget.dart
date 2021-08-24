@@ -33,12 +33,9 @@ class BottomNavigatorPageState
       AccountModel? accountModel =
           Modular.get<UserPreferencesStore>().accountModel;
 
-      controller.checkScreenSize(context);
-
       return Row(
         children: [
-          if (!(!IO.Platform.isAndroid || !IO.Platform.isIOS) ||
-              !controller.isMobile)
+          if (!IO.Platform.isAndroid && !IO.Platform.isIOS)
             Drawer(
               elevation: 0,
               child: Container(
@@ -170,64 +167,60 @@ class BottomNavigatorPageState
               //   ),
               // ),
               body: RouterOutlet(),
-              bottomNavigationBar:
-                  (IO.Platform.isAndroid || IO.Platform.isIOS) ||
-                          controller.isMobile
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12),
+              bottomNavigationBar: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                      ),
+                      child: BottomNavigationBar(
+                        elevation: 10.0,
+                        items: <BottomNavigationBarItem>[
+                          BottomNavigationBarItem(
+                            icon: PlatformSvg.asset(
+                              "images/home_bulk.svg",
+                              context: context,
+                            ),
+                            label: 'Home',
                           ),
-                          child: Observer(builder: (_) {
-                            return BottomNavigationBar(
-                              elevation: 10.0,
-                              items: <BottomNavigationBarItem>[
-                                BottomNavigationBarItem(
-                                  icon: PlatformSvg.asset(
-                                    "images/home_bulk.svg",
-                                    context: context,
-                                  ),
-                                  label: 'Home',
-                                ),
-                                BottomNavigationBarItem(
-                                  icon: PlatformSvg.asset(
-                                    "images/buy_bulk.svg",
-                                    context: context,
-                                  ),
-                                  label: 'Marketplace',
-                                ),
-                                BottomNavigationBarItem(
-                                  icon: PlatformSvg.asset(
-                                    "images/message_bulk.svg",
-                                    context: context,
-                                  ),
-                                  label: 'Comunidade',
-                                ),
-                                BottomNavigationBarItem(
-                                  icon: PlatformSvg.asset(
-                                    "images/folder_bulk_black.svg",
-                                    context: context,
-                                  ),
-                                  label: 'Educação',
-                                ),
-                                BottomNavigationBarItem(
-                                  icon: PlatformSvg.asset(
-                                    "images/user_bulk_black.svg",
-                                    context: context,
-                                  ),
-                                  label: 'Minha Conta',
-                                ),
-                              ],
-                              currentIndex: controller.currentPage,
-                              selectedItemColor:
-                                  Theme.of(context).colorScheme.secondary,
-                              unselectedItemColor:
-                                  Theme.of(context).secondaryHeaderColor,
-                              onTap: controller.changePage,
-                            );
-                          }),
-                        )
-                      : null,
+                          BottomNavigationBarItem(
+                            icon: PlatformSvg.asset(
+                              "images/buy_bulk.svg",
+                              context: context,
+                            ),
+                            label: 'Marketplace',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: PlatformSvg.asset(
+                              "images/message_bulk.svg",
+                              context: context,
+                            ),
+                            label: 'Comunidade',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: PlatformSvg.asset(
+                              "images/folder_bulk_black.svg",
+                              context: context,
+                            ),
+                            label: 'Educação',
+                          ),
+                          BottomNavigationBarItem(
+                            icon: PlatformSvg.asset(
+                              "images/user_bulk_black.svg",
+                              context: context,
+                            ),
+                            label: 'Minha Conta',
+                          ),
+                        ],
+                        currentIndex: controller.currentPage,
+                        selectedItemColor:
+                            Theme.of(context).colorScheme.secondary,
+                        unselectedItemColor:
+                            Theme.of(context).secondaryHeaderColor,
+                        onTap: controller.changePage,
+                      ),
+                    )
+                  : null,
             ),
           ),
         ],

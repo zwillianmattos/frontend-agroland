@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/models/models/paginate_model.dart';
 import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
@@ -32,6 +31,7 @@ abstract class _EducationStoreBase with Store {
   @observable
   ObservableList<Ebook> ebookBanners = <Ebook>[].asObservable();
 
+
   @observable
   ObservableList<String> videosList = <String>[
     "9f7uB081yxs",
@@ -45,10 +45,8 @@ abstract class _EducationStoreBase with Store {
     load();
     loadPage();
     loadBanners();
-
-      
-    print(Modular.args?.data['tab_index']);
   }
+
 
   @action
   loadBanners() async {

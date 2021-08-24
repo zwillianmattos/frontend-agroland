@@ -6,7 +6,7 @@ class User implements IUser {
   String? name;
   String? email;
   String? password;
-  String? imgLogo;
+  String? imgProfile;
   ProducerUser? producerUser;
 
   User(
@@ -14,7 +14,7 @@ class User implements IUser {
       this.name,
       this.email,
       this.password,
-      this.imgLogo,
+      this.imgProfile,
       this.producerUser});
 
   User.fromJson(Map<String, dynamic> json) {
@@ -22,7 +22,7 @@ class User implements IUser {
     name = json['name'];
     email = json['email'];
     password = json['password'];
-    imgLogo = json['imgProfile'];
+    imgProfile = json['img_profile'];
     if (json['ProducerUser'] != null)
       producerUser = ProducerUser.fromJson(json['ProducerUser']);
   }
@@ -33,7 +33,7 @@ class User implements IUser {
     data['name'] = this.name;
     data['email'] = this.email;
     data['password'] = this.password;
-    data['imgProfile'] = this.imgLogo;
+    data['img_profile'] = this.imgProfile;
     data['ProducerUser'] = this.producerUser;
     return data;
   }
