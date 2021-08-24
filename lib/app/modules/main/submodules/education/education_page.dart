@@ -22,7 +22,33 @@ class EducationPage extends StatefulWidget {
   _EducationPageState createState() => _EducationPageState();
 }
 
-class _EducationPageState extends ModularState<EducationPage, EducationStore> {
+class _EducationPageState extends ModularState<EducationPage, EducationStore>
+    with TickerProviderStateMixin {
+  late TabController tabController;
+  @override
+  void initState() {
+    if (Modular.args?.data['tab_index'] != null) {
+      tabController = TabController(
+        initialIndex: Modular.args?.data['tab_index'] ?? 0,
+        length: 3,
+        vsync: this,
+      );
+    } else {
+      tabController = new TabController(length: 3, vsync: this);
+    }
+
+
+    print(Modular.args?.data);
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -168,6 +194,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
             mcontinueList,
           )
         : Container();
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -194,6 +221,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
             child: Align(
               alignment: Alignment.topLeft,
               child: TabBar(
+                controller: tabController,
                 indicatorPadding: EdgeInsets.only(left: 30, right: 30),
                 indicatorWeight: 3.0,
                 isScrollable: true,
@@ -217,6 +245,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
           ),
         ),
         body: TabBarView(
+          controller: tabController,
           children: [
             ListView(
               physics: BouncingScrollPhysics(),
@@ -397,19 +426,14 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore> {
                 physics: BouncingScrollPhysics(),
                 controller: controller.ebooksController,
                 children: <Widget>[
-                  appLabelViewAll("Novidades da semana")
-                      .paddingAll(spacing_standard_new),
+                  appLabelViewAll("Novidades da semana"),
                   ItemHorizontalList(
                     popularMovieList,
                     isHorizontal: true,
                   ),
-                  appLabelViewAll("Continue assistindo").paddingOnly(
-                      left: spacing_standard_new,
-                      right: spacing_standard_new,
-                      top: 12,
-                      bottom: spacing_standard_new),
+                  appLabelViewAll("Continue assistindo"),
                   continueWatchingList,
-                  appLabelViewAll("Cursos").paddingAll(spacing_standard_new),
+                  appLabelViewAll("Cursos"),
                   ItemHorizontalList(
                     playlists,
                     isHorizontal: false,

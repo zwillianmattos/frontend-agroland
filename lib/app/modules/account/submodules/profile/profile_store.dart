@@ -24,16 +24,26 @@ abstract class _ProfileStoreBase with Store {
   User? account;
 
   @observable
-  String? userPhotoUrl;
+  String userPhotoUrl =
+      "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png";
 
   _ProfileStoreBase(this.repository) {
     refresh();
   }
 
   @action
-  refresh(){
-    account = Modular.get<UserPreferencesStore>().getUser!;
-    userPhotoUrl = account?.imgLogo ??
-        "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png";
+  refresh() {
+    try {
+      account = Modular.get<UserPreferencesStore>().getUser!;
+      print("ACCOUNT: $account");
+
+      if (account != null) {
+        userPhotoUrl = account!.imgLogo!;
+      }
+
+      print(userPhotoUrl);
+    } catch (e) {
+      print("ERROR: $e");
+    }
   }
 }

@@ -50,22 +50,22 @@ abstract class _BottomNavigatorStoreBase with Store {
   get currentPage => currentIndex;
 
   @action
-  changePage(index, {navigate = true}) async {
+  changePage(index, {navigate = true, dynamic arguments}) async {
     // if (currentIndex == index) return;
 
     currentIndex = index;
     if (!navigate) return;
 
     if (index == 0) {
-      Modular.to.navigate('/home');
+      Modular.to.navigate('/home', arguments: arguments ?? {});
     } else if (index == 1) {
-      Modular.to.navigate('/marketplace');
+      Modular.to.navigate('/marketplace', arguments: arguments ?? {});
     } else if (index == 2) {
-      Modular.to.navigate('/community');
+      Modular.to.navigate('/community', arguments: arguments ?? {});
     } else if (index == 3) {
-      Modular.to.navigate('/education');
+      Modular.to.navigate('/education', arguments: arguments ?? {});
     } else if (index == 4) {
-      if (Modular.get<UserPreferencesStore>().getUser != null) {
+      if (Modular.get<UserPreferencesStore>().getUser != null ) {
         await Modular.to.pushNamed('/account/profile',
             forRoot:
                 (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
@@ -75,7 +75,7 @@ abstract class _BottomNavigatorStoreBase with Store {
                 (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
       }
       currentIndex = 0;
-      Modular.to.navigate('/home');
+      Modular.to.navigate('/home', arguments: arguments ?? {});
     }
   }
 

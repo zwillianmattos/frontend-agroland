@@ -42,13 +42,13 @@ mixin _$ProfileStore on _ProfileStoreBase, Store {
   final _$userPhotoUrlAtom = Atom(name: '_ProfileStoreBase.userPhotoUrl');
 
   @override
-  String? get userPhotoUrl {
+  String get userPhotoUrl {
     _$userPhotoUrlAtom.reportRead();
     return super.userPhotoUrl;
   }
 
   @override
-  set userPhotoUrl(String? value) {
+  set userPhotoUrl(String value) {
     _$userPhotoUrlAtom.reportWrite(value, super.userPhotoUrl, () {
       super.userPhotoUrl = value;
     });

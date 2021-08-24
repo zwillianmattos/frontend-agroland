@@ -46,7 +46,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                     children: <Widget>[
                       ClipOval(
                         child: networkImage(
-                          controller.userPhotoUrl!,
+                          controller.userPhotoUrl,
                           aWidth: 48.0,
                           aHeight: 48.0,
                         ),

@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
 import './home_store.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../widgets/weather/page/weather_widget.dart';
@@ -33,16 +34,23 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
               //   description: "Camera",
               // ),
               CardButton(
-                icon: PlatformSvg.asset("images/document_bulk.svg",
-                    context: context,),
+                icon: PlatformSvg.asset(
+                  "images/document_bulk.svg",
+                  context: context,
+                ),
                 description: "Ebooks",
                 onPressed: () {
-                  Modular.to.pushNamed('/education/ebook');
+                  Modular.get<BottomNavigatorStore>()
+                      .changePage(3, arguments: {
+                    'tab_index': 1,
+                  });
                 },
               ),
               CardButton(
-                  icon: PlatformSvg.asset("images/folder_bulk.svg",
-                      context: context,),
+                  icon: PlatformSvg.asset(
+                    "images/folder_bulk.svg",
+                    context: context,
+                  ),
                   description: "Culturas",
                   onPressed: () {
                     Modular.to.pushNamed('/cultures',

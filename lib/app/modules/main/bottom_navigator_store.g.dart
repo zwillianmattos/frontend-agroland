@@ -52,9 +52,10 @@ mixin _$BottomNavigatorStore on _BottomNavigatorStoreBase, Store {
       AsyncAction('_BottomNavigatorStoreBase.changePage');
 
   @override
-  Future changePage(dynamic index, {dynamic navigate = true}) {
-    return _$changePageAsyncAction
-        .run(() => super.changePage(index, navigate: navigate));
+  Future changePage(dynamic index,
+      {dynamic navigate = true, dynamic arguments}) {
+    return _$changePageAsyncAction.run(() =>
+        super.changePage(index, navigate: navigate, arguments: arguments));
   }
 
   final _$_BottomNavigatorStoreBaseActionController =

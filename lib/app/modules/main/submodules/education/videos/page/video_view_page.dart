@@ -23,7 +23,9 @@ class _VideoViewPageState extends ModularState<VideoViewPage, VideoViewStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('VideoViewPage'),
+        title: Observer(builder: (_) {
+          return Text('Curso: ${controller.movie?.title}');
+        }),
       ),
       body: Observer(
         builder: (_) {
