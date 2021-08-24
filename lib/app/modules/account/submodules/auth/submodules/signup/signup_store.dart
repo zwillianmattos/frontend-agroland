@@ -47,7 +47,7 @@ abstract class SignUpStoreBase with Store {
       if (await LocalStorage.setValue("user", data) && data != null) {
         EasyLoading.showSuccess('Conta criada com sucesso!',
             duration: Duration(seconds: 2));
-        Modular.get<UserPreferencesStore>().setUser = account;
+        Modular.get<UserPreferencesStore>().setUser(account);
         Modular.to.pushReplacementNamed('/');
       }
       // redirect to home

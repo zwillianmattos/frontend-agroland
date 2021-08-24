@@ -89,9 +89,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50)),
                                 color: controller.slugSelected == e.slug
-                                    ? Theme.of(context).backgroundColor.isDark()
-                                        ? Theme.of(context).accentColor
-                                        : Theme.of(context).primaryColor
+                                    ? Theme.of(context).primaryColor
                                     : Theme.of(context).primaryColorLight,
                                 boxShadow: [
                                   BoxShadow(
@@ -110,14 +108,8 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                   padding: EdgeInsets.all(16.0),
                                   icon: SvgPicture.asset(e.icon,
                                       color: controller.slugSelected == e.slug
-                                          ? Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .color
-                                          : Theme.of(context)
-                                              .textTheme
-                                              .bodyText1!
-                                              .color),
+                                          ? Theme.of(context).textTheme.button!.color
+                                          : Theme.of(context).textTheme.button!.color,),
                                   onPressed: () {
                                     controller.selectCotacao(e.slug);
                                   }),
@@ -195,7 +187,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                                                       ee.city.toString(),
                                                       fontSize: 14.0),
                                                   subtitle: text(
-                                                      "R\$ ${ee.price!.toStringAsFixed(2)}",
+                                                      "R\$ ${ee.price?.toStringAsFixed(2) ?? 0.0}",
                                                       fontSize: 14.0),
                                                 ))
                                             .toList()),
