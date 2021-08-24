@@ -17,6 +17,7 @@ class AuthPage extends StatefulWidget {
   _AuthPageState createState() => _AuthPageState();
 }
 
+
 class _AuthPageState extends ModularState<AuthPage, AuthStore> {
   @override
   Widget build(BuildContext context) {
