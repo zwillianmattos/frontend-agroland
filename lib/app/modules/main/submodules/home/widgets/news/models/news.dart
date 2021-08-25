@@ -9,7 +9,8 @@ class NewsModel {
   final String? urlToImage;
   final DateTime? publishedAt;
   final String? content;
-
+  final bool? favorite;
+  
   const NewsModel({
     this.source,
     this.author,
@@ -19,6 +20,7 @@ class NewsModel {
     this.urlToImage,
     this.publishedAt,
     this.content,
+    this.favorite
   });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class NewsModel {
           ? null
           : DateTime.parse(json['publishedAt'] as String),
       content: json['content'] as String?,
+      favorite: json['favorite'] as bool?
     );
   }
 
@@ -48,6 +51,7 @@ class NewsModel {
       'urlToImage': urlToImage,
       'publishedAt': publishedAt?.toIso8601String(),
       'content': content,
+      'favorite' : favorite,
     };
   }
 
@@ -70,6 +74,7 @@ class NewsModel {
       urlToImage: urlToImage ?? this.urlToImage,
       publishedAt: publishedAt ?? this.publishedAt,
       content: content ?? this.content,
+      favorite: favorite ?? this.favorite
     );
   }
 
@@ -87,6 +92,7 @@ class NewsModel {
       urlToImage,
       publishedAt,
       content,
+      favorite
     ];
   }
 }

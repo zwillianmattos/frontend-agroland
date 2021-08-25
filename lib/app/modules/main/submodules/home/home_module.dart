@@ -12,6 +12,8 @@ import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/repo
 import 'package:plant_care/app/modules/main/submodules/home/widgets/acoes/widgets/cotacao_store.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_store.dart';
 
+import 'widgets/news/page/news_view_store.dart';
+
 class HomeModule extends Module {
   final List<Bind> binds = [
     BindInject((i) => NewsRepository(i<Dio>())),
@@ -25,15 +27,14 @@ class HomeModule extends Module {
     ),
     BindInject(
         (i) => CotacaoRepository(new Dio(BaseOptions(baseUrl: API_ENDPOINT)))),
-    BindInject((i) => CotacaoStore(i<CotacaoRepository>()))
+    BindInject((i) => CotacaoStore(i<CotacaoRepository>())),
+    BindInject((i) => NewsViewStore()),
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, __) => DashboardPage()),
     ChildRoute('/news',
-        child: (_, __) => NewsViewPage(
-              news: __.data,
-            )),
+        child: (_, __) => NewsViewPage()),
   ];
 }
