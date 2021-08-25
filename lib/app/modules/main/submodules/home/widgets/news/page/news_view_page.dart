@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsViewPage extends StatefulWidget {
@@ -85,11 +88,17 @@ class _NewsViewPageState extends State<NewsViewPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
-                      icon: Icon(Typicons.forward_outline),
-                      onPressed: () async {},
+                      icon: Icon(Icons.share, color: Theme.of(context).textTheme.button!.color,),
+                      onPressed: () {
+                        Share.share(
+                            '${widget.news!.title} - ${widget.news!.url}');
+                      },
                     ),
                     IconButton(
-                      icon: Icon(Typicons.heart),
+                      icon: Icon(
+                        Typicons.heart,
+                        color: Theme.of(context).textTheme.button!.color,
+                      ),
                       onPressed: () {},
                     ),
                   ],
