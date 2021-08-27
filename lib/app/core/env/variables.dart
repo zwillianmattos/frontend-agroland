@@ -9,3 +9,5 @@ const String API_ENDPOINT =
 final API_WEATHER_KEY = "43189318";
 
 const WEBSITEDOMAIN = "https://agroland.surge.sh";
+
+const ONESIGNAL_KEY = "55dd3eed-362a-4e88-90e4-929e6e170a34";

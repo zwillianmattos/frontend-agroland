@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1026383487478",
+    "project_id": "agroland-5f146",
+    "storage_bucket": "agroland-5f146.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026383487478:android:555c059e66804aa43967d7",
+        "android_client_info": {
+          "package_name": "com.brasildev.plantcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026383487478-1u3ek9gmnng5vng5mp0surjkv5kckrfv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ2ZmiaxKNUEnL9CC7b8S4dYtVzjuqa40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026383487478-1u3ek9gmnng5vng5mp0surjkv5kckrfv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
