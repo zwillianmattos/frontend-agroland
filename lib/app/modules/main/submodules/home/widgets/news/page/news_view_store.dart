@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
@@ -18,7 +20,6 @@ abstract class _NewsViewStoreBase with Store {
   NewsModel? news;
 
   _NewsViewStoreBase() {
-    news = Modular.args?.data as NewsModel?;
     load();
   }
 
@@ -26,10 +27,22 @@ abstract class _NewsViewStoreBase with Store {
   load() async {
     try {
       isLoading = true;
-      favorite = await LocalStorage.getValue<bool>('news_${news?.url}');
+
+      news = Modular.args?.data as NewsModel?;
+      var newsSaved = await LocalStorage.getValue<String>('news');
+      if (newsSaved == null || newsSaved == '') {
+        favorite = false;
+      } else {
+        newsSaved = jsonDecode(newsSaved)
+          ..map((e) => NewsModel.fromJson(e)).toList();
+        if (newsSaved.contains(news!)) {
+          favorite = true;
+        }
+      }
       isLoading = false;
     } catch (e) {
       print(e);
+      isLoading = false;
     }
   }
 
@@ -37,7 +50,25 @@ abstract class _NewsViewStoreBase with Store {
   saveNotice() async {
     try {
       favorite = !favorite;
-      await LocalStorage.setValue<bool>('news_${news?.url}', favorite);
+
+      var newsSaved = await LocalStorage.getValue<String>('news');
+
+      if (newsSaved == null || newsSaved == '') {
+        newsSaved = <NewsModel>[];
+        newsSaved.add(news!);
+      } else {
+        newsSaved = jsonDecode(newsSaved)
+          ..map((e) => NewsModel.fromJson(e)).toList();
+        if (newsSaved.contains(news!)) {
+          newsSaved.remove(news!);
+        } else {
+          newsSaved.add(news!);
+        }
+      }
+
+      if (await LocalStorage.setValue<String>('news', jsonEncode(newsSaved))) {
+        print('salvo, ${newsSaved.length}');
+      }
     } catch (e) {
       print(e);
     }

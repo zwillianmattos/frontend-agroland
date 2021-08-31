@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -9,7 +10,8 @@ import './news_store.dart';
 import 'package:universal_io/io.dart' as IO;
 
 class NewsWidget extends StatefulWidget {
-  const NewsWidget({Key? key}) : super(key: key);
+  final bool horizontal;
+  const NewsWidget({Key? key, this.horizontal = true}) : super(key: key);
 
   @override
   _NewsWidgetState createState() => _NewsWidgetState();
@@ -29,10 +31,13 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
             );
 
           if (controller.newsList == null)
-            return RetryWidget(onRetry: controller.loadNews,);
+            return RetryWidget(
+              onRetry: controller.loadNews,
+            );
 
           return ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection:
+                  widget.horizontal ? Axis.horizontal : Axis.vertical,
               itemCount: controller.newsList!.length,
               shrinkWrap: true,
               physics: ScrollPhysics(),
@@ -61,10 +66,16 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
                       ),
                     ],
                   ),
+                  height: !widget.horizontal
+                      ? width > 500
+                          ? sy(120)
+                          : 150
+                      : sy(200),
                   width: width > 500 ? sx(100) : sx(width),
                   child: InkWell(
-                    onTap: () {
-                      Modular.to.pushNamed("/home/news",
+                    onTap: () async {
+                      await Modular.to.pushNamed(
+                          "/home/news/view/${item.hashCode}",
                           arguments: item,
                           forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
                               ? true

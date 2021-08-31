@@ -1063,7 +1063,7 @@ Widget hdWidget(context) {
   );
 }
 
-Widget headingWidViewAll(BuildContext context, var titleText, callback, {
+Widget headingWidViewAll(BuildContext context, var titleText, Function()? callback, {
   limiter = false
 }) {
   return RelativeBuilder(builder: (context, height, width, sy, sx) {
