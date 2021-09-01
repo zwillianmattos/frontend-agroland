@@ -51,8 +51,6 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   flutter_zoom_drawer: ^2.1.0
   image_picker: ^0.8.3+2
-  firebase_core: ^1.5.0
-  firebase_analytics: ^8.3.0
   onesignal_flutter: ^3.2.1
   
 dev_dependencies:

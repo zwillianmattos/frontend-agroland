@@ -3,7 +3,7 @@ import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/core/interfaces/notification.dart';
 
 class NotificationService implements INotification {
-  bool requiresConsent = false;
+  bool requiresConsent = true;
   NotificationService() {
     print("NOTIFICATION SERVICE");
     initPlatformState();
