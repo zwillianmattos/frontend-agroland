@@ -110,7 +110,11 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                   WeatherWidget(),
                   buttons,
                   headingWidViewAll(context, "Notícias", () {
-                    Modular.to.pushNamed('/home/news');
+                    Modular.to.pushNamed('/home/news', 
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                            ? true
+                            : false
+                    );
                   }),
                   NewsWidget(),
                   headingWidViewAll(context, "Cotação", () {
