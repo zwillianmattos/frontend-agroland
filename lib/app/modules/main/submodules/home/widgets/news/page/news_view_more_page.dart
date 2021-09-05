@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_view_more_store.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_widget.dart';
+
+import 'card_news.dart';
 
 class NewsViewMorePage extends StatefulWidget {
   const NewsViewMorePage({Key? key}) : super(key: key);
@@ -47,10 +50,43 @@ class _NewsViewMorePageState
               ),
             )),
         body: TabBarView(children: [
-          NewsWidget(
-            horizontal: false,
+          Container(
+            margin: EdgeInsets.only(top: spacing_large),
+            child: NewsWidget(
+              horizontal: false,
+              callback: controller.loadSavedNews,
+            ),
           ),
-          Container()
+          Observer(builder: (_) {
+            if (controller.isLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (controller.listNewsSaved.length > 0) {
+              return Container(
+                margin: EdgeInsets.only(top: spacing_large),
+                child: ListView(
+                  children: controller.listNewsSaved.map(
+                    (news) {
+                      return CardNewsWidget(
+                        newsModel: news,
+                        horizontal: false,
+                        callback: controller.loadSavedNews,
+                      );
+                    },
+                  ).toList(),
+                ),
+              );
+            }
+
+            return Container(
+              child: Center(
+                child: Text("Nenhuma notícia salva"),
+              ),
+            );
+          })
         ]),
       ),
     );

@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:mobx/mobx.dart';
@@ -13,19 +12,25 @@ class NewsViewMoreStore = _NewsViewMoreStoreBase with _$NewsViewMoreStore;
 abstract class _NewsViewMoreStoreBase with Store {
   final NewsRepository newsRepository;
 
-  List<NewsModel> news = [];
+  @observable
+  bool isLoading = false;
 
-  _NewsViewMoreStoreBase(this.newsRepository){
+  @observable
+  ObservableList<dynamic> listNewsSaved = [].asObservable();
+
+  _NewsViewMoreStoreBase(this.newsRepository) {
     loadSavedNews();
   }
 
   @action
   loadSavedNews() async {
+    isLoading = true;
+    var newsSaved = await LocalStorage.getValue<String>('news_data');
+    List<dynamic> list =
+        jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
     
-      Map<String, dynamic>? newsSaved =
-          jsonDecode(await LocalStorage.getValue<String>('news'));
-      if (newsSaved == null) {
-        newsSaved = Map<String, dynamic>();
-      }
+    listNewsSaved = list.asObservable();
+
+    isLoading = false;
   }
 }
