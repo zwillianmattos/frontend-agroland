@@ -31,15 +31,22 @@ abstract class _NewsViewStoreBase with Store {
 
       news = Modular.args?.data as NewsModel?;
       var newsSaved = await LocalStorage.getValue<String>('news_data');
-      List<dynamic> list =
+      print(newsSaved);
+      if (newsSaved != null && newsSaved.isNotEmpty && newsSaved != '') {
+        List<dynamic> list =
             jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
-      var range =
-          list.indexWhere((element) => element.source.id == news!.source!.id);
-      if (range != -1) {
-        favorite = true;
+        var range =
+            list.indexWhere((element) => element.source.id == news!.source!.id);
+
+        if (range != -1) {
+          favorite = true;
+        } else {
+          favorite = false;
+        }
       } else {
         favorite = false;
       }
+
       isLoading = false;
     } catch (e) {
       print(e);
@@ -51,7 +58,8 @@ abstract class _NewsViewStoreBase with Store {
   saveNotice() async {
     try {
       var newsSaved = await LocalStorage.getValue<String>('news_data');
-      if (newsSaved != null) {
+      
+      if (newsSaved != '' && newsSaved.isNotEmpty) {
         List<dynamic> list =
             jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
         var range =
@@ -66,7 +74,9 @@ abstract class _NewsViewStoreBase with Store {
         await LocalStorage.setValue<String>('news_data', jsonEncode(list));
       } else {
         List<dynamic> list = [news!];
-        list = list.map((e) => NewsModel.fromJson(e)).toList();
+        
+        list = list.map((e) => e.toJson()).toList();
+        print(list);
         await LocalStorage.setValue<String>('news_data', jsonEncode(list));
         favorite = true;
       }

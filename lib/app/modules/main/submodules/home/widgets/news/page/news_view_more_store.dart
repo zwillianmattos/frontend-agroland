@@ -26,8 +26,8 @@ abstract class _NewsViewMoreStoreBase with Store {
   loadSavedNews() async {
     isLoading = true;
     var newsSaved = await LocalStorage.getValue<String>('news_data');
-
-    if (newsSaved != null && newsSaved.isNotEmpty && newsSaved != '') {
+    print(newsSaved);
+    if (newsSaved != null  && newsSaved != '') {
       List<dynamic> list =
           jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
       listNewsSaved = list.asObservable();
