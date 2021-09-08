@@ -6,6 +6,7 @@ import 'package:plant_care/app/modules/main/main_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'core/env/variables.dart';
+import 'core/services/notifications/notification_service.dart';
 import 'modules/account/repositories/account_repository.dart';
 
 class AppModule extends Module {
@@ -17,6 +18,7 @@ class AppModule extends Module {
     BindInject((i) => UserPreferencesStore(i<AccountRepository>()),
         isSingleton: true, isLazy: false),
     BindInject((i) => LocationService()),
+    BindInject((i) => NotificationService(), isSingleton: true, isLazy: false),
   ];
 
   @override

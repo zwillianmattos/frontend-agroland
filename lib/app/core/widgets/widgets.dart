@@ -1063,19 +1063,33 @@ Widget hdWidget(context) {
   );
 }
 
-Widget headingWidViewAll(BuildContext context, var titleText, callback) {
-  return Row(
-    children: <Widget>[
-      Expanded(child: headingText(context, titleText)),
-      InkWell(
-          onTap: callback,
-          child: itemSubTitle(context, "Ver mais",
-                  fontsize: textSizeMedium,
-                  fontFamily: fontMedium,
-                  colorThird: true)
-              .paddingAll(spacing_control_half))
-    ],
-  );
+Widget headingWidViewAll(BuildContext context, var titleText, Function()? callback, {
+  limiter = false
+}) {
+  return RelativeBuilder(builder: (context, height, width, sy, sx) {
+    return Container(
+      width: width >= 1024 && limiter ? 1024 : width,
+      padding:
+          width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.all(16.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: text(titleText,
+                textColor: black,
+                fontSize: textSizeNormal,
+                fontFamily: fontBold),
+          ),
+          InkWell(
+              onTap: callback,
+              child: itemSubTitle(context, "Ver mais",
+                      fontsize: textSizeMedium,
+                      fontFamily: fontMedium,
+                      colorThird: true)
+                  .paddingAll(spacing_control_half))
+        ],
+      ),
+    );
+  });
 }
 
 Widget toolBarTitle(BuildContext context, String title) {

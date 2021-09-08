@@ -109,9 +109,17 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 children: <Widget>[
                   WeatherWidget(),
                   buttons,
-                  appLabelViewAll("Notícias", limiter: true),
+                  headingWidViewAll(context, "Notícias", () {
+                    Modular.to.pushNamed('/home/news', 
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                            ? true
+                            : false
+                    );
+                  }),
                   NewsWidget(),
-                  appLabelViewAll("Cotação", limiter: true),
+                  headingWidViewAll(context, "Cotação", () {
+
+                  }),
                   CotacaoWidget(),
                   SizedBox(height: 40),
                 ],
