@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/source.dart';
 
 part 'news_view_store.g.dart';
 
@@ -29,15 +30,15 @@ abstract class _NewsViewStoreBase with Store {
       isLoading = true;
 
       news = Modular.args?.data as NewsModel?;
-      var newsSaved = await LocalStorage.getValue<String>('news');
-      if (newsSaved == null || newsSaved == '') {
-        favorite = false;
+      var newsSaved = await LocalStorage.getValue<String>('news_data');
+      List<dynamic> list =
+            jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
+      var range =
+          list.indexWhere((element) => element.source.id == news!.source!.id);
+      if (range != -1) {
+        favorite = true;
       } else {
-        newsSaved = jsonDecode(newsSaved)
-          ..map((e) => NewsModel.fromJson(e)).toList();
-        if (newsSaved.contains(news!)) {
-          favorite = true;
-        }
+        favorite = false;
       }
       isLoading = false;
     } catch (e) {
@@ -49,28 +50,29 @@ abstract class _NewsViewStoreBase with Store {
   @action
   saveNotice() async {
     try {
-      favorite = !favorite;
-
-      var newsSaved = await LocalStorage.getValue<String>('news');
-
-      if (newsSaved == null || newsSaved == '') {
-        newsSaved = <NewsModel>[];
-        newsSaved.add(news!);
-      } else {
-        newsSaved = jsonDecode(newsSaved)
-          ..map((e) => NewsModel.fromJson(e)).toList();
-        if (newsSaved.contains(news!)) {
-          newsSaved.remove(news!);
+      var newsSaved = await LocalStorage.getValue<String>('news_data');
+      if (newsSaved != null) {
+        List<dynamic> list =
+            jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
+        var range =
+            list.indexWhere((element) => element.source.id == news!.source!.id);
+        if (range != -1) {
+          list.removeAt(range);
+          favorite = false;
         } else {
-          newsSaved.add(news!);
+          list.add(news!);
+          favorite = true;
         }
-      }
-
-      if (await LocalStorage.setValue<String>('news', jsonEncode(newsSaved))) {
-        print('salvo, ${newsSaved.length}');
+        await LocalStorage.setValue<String>('news_data', jsonEncode(list));
+      } else {
+        List<dynamic> list = [news!];
+        list = list.map((e) => NewsModel.fromJson(e)).toList();
+        await LocalStorage.setValue<String>('news_data', jsonEncode(list));
+        favorite = true;
       }
     } catch (e) {
-      print(e);
+      print("ERROR: $e");
+      favorite = false;
     }
   }
 }

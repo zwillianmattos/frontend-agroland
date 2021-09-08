@@ -9,9 +9,12 @@ import '../models/news.dart';
 import './news_store.dart';
 import 'package:universal_io/io.dart' as IO;
 
+import 'card_news.dart';
+
 class NewsWidget extends StatefulWidget {
   final bool horizontal;
-  const NewsWidget({Key? key, this.horizontal = true}) : super(key: key);
+  final Function()? callback;
+  const NewsWidget({Key? key, this.horizontal = true, this.callback}) : super(key: key);
 
   @override
   _NewsWidgetState createState() => _NewsWidgetState();
@@ -44,71 +47,8 @@ class _NewsWidgetState extends ModularState<NewsWidget, NewsStore> {
               itemBuilder: (context, index) {
                 NewsModel item = controller.newsList![index];
 
-                return Container(
-                  margin: EdgeInsets.only(
-                      left: width >= 1024 && index == 0 ? 0 : 16,
-                      right: 16,
-                      bottom: 24,
-                      top: 0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: white,
-                    image: DecorationImage(
-                      image: NetworkImage(item.urlToImage.toString()),
-                      fit: BoxFit.cover,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.15),
-                        spreadRadius: 0,
-                        blurRadius: 5,
-                        offset: Offset(0, 0), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  height: !widget.horizontal
-                      ? width > 500
-                          ? sy(120)
-                          : 150
-                      : sy(200),
-                  width: width > 500 ? sx(100) : sx(width),
-                  child: InkWell(
-                    onTap: () async {
-                      await Modular.to.pushNamed(
-                          "/home/news/view/${item.hashCode}",
-                          arguments: item,
-                          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
-                              ? true
-                              : false);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            stops: [
-                              0.1,
-                              0.7
-                            ],
-                            colors: [
-                              Colors.black.withOpacity(0.8),
-                              Colors.transparent
-                            ]),
-                      ),
-                      child: Align(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            item.title.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        alignment: Alignment.bottomCenter,
-                      ),
-                    ),
-                  ),
-                );
+                return CardNewsWidget(
+                    newsModel: item, horizontal: widget.horizontal, callback: widget.callback,);
               });
         }),
       );
