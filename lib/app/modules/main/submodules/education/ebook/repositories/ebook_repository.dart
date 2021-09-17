@@ -46,15 +46,12 @@ class EbookRepository with Store implements EbookDatasource {
         });
       }
 
-      print(listaEbooks);
-
       return PaginateModel(
           currentPage: jsonResponse['data']['currentPage'],
           totalPages: jsonResponse['data']['totalPages'],
           totalItems: jsonResponse['data']['totalItems'],
           items: listaEbooks);
     } catch (e) {
-      print("erro");
       print(e);
 
       return PaginateModel(

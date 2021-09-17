@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ebook_view_store.dart';
+part of 'rating_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,16 +8,8 @@ part of 'ebook_view_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$EbookViewStore on _EbookViewStoreBase, Store {
-  Computed<dynamic>? _$getTotalRatingComputed;
-
-  @override
-  dynamic get getTotalRating => (_$getTotalRatingComputed ??= Computed<dynamic>(
-          () => super.getTotalRating,
-          name: '_EbookViewStoreBase.getTotalRating'))
-      .value;
-
-  final _$isLoadingAtom = Atom(name: '_EbookViewStoreBase.isLoading');
+mixin _$RatingStore on _RatingStoreBase, Store {
+  final _$isLoadingAtom = Atom(name: '_RatingStoreBase.isLoading');
 
   @override
   bool get isLoading {
@@ -32,7 +24,7 @@ mixin _$EbookViewStore on _EbookViewStoreBase, Store {
     });
   }
 
-  final _$ebookAtom = Atom(name: '_EbookViewStoreBase.ebook');
+  final _$ebookAtom = Atom(name: '_RatingStoreBase.ebook');
 
   @override
   Ebook? get ebook {
@@ -47,26 +39,26 @@ mixin _$EbookViewStore on _EbookViewStoreBase, Store {
     });
   }
 
-  final _$ratingTotalAtom = Atom(name: '_EbookViewStoreBase.ratingTotal');
+  final _$ratingAtom = Atom(name: '_RatingStoreBase.rating');
 
   @override
-  double get ratingTotal {
-    _$ratingTotalAtom.reportRead();
-    return super.ratingTotal;
+  RatingModel? get rating {
+    _$ratingAtom.reportRead();
+    return super.rating;
   }
 
   @override
-  set ratingTotal(double value) {
-    _$ratingTotalAtom.reportWrite(value, super.ratingTotal, () {
-      super.ratingTotal = value;
+  set rating(RatingModel? value) {
+    _$ratingAtom.reportWrite(value, super.rating, () {
+      super.rating = value;
     });
   }
 
-  final _$loadEbookAsyncAction = AsyncAction('_EbookViewStoreBase.loadEbook');
+  final _$sendRateAsyncAction = AsyncAction('_RatingStoreBase.sendRate');
 
   @override
-  Future loadEbook() {
-    return _$loadEbookAsyncAction.run(() => super.loadEbook());
+  Future sendRate() {
+    return _$sendRateAsyncAction.run(() => super.sendRate());
   }
 
   @override
@@ -74,8 +66,7 @@ mixin _$EbookViewStore on _EbookViewStoreBase, Store {
     return '''
 isLoading: ${isLoading},
 ebook: ${ebook},
-ratingTotal: ${ratingTotal},
-getTotalRating: ${getTotalRating}
+rating: ${rating}
     ''';
   }
 }

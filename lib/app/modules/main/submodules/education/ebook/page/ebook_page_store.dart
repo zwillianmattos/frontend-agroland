@@ -17,4 +17,10 @@ abstract class _EbookPageStoreBase with Store {
   ObservableList<Ebook>? ebooks;
 
   _EbookPageStoreBase(this.repository);
+
+  @action
+  loadEbooks() async {
+
+    return ebooks;
+  }
 }
