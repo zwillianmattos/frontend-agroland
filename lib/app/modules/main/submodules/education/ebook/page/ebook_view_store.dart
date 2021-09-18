@@ -22,7 +22,7 @@ abstract class _EbookViewStoreBase with Store {
   @observable
   Ebook? ebook;
 
-  @observable 
+  @observable
   double ratingTotal = 0.0;
 
   _EbookViewStoreBase(this.repository) {
@@ -38,19 +38,19 @@ abstract class _EbookViewStoreBase with Store {
         await this.repository.load(query: "?id=${Modular.args?.params['id']}");
 
     ebook = paginateModel.items?.first;
-    
+
     ratingTotal = 0.0;
-    
-    ebook!.rating!.forEach((Rating e) {
-      ratingTotal += e.rating!;
+
+    ebook?.rating?.forEach((Rating e) {
+      if (e.rating != null) {
+        ratingTotal += e.rating!;
+      }
     });
 
     ratingTotal = ratingTotal / ebook!.rating!.length;
     isLoading = false;
   }
 
-
   @computed
   get getTotalRating => ratingTotal;
-
 }

@@ -144,8 +144,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
                                     return RatingBar(
                                         itemSize: 25,
                                         ignoreGestures: true,
-                                        initialRating:
-                                            controller.getTotalRating,
+                                        initialRating: controller.ebook!.rating!.length == 0 ? 0 : controller.getTotalRating,
                                         direction: Axis.horizontal,
                                         allowHalfRating: false,
                                         itemCount: 5,
