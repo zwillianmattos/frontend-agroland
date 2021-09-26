@@ -48,11 +48,12 @@ class _EbookPageState extends ModularState<EbookPage, EbookPageStore> {
                     ],
                   ),
                   onTap: () async {
-                    Modular.to.pushNamed('view/${ebook.id}',
+                    await Modular.to.pushNamed('view/${ebook.id}',
                         arguments: ebook,
                         forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
                             ? true
                             : false);
+                    await controller.loadEbooks();
                   },
                 );
               },

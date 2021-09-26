@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
@@ -13,6 +14,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import 'ebook/models/rating.dart';
 import 'videos/models/video_model.dart';
 
 class EducationPage extends StatefulWidget {
@@ -36,9 +38,6 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
     } else {
       tabController = new TabController(length: 3, vsync: this);
     }
-
-
-    print(Modular.args?.data);
     // TODO: implement initState
     super.initState();
   }
@@ -304,7 +303,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                                 : (width * 0.28) * 2.8 / 6,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: controller.ebooks.length,
+                              itemCount: 5,
                               shrinkWrap: true,
                               padding: EdgeInsets.only(
                                   left: spacing_standard,
@@ -381,18 +380,27 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
               ],
             ),
             Observer(builder: (_) {
+              if (controller.isLoading == true) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
               return ListView(
                 physics: BouncingScrollPhysics(),
                 controller: controller.ebooksController,
                 children: controller.ebooksList
                     .map((element) => ListTile(
-                          onTap: () {
-                            Modular.to.pushNamed('ebook/view/${element.id}',
+                          onTap: () async {
+                            await Modular.to.pushNamed(
+                                'ebook/view/${element.id}',
                                 arguments: element,
                                 forRoot:
                                     (IO.Platform.isAndroid || IO.Platform.isIOS)
                                         ? true
                                         : false);
+
+                            await controller.refresh();
                           },
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 10.0),
@@ -415,8 +423,28 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                           ),
                           title: text(element.name.toString(),
                               fontSize: 14.0, maxLine: 10),
-                          subtitle: text(element.description.toString(),
-                              fontSize: 12.0),
+                          subtitle: RatingBar(
+                              itemSize: 15,
+                              ignoreGestures: true,
+                              initialRating: element.rating!.length <= 0
+                                  ? 0.0
+                                  : element.rating!.sumByDouble(
+                                          (Rating rate) => rate.rating!) /
+                                      element.rating!.length,
+                              direction: Axis.horizontal,
+                              allowHalfRating: false,
+                              itemCount: 5,
+                              ratingWidget: RatingWidget(
+                                  full: Icon(Icons.star, color: Colors.orange),
+                                  half: Icon(
+                                    Icons.star_half,
+                                    color: Colors.orange,
+                                  ),
+                                  empty: Icon(
+                                    Icons.star_outline,
+                                    color: Colors.orange,
+                                  )),
+                              onRatingUpdate: (value) {}),
                         ))
                     .toList(),
               );

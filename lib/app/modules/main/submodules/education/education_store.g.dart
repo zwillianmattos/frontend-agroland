@@ -108,6 +108,13 @@ mixin _$EducationStore on _EducationStoreBase, Store {
     return _$loadBannersAsyncAction.run(() => super.loadBanners());
   }
 
+  final _$refreshAsyncAction = AsyncAction('_EducationStoreBase.refresh');
+
+  @override
+  Future refresh() {
+    return _$refreshAsyncAction.run(() => super.refresh());
+  }
+
   final _$loadPageAsyncAction = AsyncAction('_EducationStoreBase.loadPage');
 
   @override
