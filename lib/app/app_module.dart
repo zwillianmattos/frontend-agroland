@@ -11,13 +11,13 @@ import 'modules/account/repositories/account_repository.dart';
 
 class AppModule extends Module {
   final List<Bind> binds = [
+    BindInject((i) => LocationService(), isSingleton: true, isLazy: false),
     BindInject(
       (i) => Dio(BaseOptions(baseUrl: API_ENDPOINT)),
     ),
     BindInject((i) => AccountRepository(i<Dio>())),
     BindInject((i) => UserPreferencesStore(i<AccountRepository>()),
         isSingleton: true, isLazy: false),
-    BindInject((i) => LocationService()),
     BindInject((i) => NotificationService(), isSingleton: true, isLazy: false),
   ];
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:mobx/mobx.dart';
@@ -51,6 +52,30 @@ abstract class ThreadViewStorePageBase with Store {
           body: comment,
         ),
         thread: thread);
+    return await loadThreadDetail();
+  }
+
+  @action
+  removeComment(String replieId) async {
+    try {
+      var param = Modular.args!.params;
+      await repository.delete(
+          channelId: param['channel'],
+          threadId: param['thread'],
+          replieId: replieId);
+
+      EasyLoading.showSuccess("Comentário excluído");
+    } catch (e) {
+      EasyLoading.showError(e.toString());
+    }
+    return await loadThreadDetail();
+  }
+
+  @action
+  Future<void> like({
+    required Thread thread,
+  }) async {
+    await repository.like(thread: thread);
     await loadThreadDetail();
   }
 }

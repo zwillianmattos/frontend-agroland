@@ -22,9 +22,6 @@ abstract class _WeatherStoreBase with Store {
   @action
   loadWeather() async {
     try {
-      print("CARREGANDO TEMPO");
-      print(this.isLoading);
-      print(this.wheater);
       this.isLoading = true;
       this.wheater = await weatherRepository.get();
     } catch (e) {

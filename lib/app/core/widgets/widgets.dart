@@ -854,8 +854,10 @@ Widget formField(
   IconData? suffixIcon,
   maxLine = 1,
   suffixIconSelector,
+  String? initialValue,
 }) {
   return TextFormField(
+    enabled: isEnabled,
     controller: controller,
     obscureText: isPassword && isPasswordVisible,
     cursorColor: color_colorPrimary,
@@ -870,6 +872,7 @@ Widget formField(
         FocusScope.of(context).requestFocus(nextFocus);
       }
     },
+    initialValue: initialValue ?? "",
     decoration: InputDecoration(
       focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: color_colorPrimary)),

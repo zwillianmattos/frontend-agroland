@@ -197,7 +197,7 @@ class _CotacaoWidgetState extends ModularState<CotacaoWidget, CotacaoStore> {
                   ]);
                 }),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 56),
             ]);
           }),
         ],
