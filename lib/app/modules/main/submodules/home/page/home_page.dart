@@ -107,6 +107,8 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  if(IO.Platform.isIOS)
+                    SizedBox(height: 40),
                   WeatherWidget(),
                   buttons,
                   headingWidViewAll(context, "Notícias", () {

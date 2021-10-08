@@ -2,6 +2,7 @@ import 'package:plant_care/app/modules/account/models/user.dart';
 
 import 'channel.dart';
 import 'replies_model.dart';
+import 'thread_likes_model.dart';
 
 class Thread {
   int? id;
@@ -12,6 +13,8 @@ class Thread {
   User? user;
   Channel? channel;
   List<Replies>? replies;
+  List<ThreadLike>? threadLikes;
+
   Thread(
       {this.id,
       this.title,
@@ -20,7 +23,8 @@ class Thread {
       this.updatedAt,
       this.user,
       this.channel,
-      this.replies});
+      this.replies,
+      this.threadLikes});
 
   Thread.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,6 +39,12 @@ class Thread {
       replies = <Replies>[];
       json['Replies'].forEach((v) {
         replies!.add(new Replies.fromJson(v));
+      });
+    }
+    if (json['ThreadLikes'] != null) {
+      threadLikes = <ThreadLike>[];
+      json['ThreadLikes'].forEach((v) {
+        threadLikes!.add(new ThreadLike.fromJson(v));
       });
     }
   }
@@ -54,6 +64,9 @@ class Thread {
     }
     if (this.replies != null) {
       data['Replies'] = this.replies!.map((v) => v.toJson()).toList();
+    }
+    if (this.threadLikes != null) {
+      data['ThreadLikes'] = this.threadLikes!.map((v) => v.toJson()).toList();
     }
     return data;
   }

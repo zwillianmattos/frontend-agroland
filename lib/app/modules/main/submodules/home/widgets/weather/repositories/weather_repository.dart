@@ -21,7 +21,7 @@ class WeatherRepository extends Disposable {
   init() async {
     try {
       var dir = await pp.getApplicationDocumentsDirectory();
-      cacheStore = DbCacheStore(databasePath: dir.path, logStatements: true);
+      cacheStore = DbCacheStore(databasePath: dir.path, logStatements: false);
       cacheOptions = CacheOptions(
         store: cacheStore,
         policy: CachePolicy.request,
@@ -46,8 +46,7 @@ class WeatherRepository extends Disposable {
     Options? options;
 
     if (cacheOptions != null) {
-      options =
-          cacheOptions!.copyWith(policy: CachePolicy.forceCache).toOptions();
+      options = cacheOptions!.copyWith(policy: CachePolicy.forceCache).toOptions();
     }
 
     Response response = await _http.get(

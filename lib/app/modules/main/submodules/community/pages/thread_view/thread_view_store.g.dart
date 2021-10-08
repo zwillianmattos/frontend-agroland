@@ -87,6 +87,21 @@ mixin _$ThreadViewStorePage on ThreadViewStorePageBase, Store {
         .run(() => super.sendComment(comment: comment, thread: thread));
   }
 
+  final _$removeCommentAsyncAction =
+      AsyncAction('ThreadViewStorePageBase.removeComment');
+
+  @override
+  Future removeComment(String replieId) {
+    return _$removeCommentAsyncAction.run(() => super.removeComment(replieId));
+  }
+
+  final _$likeAsyncAction = AsyncAction('ThreadViewStorePageBase.like');
+
+  @override
+  Future<void> like({required Thread thread}) {
+    return _$likeAsyncAction.run(() => super.like(thread: thread));
+  }
+
   final _$ThreadViewStorePageBaseActionController =
       ActionController(name: 'ThreadViewStorePageBase');
 

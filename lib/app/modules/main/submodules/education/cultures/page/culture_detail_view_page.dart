@@ -35,7 +35,7 @@ class _CultureDetailViewPageState
               icon: Icon(Icons.share),
               onPressed: () {
                 Share.share(
-                    '${controller.content!.description} - ${WEBSITEDOMAIN}${Modular.to.path}');
+                    '${controller.content!.description} - ${WEBSITEDOMAIN}#/${Modular.to.path}');
               },
             ),
           ]),

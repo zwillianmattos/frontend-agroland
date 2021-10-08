@@ -13,7 +13,10 @@ part 'thread_repository.g.dart';
 abstract class ThreadDatasource {
   Future<PaginateModel> load();
   Future<List<dynamic>?> store();
-  Future<List<dynamic>?> delete();
+  Future<List<dynamic>?> delete(
+      {required String channelId,
+      required String threadId,
+      required String replieId});
 }
 
 @Injectable(singleton: false)
@@ -82,7 +85,17 @@ class ThreadRepository implements ThreadDatasource {
   Future<List<dynamic>?> store() async {}
 
   @override
-  Future<List<dynamic>?> delete() async {}
+  Future<List<dynamic>?> delete(
+      {required String channelId,
+      required String threadId,
+      required String replieId}) async {
+    Response response = await dio.delete(
+      "threads/$channelId/$threadId/$replieId",
+      options: await Modular.get<UserPreferencesStore>().authHeader,
+    );
+    var jsonResponse = response.data;
+    if (jsonResponse['status'] != true) throw (jsonResponse['message']);
+  }
 
   @override
   Future<Replies?> send({
@@ -94,19 +107,39 @@ class ThreadRepository implements ThreadDatasource {
     try {
       Response response = await dio.post(
           "threads/${thread.channel}/${thread.id}/replies",
-          options: Modular.get<UserPreferencesStore>().authHeader,
+          options: await Modular.get<UserPreferencesStore>().authHeader,
           data: {
             'body': replie.body,
           });
-
+      print("threads/${thread.channel}/${thread.id}/replies");
       var jsonResponse = response.data;
       replieData = Replies.fromJson(jsonResponse['replie']);
-
-      print(replieData.toJson());
     } catch (e) {
       print(e);
     }
 
     return replieData;
+  }
+
+  Future<bool> like({
+    required Thread thread,
+  }) async {
+    try {
+      print("${Modular.get<UserPreferencesStore>().authHeader}");
+
+      print(
+          "${dio.options.baseUrl}threads/${thread.channel}/${thread.id}/like");
+      Response response = await dio.post(
+          "threads/${thread.channel}/${thread.id}/like",
+          options: await Modular.get<UserPreferencesStore>().authHeader,
+          data: {});
+
+      var jsonResponse = response.data;
+      if (jsonResponse['status'] == true) return true;
+    } catch (e) {
+      print(e);
+    }
+
+    return false;
   }
 }

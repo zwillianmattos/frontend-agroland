@@ -81,6 +81,8 @@ class _ProfileEditPageState
                             "Email",
                             onSaved: (String? value) {},
                             suffixIcon: Icons.mail_outline,
+                            isEnabled: false,
+                            initialValue: controller.account?.email
                           ).paddingBottom(spacing_standard_new),
                           formField(
                             context,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:plant_care/app/core/models/account.dart';
 import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
@@ -65,13 +66,21 @@ abstract class _UserPreferencesStoreBase with Store {
     });
   }
 
-  isAuth() async {
+  Future<bool> isAuth({
+    bool redirect = false
+  }) async {
     String? account = await LocalStorage.getValue<String>("user");
     // Check token is not null
     if (account == '' || account == null) return false;
     // Convert data to json
     var data = jsonDecode(account);
     this.accountModel = AccountModel.fromJson(data);
+
+    if( redirect ) {
+      Modular.to.pushNamed('/account');
+    }
+
+    return true;
   }
 
   refreshProducerUser(ProducerUser producerUser) {
@@ -84,6 +93,7 @@ abstract class _UserPreferencesStoreBase with Store {
 
   logOff() async {
     await LocalStorage.setValue("user", "");
+    Modular.to.pop();
     this.accountModel = null;
   }
 
