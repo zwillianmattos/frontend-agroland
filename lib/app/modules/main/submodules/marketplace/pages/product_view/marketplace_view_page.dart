@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
@@ -262,7 +263,8 @@ class _MarketplaceClassificadoViewPageState
                                     text(
                                         "${widget.classificado.producerUser!.fantasyName}",
                                         isLongText: true,
-                                        fontSize: textSizeNormal),
+                                        maxLine: 2,
+                                        fontSize: textSizeSmall),
                                     text(
                                         "${widget.classificado.producerUser!.cnpj}",
                                         fontSize: textSizeSmall,
@@ -291,31 +293,31 @@ class _MarketplaceClassificadoViewPageState
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            height: 150,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.25),
-                      spreadRadius: 2,
-                      blurRadius: 19,
-                      offset: Offset(4, 6), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover,
-                  imageUrl:
-                      "https://www.google.com/maps/api/staticmap?key=AIzaSyALrSTy6NpqdhIOUs3IQMfvjh71td2suzY&center=${widget.classificado.producerUser!.location}8&zoom=12&size=600x300&markers=color:red%7Clabel:${widget.classificado.producerUser!.corporateName}%7C${widget.classificado.producerUser!.location}",
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   padding: const EdgeInsets.all(16.0),
+          //   height: 150,
+          //   child: ClipRRect(
+          //     borderRadius: BorderRadius.all(Radius.circular(8)),
+          //     child: Container(
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.all(Radius.circular(10)),
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: Colors.grey.withOpacity(0.25),
+          //             spreadRadius: 2,
+          //             blurRadius: 19,
+          //             offset: Offset(4, 6), // changes position of shadow
+          //           ),
+          //         ],
+          //       ),
+          //       child: CachedNetworkImage(
+          //         fit: BoxFit.cover,
+          //         imageUrl:
+          //             "https://www.google.com/maps/api/staticmap?key=$API_GOOGLE_MAPS&center=${widget.classificado.producerUser!.location}&zoom=12&size=600x300&markers=color:red%7Clabel:${widget.classificado.producerUser!.corporateName}%7C${widget.classificado.producerUser!.location}",
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Container(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: Column(
