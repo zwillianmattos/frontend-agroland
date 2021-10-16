@@ -121,8 +121,9 @@ class CardAnuncio extends StatelessWidget {
                           padding: EdgeInsets.only(
                               left: spacing_control, right: spacing_control),
                           decoration: boxDecoration(
-                              radius: spacing_control,
-                              bgColor:  Theme.of(context).primaryColor,),
+                            radius: spacing_control,
+                            bgColor: Theme.of(context).primaryColor,
+                          ),
                           child: text(
                               classificado
                                       .productCategories!.first.description ??
@@ -130,13 +131,15 @@ class CardAnuncio extends StatelessWidget {
                               fontSize: textSizeSmall,
                               isCentered: true,
                               isLongText: true,
-                              textColor: Theme.of(context).textTheme.bodyText1!.color),
+                              textColor:
+                                  Theme.of(context).textTheme.bodyText1!.color),
                         ),
                       ),
-                    Expanded(child: Container()),
-                    Expanded(
-                        child: Icon(Icons.favorite_border,
-                            color: color_icon_color))
+                    Expanded(flex: 3, child: Container()),
+                    // Expanded(child: Container()),
+                    // Expanded(
+                    //     child: Icon(Icons.favorite_border,
+                    //         color: color_icon_color))
                   ],
                 ),
                 SizedBox(height: 4),

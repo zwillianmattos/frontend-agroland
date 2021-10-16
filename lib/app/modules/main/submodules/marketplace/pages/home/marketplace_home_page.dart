@@ -194,37 +194,6 @@ class _MarketplaceHomePageState
                   ],
                 ),
               ),
-              Observer(
-                builder: (_) {
-                  if (controller.categories == null) {
-                    return Container();
-                  }
-
-                  return Container(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: controller.categories!
-                              .map((element) => appButton2(
-                                    onPressed: () {
-                                      controller.selectCategory(element);
-                                    },
-                                    textContent: element.description.toString(),
-                                    radius: 0.0,
-                                    color: Theme.of(context).textTheme.bodyText1!.color,
-                                    bgColors: controller.indexCategory ==
-                                            controller.categories!
-                                                .indexOf(element)
-                                        ? Theme.of(context).primaryColor
-                                        : Theme.of(context).backgroundColor,
-                                  ))
-                              .toList()),
-                    ),
-                  );
-                },
-              ),
               appLabelViewAll("Mais Recentes"),
               Observer(builder: (_) {
                 if (controller.isLoading) {
@@ -260,8 +229,6 @@ class _MarketplaceHomePageState
                   ),
                 );
               }),
-              appLabelViewAll("Visto recentemente"),
-              appLabelViewAll("Favoritos"),
             ],
           ),
         ),
