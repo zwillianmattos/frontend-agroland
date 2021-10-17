@@ -1,4 +1,0 @@
-0 Apple___healthy
-1 Apple___Apple_scab
-2 Apple___Cedar_apple_rust
-3 Apple___Black_rot

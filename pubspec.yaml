@@ -81,8 +81,10 @@ flutter:
     - images/logo.png
     - images/background.jpg
     - images/LikeButton/image/grey.jpg
-    - assets/data/apple_label.txt
-    - assets/data/apple.tflite
+    - assets/apple_label.txt
+    - assets/apple.tflite
+    - assets/data.tflite
+    - assets/label.txt
   fonts:
     - family: Product Sans
       fonts:

@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/tools/ui/home_view.dart';
+import 'package:plant_care/app/modules/main/submodules/tools/home_view.dart';
 
 class ToolsModule extends Module {
   @override
