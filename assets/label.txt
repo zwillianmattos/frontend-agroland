@@ -1,0 +1,16 @@
+Tomato Healthy
+Tomato Septoria Leaf Spot
+Tomato Bacterial Spot
+Tomato Blight
+Cabbage Healthy
+Tomato Spider Mite
+Tomato Leaf Mold
+Tomato_Yellow Leaf Curl Virus
+Soy_Frogeye_Leaf_Spot
+Soy_Downy_Mildew
+Maize_Ravi_Corn_Rust
+Maize_Healthy
+Maize_Grey_Leaf_Spot
+Maize_Lethal_Necrosis
+Soy_Healthy
+Cabbage Black Rot

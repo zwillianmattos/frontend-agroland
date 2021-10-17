@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -20,6 +21,9 @@ abstract class _UserPreferencesStoreBase with Store {
 
   final AccountRepository accountRepository;
 
+  // Global Camera object
+  List<CameraDescription>? cameras;
+
   @observable
   bool darkTheme = false;
 
@@ -29,12 +33,19 @@ abstract class _UserPreferencesStoreBase with Store {
 
     // load data from local storage
     _loadFromLocalStorage();
+    loadCameras();
   }
+
+  Future<List<CameraDescription>?> loadCameras() async {
+    cameras = await availableCameras();
+    return cameras;
+  }
+
+  get retornaCameras async => await loadCameras();
 
   @action
   Future<void> _loadFromLocalStorage() async {
     var data = await LocalStorage.getValue<bool>('dark_theme');
-    print("buscou do banco $data");
     if (data == null) {
       darkTheme = false;
     } else {
@@ -66,9 +77,7 @@ abstract class _UserPreferencesStoreBase with Store {
     });
   }
 
-  Future<bool> isAuth({
-    bool redirect = false
-  }) async {
+  Future<bool> isAuth({bool redirect = false}) async {
     String? account = await LocalStorage.getValue<String>("user");
     // Check token is not null
     if (account == '' || account == null) return false;
@@ -76,7 +85,7 @@ abstract class _UserPreferencesStoreBase with Store {
     var data = jsonDecode(account);
     this.accountModel = AccountModel.fromJson(data);
 
-    if( redirect ) {
+    if (redirect) {
       Modular.to.pushNamed('/account');
     }
 

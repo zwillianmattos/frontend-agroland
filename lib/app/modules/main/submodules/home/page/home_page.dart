@@ -28,11 +28,18 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              // CardButton(
-              //   icon: PlatformSvg.asset("images/camera_bulk.svg",
-              //       context: context),
-              //   description: "Camera",
-              // ),
+              CardButton(
+                  icon: PlatformSvg.asset(
+                    "images/camera_bulk.svg",
+                    context: context,
+                  ),
+                  description: "Camera",
+                  onPressed: () {
+                    Modular.to.pushNamed('/tools',
+                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                            ? true
+                            : false);
+                  }),
               CardButton(
                 icon: PlatformSvg.asset(
                   "images/document_bulk.svg",
@@ -40,8 +47,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 ),
                 description: "Ebooks",
                 onPressed: () {
-                  Modular.get<BottomNavigatorStore>()
-                      .changePage(3, arguments: {
+                  Modular.get<BottomNavigatorStore>().changePage(3, arguments: {
                     'tab_index': 1,
                   });
                 },
@@ -107,21 +113,17 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  if(IO.Platform.isIOS)
-                    SizedBox(height: 40),
+                  if (IO.Platform.isIOS) SizedBox(height: 40),
                   WeatherWidget(),
                   buttons,
                   headingWidViewAll(context, "Notícias", () {
-                    Modular.to.pushNamed('/home/news', 
-                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                    Modular.to.pushNamed('/home/news',
+                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
                             ? true
-                            : false
-                    );
+                            : false);
                   }),
                   NewsWidget(),
-                  headingWidViewAll(context, "Cotação", () {
-
-                  }),
+                  headingWidViewAll(context, "Cotação", () {}),
                   CotacaoWidget(),
                   SizedBox(height: 40),
                 ],

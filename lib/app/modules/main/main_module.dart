@@ -7,6 +7,7 @@ import 'bottom_navigator_widget.dart';
 import 'submodules/community/community_module.dart';
 import 'submodules/configurations/configurations_page.dart';
 import 'submodules/education/education_module.dart';
+import 'submodules/tools/tools_module.dart';
 
 class MainModule extends Module {
   @override
@@ -34,8 +35,12 @@ class MainModule extends Module {
             module: MarketplaceModule(), transition: TransitionType.fadeIn),
         ModuleRoute('/cultures',
             module: CulturesModule(), transition: TransitionType.fadeIn),
-        ChildRoute('/configurations',
-            child: (_, __) => ConfigurationPage(),),
+        ChildRoute(
+          '/configurations',
+          child: (_, __) => ConfigurationPage(),
+        ),
+        ModuleRoute('/tools',
+            module: ToolsModule(), transition: TransitionType.fadeIn),
       ],
     ),
   ];
