@@ -7,6 +7,7 @@ import 'package:plant_care/app/modules/account/submodules/auth/auth_store.dart';
 import 'package:plant_care/app/modules/account/submodules/auth/submodules/signin/signin_store.dart';
 import 'package:plant_care/app/modules/account/submodules/auth/submodules/signup/signup_store.dart';
 import 'package:plant_care/app/modules/account/submodules/auth/auth_page.dart';
+import 'package:plant_care/app/modules/account/submodules/splash_auth.dart';
 
 class AuthModule extends Module {
   @override
@@ -23,6 +24,7 @@ class AuthModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, __) => AuthPage()),
+    ChildRoute(Modular.initialRoute, child: (_, __) => SplashPage()),
+    ChildRoute('/usr', child: (_, __) => AuthPage()),
   ];
 }

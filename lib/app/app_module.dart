@@ -8,6 +8,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'core/env/variables.dart';
 import 'core/services/notifications/notification_service.dart';
 import 'modules/account/repositories/account_repository.dart';
+import 'modules/splash/splash_page.dart';
 
 class AppModule extends Module {
   final List<Bind> binds = [
@@ -23,7 +24,7 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    // ChildRoute('/splash', child: (_, __) => SplashPage()),
+    ChildRoute('/splash', child: (_, __) => SplashPage()),
     ModuleRoute(
       '/',
       module: MainModule(),

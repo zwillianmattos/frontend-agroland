@@ -72,38 +72,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
 
         return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              // SliverAppBar(
-              //   backgroundColor: color_app_background,
-              //   floating: false,
-              //   pinned: false,
-              //   leading: IconButton(
-              //       icon: PlatformSvg.asset("images/user_broken.svg",
-              //           context: context),
-              //       onPressed: () async {
-              //         if (Modular.get<UserPreferencesStore>().getUser != null) {
-              //           Modular.to.pushNamed('/account/profile');
-              //         } else {
-              //           Modular.to.pushNamed('/account/auth');
-              //         }
-              //       }),
-              //   centerTitle: true,
-              //   title: Image.asset(
-              //     'images/logo.png',
-              //     scale: 2.5,
-              //   ),
-              //   actions: [
-              //     IconButton(
-              //         icon: PlatformSvg.asset("images/search_broken.svg",
-              //             context: context),
-              //         onPressed: () {}),
-              //     IconButton(
-              //         icon: PlatformSvg.asset("images/notification_broken.svg",
-              //             context: context),
-              //         onPressed: () {})
-              //   ],
-              // ),
-            ];
+            return [];
           },
           body: Container(
             width: width > 500 ? sx(250) : width,
@@ -123,7 +92,8 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                             : false);
                   }),
                   NewsWidget(),
-                  headingWidViewAll(context, "Cotação", () {}),
+                  headingWidViewAll(context, "Cotação", () {},
+                      desativaBotao: true),
                   CotacaoWidget(),
                   SizedBox(height: 40),
                 ],
