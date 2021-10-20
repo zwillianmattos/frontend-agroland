@@ -3,11 +3,15 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 import 'package:image/image.dart' as img;
-import 'classifier.dart';
-import 'classifier_quant.dart';
+
+import './plant_diseases/classifier.dart'
+    if (dart.library.io) './plant_diseases/classifier.dart'
+    if (dart.library.js) './plant_disease/unsuported_platform.dart'
+    if (dart.library.html) './plant_disease/unsuported_platform.dart';
+
+import './plant_diseases/classifier_quant.dart';
 
 /// [HomeView] stacks [CameraView] and [BoxWidget]s with bottom sheet for stats
 class HomeView extends StatefulWidget {
@@ -25,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
 
   img.Image? fox;
 
-  Category? category;
+  dynamic category;
 
   @override
   void initState() {

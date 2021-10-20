@@ -2,10 +2,11 @@ import 'dart:math';
 
 import 'package:image/image.dart';
 import 'package:collection/collection.dart';
+import 'package:plant_care/app/modules/main/submodules/tools/plant_diseases/recognition_interface.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
-abstract class Classifier {
+abstract class Classifier implements IRecognition {
   late Interpreter interpreter;
   late InterpreterOptions _interpreterOptions;
 
@@ -81,7 +82,7 @@ abstract class Classifier {
         .process(_inputImage);
   }
 
-  Category predict(Image image) {
+  dynamic predict(Image image) {
     final pres = DateTime.now().millisecondsSinceEpoch;
     _inputImage = TensorImage(_inputType);
     _inputImage.loadImage(image);
