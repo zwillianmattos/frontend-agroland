@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Image.asset(
               'images/logo.png',
@@ -38,46 +38,42 @@ class _SplashPageState extends State<SplashPage> {
               padding: const EdgeInsets.all(spacing_standard_new),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  text("Bem vindo",
-                          textColor: color_white,
-                          fontSize: textSizeXXLarge,
-                          fontFamily: fontSemibold,
-                          isCentered: true,
-                          isLongText: true)
-                      .paddingOnly(
-                          left: spacing_control, right: spacing_control),
                   SizedBox(
                     height: spacing_xxLarge,
                   ),
-                  Container(
-                      width: width * 0.35,
-                      child: appButton2(
-                        textContent: "Entrar",
-                        onPressed: (() {
-                          Modular.to.pushReplacementNamed('/account/auth',
-                              arguments: <String, bool>{
-                                'signup': false,
-                                'signin': true,
-                              });
-                        }),
-                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 32.0, right: 32.0, bottom: 16.0),
+                    child: appButton3(
+                      textContent: "Entrar",
+                      onPressed: (() {
+                        Modular.to.pushNamed('/account/auth/usr',
+                            arguments: <String, bool>{
+                              'signup': false,
+                              'signin': true,
+                            });
+                      }),
+                    ),
+                  ),
                   SizedBox(
                     height: spacing_standard,
                   ),
-                  FittedBox(
-                      child: appButton3(
-                    textContent: "Cadastrar",
-                    onPressed: (() {
-                      Modular.to.pushReplacementNamed('/account/auth',
-                          arguments: <String, bool>{
-                            'signup': true,
-                            'signin': false,
-                          });
-                    }),
-                  ))
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 32.0, right: 32.0, bottom: 16.0),
+                    child: appButton3(
+                        textContent: "Cadastrar",
+                        onPressed: (() {
+                          Modular.to.pushNamed('/account/auth/usr',
+                              arguments: <String, bool>{
+                                'signup': true,
+                                'signin': false,
+                              });
+                        })),
+                  ),
                 ],
               ).paddingOnly(bottom: spacing_xxLarge),
             )

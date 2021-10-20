@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/models/account.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -25,11 +23,11 @@ class _SplashPageState extends State<SplashPage> {
             builder: (BuildContext context, double? scale, Widget? child) {
               return Transform.scale(scale: scale!, child: child);
             },
-            duration: Duration(milliseconds: 600),
+            duration: Duration(milliseconds: 2000),
             tween: _scaleTween,
             child: Image.asset(
               'images/logo.png',
-              scale: 2,
+              scale: 1.5,
             ),
             onEnd: () {
               Modular.to.pushReplacementNamed('/');

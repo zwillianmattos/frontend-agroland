@@ -22,10 +22,10 @@ class AppWidget extends StatelessWidget {
         dividerColor: Colors.black12,
         fontFamily: 'Product Sans',
         textTheme: TextTheme(
-            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Product Sans'),
-          ),
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Product Sans'),
+        ),
       );
 
       final lightTheme = ThemeData(
@@ -39,16 +39,15 @@ class AppWidget extends StatelessWidget {
         dividerColor: Colors.white54,
         fontFamily: 'Product Sans',
         textTheme: TextTheme(
-            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Product Sans'),
-          ),
-
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Product Sans'),
+        ),
       );
 
       return MaterialApp(
         title: 'Agro Land',
-        initialRoute: '/',
+        initialRoute: '/splash',
         debugShowCheckedModeBanner: false,
         builder: EasyLoading.init(),
         theme: userStore.darkTheme ? darkTheme : lightTheme,

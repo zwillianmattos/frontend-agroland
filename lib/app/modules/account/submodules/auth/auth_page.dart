@@ -17,7 +17,6 @@ class AuthPage extends StatefulWidget {
   _AuthPageState createState() => _AuthPageState();
 }
 
-
 class _AuthPageState extends ModularState<AuthPage, AuthStore> {
   @override
   Widget build(BuildContext context) {
@@ -65,7 +64,6 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
     return Scaffold(
       // backgroundColor: color_app_background,
       appBar: AppBar(
-        leading: BackButton(),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Image.asset(
@@ -77,7 +75,9 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            padding: width <= 540 ?  EdgeInsets.zero : EdgeInsets.symmetric(horizontal: width * 0.350),
+            padding: width <= 540
+                ? EdgeInsets.zero
+                : EdgeInsets.symmetric(horizontal: width * 0.350),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

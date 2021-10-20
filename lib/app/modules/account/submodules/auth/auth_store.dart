@@ -10,15 +10,18 @@ abstract class AuthStoreBase with Store {
   bool isSignUp = false;
 
   @observable
-  bool isSignIn = true;
+  bool isSignIn = false;
 
   AuthStoreBase() {
-    if (Modular.args?.data == null || Modular.args?.data?['isSignIn'] == true) {
+    if (Modular.args?.data == null || Modular.args?.data?['signin'] == true) {
       isSignIn = true;
       isSignUp = false;
-    } else {
+    } else if (Modular.args?.data?['signup'] == true) {
       isSignIn = false;
       isSignUp = true;
+    } else {
+      isSignIn = true;
+      isSignUp = false;
     }
   }
 }

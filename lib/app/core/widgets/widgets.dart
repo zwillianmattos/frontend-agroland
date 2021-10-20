@@ -171,7 +171,7 @@ class text extends StatelessWidget {
         fontFamily: fontFamily ?? fontRegular,
         fontSize: fontSize,
         fontWeight: bold ? FontWeight.bold : null,
-        color: Theme.of(context).textTheme.button!.color,
+        color: textColor ?? Theme.of(context).textTheme.button!.color,
         height: 1.5,
         letterSpacing: latterSpacing,
         decoration:
@@ -470,7 +470,7 @@ class appButtonState2 extends State<appButton2> {
         padding: EdgeInsets.fromLTRB(16, 6, 16, 6),
         alignment: Alignment.center,
         child: text(widget.textContent,
-            textColor: widget.isStroked ? color_textColorPrimary : color_white,
+            textColor: Theme.of(context).dialogBackgroundColor,
             fontSize: textSizeLargeMedium,
             isCentered: true,
             fontFamily: fontSemibold,
@@ -508,6 +508,7 @@ class appButton3State extends State<appButton3> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: Container(
+        height: widget.height,
         padding: EdgeInsets.fromLTRB(16, 6, 16, 6),
         alignment: Alignment.center,
         child: text(widget.textContent,
@@ -610,7 +611,7 @@ class CardButton extends StatelessWidget {
       return InkWell(
         onTap: onPressed,
         child: Container(
-          margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
+          margin: EdgeInsets.only(left: 13, right: 1, bottom: 16, top: 16),
           padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
           width: sx(width) > 500 ? sx(100) : width / 2.35,
           decoration: BoxDecoration(
@@ -1066,9 +1067,9 @@ Widget hdWidget(context) {
   );
 }
 
-Widget headingWidViewAll(BuildContext context, var titleText, Function()? callback, {
-  limiter = false
-}) {
+Widget headingWidViewAll(
+    BuildContext context, var titleText, Function()? callback,
+    {limiter = false, desativaBotao = false}) {
   return RelativeBuilder(builder: (context, height, width, sy, sx) {
     return Container(
       width: width >= 1024 && limiter ? 1024 : width,
@@ -1082,13 +1083,14 @@ Widget headingWidViewAll(BuildContext context, var titleText, Function()? callba
                 fontSize: textSizeNormal,
                 fontFamily: fontBold),
           ),
-          InkWell(
-              onTap: callback,
-              child: itemSubTitle(context, "Ver mais",
-                      fontsize: textSizeMedium,
-                      fontFamily: fontMedium,
-                      colorThird: true)
-                  .paddingAll(spacing_control_half))
+          if (!desativaBotao)
+            InkWell(
+                onTap: callback,
+                child: itemSubTitle(context, "Ver mais",
+                        fontsize: textSizeMedium,
+                        fontFamily: fontMedium,
+                        colorThird: true)
+                    .paddingAll(spacing_control_half))
         ],
       ),
     );
