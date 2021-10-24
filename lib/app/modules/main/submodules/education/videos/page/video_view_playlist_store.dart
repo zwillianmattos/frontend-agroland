@@ -88,6 +88,8 @@ abstract class _VideoViewPlaylistStoreBase with Store {
             showFullscreenButton: true,
             mute: false,
             autoPlay: true,
+            privacyEnhanced: true,
+            useHybridComposition: kIsWeb ? true : false,
             showVideoAnnotations: false,
             strictRelatedVideos: false,
             desktopMode: kIsWeb ? true : false,
@@ -116,8 +118,7 @@ abstract class _VideoViewPlaylistStoreBase with Store {
 
     List<Map> listMap = recentVideos.map((Movie e) => e.toJson()).toList();
     print(listMap);
-    await LocalStorage.setValue("recent_videos",
-        jsonEncode(listMap));
+    await LocalStorage.setValue("recent_videos", jsonEncode(listMap));
     return true;
   }
 

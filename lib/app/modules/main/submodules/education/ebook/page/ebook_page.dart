@@ -19,7 +19,7 @@ class _EbookPageState extends ModularState<EbookPage, EbookPageStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: text("Ebooks"),
+        title: text("Livros"),
         backgroundColor: color_colorPrimary,
       ),
       body: Observer(

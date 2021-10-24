@@ -34,7 +34,6 @@ class Ebook {
     if (json['Ratings'] != null) {
       rating = <Rating>[];
       json['Ratings'].forEach((v) {
-        print(v);
         rating!.add(new Rating.fromJson(v));
       });
     }

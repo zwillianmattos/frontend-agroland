@@ -24,7 +24,7 @@ abstract class _CulturesCategoryStoreBase with Store {
   @action
   loadCultureCategories() async {
     var cultureId = Modular.args?.params['culture'];
-    print(cultureId);
-    this.culture = await this.repository.getCultureCategories(cultureId: cultureId);
+    this.culture =
+        await this.repository.getCultureCategories(cultureId: cultureId);
   }
 }

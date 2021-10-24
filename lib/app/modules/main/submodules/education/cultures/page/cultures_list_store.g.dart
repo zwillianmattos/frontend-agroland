@@ -24,6 +24,21 @@ mixin _$CulturesListStore on _CulturesListStoreBase, Store {
     });
   }
 
+  final _$isLoadingAtom = Atom(name: '_CulturesListStoreBase.isLoading');
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   final _$loadCulturesAsyncAction =
       AsyncAction('_CulturesListStoreBase.loadCultures');
 
@@ -35,7 +50,8 @@ mixin _$CulturesListStore on _CulturesListStoreBase, Store {
   @override
   String toString() {
     return '''
-cultures: ${cultures}
+cultures: ${cultures},
+isLoading: ${isLoading}
     ''';
   }
 }

@@ -236,8 +236,8 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                     EdgeInsets.only(left: spacing_large, right: spacing_large),
                 tabs: [
                   Tab(child: text("Home")),
-                  Tab(child: text("Ebooks")),
-                  Tab(child: text("Videos")),
+                  Tab(child: text("Livros")),
+                  Tab(child: text("Vídeos")),
                 ],
               ),
             ),
@@ -369,7 +369,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                           ),
                   );
                 }),
-                appLabelViewAll("Videos"),
+                appLabelViewAll("Vídeos"),
                 ItemHorizontalList(
                   popularMovieList,
                   isHorizontal: false,

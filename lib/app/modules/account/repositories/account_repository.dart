@@ -15,13 +15,10 @@ class AccountRepository extends Disposable {
 
   Future<AccountModel> register(IUser user) async {
     try {
-      print(user.toJson());
-
       Response response =
           await _http.post('/user/register', data: user.toJson());
 
       var data = response.data;
-      print(data);
       if (!data['status']) {
         throw (data['message']);
       }
@@ -47,7 +44,7 @@ class AccountRepository extends Disposable {
   Future<AccountModel> login(IUser user) async {
     try {
       Response response = await _http.post('/user/login', data: user.toJson());
-      print(response.data);
+
       var data = response.data;
 
       if (data['status'] != null && data['status'] == false) {
@@ -95,16 +92,10 @@ class AccountRepository extends Disposable {
     try {
       var formData = FormData.fromMap(
           {'file': await MultipartFile.fromFile(new File(filePath).path)});
-      print(formData);
-
       Response response = await _http.post('/user/profile/photo',
           data: formData,
           options: await Modular.get<UserPreferencesStore>().authHeader);
-
-      print(response.realUri);
-
       var data = response.data;
-      print(data);
       if (data != null) {
         return 'https://res.cloudinary.com/dxz4ivhm8/image/upload/c_thumb,g_face,h_200,w_200/${data['public_id']}.jpg';
       }

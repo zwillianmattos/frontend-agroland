@@ -89,17 +89,19 @@ abstract class Classifier implements IRecognition {
     _inputImage = _preProcess();
     final pre = DateTime.now().millisecondsSinceEpoch - pres;
 
-    print('Time to load image: $pre ms');
+    print('Hora de carregar a imagem: $pre ms');
 
     final runs = DateTime.now().millisecondsSinceEpoch;
     interpreter.run(_inputImage.buffer, _outputBuffer.getBuffer());
     final run = DateTime.now().millisecondsSinceEpoch - runs;
 
-    print('Time to run inference: $run ms');
+    print('Hora de executar a inferência: $run ms');
 
     Map<String, double> labeledProb = TensorLabel.fromList(
             labels, _probabilityProcessor.process(_outputBuffer))
         .getMapWithFloatValue();
+
+    print("$labeledProb");
     final pred = getTopProbability(labeledProb);
 
     return Category(pred.key, pred.value);

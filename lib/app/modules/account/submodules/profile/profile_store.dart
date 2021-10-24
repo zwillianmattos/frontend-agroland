@@ -35,13 +35,9 @@ abstract class _ProfileStoreBase with Store {
   refresh() {
     try {
       account = Modular.get<UserPreferencesStore>().getUser!;
-      print("ACCOUNT: $account");
-
       if (account != null) {
         userPhotoUrl = account!.imgLogo!;
       }
-
-      print(userPhotoUrl);
     } catch (e) {
       print("ERROR: $e");
     }

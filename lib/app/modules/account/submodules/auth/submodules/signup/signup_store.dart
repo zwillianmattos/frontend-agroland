@@ -38,7 +38,7 @@ abstract class SignUpStoreBase with Store {
 
       formKey.currentState!.save();
       AccountModel account = await _repository.register(user);
-      print(account.toJson());
+
       if (account.token == null) {
         throw ("Erro ao se cadastrar");
       }

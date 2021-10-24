@@ -25,7 +25,7 @@ class _NewsViewPageState extends ModularState<NewsViewPage, NewsViewStore> {
             SliverAppBar(
               pinned: false,
               title: innerBoxIsScrolled ? Text(controller.news!.title!) : null,
-              backgroundColor: color_colorPrimary,
+              backgroundColor: Theme.of(context).colorScheme.background,
               expandedHeight: 250.0,
               flexibleSpace: Container(
                 decoration: BoxDecoration(
@@ -44,7 +44,7 @@ class _NewsViewPageState extends ModularState<NewsViewPage, NewsViewStore> {
                         0.3
                       ],
                           colors: [
-                        color_app_background.withOpacity(1),
+                        Theme.of(context).scaffoldBackgroundColor,
                         Colors.transparent,
                       ])),
                 ),

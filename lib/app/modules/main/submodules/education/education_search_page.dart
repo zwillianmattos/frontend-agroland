@@ -114,7 +114,6 @@ class _EducationSearchPageState
                               children: controller.searchResults
                                   .map((element) => ListTile(
                                         onTap: () {
-                                          print("clicando");
                                           Modular.to.pushNamed(
                                               'ebook/view/${element.id}',
                                               arguments: element,

@@ -259,30 +259,10 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                 ],
               ),
             ),
-          // ListTile(
-          //     leading: Icon(Icons.home),
-          //     title: Text("Inicio"),
-          //     onTap: () {
-          //       debugPrint('toquei no drawer');
-          //     }),
-          // ListTile(
-          //     leading: Icon(Icons.search),
-          //     title: Text("Buscar"),
-          //     onTap: () {
-          //       debugPrint('toquei no drawer');
-          //     }),
-          // ListTile(
-          //     leading: Icon(Icons.notifications),
-          //     title: Text("Notificacoes"),
-          //     onTap: () {
-          //       debugPrint('toquei no drawer');
-          //     }),
           ListTile(
               leading: Icon(Icons.favorite),
               title: Text("Favoritos"),
-              onTap: () {
-                debugPrint('toquei no drawer');
-              }),
+              onTap: () {}),
           ListTile(
             leading: Icon(Icons.money),
             title: Text("Vender"),

@@ -40,19 +40,22 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Ebook'),
+          title: Observer(builder: (_) {
+            if (controller.isLoading) return Text('-');
+            return Text('${controller.ebook?.name}');
+          }),
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
         floatingActionButton: Observer(builder: (_) {
           if (controller.isLoading) return Container();
-          Ebook ebook = controller.ebook!;
+          Ebook? ebook = controller.ebook;
 
           return FloatingActionButton(
             child: Icon(Icons.book_outlined),
             onPressed: () async {
-              await canLaunch(ebook.file!)
+              await canLaunch(ebook!.file!)
                   ? await launch(ebook.file!)
                   : throw 'Could not launch';
 
@@ -144,7 +147,11 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
                                     return RatingBar(
                                         itemSize: 25,
                                         ignoreGestures: true,
-                                        initialRating: controller.ebook!.rating!.length == 0 ? 0 : controller.getTotalRating,
+                                        initialRating:
+                                            controller.ebook!.rating!.length ==
+                                                    0
+                                                ? 0
+                                                : controller.getTotalRating,
                                         direction: Axis.horizontal,
                                         allowHalfRating: false,
                                         itemCount: 5,
@@ -225,9 +232,7 @@ class _EbookViewPageState extends ModularState<EbookViewPage, EbookViewStore> {
                                               )
                                             ],
                                           ),
-                                          Observer(builder: (_) {
-                                            return RateWidget();
-                                          })
+                                          RateWidget()
                                         ],
                                       ),
                                     ),

@@ -51,7 +51,6 @@ class _HomeViewState extends State<HomeView> {
   void _predict() async {
     img.Image imageInput = img.decodeImage(_image!.readAsBytesSync())!;
     var pred = _classifier.predict(imageInput);
-    print(pred);
     setState(() {
       this.category = pred;
     });

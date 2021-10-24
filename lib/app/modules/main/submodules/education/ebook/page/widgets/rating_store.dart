@@ -43,7 +43,7 @@ abstract class _RatingStoreBase with Store {
       formKey.currentState?.save();
 
       // send rate
-      var ratingResult = await this.ratingRepository.rate(
+      var response = await this.ratingRepository.rate(
             this.rating!,
             Modular.args?.params['id'],
           );
@@ -51,10 +51,15 @@ abstract class _RatingStoreBase with Store {
       print(e);
       EasyLoading.showError(e.toString(), duration: Duration(seconds: 4));
     } finally {
-      isLoading = false;
+      await Modular.get<EbookViewStore>().loadEbook(showLoad: false);
+      ebook = Modular.get<EbookViewStore>().ebook;
       formKey.currentState?.reset();
-
-      ebook = await Modular.get<EbookViewStore>().loadEbook();
+      isLoading = false;
+      rating = RatingModel(
+        rating: 0.0,
+      );
+      EasyLoading.showSuccess("Comentário adicionado com sucesso!",
+          duration: Duration(seconds: 4));
     }
   }
 }

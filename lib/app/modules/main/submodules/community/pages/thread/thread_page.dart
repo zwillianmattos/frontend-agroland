@@ -41,7 +41,6 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
           List<Thread> list = controller.threads;
 
           return RelativeBuilder(builder: (context, height, width, sy, sx) {
-            print(width);
             return Container(
               padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
@@ -76,7 +75,8 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                 User? user =
                                     Modular.get<UserPreferencesStore>().getUser;
 
-                                if (user != null && list[index].user?.id == user.id)
+                                if (user != null &&
+                                    list[index].user?.id == user.id)
                                   showModalBottomSheet(
                                       context: context,
                                       builder: (context) {
@@ -88,7 +88,8 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                                   new Icon(Icons.remove_circle),
                                               title: new Text('Remover'),
                                               onTap: () {
-                                                controller.removeThread(list[index]);
+                                                controller
+                                                    .removeThread(list[index]);
                                                 Navigator.pop(context);
                                               },
                                             ),
@@ -199,7 +200,6 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                                   ?.where((element) =>
                                                       element.user?.id ==
                                                       user.id);
-                                              print(result);
 
                                               if (result?.length != null &&
                                                   result!.length > 0) {

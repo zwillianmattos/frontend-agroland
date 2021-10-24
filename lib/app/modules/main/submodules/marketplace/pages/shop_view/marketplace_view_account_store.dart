@@ -21,7 +21,6 @@ abstract class _MarketplaceViewAccoutStoreBase with Store {
   ObservableList<ProductSell>? products;
 
   _MarketplaceViewAccoutStoreBase(this.repository) {
-    print(Modular.args!.data);
     this.logista = Modular.args!.data as ProducerUser;
     load();
   }

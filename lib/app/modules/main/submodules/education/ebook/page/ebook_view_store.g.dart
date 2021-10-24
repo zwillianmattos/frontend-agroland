@@ -65,8 +65,9 @@ mixin _$EbookViewStore on _EbookViewStoreBase, Store {
   final _$loadEbookAsyncAction = AsyncAction('_EbookViewStoreBase.loadEbook');
 
   @override
-  Future loadEbook() {
-    return _$loadEbookAsyncAction.run(() => super.loadEbook());
+  Future loadEbook({bool showLoad = true}) {
+    return _$loadEbookAsyncAction
+        .run(() => super.loadEbook(showLoad: showLoad));
   }
 
   @override

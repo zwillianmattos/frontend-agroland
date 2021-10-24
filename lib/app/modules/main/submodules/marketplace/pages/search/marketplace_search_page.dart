@@ -113,7 +113,6 @@ class _MarketplaceSearchPageState
                               children: controller.searchResults
                                   .map((element) => ListTile(
                                         onTap: () {
-                                          print("clicando");
                                           Modular.to.pushNamed(
                                               '/marketplace/view',
                                               arguments: element,

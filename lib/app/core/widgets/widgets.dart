@@ -1146,15 +1146,13 @@ Widget moviePost(videoController) {
       });
     }
 
-    return Observer(builder: (_) {
-      return YoutubePlayerControllerProvider(
-        // Provides controller to all the widget below it.
-        controller: controller,
-        child: YoutubePlayerIFrame(
-          aspectRatio: 16 / 9,
-        ),
-      );
-    });
+    return YoutubePlayerControllerProvider(
+      // Provides controller to all the widget below it.
+      controller: controller,
+      child: YoutubePlayerIFrame(
+        aspectRatio: 16 / 9,
+      ),
+    );
   }).paddingAll(spacing_standard_new);
 }
 

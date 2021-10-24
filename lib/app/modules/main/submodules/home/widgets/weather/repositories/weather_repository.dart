@@ -42,19 +42,17 @@ class WeatherRepository extends Disposable {
 
   Future<Weather?> get() async {
     LocationData location = await _locationService.locationData;
-    print(location);
+
     Options? options;
 
     if (cacheOptions != null) {
-      options = cacheOptions!.copyWith(policy: CachePolicy.forceCache).toOptions();
+      options =
+          cacheOptions!.copyWith(policy: CachePolicy.forceCache).toOptions();
     }
 
     Response response = await _http.get(
         'https://api.hgbrasil.com/weather?format=json-cors&key=${API_WEATHER_KEY}&lat=${location.latitude}&lon=${location.longitude}',
         options: options);
-    print("resposta localizacao");
-    print(response);
-
     if (response == null) {
       return null;
     }

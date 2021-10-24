@@ -64,7 +64,6 @@ abstract class _EducationStoreBase with Store {
 
   @action
   void _scrollListener() {
-    print(ebooksController!.position.extentAfter);
     if (ebooksController!.position.extentAfter < 500 && isLoading == false) {
       if (currentPage < paginateModel.totalPages!) {
         currentPage++;
@@ -83,14 +82,12 @@ abstract class _EducationStoreBase with Store {
     await loadPage();
     isLoading = false;
     return true;
-    
   }
 
   @action
   loadPage({
     query: "?size=10",
   }) async {
-    
     paginateModel = await repository.load(
       query: "?size=10&page=$currentPage",
     );
@@ -99,7 +96,6 @@ abstract class _EducationStoreBase with Store {
       var data = paginateModel.items;
       ebooksList.addAll(data as List<Ebook>);
     }
-    
   }
 
   @action

@@ -9,8 +9,6 @@ import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ra
 import 'package:plant_care/app/modules/main/submodules/education/ebook/page/widgets/rating_store.dart';
 
 class RateWidget extends StatefulWidget {
-
-
   const RateWidget({Key? key}) : super(key: key);
 
   @override
@@ -21,6 +19,9 @@ class _RateWidgetState extends ModularState<RateWidget, RatingStore> {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
+      if (controller.ebook == null) {
+        return Center();
+      }
       if (controller.isLoading) {
         return Center(child: CircularProgressIndicator());
       }
@@ -112,14 +113,15 @@ class _RateWidgetState extends ModularState<RateWidget, RatingStore> {
                       Rating rating = controller.ebook!.rating![index];
 
                       return ListTile(
-                        onTap : () {
-                        },
+                        onTap: () {},
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             text(
                               "${rating.userObj?.name}",
-                              maxLine: 2, fontSize: 14, fontFamily: fontBold,
+                              maxLine: 2,
+                              fontSize: 14,
+                              fontFamily: fontBold,
                             ),
                             text("Avaliação: ${rating.comment}",
                                 maxLine: 10, fontSize: 14),

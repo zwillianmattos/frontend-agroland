@@ -27,18 +27,19 @@ abstract class _EbookViewStoreBase with Store {
 
   _EbookViewStoreBase(this.repository) {
     if (Modular.args?.params['id'] != null) {
-      loadEbook();
+      loadEbook(
+        showLoad: true,
+      );
     }
   }
 
   @action
-  loadEbook() async {
-    isLoading = true;
+  loadEbook({bool showLoad = true}) async {
+    if (showLoad) isLoading = true;
     PaginateModel paginateModel =
         await this.repository.load(query: "?id=${Modular.args?.params['id']}");
-
+    print(paginateModel.items?.first);
     ebook = paginateModel.items?.first;
-
     ratingTotal = 0.0;
 
     ebook?.rating?.forEach((Rating e) {
@@ -48,7 +49,7 @@ abstract class _EbookViewStoreBase with Store {
     });
 
     ratingTotal = ratingTotal / ebook!.rating!.length;
-    isLoading = false;
+    if (showLoad) isLoading = false;
   }
 
   @computed

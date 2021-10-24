@@ -10,6 +10,9 @@ abstract class _CulturesListStoreBase with Store {
   @observable
   ObservableList<Culture>? cultures;
 
+  @observable
+  bool isLoading = false;
+
   final CulturesRepository repository;
 
   _CulturesListStoreBase(this.repository) {
@@ -18,7 +21,14 @@ abstract class _CulturesListStoreBase with Store {
 
   @action
   loadCultures() async {
-    this.cultures =
-        (await this.repository.getCultures() as List<Culture>).asObservable();
+    try {
+      isLoading = true;
+      this.cultures =
+          (await this.repository.getCultures() as List<Culture>).asObservable();
+      isLoading = false;
+    } catch (e) {
+      this.cultures = null;
+      isLoading = false;
+    }
   }
 }

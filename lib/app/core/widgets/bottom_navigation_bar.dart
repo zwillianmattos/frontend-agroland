@@ -186,8 +186,6 @@ class AppBottomNavigationBar extends StatefulWidget {
       case AppBottomNavigationBarType.fixed:
         return true;
     }
-    assert(false);
-    return false;
   }
 
   @override
@@ -213,11 +211,7 @@ class _BottomNavigationTile extends StatelessWidget {
     this.showSelectedLabels,
     this.showUnselectedLabels,
     this.indexLabel,
-  })  : assert(type != null),
-        assert(item != null),
-        assert(animation != null),
-        assert(selected != null),
-        assert(selectedLabelStyle != null),
+  })  : assert(selectedLabelStyle != null),
         assert(unselectedLabelStyle != null);
 
   final AppBottomNavigationBarType type;
@@ -375,9 +369,7 @@ class _TileIcon extends StatelessWidget {
     required this.item,
     required this.selectedIconTheme,
     required this.unselectedIconTheme,
-  })   : assert(selected != null),
-        assert(item != null),
-        super(key: key);
+  }) : super(key: key);
 
   final ColorTween colorTween;
   final Animation<double> animation;
@@ -389,17 +381,6 @@ class _TileIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color iconColor = colorTween.evaluate(animation)!;
-    final IconThemeData defaultIconTheme = IconThemeData(
-      color: iconColor,
-      size: iconSize,
-    );
-    final IconThemeData iconThemeData = IconThemeData.lerp(
-      defaultIconTheme.merge(unselectedIconTheme),
-      defaultIconTheme.merge(selectedIconTheme),
-      animation.value,
-    );
-
     return Align(
       alignment: Alignment.topCenter,
       heightFactor: 1.0,
@@ -424,10 +405,7 @@ class _Label extends StatelessWidget {
     required this.unselectedLabelStyle,
     required this.showSelectedLabels,
     required this.showUnselectedLabels,
-  })   : assert(colorTween != null),
-        assert(animation != null),
-        assert(item != null),
-        assert(selectedLabelStyle != null),
+  })  : assert(selectedLabelStyle != null),
         assert(unselectedLabelStyle != null),
         assert(showSelectedLabels != null),
         assert(showUnselectedLabels != null),
@@ -765,9 +743,7 @@ class _Circle {
     required this.index,
     required this.color,
     required TickerProvider vsync,
-  })   : assert(state != null),
-        assert(index != null),
-        assert(color != null) {
+  }) {
     controller = AnimationController(
       duration: kThemeAnimationDuration,
       vsync: vsync,
@@ -816,7 +792,7 @@ class _RadialPainter extends CustomPainter {
     required this.circles,
     required this.textDirection,
     // ignore: unnecessary_null_comparison
-  })   : assert(circles != null),
+  })  : assert(circles != null),
         // ignore: unnecessary_null_comparison
         assert(textDirection != null);
 

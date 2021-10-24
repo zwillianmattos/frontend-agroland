@@ -26,13 +26,13 @@ class MainModule extends Module {
             module: HomeModule(), transition: TransitionType.fadeIn),
         ModuleRoute('/community',
             module: CommunityModule(), transition: TransitionType.fadeIn),
+        ModuleRoute('/marketplace',
+            module: MarketplaceModule(), transition: TransitionType.fadeIn),
         ModuleRoute(
           '/education',
           module: EducationModule(),
           transition: TransitionType.fadeIn,
         ),
-        ModuleRoute('/marketplace',
-            module: MarketplaceModule(), transition: TransitionType.fadeIn),
         ModuleRoute('/cultures',
             module: CulturesModule(), transition: TransitionType.fadeIn),
         ChildRoute(

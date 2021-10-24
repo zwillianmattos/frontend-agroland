@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/core/services/location/location_service.dart';
+import 'package:plant_care/app/modules/main/submodules/education/education_module.dart';
 import 'package:plant_care/app/modules/main/submodules/home/page/home_page.dart';
 import 'package:plant_care/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
 import 'package:plant_care/app/modules/main/submodules/home/page/home_store.dart';

@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/duration_formatter.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
-import 'package:universal_io/io.dart' as IO;
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:video_player/video_player.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'video_view_playlist_store.dart';
@@ -126,8 +119,7 @@ class _VideoViewPlaylistPageState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Observer(builder: (_) {
-                          return Center(
-                              child: moviePost(controller.videoController));
+                          return moviePost(controller.videoController);
                         }),
                         Row(
                           children: <Widget>[

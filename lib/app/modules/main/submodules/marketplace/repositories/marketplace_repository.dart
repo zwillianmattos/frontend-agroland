@@ -35,16 +35,11 @@ class MarketplaceRepository with Store implements ProductSellDatasource {
   Future<List<ProductSell>?> load({query: ""}) async {
     List<ProductSell> items = [];
     try {
-      print(await Modular.get<UserPreferencesStore>().authHeader);
-
       Response response = await _http.get('/marketplace/announces$query',
           options: await Modular.get<UserPreferencesStore>().authHeader);
 
       if (response.statusCode != 200) throw Error();
-
-      print(response.realUri);
       var jsonResponse = response.data;
-      print(jsonResponse);
       List<dynamic> list = jsonResponse['items'];
       if (list.isNotEmpty) {
         list.asMap().forEach((key, value) {
@@ -66,7 +61,6 @@ class MarketplaceRepository with Store implements ProductSellDatasource {
           data: productSell.toJson());
 
       var jsonResponse = response.data;
-      print(jsonResponse["data"]);
       return ProductSell.fromJson(jsonResponse["data"]);
     } on DioError catch (e) {
       // The request was made and the server responded with a status code
@@ -96,8 +90,6 @@ class MarketplaceRepository with Store implements ProductSellDatasource {
       if (response.statusCode != 200) throw Error();
       var jsonResponse = response.data;
       List<dynamic> list = jsonResponse["data"]['items'];
-
-      print(list);
       if (list.isNotEmpty) {
         list.asMap().forEach((key, value) {
           items.add(ProductCategories.fromJson(value));
@@ -129,9 +121,6 @@ class MarketplaceRepository with Store implements ProductSellDatasource {
           listaEbooks.add(ProductSell.fromJson(value));
         });
       }
-
-      print(listaEbooks);
-
       return PaginateModel(
           currentPage: jsonResponse['currentPage'],
           totalPages: jsonResponse['totalPages'],

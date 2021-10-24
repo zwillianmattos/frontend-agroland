@@ -31,7 +31,6 @@ abstract class _CultureDetailViewStoreBase with Store {
   loadCultureDetail() async {
     try {
       isLoading = true;
-      print(Modular.args?.params);
       this.culturesCategoriesRels = (await this
               .repository
               .getCultureCategorieDetail(
@@ -40,8 +39,10 @@ abstract class _CultureDetailViewStoreBase with Store {
           as CulturesCategoriesRels);
 
       if (culturesCategoriesRels != null) {
-        this.content = culturesCategoriesRels!.culturesContents?.where(
-            (element) => element.id == int.parse(Modular.args?.params["item"])).first;
+        this.content = culturesCategoriesRels!.culturesContents
+            ?.where((element) =>
+                element.id == int.parse(Modular.args?.params["item"]))
+            .first;
       }
 
       isLoading = false;

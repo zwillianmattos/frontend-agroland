@@ -69,7 +69,6 @@ class LinearPercentIndicator extends StatefulWidget {
   final bool restartAnimation;
 
   LinearPercentIndicator(
-    
       {Key? key,
       this.fillColor = Colors.transparent,
       this.percent = 0.0,
@@ -94,8 +93,6 @@ class LinearPercentIndicator extends StatefulWidget {
       this.restartAnimation = false})
       : super(key: key) {
     _progressColor = progressColor ?? Colors.red;
-
-    assert(curve != null);
 
     if (percent < 0.0 || percent > 1.0) {
       throw new Exception("Percent value must be a double between 0.0 and 1.0");

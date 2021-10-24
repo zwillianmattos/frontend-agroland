@@ -143,63 +143,6 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                             ),
                           ],
                         ),
-                        // SingleChildScrollView(
-                        //   scrollDirection: Axis.horizontal,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //     crossAxisAlignment: CrossAxisAlignment.center,
-                        //     children: w.results!.forecast!
-                        //         .map((foreCast) => Container(
-                        //               padding: EdgeInsets.all(16.0),
-                        //               child: Column(
-                        //                   mainAxisAlignment:
-                        //                       MainAxisAlignment.spaceAround,
-                        //                   crossAxisAlignment:
-                        //                       CrossAxisAlignment.center,
-                        //                   children: [
-                        //                     Text(
-                        //                       "${foreCast.date}",
-                        //                       style: TextStyle(
-                        //                           fontSize: 16,
-                        //                           fontWeight: FontWeight.bold),
-                        //                     ),
-                        //                     Container(
-                        //                       child: Row(
-                        //                         crossAxisAlignment:
-                        //                             CrossAxisAlignment.start,
-                        //                         children: [
-                        //                           Text(
-                        //                             "${foreCast.max}",
-                        //                             style: TextStyle(fontSize: 12),
-                        //                           ),
-                        //                           Text(
-                        //                             "°c",
-                        //                             style: TextStyle(fontSize: 10),
-                        //                           ),
-                        //                         ],
-                        //                       ),
-                        //                     ),
-                        //                     Container(
-                        //                       child: Row(
-                        //                         crossAxisAlignment:
-                        //                             CrossAxisAlignment.start,
-                        //                         children: [
-                        //                           Text(
-                        //                             "${foreCast.min}",
-                        //                             style: TextStyle(fontSize: 12),
-                        //                           ),
-                        //                           Text(
-                        //                             "°c",
-                        //                             style: TextStyle(fontSize: 10),
-                        //                           ),
-                        //                         ],
-                        //                       ),
-                        //                     ),
-                        //                   ]),
-                        //             ))
-                        //         .toList(),
-                        //   ),
-                        // )
                       ],
                     ),
                   ),

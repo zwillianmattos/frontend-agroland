@@ -65,11 +65,7 @@ class ThreadRepository implements ThreadDatasource {
       Response response = await dio.get(
         "threads/${channel}/${threadId}",
       );
-      print(response.realUri);
       var jsonResponse = response.data;
-
-      print(jsonResponse);
-
       List<dynamic> list = jsonResponse['data']['items'];
       if (list != null) {
         thread = Thread.fromJson(list.first);
@@ -111,7 +107,6 @@ class ThreadRepository implements ThreadDatasource {
           data: {
             'body': replie.body,
           });
-      print("threads/${thread.channel}/${thread.id}/replies");
       var jsonResponse = response.data;
       replieData = Replies.fromJson(jsonResponse['replie']);
     } catch (e) {
@@ -125,10 +120,6 @@ class ThreadRepository implements ThreadDatasource {
     required Thread thread,
   }) async {
     try {
-      print("${Modular.get<UserPreferencesStore>().authHeader}");
-
-      print(
-          "${dio.options.baseUrl}threads/${thread.channel}/${thread.id}/like");
       Response response = await dio.post(
           "threads/${thread.channel}/${thread.id}/like",
           options: await Modular.get<UserPreferencesStore>().authHeader,

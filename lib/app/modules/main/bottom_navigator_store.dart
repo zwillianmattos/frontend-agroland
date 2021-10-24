@@ -17,7 +17,6 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   _BottomNavigatorStoreBase() {
     if (Modular.args!.params.isNotEmpty && Modular.args!.params.length > 0) {
-      print("PARAMETROS ${Modular.args?.params}");
       Modular.to.navigate(Modular.to.modulePath);
       Modular.to.pushNamed(Modular.to.path,
           forRoot: Modular.to.path.contains("/view") &&
@@ -63,9 +62,7 @@ abstract class _BottomNavigatorStoreBase with Store {
     } else if (index == 2) {
       Modular.to.navigate('/community', arguments: arguments ?? {});
     } else if (index == 3) {
-      Modular.to.navigate('/education', arguments: arguments ?? {});
-    } else if (index == 4) {
-      if (Modular.get<UserPreferencesStore>().getUser != null ) {
+      if (Modular.get<UserPreferencesStore>().getUser != null) {
         await Modular.to.pushNamed('/account/profile',
             forRoot:
                 (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);

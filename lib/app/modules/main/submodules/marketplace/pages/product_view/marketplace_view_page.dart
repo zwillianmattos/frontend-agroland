@@ -10,6 +10,10 @@ import 'package:plant_care/app/core/env/variables.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+import 'dart:core';
+import 'package:plant_care/app/core/env/variables.dart';
 
 class MarketplaceClassificadoViewPage extends StatefulWidget {
   final ProductSell classificado;
@@ -94,56 +98,6 @@ class _MarketplaceClassificadoViewPageState
                   fontSize: textSizeLarge),
             ]),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: Container(
-          //     decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.all(Radius.circular(10)),
-          //       boxShadow: [
-          //         BoxShadow(
-          //           color: Colors.grey.withOpacity(0.25),
-          //           spreadRadius: 2,
-          //           blurRadius: 19,
-          //           offset: Offset(4, 6), // changes position of shadow
-          //         ),
-          //       ],
-          //     ),
-          //     padding: const EdgeInsets.only(
-          //       top: 16.0,
-          //       bottom: 16.0,
-          //       right: 16.0,
-          //     ),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //       crossAxisAlignment: CrossAxisAlignment.end,
-          //       children: [
-          //         Expanded(
-          //           child: Container(
-          //             margin: EdgeInsets.only(
-          //                 left: 24.0, right: 24.0, top: 5.0, bottom: 5),
-          //             decoration: boxDecoration(
-          //                 bgColor: color_edit_background,
-          //                 color: color_edit_background,
-          //                 showShadow: false,
-          //                 radius: 4),
-          //             child: appEditTextStyle(
-          //                 "Ola ${widget.classificado.producerUser.corporateName}, Esse item ainda esta disponivel ?",
-          //                 isPassword: false,
-          //                 enableLabel: false,
-          //                 enableBorder: false,
-          //                 maxLines: 2),
-          //           ),
-          //         ),
-          //         FlatButton(
-          //           onPressed: () {},
-          //           child: Text("Enviar"),
-          //           color: color_colorPrimary,
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Row(
@@ -160,7 +114,20 @@ class _MarketplaceClassificadoViewPageState
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        var phoneNumber = widget
+                            .classificado.producerUser?.phone
+                            ?.replaceAll('(', '')
+                            .replaceAll(')', '')
+                            .replaceAll('-', '')
+                            .replaceAll(' ', '');
+                        print(Uri.parse(
+                                "https://api.whatsapp.com/send?phone=55$phoneNumber&text=Olá estou interesado no produto ${widget.classificado.title} - ${widget.classificado.price}, $WEBSITEDOMAIN#/${Modular.to.path}")
+                            .toString());
+                        await launch(Uri.parse(
+                                "https://api.whatsapp.com/send?phone=55$phoneNumber&text=Olá estou interesado no produto ${widget.classificado.title} - ${widget.classificado.price}, $WEBSITEDOMAIN#/${Modular.to.path}")
+                            .toString());
+                      },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -195,7 +162,15 @@ class _MarketplaceClassificadoViewPageState
                           borderRadius: BorderRadius.all(Radius.circular(8)),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        var phoneNumber = widget
+                            .classificado.producerUser?.phone
+                            ?.replaceAll('(', '')
+                            .replaceAll(')', '')
+                            .replaceAll('-', '')
+                            .replaceAll(' ', '');
+                        await launch("tel:+55$phoneNumber");
+                      },
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -293,31 +268,6 @@ class _MarketplaceClassificadoViewPageState
               ),
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.all(16.0),
-          //   height: 150,
-          //   child: ClipRRect(
-          //     borderRadius: BorderRadius.all(Radius.circular(8)),
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.all(Radius.circular(10)),
-          //         boxShadow: [
-          //           BoxShadow(
-          //             color: Colors.grey.withOpacity(0.25),
-          //             spreadRadius: 2,
-          //             blurRadius: 19,
-          //             offset: Offset(4, 6), // changes position of shadow
-          //           ),
-          //         ],
-          //       ),
-          //       child: CachedNetworkImage(
-          //         fit: BoxFit.cover,
-          //         imageUrl:
-          //             "https://www.google.com/maps/api/staticmap?key=$API_GOOGLE_MAPS&center=${widget.classificado.producerUser!.location}&zoom=12&size=600x300&markers=color:red%7Clabel:${widget.classificado.producerUser!.corporateName}%7C${widget.classificado.producerUser!.location}",
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Container(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: Column(
