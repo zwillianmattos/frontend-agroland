@@ -24,21 +24,25 @@ class _CultureDetailViewPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-          title: Observer(builder: (_) {
-            if (this.controller.isLoading || this.controller.content == null) return text("-");
+        title: Observer(builder: (_) {
+          if (this.controller.isLoading || this.controller.content == null)
+            return text("-");
 
-            return text("${controller.content!.description}");
-          }),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.share),
-              onPressed: () {
-                Share.share(
-                    '${controller.content!.description} - ${WEBSITEDOMAIN}#/${Modular.to.path}');
-              },
-            ),
-          ]),
+          return text("${controller.content!.description}");
+        }),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {
+              Share.share(
+                  '${controller.content!.description} - ${WEBSITEDOMAIN}#/${Modular.to.path}');
+            },
+          ),
+        ],
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Observer(builder: (_) {
         if (this.controller.isLoading)
           return Center(
@@ -70,8 +74,24 @@ class _CultureDetailViewPageState
                 : ExpansionTile(
                     title: Text("${e.value['title']}"),
                     children: [
-                      ListTile(
-                        title: Html(
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
+                        padding: EdgeInsets.all(18.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.15),
+                              spreadRadius: 0,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 0), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Html(
                           data: e.value['content'],
                           onLinkTap: (String? link, _, __, el) async {
                             if (link != null) {

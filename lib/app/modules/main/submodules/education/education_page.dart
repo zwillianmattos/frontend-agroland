@@ -198,6 +198,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           elevation: 0,
           // backgroundColor: color_app_background,
           centerTitle: true,
@@ -229,9 +230,9 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                   fontFamily: fontMedium,
                   fontSize: textSizeNormal,
                 ),
-                indicatorColor: Theme.of(context).colorScheme.secondary,
+                indicatorColor: Theme.of(context).colorScheme.primary,
                 unselectedLabelColor: Theme.of(context).secondaryHeaderColor,
-                labelColor: Theme.of(context).colorScheme.secondary,
+                labelColor: Theme.of(context).colorScheme.primary,
                 labelPadding:
                     EdgeInsets.only(left: spacing_large, right: spacing_large),
                 tabs: [

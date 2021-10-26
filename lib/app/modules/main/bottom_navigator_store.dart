@@ -62,17 +62,10 @@ abstract class _BottomNavigatorStoreBase with Store {
     } else if (index == 2) {
       Modular.to.navigate('/community', arguments: arguments ?? {});
     } else if (index == 3) {
-      if (Modular.get<UserPreferencesStore>().getUser != null) {
-        await Modular.to.pushNamed('/account/profile',
-            forRoot:
-                (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
-      } else {
-        await Modular.to.pushNamed('/account/auth',
-            forRoot:
-                (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
-      }
+      Modular.to.pushNamed('/account/profile',
+          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
       currentIndex = 0;
-      Modular.to.navigate('/home', arguments: arguments ?? {});
+      // Modular.to.navigate('/home', arguments: arguments ?? {});
     }
   }
 

@@ -18,6 +18,9 @@ class _MarketplaceAnnouncesPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: Text('Marketplace Announces'),
       ),
       body: Observer(builder: (_) {

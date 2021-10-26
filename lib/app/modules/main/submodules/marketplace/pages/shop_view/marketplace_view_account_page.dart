@@ -27,6 +27,7 @@ class _MarketplaceViewAccountPageState extends ModularState<
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -35,16 +36,6 @@ class _MarketplaceViewAccountPageState extends ModularState<
             Container(
               height: 150,
               padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                // image: DecorationImage(
-                //   image: NetworkImage(
-                //       "https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/shop/f2575b4929b32ab70bf3b98ebb2aa6eb.png"),
-                //   fit: BoxFit.cover,
-                //   colorFilter: new ColorFilter.mode(
-                //       Colors.black.withOpacity(1.0), BlendMode.softLight),
-                // ),
-                color: Colors.greenAccent,
-              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -77,14 +68,15 @@ class _MarketplaceViewAccountPageState extends ModularState<
                                 text(
                                     "${controller.logista.fantasyName ?? controller.logista.corporateName}",
                                     fontSize: textSizeNormal,
-                                    textColor: color_white,
                                     isLongText: true),
-                                text("${controller.logista.phone!}",
-                                    fontSize: textSizeSmall,
-                                    textColor: color_white),
-                                text("${controller.logista.cnpj}",
-                                    fontSize: textSizeSmall,
-                                    textColor: color_white),
+                                text(
+                                  "${controller.logista.phone!}",
+                                  fontSize: textSizeSmall,
+                                ),
+                                text(
+                                  "${controller.logista.cnpj}",
+                                  fontSize: textSizeSmall,
+                                ),
                               ],
                             ),
                           ),

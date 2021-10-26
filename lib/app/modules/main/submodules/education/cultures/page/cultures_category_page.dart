@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'cultures_category_store.dart';
@@ -18,10 +19,12 @@ class _CulturesCategoryPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         title: Observer(builder: (_) {
           return Text('${controller.culture?.name ?? ""}');
         }),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Observer(builder: (_) {
         if (controller.culture == null) {
@@ -33,17 +36,44 @@ class _CulturesCategoryPageState
         return ListView.builder(
             itemCount: _culture.culturesCategoriesRels?.length ?? 0,
             itemBuilder: (_, index) {
-              return ListTile(
-                title: Text(
-                    "${_culture.culturesCategoriesRels?[index].culturesCategory?.description}"),
-                onTap: () {
-                  Modular.to.pushNamed(
-                      "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].id}/items",
-                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
-                          ? true
-                          : false,
-                      arguments: _culture.culturesCategoriesRels?[index]);
-                },
+              return Container(
+                margin: EdgeInsets.only(
+                    left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
+                padding: EdgeInsets.all(18.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.15),
+                      spreadRadius: 0,
+                      blurRadius: 5,
+                      offset: Offset(0, 0), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Modular.to.pushNamed(
+                        "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].id}/items",
+                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                            ? true
+                            : false,
+                        arguments: _culture.culturesCategoriesRels?[index]);
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (_culture.icon != null) _culture.icon,
+                      text(
+                        "${_culture.culturesCategoriesRels?[index].culturesCategory?.description}",
+                        bold: true,
+                        fontSize: 16,
+                      ),
+                    ],
+                  ),
+                ),
               );
             });
       }),

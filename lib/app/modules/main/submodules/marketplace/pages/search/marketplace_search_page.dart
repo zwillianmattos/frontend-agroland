@@ -25,9 +25,10 @@ class _MarketplaceSearchPageState
     return Observer(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: text("Pesquisar marketplace"),
-          backgroundColor: color_colorPrimary,
           elevation: 0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: text("Pesquisar marketplace"),
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 45),
             child: Container(

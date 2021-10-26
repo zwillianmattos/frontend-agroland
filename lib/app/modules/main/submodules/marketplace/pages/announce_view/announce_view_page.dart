@@ -19,6 +19,9 @@ class _MarketplaceAnnounceViewPageState extends ModularState<
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: Text('Marketplace Announce'),
       ),
       body: Form(

@@ -38,7 +38,7 @@ class _MarketplaceHomePageState
         drawer: MarketplaceDrawer(),
         appBar: AppBar(
           elevation: 0,
-          // backgroundColor: color_app_background,
+          backgroundColor: Colors.transparent,
           centerTitle: true,
           title: text("Marketplace",
               fontSize: 20.0, textColor: color_textColorPrimary),

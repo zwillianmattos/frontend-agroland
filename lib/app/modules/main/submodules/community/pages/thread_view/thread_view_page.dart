@@ -29,7 +29,7 @@ class _ThreadViewPageState
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: color_colorPrimary,
+        backgroundColor: Colors.transparent,
         title: Observer(builder: (_) {
           if (!controller.isLoading && controller.thread != null) {
             return Text(controller.thread!.title!);
@@ -233,7 +233,8 @@ class _ThreadViewPageState
                                         Modular.get<UserPreferencesStore>()
                                             .getUser;
 
-                                    if (user != null && replie.user?.id == user.id)
+                                    if (user != null &&
+                                        replie.user?.id == user.id)
                                       showModalBottomSheet(
                                           context: context,
                                           builder: (context) {
@@ -245,7 +246,8 @@ class _ThreadViewPageState
                                                       Icons.remove_circle),
                                                   title: new Text('Remover'),
                                                   onTap: () {
-                                                    controller.removeComment(replie.id.toString());
+                                                    controller.removeComment(
+                                                        replie.id.toString());
                                                     Navigator.pop(context);
                                                   },
                                                 ),

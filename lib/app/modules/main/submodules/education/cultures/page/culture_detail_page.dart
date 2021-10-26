@@ -22,11 +22,13 @@ class _CultureDetailPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         title: Observer(builder: (_) {
           return Text(
               '${controller.culturesCategoriesRels?.culturesCategory?.description ?? ""}');
         }),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Observer(builder: (_) {
         if (controller.isLoading)

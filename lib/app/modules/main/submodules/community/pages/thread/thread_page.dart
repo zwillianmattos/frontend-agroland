@@ -29,7 +29,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
       appBar: AppBar(
         elevation: 0,
         title: text("Comunidade"),
-        // backgroundColor: color_colorPrimary,
+        backgroundColor: Colors.transparent,
       ),
       body: Observer(
         builder: (_) {

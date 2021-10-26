@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:universal_io/io.dart' as IO;
 
 class SplashPage extends StatefulWidget {
   @override
@@ -29,8 +31,12 @@ class _SplashPageState extends State<SplashPage> {
               'images/logo.png',
               scale: 1.5,
             ),
-            onEnd: () {
-              Modular.to.pushReplacementNamed('/');
+            onEnd: () async {
+              if (Modular.get<UserPreferencesStore>().getUser != null) {
+                Modular.to.pushReplacementNamed('/');
+              } else {
+                Modular.to.pushReplacementNamed('/account/auth');
+              }
             }),
       ),
     );

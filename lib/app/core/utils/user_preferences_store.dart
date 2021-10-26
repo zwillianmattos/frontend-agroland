@@ -102,7 +102,7 @@ abstract class _UserPreferencesStoreBase with Store {
 
   logOff() async {
     await LocalStorage.setValue("user", "");
-    Modular.to.pop();
+    Modular.to.pushReplacementNamed('/account/auth');
     this.accountModel = null;
   }
 
