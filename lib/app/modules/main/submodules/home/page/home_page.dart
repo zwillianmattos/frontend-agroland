@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+<<<<<<< HEAD
 import 'package:agro_tools/app/core/consts/colors.dart';
 import 'package:agro_tools/app/core/consts/texts.dart';
 import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:agro_tools/app/modules/main/bottom_navigator_store.dart';
 import './home_store.dart';
+=======
+import 'package:plant_care/app/core/consts/colors.dart';
+import 'package:plant_care/app/core/consts/texts.dart';
+import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
+import 'package:plant_care/app/modules/main/submodules/home/stores/home_store.dart';
+
+>>>>>>> 122cba5 (feat: :sparkles: add weather details page)
 import 'package:relative_scale/relative_scale.dart';
 import '../widgets/weather/page/weather_widget.dart';
 import '../widgets/acoes/widgets/cotacao_widget.dart';
