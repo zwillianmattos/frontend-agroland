@@ -62,7 +62,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
     });
 
     return Scaffold(
-      // backgroundColor: color_app_background,
+      backgroundColor: color_white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -95,12 +95,12 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
                       topLeft: Radius.circular(8.0),
                       topRight: const Radius.circular(8.0),
                     ),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          color: color_ShadowColor,
-                          blurRadius: 20.0,
-                          offset: Offset(0.0, 0.9)),
-                    ],
+                    // boxShadow: <BoxShadow>[
+                    //   BoxShadow(
+                    //       color: color_ShadowColor,
+                    //       blurRadius: 20.0,
+                    //       offset: Offset(0.0, 0.9)),
+                    // ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

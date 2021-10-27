@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
 import 'package:plant_care/app/core/widgets/widgets.dart';
 import 'package:plant_care/app/modules/account/submodules/auth/submodules/signin/signin_store.dart';
@@ -14,7 +15,6 @@ class SignInWidget extends StatefulWidget {
 class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
   @override
   Widget build(BuildContext context) {
-
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
@@ -82,25 +82,36 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
                     controller.user.password = text;
                   }).paddingAll(spacing_standard_new),
                 ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: appButton2(
-                          radius: 8,
-                          textContent: "Entrar",
-                          onPressed: (() {
-                            controller.signIn();
-                          }),
-                        ).paddingOnly(
-                          bottom:  spacing_standard_new
-                        )
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints.tightFor(width: 300, height: 50),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                            primary: color_colorPrimary,
+                            onPrimary: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                        child: text(
+                          'Entrar',
+                          textColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          controller.signIn();
+                        },
                       ),
-                    )
+                    ),
                   ],
-                ).paddingOnly( left: spacing_standard_new, right:  spacing_standard_new, bottom:  spacing_standard_new),
+                ).paddingOnly(
+                    left: spacing_standard_new,
+                    right: spacing_standard_new,
+                    bottom: spacing_standard_new),
               ],
             ),
           ),

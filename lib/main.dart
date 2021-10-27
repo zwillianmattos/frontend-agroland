@@ -7,9 +7,8 @@ import 'app/app_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(ModularApp(module: AppModule(), child: AppWidget()));
   configLoading();
+  runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
 
 void configLoading() {
@@ -19,10 +18,6 @@ void configLoading() {
     ..loadingStyle = EasyLoadingStyle.dark
     ..indicatorSize = 45.0
     ..radius = 10.0
-    ..progressColor = Colors.yellow
-    ..backgroundColor = Colors.green
-    ..indicatorColor = Colors.yellow
-    ..textColor = Colors.yellow
     ..maskColor = Colors.blue.withOpacity(0.5)
     ..userInteractions = true
     ..dismissOnTap = false;

@@ -48,9 +48,12 @@ TextFormField appEditTextStyle(var hintText,
       contentPadding: EdgeInsets.fromLTRB(16, 8, 4, 8),
       labelText: enableLabel ? hintText : null,
       hintText: hintText,
+      fillColor: color_colorPrimary.withOpacity(0.1),
+      filled: true,
       border: enableBorder
           ? new OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.teal))
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+              borderSide: new BorderSide(color: color_textColorSecondary.withOpacity(0.1)))
           : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
@@ -1074,7 +1077,7 @@ Widget headingWidViewAll(
     return Container(
       width: width >= 1024 && limiter ? 1024 : width,
       padding:
-          width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.all(16.0),
+          width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 6.0),
       child: Row(
         children: <Widget>[
           Expanded(

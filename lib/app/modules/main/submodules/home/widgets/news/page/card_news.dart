@@ -22,7 +22,7 @@ class CardNewsWidget extends StatelessWidget {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return Container(
         margin: EdgeInsets.only(
-            left: width >= 1024 ? 0 : 13, right: 1, bottom: 24, top: 0),
+            left: width >= 1024 ? 0 : 13, right: 1, bottom: 5, top: 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           color: white,

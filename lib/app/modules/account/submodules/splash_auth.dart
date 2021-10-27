@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:plant_care/app/core/consts/colors.dart';
 import 'package:plant_care/app/core/consts/texts.dart';
@@ -13,6 +14,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
+    //SystemChrome.setEnabledSystemUIOverlays([]);
     // TODO: implement initState
     super.initState();
   }
@@ -22,62 +24,93 @@ class _SplashPageState extends State<SplashPage> {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: color_colorPrimary,
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Image.asset(
-              'images/logo.png',
-              // width: width * 0.6,
-              height: width * 0.15,
-              fit: BoxFit.contain,
-            ).center(),
-            Padding(
-              padding: const EdgeInsets.all(spacing_standard_new),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  SizedBox(
-                    height: spacing_xxLarge,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 32.0, right: 32.0, bottom: 16.0),
-                    child: appButton3(
-                      textContent: "Entrar",
-                      onPressed: (() {
-                        Modular.to.pushNamed('/account/auth/usr',
-                            arguments: <String, bool>{
-                              'signup': false,
-                              'signin': true,
-                            });
-                      }),
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+          image: AssetImage(
+            "images/background_plants.jpg",
+          ),
+          fit: BoxFit.cover,
+        )),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Image.asset(
+                'images/logo.png',
+                // width: width * 0.6,
+                height: width * 0.5,
+                fit: BoxFit.contain,
+              ).center(),
+              Padding(
+                padding: const EdgeInsets.all(spacing_standard_new),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    SizedBox(
+                      height: spacing_xxLarge,
                     ),
-                  ),
-                  SizedBox(
-                    height: spacing_standard,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 32.0, right: 32.0, bottom: 16.0),
-                    child: appButton3(
-                        textContent: "Cadastrar",
-                        onPressed: (() {
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints.tightFor(width: 300, height: 50),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                            onPrimary: color_colorPrimary,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                        child: text(
+                          'Entrar',
+                          textColor: color_colorPrimary,
+                        ),
+                        onPressed: () {
+                          Modular.to.pushNamed('/account/auth/usr',
+                              arguments: <String, bool>{
+                                'signup': false,
+                                'signin': true,
+                              });
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: spacing_standard_new,
+                    ),
+                    ConstrainedBox(
+                      constraints:
+                          const BoxConstraints.tightFor(width: 300, height: 50),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: color_colorPrimary,
+                            onPrimary: Colors.white,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 10),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                        child: text(
+                          'Cadastrar',
+                          textColor: Colors.white,
+                        ),
+                        onPressed: () {
                           Modular.to.pushNamed('/account/auth/usr',
                               arguments: <String, bool>{
                                 'signup': true,
                                 'signin': false,
                               });
-                        })),
-                  ),
-                ],
-              ).paddingOnly(bottom: spacing_xxLarge),
-            )
-          ],
+                        },
+                      ),
+                    ),
+                    
+                  ],
+                ).paddingOnly(bottom: spacing_xxLarge),
+              )
+            ],
+          ),
         ),
       ),
     );

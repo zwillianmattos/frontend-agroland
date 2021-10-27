@@ -73,6 +73,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                     text(
                                       "Identif.",
                                       fontSize: textSizeSMedium,
+                                      isLongText: true,
                                     )
                                   ],
                                 ),
@@ -96,6 +97,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                     text(
                                       "Diagnóstico",
                                       fontSize: textSizeSMedium,
+                                      isLongText: true,
                                     )
                                   ],
                                 ),
@@ -121,27 +123,29 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                                     text(
                                       "Educação",
                                       fontSize: textSizeSMedium,
+                                      isLongText: true,
                                     )
                                   ],
                                 ),
                               ),
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                padding: EdgeInsets.all(15),
-                                child: Column(
-                                  children: [
-                                    PlatformSvg.asset("images/plan_bulk.svg",
-                                        context: context),
-                                    text(
-                                      "Premium",
-                                      fontSize: textSizeSMedium,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
+                            // InkWell(
+                            //   onTap: () {},
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(15),
+                            //     child: Column(
+                            //       children: [
+                            //         PlatformSvg.asset("images/plan_bulk.svg",
+                            //             context: context),
+                            //         text(
+                            //           "Premium",
+                            //           fontSize: textSizeSMedium,
+                            //           isLongText: true,
+                            //         )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],
@@ -157,7 +161,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                   headingWidViewAll(context, "Cotação", () {},
                       desativaBotao: true),
                   CotacaoWidget(),
-                  SizedBox(height: 40),
+                  SizedBox(height: 50),
                 ],
               ),
             ),
