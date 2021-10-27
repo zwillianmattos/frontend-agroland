@@ -8,12 +8,10 @@ part 'home_store.g.dart';
 class HomeStore = _HomeStoreBase with _$HomeStore;
 
 abstract class _HomeStoreBase with Store {
-  final NewsRepository newsRepository;
-
   @observable
   ObservableList<NewsModel> newsList = ObservableList<NewsModel>.of([]);
 
-  _HomeStoreBase(this.newsRepository) {}
+  _HomeStoreBase() {}
 
   @action
   ebookPage() {
