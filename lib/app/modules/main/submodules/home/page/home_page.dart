@@ -1,25 +1,15 @@
+import 'package:agro_tools/app/modules/main/submodules/home/stores/home_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/acoes/widgets/cotacao_widget.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/page/news_widget.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/page/weather_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-<<<<<<< HEAD
-import 'package:agro_tools/app/core/consts/colors.dart';
 import 'package:agro_tools/app/core/consts/texts.dart';
 import 'package:agro_tools/app/core/widgets/widgets.dart';
-import 'package:agro_tools/app/modules/main/bottom_navigator_store.dart';
-import './home_store.dart';
-=======
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
-import 'package:plant_care/app/modules/main/submodules/home/stores/home_store.dart';
-
->>>>>>> 122cba5c7d6d5f13f8e373c8a2dc15a0a8c5eb46
 import 'package:relative_scale/relative_scale.dart';
-import '../widgets/weather/page/weather_widget.dart';
-import '../widgets/acoes/widgets/cotacao_widget.dart';
-import '../widgets/news/page/news_widget.dart';
 import 'package:universal_io/io.dart' as IO;
+
 
 class DashboardPage extends StatefulWidget {
   @override

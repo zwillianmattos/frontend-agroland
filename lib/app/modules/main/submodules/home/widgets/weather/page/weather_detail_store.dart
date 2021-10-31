@@ -1,19 +1,22 @@
+import 'dart:convert';
+
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/repositories/weather_repository.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/repositories/weather_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
 
 part 'weather_detail_store.g.dart';
 
 class WeatherDetailStore = _WeatherDetailStoreBase with _$WeatherDetailStore;
 
 abstract class _WeatherDetailStoreBase with Store {
-    final WeatherRepository weatherRepository;
+  final WeatherRepository weatherRepository;
 
   @observable
   bool isLoading = false;
 
   @observable
-  Weather? weather;
+  ObservableList<Weather>? localizacoesLista;
 
   _WeatherDetailStoreBase(this.weatherRepository) {
     loadWeather();
@@ -23,12 +26,39 @@ abstract class _WeatherDetailStoreBase with Store {
   loadWeather() async {
     try {
       this.isLoading = true;
-      this.weather = await weatherRepository.get();
+
+      var localizacoes =
+          await LocalStorage.getValue<String>('weather_localizacoes');
+
+      localizacoesLista = ObservableList<Weather>.of([]);
+
+      Weather? currentLocation = await weatherRepository.get();
+
+      if (currentLocation != null) {
+        currentLocation.results?.cid = "local_atual";
+        localizacoesLista?.add(currentLocation);
+      }
+
+      if (localizacoes != null && localizacoes != '') {
+        List<dynamic> jsonLocalizacoes = jsonDecode(localizacoes);
+
+        jsonLocalizacoes
+            .map((e) async =>
+                await weatherRepository.getByCity(e['results']['city']))
+            .take(100)
+            .map((e) => e.then((Weather? value) {
+                  print("Add Lista");
+                  print("${localizacoesLista.toString()}");
+                  if (value != null) localizacoesLista?.add(value);
+                  return value;
+                }))
+            .toList();
+      }
+
+      this.isLoading = false;
     } catch (e) {
       this.isLoading = false;
       print(e);
-    } finally {
-      this.isLoading = false;
     }
   }
 }

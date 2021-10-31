@@ -24,18 +24,19 @@ mixin _$WeatherDetailStore on _WeatherDetailStoreBase, Store {
     });
   }
 
-  final _$weatherAtom = Atom(name: '_WeatherDetailStoreBase.weather');
+  final _$localizacoesListaAtom =
+      Atom(name: '_WeatherDetailStoreBase.localizacoesLista');
 
   @override
-  Weather? get weather {
-    _$weatherAtom.reportRead();
-    return super.weather;
+  ObservableList<Weather>? get localizacoesLista {
+    _$localizacoesListaAtom.reportRead();
+    return super.localizacoesLista;
   }
 
   @override
-  set weather(Weather? value) {
-    _$weatherAtom.reportWrite(value, super.weather, () {
-      super.weather = value;
+  set localizacoesLista(ObservableList<Weather>? value) {
+    _$localizacoesListaAtom.reportWrite(value, super.localizacoesLista, () {
+      super.localizacoesLista = value;
     });
   }
 
@@ -51,7 +52,7 @@ mixin _$WeatherDetailStore on _WeatherDetailStoreBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
-weather: ${weather}
+localizacoesLista: ${localizacoesLista}
     ''';
   }
 }

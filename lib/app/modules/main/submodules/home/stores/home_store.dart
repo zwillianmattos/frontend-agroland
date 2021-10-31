@@ -11,8 +11,6 @@ abstract class _HomeStoreBase with Store {
   @observable
   ObservableList<NewsModel> newsList = ObservableList<NewsModel>.of([]);
 
-  _HomeStoreBase() {}
-
   @action
   ebookPage() {
     Modular.to.pushNamed('/education/ebook',

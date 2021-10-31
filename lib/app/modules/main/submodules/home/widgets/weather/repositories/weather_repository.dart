@@ -62,6 +62,25 @@ class WeatherRepository extends Disposable {
     return weather;
   }
 
+  Future<Weather?> getByCity(String city) async {
+    Options? options;
+    if (cacheOptions != null) {
+      options =
+          cacheOptions!.copyWith(policy: CachePolicy.forceCache).toOptions();
+    }
+
+    Response response = await _http.get(
+        'https://api.hgbrasil.com/weather?format=json-cors&key=${API_WEATHER_KEY}&city_name=${city}',
+        options: options);
+    if (response == null) {
+      return null;
+    }
+
+    var data = response.data;
+    Weather weather = Weather.fromJson(data);
+    return weather;
+  }
+
   @override
   void dispose() async {}
 }
