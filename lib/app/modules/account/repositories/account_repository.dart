@@ -19,6 +19,7 @@ class AccountRepository extends Disposable {
           await _http.post('/user/register', data: user.toJson());
 
       var data = response.data;
+      print(data);
       if (!data['status']) {
         throw (data['message']);
       }

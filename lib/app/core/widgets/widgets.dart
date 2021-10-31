@@ -1082,7 +1082,7 @@ Widget hdWidget(context) {
 
 Widget headingWidViewAll(
     BuildContext context, var titleText, Function()? callback,
-    {limiter = false, desativaBotao = false}) {
+    {limiter = false, desativaBotao = false, itemSubText = "Ver Mais"}) {
   return RelativeBuilder(builder: (context, height, width, sy, sx) {
     return Container(
       width: width >= 1024 && limiter ? 1024 : width,
@@ -1098,7 +1098,7 @@ Widget headingWidViewAll(
           if (!desativaBotao)
             InkWell(
                 onTap: callback,
-                child: itemSubTitle(context, "Ver mais",
+                child: itemSubTitle(context, itemSubText,
                         fontsize: textSizeMedium,
                         fontFamily: fontMedium,
                         colorThird: true)

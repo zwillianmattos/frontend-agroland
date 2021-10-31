@@ -80,7 +80,7 @@ class _CultureDetailViewPageState
                         padding: EdgeInsets.all(18.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(8)),
-                          color: Colors.white,
+                          color: Theme.of(context).dialogBackgroundColor,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.15),

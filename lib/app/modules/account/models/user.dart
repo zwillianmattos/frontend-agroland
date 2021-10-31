@@ -8,7 +8,7 @@ class User implements IUser {
   String? password;
   String? imgLogo;
   ProducerUser? producerUser;
-  bool? excluded;
+  int? excluded;
 
   User(
       {this.id,
@@ -29,7 +29,6 @@ class User implements IUser {
     if(imgLogo == null || imgLogo == " " || imgLogo == ""){
       imgLogo =  "https://www.pngitem.com/pimgs/m/150-1503941_user-windows-10-user-icon-png-transparent-png.png";
     }
-    print(imgLogo);
     if (json['ProducerUser'] != null)
       producerUser = ProducerUser.fromJson(json['ProducerUser']);
     excluded = json['excluded'];

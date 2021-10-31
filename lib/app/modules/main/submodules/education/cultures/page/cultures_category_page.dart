@@ -20,7 +20,7 @@ class _CulturesCategoryPageState
     return Scaffold(
       appBar: AppBar(
         title: Observer(builder: (_) {
-          return Text('${controller.culture?.name ?? ""}');
+          return text('${controller.culture?.name ?? ""}');
         }),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -36,31 +36,31 @@ class _CulturesCategoryPageState
         return ListView.builder(
             itemCount: _culture.culturesCategoriesRels?.length ?? 0,
             itemBuilder: (_, index) {
-              return Container(
-                margin: EdgeInsets.only(
-                    left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
-                padding: EdgeInsets.all(18.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.15),
-                      spreadRadius: 0,
-                      blurRadius: 5,
-                      offset: Offset(0, 0), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: InkWell(
-                  onTap: () {
-                    Modular.to.pushNamed(
-                        "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].id}/items",
-                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
-                            ? true
-                            : false,
-                        arguments: _culture.culturesCategoriesRels?[index]);
-                  },
+              return InkWell(
+                onTap: () {
+                  Modular.to.pushNamed(
+                      "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].id}/items",
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                          ? true
+                          : false,
+                      arguments: _culture.culturesCategoriesRels?[index]);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
+                  padding: EdgeInsets.all(18.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    color: Theme.of(context).dialogBackgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.15),
+                        spreadRadius: 0,
+                        blurRadius: 5,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

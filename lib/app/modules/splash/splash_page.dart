@@ -28,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
             duration: Duration(milliseconds: 2000),
             tween: _scaleTween,
             child: Image.asset(
-              'images/logo_tcc2.png',
+              'images/logo_tcc3.png',
             ),
             onEnd: () async {
               if (Modular.get<UserPreferencesStore>().getUser != null) {

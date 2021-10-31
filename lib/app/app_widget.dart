@@ -18,7 +18,7 @@ class AppWidget extends StatelessWidget {
         brightness: Brightness.dark,
         visualDensity: VisualDensity.comfortable,
         backgroundColor: const Color(0xFF212121),
-        accentColor: Colors.white,
+        accentColor: color_colorPrimary,
         accentIconTheme: IconThemeData(color: Colors.white),
         dividerColor: Colors.black12,
         fontFamily: 'Product Sans',
