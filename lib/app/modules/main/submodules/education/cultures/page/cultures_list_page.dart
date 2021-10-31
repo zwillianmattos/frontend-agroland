@@ -19,9 +19,8 @@ class _CulturesListPageState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color_app_background,
       appBar: AppBar(
-        title: Text('Diagnóstico'),
+        title: text('Diagnóstico'),
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -40,29 +39,29 @@ class _CulturesListPageState
             itemBuilder: (_, index) {
               Culture _culture = controller.cultures![index];
 
-              return Container(
-                margin: EdgeInsets.only(
-                    left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
-                padding: EdgeInsets.all(18.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.15),
-                      spreadRadius: 0,
-                      blurRadius: 5,
-                      offset: Offset(0, 0), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: InkWell(
-                  onTap: () {
-                    Modular.to.pushNamed("/cultures/${_culture.id}/categories",
-                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
-                            ? true
-                            : false);
-                  },
+              return InkWell(
+                onTap: () {
+                  Modular.to.pushNamed("/cultures/${_culture.id}/categories",
+                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                          ? true
+                          : false);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(
+                      left: 16.0, right: 16.0, bottom: 10.0, top: 10.0),
+                  padding: EdgeInsets.all(18.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    color: Theme.of(context).dialogBackgroundColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.15),
+                        spreadRadius: 0,
+                        blurRadius: 5,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
