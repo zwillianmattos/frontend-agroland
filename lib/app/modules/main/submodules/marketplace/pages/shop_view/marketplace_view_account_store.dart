@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/producer_user.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
 
 part 'marketplace_view_account_store.g.dart';
 

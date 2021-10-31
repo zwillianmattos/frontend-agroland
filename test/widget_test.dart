@@ -8,7 +8,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_test/flutter_test.dart';
 //
-// import 'package:plant_care/main.dart';
+// import 'package:agro_tools/main.dart';
 
 void main() {
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {

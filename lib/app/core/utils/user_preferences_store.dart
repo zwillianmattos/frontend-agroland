@@ -4,11 +4,11 @@ import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/account.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:plant_care/app/modules/account/repositories/account_repository.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
+import 'package:agro_tools/app/core/models/account.dart';
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/account/repositories/account_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/producer_user.dart';
 
 part 'user_preferences_store.g.dart';
 

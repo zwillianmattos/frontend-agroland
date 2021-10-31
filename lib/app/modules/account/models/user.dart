@@ -1,5 +1,5 @@
-import 'package:plant_care/app/core/interfaces/user_interface.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
+import 'package:agro_tools/app/core/interfaces/user_interface.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/producer_user.dart';
 
 class User implements IUser {
   int? id;

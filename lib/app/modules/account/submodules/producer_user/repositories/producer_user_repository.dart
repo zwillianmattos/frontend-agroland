@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/producer_user.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/producer_user.dart';
 
 class ProducerUserRepository extends Disposable {
   final Dio _http;

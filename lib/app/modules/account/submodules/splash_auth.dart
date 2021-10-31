@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,15 +23,17 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: color_colorPrimary,
+      backgroundColor: Colors.black,
       body: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage(
-            "images/background_plants.jpg",
+          image: DecorationImage(
+            image: AssetImage(
+              "images/background_plants.jpg",
+            ),
+            colorFilter: new ColorFilter.mode(Colors.black.withOpacity(0.6), BlendMode.dstATop),
+            fit: BoxFit.cover,
           ),
-          fit: BoxFit.cover,
-        )),
+        ),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,9 +41,9 @@ class _SplashPageState extends State<SplashPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Image.asset(
-                'images/logo.png',
+                'images/logo_tcc4.png',
                 // width: width * 0.6,
-                height: width * 0.5,
+                height: width * 0.2,
                 fit: BoxFit.contain,
               ).center(),
               Padding(
@@ -105,7 +107,6 @@ class _SplashPageState extends State<SplashPage> {
                         },
                       ),
                     ),
-                    
                   ],
                 ).paddingOnly(bottom: spacing_xxLarge),
               )

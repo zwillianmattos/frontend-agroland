@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
-import 'package:plant_care/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
 
 class MenuCategoriaClassificados {
   ClassificadoCategoria categoria;

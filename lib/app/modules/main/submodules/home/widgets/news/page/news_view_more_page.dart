@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_view_more_store.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_widget.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/page/news_view_more_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/page/news_widget.dart';
 
 import 'card_news.dart';
 

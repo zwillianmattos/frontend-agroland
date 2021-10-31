@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import 'package:universal_io/io.dart' as IO;
 part 'bottom_navigator_store.g.dart';
 

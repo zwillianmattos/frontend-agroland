@@ -1,11 +1,11 @@
-import 'package:plant_care/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/interfaces/user_interface.dart';
-import 'package:plant_care/app/core/models/account.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/interfaces/user_interface.dart';
+import 'package:agro_tools/app/core/models/account.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import 'package:http/http.dart' as http;
 
 class AccountRepository extends Disposable {

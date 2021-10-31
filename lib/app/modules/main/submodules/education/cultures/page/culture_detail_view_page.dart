@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture_content.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/cultures_categories_rels.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/page/culture_detail_view_store.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/models/culture_content.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/models/cultures_categories_rels.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/page/culture_detail_view_store.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 

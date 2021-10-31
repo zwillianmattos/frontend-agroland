@@ -8,12 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/modules/main/bottom_navigator_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -21,7 +21,7 @@ import 'percent_indicator.dart';
 
 Widget logoTitle(context) {
   return Image.asset(
-    'images/logo.png',
+    'images/logo_tcc2.png',
     width: MediaQuery.of(context).size.width * 0.3,
     height: 53,
   );
@@ -431,7 +431,6 @@ Widget appLabelViewAll(var texto, {bool limiter = false}) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             text(texto,
-                textColor: black,
                 fontSize: textSizeNormal,
                 fontFamily: fontBold),
           ],
@@ -799,7 +798,11 @@ Widget itemSubTitle(BuildContext context, var titleText,
     fontSize: fontsize,
     fontFamily: fontFamily,
     isLongText: isLongText,
-    textColor: colorThird ? textPrimaryColor : textSecondaryColor,
+    textColor: colorThird ? Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor : Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,
     maxLine: 10,
   );
 }
@@ -808,8 +811,7 @@ Widget itemTitle(BuildContext context, var titleText,
     {var fontfamily = fontMedium}) {
   return text(titleText,
       fontSize: textSizeNormal,
-      fontFamily: fontfamily,
-      textColor: textPrimaryColor);
+      fontFamily: fontfamily,);
 }
 
 Widget subType(context, key, VoidCallback callback, icon) {
@@ -879,12 +881,18 @@ Widget formField(
     initialValue: initialValue ?? "",
     decoration: InputDecoration(
       focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: color_colorPrimary)),
+          borderSide: BorderSide(color: Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,)),
       enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: t8_textColorPrimary)),
+          borderSide: BorderSide(color: Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,)),
       labelText: hint,
       labelStyle:
-          TextStyle(fontSize: textSizeNormal, color: t8_textColorPrimary),
+          TextStyle(fontSize: textSizeNormal, color: Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,),
       suffixIcon: isPassword && isPasswordVisible
           ? GestureDetector(
               onTap: suffixIconSelector,
@@ -894,7 +902,9 @@ Widget formField(
     ),
     style: TextStyle(
         fontSize: textSizeNormal,
-        color: isDummy ? Colors.transparent : t8_textColorPrimary,
+        color: isDummy ? Colors.transparent : Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,
         fontFamily: fontRegular),
   );
 }
@@ -1082,7 +1092,6 @@ Widget headingWidViewAll(
         children: <Widget>[
           Expanded(
             child: text(titleText,
-                textColor: black,
                 fontSize: textSizeNormal,
                 fontFamily: fontBold),
           ),

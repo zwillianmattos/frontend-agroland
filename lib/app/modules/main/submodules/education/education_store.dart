@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/models/paginate_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
+import 'package:agro_tools/app/core/models/models/paginate_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
 
 part 'education_store.g.dart';
 

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/modules/main/submodules/community/repositories/thread_repository.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/modules/main/submodules/community/repositories/thread_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'pages/thread/thread_page.dart';

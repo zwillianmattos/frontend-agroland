@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import 'package:universal_io/io.dart' as IO;
 
 class SplashPage extends StatefulWidget {
@@ -9,7 +9,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Tween<double> _scaleTween = Tween<double>(begin: 1, end: 2);
+  Tween<double> _scaleTween = Tween<double>(begin: 0.1, end: 0.5);
 
   @override
   void initState() {
@@ -28,8 +28,7 @@ class _SplashPageState extends State<SplashPage> {
             duration: Duration(milliseconds: 2000),
             tween: _scaleTween,
             child: Image.asset(
-              'images/logo.png',
-              scale: 1.5,
+              'images/logo_tcc2.png',
             ),
             onEnd: () async {
               if (Modular.get<UserPreferencesStore>().getUser != null) {

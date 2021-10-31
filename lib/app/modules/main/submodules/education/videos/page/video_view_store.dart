@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 

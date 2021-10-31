@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
 
 import 'bottom_navigator_store.dart';
 
@@ -34,7 +34,7 @@ class BottomNavigatorPageState
                         padding: EdgeInsets.zero,
                         children: [
                           Image.asset(
-                            'images/logo.png',
+                            'images/logo_tcc.png',
                             scale: 2.5,
                           ),
                           DrawerListTile(

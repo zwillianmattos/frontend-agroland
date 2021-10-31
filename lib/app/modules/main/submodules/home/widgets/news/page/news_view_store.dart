@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/source.dart';
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/source.dart';
 
 part 'news_view_store.g.dart';
 

@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:plant_care/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/announce_view/announce_view_page.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/announce_view/announce_view_store.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/announces/announces_store.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/home/marketplace_home_store.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/search/marketplace_search_page.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/search/marketplace_search_store.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_page.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_store.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/product_view/marketplace_view_page.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/announce_view/announce_view_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/announce_view/announce_view_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/announces/announces_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/home/marketplace_home_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/search/marketplace_search_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/search/marketplace_search_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/product_view/marketplace_view_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
 import 'pages/announces/announces_page.dart';
 import 'pages/home/marketplace_home_page.dart';
 

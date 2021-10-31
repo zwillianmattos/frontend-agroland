@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/rating.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/page/widgets/rating_store.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/rating.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/page/widgets/rating_store.dart';
 
 class RateWidget extends StatefulWidget {
   const RateWidget({Key? key}) : super(key: key);

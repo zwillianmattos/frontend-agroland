@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/models/paginate_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/rating.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/rating_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/repositories/rating_repository.dart';
+import 'package:agro_tools/app/core/models/models/paginate_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/rating.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/rating_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/repositories/rating_repository.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 part 'ebook_view_store.g.dart';

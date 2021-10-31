@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:universal_io/io.dart' as IO;
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:core';
-import 'package:plant_care/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
 
 class MarketplaceClassificadoViewPage extends StatefulWidget {
   final ProductSell classificado;

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
 
 part 'news_view_more_store.g.dart';
 

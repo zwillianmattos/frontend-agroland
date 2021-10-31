@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/account/submodules/auth/submodules/signup/signup_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/submodules/auth/submodules/signup/signup_store.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignUpWidget extends StatefulWidget {
@@ -20,18 +20,27 @@ class _SignUpWidgetState extends ModularState<SignUpWidget, SignUpStore> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // text("Bem-vindo ao PlantCare",
-            //         fontSize: textSizeLarge, fontFamily: fontBold, maxLine: 5)
-            //     .paddingOnly(
-            //         top: spacing_standard_new,
-            //         left: spacing_standard_new,
-            //         right: spacing_standard_new),
-            // text("Vamos começar",
-            //         textColor: color_textColorSecondary,
-            //         fontSize: textSizeLargeMedium,
-            //         fontFamily: fontRegular, maxLine: 5)
-            //     .paddingOnly(
-            //         left: spacing_standard_new, right: spacing_standard_new),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: text("Seja bem vindo ao AgroTools",
+                      fontSize: textSizeLarge, fontFamily: fontBold, maxLine: 5)
+                  .paddingOnly(
+                      top: spacing_standard_new,
+                      left: spacing_standard_new,
+                      right: spacing_standard_new),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: text("Vamos começar",
+                      textColor: color_textColorSecondary,
+                      fontSize: textSizeLargeMedium,
+                      fontFamily: fontRegular,
+                      maxLine: 5)
+                  .paddingOnly(
+                      left: spacing_standard_new,
+                      right: spacing_standard_new,
+                      bottom: spacing_standard_new),
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: appEditTextStyle(
@@ -130,6 +139,9 @@ class _SignUpWidgetState extends ModularState<SignUpWidget, SignUpStore> {
                 left: spacing_standard_new,
                 right: spacing_standard_new,
                 bottom: spacing_standard_new),
+            SizedBox(
+              height: spacing_xxLarge,
+            ),
           ],
         ),
       ),

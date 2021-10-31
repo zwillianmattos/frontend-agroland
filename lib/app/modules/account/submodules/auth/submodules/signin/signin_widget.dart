@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/account/submodules/auth/submodules/signin/signin_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/submodules/auth/submodules/signin/signin_store.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignInWidget extends StatefulWidget {
@@ -27,19 +27,27 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                // text("Faça login no aplicativo",
-                //         maxLine: 5, fontSize: textSizeLarge, fontFamily: fontBold)
-                //     .paddingOnly(
-                //         top: spacing_standard_new,
-                //         left: spacing_standard_new,
-                //         right: spacing_standard_new),
-                // text(
-                //   "Digite o email e a senha para continuar",
-                //   textColor: textSecondaryColor,
-                //   fontSize: textSizeLargeMedium,
-                //   maxLine: 5
-                // ).paddingOnly(
-                //     left: spacing_standard_new, right: spacing_standard_new),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: text("Faça login no aplicativo",
+                          maxLine: 5,
+                          fontSize: textSizeLarge,
+                          fontFamily: fontBold)
+                      .paddingOnly(
+                          top: spacing_standard_new,
+                          left: spacing_standard_new,
+                          right: spacing_standard_new),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: text("Digite o email e a senha para continuar",
+                          textColor: textSecondaryColor,
+                          fontSize: textSizeLargeMedium,
+                          maxLine: 5)
+                      .paddingOnly(
+                          left: spacing_standard_new,
+                          right: spacing_standard_new),
+                ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   child: appEditTextStyle("Email",
@@ -82,7 +90,6 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
                     controller.user.password = text;
                   }).paddingAll(spacing_standard_new),
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -91,7 +98,7 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
                           const BoxConstraints.tightFor(width: 300, height: 50),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          elevation: 0,
+                            elevation: 0,
                             primary: color_colorPrimary,
                             onPrimary: Colors.white,
                             padding: EdgeInsets.symmetric(
@@ -112,6 +119,9 @@ class _SignInWidgetState extends ModularState<SignInWidget, SignInStore> {
                     left: spacing_standard_new,
                     right: spacing_standard_new,
                     bottom: spacing_standard_new),
+                SizedBox(
+                  height: spacing_xxLarge,
+                ),
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/repositories/cultures_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/models/culture.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/repositories/cultures_repository.dart';
 
 part 'cultures_list_store.g.dart';
 

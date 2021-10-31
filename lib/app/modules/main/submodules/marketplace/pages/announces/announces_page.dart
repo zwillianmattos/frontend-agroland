@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/announces/announces_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/announces/announces_store.dart';
 import 'package:universal_io/io.dart' as IO;
 
 class MarketplaceAnnouncesPage extends StatefulWidget {

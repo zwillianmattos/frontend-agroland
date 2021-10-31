@@ -1,5 +1,5 @@
-name: plant_care
-description: A new Flutter project.
+name: agro_tools
+description: Agro no bolso
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -70,7 +70,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "images/icon.png"
+  image_path: "images/logo_tcc3.png"
 
 flutter:
 

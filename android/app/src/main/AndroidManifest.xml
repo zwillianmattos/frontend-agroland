@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.brasildev.plantcare">
+    package="com.brasildev.agro_tools">
 
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -9,7 +9,7 @@
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-feature android:glEsVersion="0x00020000" android:required="true" />
   <application
-        android:label="Plant Care"
+        android:label="AgroTools"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
         <activity

@@ -1,5 +1,5 @@
 
-import 'package:plant_care/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
 
 class Rating {
 	int? excluded;

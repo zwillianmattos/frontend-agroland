@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/cultures_module.dart';
-import 'package:plant_care/app/modules/main/submodules/home/home_module.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/marketplace_module.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/cultures_module.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/home_module.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/marketplace_module.dart';
 import 'bottom_navigator_store.dart';
 import 'bottom_navigator_widget.dart';
 import 'submodules/community/community_module.dart';

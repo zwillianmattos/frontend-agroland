@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:image/image.dart';
 import 'package:collection/collection.dart';
-import 'package:plant_care/app/modules/main/submodules/tools/plant_diseases/recognition_interface.dart';
+import 'package:agro_tools/app/modules/main/submodules/tools/plant_diseases/recognition_interface.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 

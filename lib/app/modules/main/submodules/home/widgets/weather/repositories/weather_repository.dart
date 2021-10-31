@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:location/location.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/services/location/location_service.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/services/location/location_service.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:path_provider/path_provider.dart' as pp;
 

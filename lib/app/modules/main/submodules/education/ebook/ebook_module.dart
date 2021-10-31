@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/page/ebook_view_store.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/page/widgets/rating_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/page/ebook_view_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/page/widgets/rating_store.dart';
 import 'page/ebook_page.dart';
 
 import './repositories/ebook_repository.dart';

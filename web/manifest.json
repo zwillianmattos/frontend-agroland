@@ -1,6 +1,6 @@
 {
-    "name": "plant_care",
-    "short_name": "plant_care",
+    "name": "agro_tools",
+    "short_name": "agro_tools",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

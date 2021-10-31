@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/tools/home_view.dart';
-import 'package:plant_care/app/modules/main/submodules/tools/plant_diseases/camera_stream.dart';
+import 'package:agro_tools/app/modules/main/submodules/tools/home_view.dart';
+import 'package:agro_tools/app/modules/main/submodules/tools/plant_diseases/camera_stream.dart';
 
 class ToolsModule extends Module {
   @override

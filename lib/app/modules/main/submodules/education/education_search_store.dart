@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/models/paginate_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
+import 'package:agro_tools/app/core/models/models/paginate_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
 
 import 'ebook/models/debouncer.dart';
 import 'ebook/repositories/ebook_repository.dart';

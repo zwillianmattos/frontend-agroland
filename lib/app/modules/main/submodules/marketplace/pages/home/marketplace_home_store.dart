@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_categories.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_categories.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
 
 part 'marketplace_home_store.g.dart';
 

@@ -1,6 +1,6 @@
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/interfaces/notification.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/interfaces/notification.dart';
 
 class NotificationService implements INotification {
   bool requiresConsent = true;
