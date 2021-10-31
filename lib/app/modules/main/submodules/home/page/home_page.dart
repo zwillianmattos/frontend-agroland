@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/bottom_navigator_store.dart';
 import './home_store.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../widgets/weather/page/weather_widget.dart';
@@ -22,82 +23,9 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
     return Scaffold(
       // backgroundColor: color_app_background,
       body: RelativeBuilder(builder: (context, height, width, sy, sx) {
-        final Widget buttons = SizedBox(
-          height: width > 500 ? sy(60) : 100,
-          width: width >= 1024 ? 1024 : width,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              // CardButton(
-              //   icon: PlatformSvg.asset("images/camera_bulk.svg",
-              //       context: context),
-              //   description: "Camera",
-              // ),
-              CardButton(
-                icon: PlatformSvg.asset(
-                  "images/document_bulk.svg",
-                  context: context,
-                ),
-                description: "Ebooks",
-                onPressed: () {
-                  Modular.get<BottomNavigatorStore>()
-                      .changePage(3, arguments: {
-                    'tab_index': 1,
-                  });
-                },
-              ),
-              CardButton(
-                  icon: PlatformSvg.asset(
-                    "images/folder_bulk.svg",
-                    context: context,
-                  ),
-                  description: "Culturas",
-                  onPressed: () {
-                    Modular.to.pushNamed('/cultures',
-                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
-                            ? true
-                            : false);
-                  }),
-            ],
-            shrinkWrap: true,
-            physics: ScrollPhysics(),
-          ),
-        );
-
         return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              // SliverAppBar(
-              //   backgroundColor: color_app_background,
-              //   floating: false,
-              //   pinned: false,
-              //   leading: IconButton(
-              //       icon: PlatformSvg.asset("images/user_broken.svg",
-              //           context: context),
-              //       onPressed: () async {
-              //         if (Modular.get<UserPreferencesStore>().getUser != null) {
-              //           Modular.to.pushNamed('/account/profile');
-              //         } else {
-              //           Modular.to.pushNamed('/account/auth');
-              //         }
-              //       }),
-              //   centerTitle: true,
-              //   title: Image.asset(
-              //     'images/logo.png',
-              //     scale: 2.5,
-              //   ),
-              //   actions: [
-              //     IconButton(
-              //         icon: PlatformSvg.asset("images/search_broken.svg",
-              //             context: context),
-              //         onPressed: () {}),
-              //     IconButton(
-              //         icon: PlatformSvg.asset("images/notification_broken.svg",
-              //             context: context),
-              //         onPressed: () {})
-              //   ],
-              // ),
-            ];
+            return [];
           },
           body: Container(
             width: width > 500 ? sx(250) : width,
@@ -107,21 +35,133 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
+                  if (IO.Platform.isIOS) SizedBox(height: 40),
                   WeatherWidget(),
-                  buttons,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color:
+                              Theme.of(context).shadowColor.withOpacity(0.15),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset: Offset(0, 0), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Modular.to.pushNamed('/tools',
+                                    forRoot: (IO.Platform.isAndroid ||
+                                            IO.Platform.isIOS)
+                                        ? true
+                                        : false);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  children: [
+                                    PlatformSvg.asset("images/camera_bulk.svg",
+                                        context: context),
+                                    text(
+                                      "Identif.",
+                                      fontSize: textSizeSMedium,
+                                      isLongText: true,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Modular.to.pushNamed('/cultures',
+                                    forRoot: (IO.Platform.isAndroid ||
+                                            IO.Platform.isIOS)
+                                        ? true
+                                        : false);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  children: [
+                                    PlatformSvg.asset(
+                                        "images/document_bulk.svg",
+                                        context: context),
+                                    text(
+                                      "Diagnóstico",
+                                      fontSize: textSizeSMedium,
+                                      isLongText: true,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Modular.to.pushNamed('/education',
+                                    arguments: {'tab_index': 0},
+                                    forRoot: (IO.Platform.isAndroid ||
+                                            IO.Platform.isIOS)
+                                        ? true
+                                        : false);
+                                // Modular.get<BottomNavigatorStore>()
+                                //     .changePage(3);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                child: Column(
+                                  children: [
+                                    PlatformSvg.asset("images/folder_bulk.svg",
+                                        context: context),
+                                    text(
+                                      "Educação",
+                                      fontSize: textSizeSMedium,
+                                      isLongText: true,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // InkWell(
+                            //   onTap: () {},
+                            //   child: Container(
+                            //     padding: EdgeInsets.all(15),
+                            //     child: Column(
+                            //       children: [
+                            //         PlatformSvg.asset("images/plan_bulk.svg",
+                            //             context: context),
+                            //         text(
+                            //           "Premium",
+                            //           fontSize: textSizeSMedium,
+                            //           isLongText: true,
+                            //         )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   headingWidViewAll(context, "Notícias", () {
-                    Modular.to.pushNamed('/home/news', 
-                      forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
+                    Modular.to.pushNamed('/home/news',
+                        forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
                             ? true
-                            : false
-                    );
+                            : false);
                   }),
                   NewsWidget(),
-                  headingWidViewAll(context, "Cotação", () {
-
-                  }),
+                  headingWidViewAll(context, "Cotação", () {},
+                      desativaBotao: true),
                   CotacaoWidget(),
-                  SizedBox(height: 40),
+                  SizedBox(height: 50),
                 ],
               ),
             ),

@@ -3,7 +3,7 @@ import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 import '../models/news.dart';
 import './news_store.dart';

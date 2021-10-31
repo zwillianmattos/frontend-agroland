@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/models/account.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/models/account.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
 
@@ -121,8 +121,9 @@ class CardAnuncio extends StatelessWidget {
                           padding: EdgeInsets.only(
                               left: spacing_control, right: spacing_control),
                           decoration: boxDecoration(
-                              radius: spacing_control,
-                              bgColor:  Theme.of(context).primaryColor,),
+                            radius: spacing_control,
+                            bgColor: Theme.of(context).primaryColor,
+                          ),
                           child: text(
                               classificado
                                       .productCategories!.first.description ??
@@ -130,13 +131,15 @@ class CardAnuncio extends StatelessWidget {
                               fontSize: textSizeSmall,
                               isCentered: true,
                               isLongText: true,
-                              textColor: Theme.of(context).textTheme.bodyText1!.color),
+                              textColor:
+                                  Theme.of(context).textTheme.bodyText1!.color),
                         ),
                       ),
-                    Expanded(child: Container()),
-                    Expanded(
-                        child: Icon(Icons.favorite_border,
-                            color: color_icon_color))
+                    Expanded(flex: 3, child: Container()),
+                    // Expanded(child: Container()),
+                    // Expanded(
+                    //     child: Icon(Icons.favorite_border,
+                    //         color: color_icon_color))
                   ],
                 ),
                 SizedBox(height: 4),
@@ -256,30 +259,10 @@ class _MarketplaceDrawerState extends State<MarketplaceDrawer> {
                 ],
               ),
             ),
-          // ListTile(
-          //     leading: Icon(Icons.home),
-          //     title: Text("Inicio"),
-          //     onTap: () {
-          //       debugPrint('toquei no drawer');
-          //     }),
-          // ListTile(
-          //     leading: Icon(Icons.search),
-          //     title: Text("Buscar"),
-          //     onTap: () {
-          //       debugPrint('toquei no drawer');
-          //     }),
-          // ListTile(
-          //     leading: Icon(Icons.notifications),
-          //     title: Text("Notificacoes"),
-          //     onTap: () {
-          //       debugPrint('toquei no drawer');
-          //     }),
           ListTile(
               leading: Icon(Icons.favorite),
               title: Text("Favoritos"),
-              onTap: () {
-                debugPrint('toquei no drawer');
-              }),
+              onTap: () {}),
           ListTile(
             leading: Icon(Icons.money),
             title: Text("Vender"),

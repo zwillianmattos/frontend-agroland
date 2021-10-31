@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/models/account.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:plant_care/app/modules/account/submodules/profile/profile_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/models/account.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/account/submodules/profile/profile_store.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -53,18 +53,16 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                       ).paddingRight(spacing_standard_new),
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             text(
                               controller.account!.name!,
                               fontSize: textSizeNormal,
                               fontFamily: fontBold,
-                              textColor: color_textColorPrimary,
                             ),
                             text(controller.account!.email!,
                                 fontSize: textSizeSmall,
-                                fontFamily: fontMedium,
-                                textColor: color_textColorSecondary)
+                                fontFamily: fontMedium,)
                           ],
                         ),
                       ),

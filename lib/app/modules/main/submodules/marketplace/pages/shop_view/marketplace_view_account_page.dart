@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/pages/shop_view/marketplace_view_account_store.dart';
 
 import '../../widgets.dart';
 
@@ -27,6 +27,7 @@ class _MarketplaceViewAccountPageState extends ModularState<
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: Colors.transparent,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -34,92 +35,56 @@ class _MarketplaceViewAccountPageState extends ModularState<
           children: [
             Container(
               height: 150,
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://deo.shopeemobile.com/shopee/shopee-mobilemall-live-sg/shop/f2575b4929b32ab70bf3b98ebb2aa6eb.png"),
-                  fit: BoxFit.cover,
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(1.0), BlendMode.softLight),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            if (controller.logista.imgLogo != null)
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ClipOval(
-                                  child: Image.network(
-                                    controller.logista.imgLogo!,
-                                    width: 42,
-                                  ),
-                                ),
-                              ),
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          if (controller.logista.imgLogo != null)
                             Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 24.0,
-                                  right: 8.0,
-                                  top: 8.0,
-                                  bottom: 8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  text("${controller.logista.corporateName}",
-                                      fontSize: textSizeNormal,
-                                      textColor: color_white,
-                                      isLongText: true),
-                                  text("Ativo ha 23 horas",
-                                      fontSize: textSizeSmall,
-                                      textColor: color_white),
-                                  // text("${controller.logista.phone!}",
-                                  //     fontSize: textSizeSmall, textColor: color_white),
-                                  // text("${controller.logista.cnpj}",
-                                  //     fontSize: textSizeSmall, textColor: color_white),
-                                ],
+                              padding: const EdgeInsets.all(8.0),
+                              child: ClipOval(
+                                child: Image.network(
+                                  controller.logista.imgLogo!,
+                                  width: 42,
+                                ),
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 24.0, right: 8.0, top: 8.0, bottom: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: appButton3(
-                                    textContent: "Chat",
-                                    fontSize: textSizeSmall,
-                                    onPressed: () {},
-                                  ),
+                                text(
+                                    "${controller.logista.fantasyName ?? controller.logista.corporateName}",
+                                    fontSize: textSizeNormal,
+                                    isLongText: true),
+                                text(
+                                  "${controller.logista.phone!}",
+                                  fontSize: textSizeSmall,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: appButton3(
-                                      textContent: "Seguir",
-                                      fontSize: textSizeSmall,
-                                      onPressed: () {}),
+                                text(
+                                  "${controller.logista.cnpj}",
+                                  fontSize: textSizeSmall,
                                 ),
                               ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Container(
@@ -128,7 +93,7 @@ class _MarketplaceViewAccountPageState extends ModularState<
                   fontSize: textSizeSmall, maxLine: 10, justifyText: true),
             ),
             DefaultTabController(
-              length: 2,
+              length: 1,
               initialIndex: 0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -151,7 +116,6 @@ class _MarketplaceViewAccountPageState extends ModularState<
                           left: spacing_large, right: spacing_large),
                       tabs: [
                         Tab(child: text("Todos os Produtos")),
-                        Tab(child: text("Categorias")),
                       ],
                     ),
                   ),
@@ -171,48 +135,26 @@ class _MarketplaceViewAccountPageState extends ModularState<
                                 controller.products!;
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Expanded(
-                                child: StaggeredGridView.countBuilder(
-                                  primary: false,
-                                  crossAxisCount: 4,
-                                  mainAxisSpacing: 4,
-                                  crossAxisSpacing: 4,
-                                  physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: items.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) =>
-                                          CardAnuncio(
-                                    classificado: items[index],
-                                  ),
-                                  staggeredTileBuilder: (index) => width > 500
-                                      ? const StaggeredTile.fit(1)
-                                      : const StaggeredTile.fit(2),
+                              child: StaggeredGridView.countBuilder(
+                                primary: false,
+                                crossAxisCount: 4,
+                                mainAxisSpacing: 4,
+                                crossAxisSpacing: 4,
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: items.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) =>
+                                        CardAnuncio(
+                                  classificado: items[index],
                                 ),
+                                staggeredTileBuilder: (index) => width > 500
+                                    ? const StaggeredTile.fit(1)
+                                    : const StaggeredTile.fit(2),
                               ),
                             );
                           }),
                         ),
-                        ListView(
-                          physics: BouncingScrollPhysics(),
-                          children: [
-                            ListTile(
-                              title: Text("Moveis de escritorio"),
-                              subtitle: Text("6 produtos"),
-                              trailing: Icon(Icons.keyboard_arrow_right),
-                            ),
-                            ListTile(
-                              title: Text("Outros"),
-                              subtitle: Text("3 produtos"),
-                              trailing: Icon(Icons.keyboard_arrow_right),
-                            ),
-                            ListTile(
-                              title: Text("Todos os produtos"),
-                              subtitle: Text("12 produtos"),
-                              trailing: Icon(Icons.keyboard_arrow_right),
-                            )
-                          ],
-                        )
                       ],
                     ),
                   ),

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/acoes/models/cotacao_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/acoes/models/cotacao_model.dart';
 
 class CotacaoRepository extends Disposable {
   final Dio _http;

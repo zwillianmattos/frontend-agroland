@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/account/submodules/auth/submodules/signin/signin_widget.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/submodules/auth/submodules/signin/signin_widget.dart';
 import 'auth_store.dart';
 import 'submodules/signup/signup_widget.dart';
 
@@ -16,7 +16,6 @@ class AuthPage extends StatefulWidget {
   @override
   _AuthPageState createState() => _AuthPageState();
 }
-
 
 class _AuthPageState extends ModularState<AuthPage, AuthStore> {
   @override
@@ -63,21 +62,22 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
     });
 
     return Scaffold(
-      // backgroundColor: color_app_background,
+      backgroundColor: color_white,
       appBar: AppBar(
-        leading: BackButton(),
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Image.asset(
-          'images/logo.png',
-          scale: 2.5,
+          'images/logo_tcc.png',
+          width: width * 0.5,
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Container(
-            padding: width <= 540 ?  EdgeInsets.zero : EdgeInsets.symmetric(horizontal: width * 0.350),
+            padding: width <= 540
+                ? EdgeInsets.zero
+                : EdgeInsets.symmetric(horizontal: width * 0.350),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,6 +113,8 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
                   ),
                 ),
                 SizedBox(
+                  height: spacing_xxLarge,
+                ),SizedBox(
                   height: spacing_xxLarge,
                 ),
               ],

@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/repositories/cultures_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/models/culture.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/repositories/cultures_repository.dart';
 
 part 'cultures_list_store.g.dart';
 
@@ -10,6 +10,9 @@ abstract class _CulturesListStoreBase with Store {
   @observable
   ObservableList<Culture>? cultures;
 
+  @observable
+  bool isLoading = false;
+
   final CulturesRepository repository;
 
   _CulturesListStoreBase(this.repository) {
@@ -18,7 +21,14 @@ abstract class _CulturesListStoreBase with Store {
 
   @action
   loadCultures() async {
-    this.cultures =
-        (await this.repository.getCultures() as List<Culture>).asObservable();
+    try {
+      isLoading = true;
+      this.cultures =
+          (await this.repository.getCultures() as List<Culture>).asObservable();
+      isLoading = false;
+    } catch (e) {
+      this.cultures = null;
+      isLoading = false;
+    }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/models/paginate_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
+import 'package:agro_tools/app/core/models/models/paginate_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/models/ebook_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
 
 part 'education_store.g.dart';
 
@@ -45,9 +45,6 @@ abstract class _EducationStoreBase with Store {
     load();
     loadPage();
     loadBanners();
-
-      
-    print(Modular.args?.data['tab_index']);
   }
 
   @action
@@ -67,11 +64,7 @@ abstract class _EducationStoreBase with Store {
 
   @action
   void _scrollListener() {
-    print(ebooksController!.position.extentAfter);
     if (ebooksController!.position.extentAfter < 500 && isLoading == false) {
-      // Request next Page
-      print("loading next Page $currentPage");
-
       if (currentPage < paginateModel.totalPages!) {
         currentPage++;
         loadPage();
@@ -80,10 +73,21 @@ abstract class _EducationStoreBase with Store {
   }
 
   @action
+  refresh() async {
+    isLoading = true;
+    currentPage = 0;
+    totalPage = 0;
+    ebooksController!.jumpTo(0);
+    ebooksList = <Ebook>[].asObservable();
+    await loadPage();
+    isLoading = false;
+    return true;
+  }
+
+  @action
   loadPage({
     query: "?size=10",
   }) async {
-    isLoading = true;
     paginateModel = await repository.load(
       query: "?size=10&page=$currentPage",
     );
@@ -92,7 +96,6 @@ abstract class _EducationStoreBase with Store {
       var data = paginateModel.items;
       ebooksList.addAll(data as List<Ebook>);
     }
-    isLoading = false;
   }
 
   @action

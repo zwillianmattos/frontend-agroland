@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/account.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/modules/account/models/user.dart';
-import 'package:plant_care/app/modules/account/repositories/account_repository.dart';
+import 'package:agro_tools/app/core/models/account.dart';
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/account/repositories/account_repository.dart';
 
 part 'signup_store.g.dart';
 
@@ -38,7 +38,7 @@ abstract class SignUpStoreBase with Store {
 
       formKey.currentState!.save();
       AccountModel account = await _repository.register(user);
-      print(account.toJson());
+
       if (account.token == null) {
         throw ("Erro ao se cadastrar");
       }

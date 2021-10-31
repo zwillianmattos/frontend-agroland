@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(plant_care LANGUAGES CXX)
+project(agro_tools LANGUAGES CXX)
 
-set(BINARY_NAME "plant_care")
+set(BINARY_NAME "agro_tools")
 
 cmake_policy(SET CMP0063 NEW)
 

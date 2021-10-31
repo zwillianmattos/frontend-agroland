@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:video_player/video_player.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -88,6 +88,8 @@ abstract class _VideoViewPlaylistStoreBase with Store {
             showFullscreenButton: true,
             mute: false,
             autoPlay: true,
+            privacyEnhanced: true,
+            useHybridComposition: kIsWeb ? true : false,
             showVideoAnnotations: false,
             strictRelatedVideos: false,
             desktopMode: kIsWeb ? true : false,
@@ -116,8 +118,7 @@ abstract class _VideoViewPlaylistStoreBase with Store {
 
     List<Map> listMap = recentVideos.map((Movie e) => e.toJson()).toList();
     print(listMap);
-    await LocalStorage.setValue("recent_videos",
-        jsonEncode(listMap));
+    await LocalStorage.setValue("recent_videos", jsonEncode(listMap));
     return true;
   }
 

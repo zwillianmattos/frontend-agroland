@@ -73,7 +73,7 @@ mixin _$MarketplaceHomeStore on _MarketplaceHomeStoreBase, Store {
   final _$loadAsyncAction = AsyncAction('_MarketplaceHomeStoreBase.load');
 
   @override
-  Future load({dynamic query = ""}) {
+  Future load({dynamic query = "?size=20"}) {
     return _$loadAsyncAction.run(() => super.load(query: query));
   }
 

@@ -4,12 +4,14 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/community/models/thread_model.dart';
-import 'package:plant_care/app/modules/main/submodules/community/pages/thread/thread_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/main/submodules/community/models/thread_likes_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/community/models/thread_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/community/pages/thread/thread_store.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
 
@@ -27,7 +29,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
       appBar: AppBar(
         elevation: 0,
         title: text("Comunidade"),
-        // backgroundColor: color_colorPrimary,
+        backgroundColor: Colors.transparent,
       ),
       body: Observer(
         builder: (_) {
@@ -36,131 +38,22 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
               child: CircularProgressIndicator(),
             );
           }
-
-          // if (controller.threads.length <= 0 ) {
-          //   return Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Column(
-          //       children: [
-          //         text("Ocorreu um erro interno, tente novamente",
-          //             maxLine: 5, isCentered: true),
-          //         Divider(),
-          //         Container(
-          //           child: appButton(
-          //             textContent: "Tentar novamente",
-          //             onPressed: controller.loadThreads,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   );
-          // }
-
           List<Thread> list = controller.threads;
 
           return RelativeBuilder(builder: (context, height, width, sy, sx) {
-            print(width);
             return Container(
+              padding: EdgeInsets.only(left: 8.0, right: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    color: Theme.of(context).backgroundColor,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                        top: 8,
-                        bottom: 8,
-                      ),
-                      child: Column(
-                        children: [
-                          // Column(
-                          //   children: [
-                          //     Container(
-                          //       decoration: BoxDecoration(
-                          //         borderRadius:
-                          //             BorderRadius.all(Radius.circular(6)),
-                          //         color: white,
-                          //         boxShadow: [
-                          //           BoxShadow(
-                          //             color: Colors.grey.withOpacity(0.06),
-                          //             spreadRadius: 5,
-                          //             blurRadius: 10,
-                          //             offset: Offset(
-                          //                 0, 0), // changes position of shadow
-                          //           ),
-                          //         ],
-                          //       ),
-                          //       child: TextField(
-                          //           textAlignVertical: TextAlignVertical.center,
-                          //           decoration: InputDecoration(
-                          //             fillColor: color_white,
-                          //             hintText: "Buscar",
-                          //             border: InputBorder.none,
-                          //             prefixIcon: Icon(Typicons.search_outline),
-                          //             contentPadding: EdgeInsets.only(
-                          //                 left: 26.0,
-                          //                 bottom: 8.0,
-                          //                 top: 8.0,
-                          //                 right: 50.0),
-                          //           )),
-                          //       alignment: Alignment.center,
-                          //     ),
-                          //   ],
-                          // ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.only(
-                                  left: 0.0,
-                                ),
-                                child: Image.network(
-                                  Modular.get<UserPreferencesStore>().getUser?.imgLogo ?? "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
-                                  width: 30,
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.all(8),
-                                  decoration: boxDecoration(
-                                      bgColor:
-                                          Theme.of(context).backgroundColor,
-                                      color: Theme.of(context).primaryColor,
-                                      showShadow: false,
-                                      radius: 4),
-                                  child: TextField(
-                                      textInputAction: TextInputAction.send,
-                                      style: TextStyle(
-                                          fontSize: textSizeMedium,
-                                          fontFamily: fontRegular),
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            EdgeInsets.fromLTRB(16, 22, 16, 22),
-                                        hintText: "O que vc esta pensando?",
-                                        border: InputBorder.none,
-                                        hintStyle: TextStyle(
-                                            color: color_textColorSecondary),
-                                      ),
-                                      readOnly: false,
-                                      onSubmitted: (value) {}),
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   SizedBox(
                     height: 16,
                   ),
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh: () async {
-                        await controller.loadThreads();
+                        await controller.refresh();
                       },
                       child: Container(
                         // width: width > 600 ? sx(300) : width,
@@ -178,21 +71,51 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                         ? true
                                         : false);
                               },
+                              onLongPress: () {
+                                User? user =
+                                    Modular.get<UserPreferencesStore>().getUser;
+
+                                if (user != null &&
+                                    list[index].user?.id == user.id)
+                                  showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            ListTile(
+                                              leading:
+                                                  new Icon(Icons.remove_circle),
+                                              title: new Text('Remover'),
+                                              onTap: () {
+                                                controller
+                                                    .removeThread(list[index]);
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                            ListTile(
+                                              leading: new Icon(Icons.edit),
+                                              title: new Text('Editar'),
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        );
+                                      });
+                              },
                               child: Container(
-                                margin: const EdgeInsets.only(
-                                    left: 16.0,
-                                    right: 16.0,
-                                    bottom: 8.0,
-                                    top: 8.0),
+                                margin: EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(3)),
+                                      BorderRadius.all(Radius.circular(8)),
                                   color: Theme.of(context).backgroundColor,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Theme.of(context)
-                                          .shadowColor
-                                          .withOpacity(0.15),
+                                      color: Colors.grey.withOpacity(0.15),
                                       spreadRadius: 0,
                                       blurRadius: 5,
                                       offset: Offset(
@@ -201,11 +124,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                   ],
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0,
-                                      right: 16.0,
-                                      bottom: 8.0,
-                                      top: 8.0),
+                                  padding: EdgeInsets.all(6.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -218,14 +137,18 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                             CrossAxisAlignment.center,
                                         children: <Widget>[
                                           Container(
-                                            padding: const EdgeInsets.only(
-                                                left: 4.0,
-                                                top: 16.0,
-                                                right: 8.0,
-                                                bottom: 16.0),
-                                            child: Image.network(
-                                              list[index].user?.imgLogo ?? "https://freepikpsd.com/media/2019/10/default-profile-image-png-1-Transparent-Images.png",
-                                              width: 30,
+                                            child: Card(
+                                              semanticContainer: true,
+                                              clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
+                                              child: Image.network(
+                                                "${list[index].user?.imgLogo}",
+                                                width: 30,
+                                              ),
                                             ),
                                           ),
                                           Column(
@@ -250,11 +173,6 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                           ),
                                           Spacer(),
                                           Spacer(),
-                                          // IconButton(
-                                          //   icon: Icon(Icons.more_vert),
-                                          //   onPressed: () {},
-                                          //   iconSize: 20,
-                                          // )
                                         ],
                                       ),
 
@@ -262,91 +180,97 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          // Posted Timestamp
-                                          if (list[index].title != null)
-                                            Text(
-                                              list[index].title.toString(),
-                                              textAlign: TextAlign.justify,
-                                            ),
                                           Html(
                                             data: list[index].body,
                                             shrinkWrap: true,
                                           ),
-                                          Divider(),
+
                                           // butttons
                                           Observer(builder: (_) {
+                                            User? user = Modular.get<
+                                                    UserPreferencesStore>()
+                                                .getUser;
+                                            bool liked = false;
+
+                                            if (user != null) {
+                                              var result = list[index]
+                                                  .threadLikes
+                                                  ?.where((element) =>
+                                                      element.user?.id ==
+                                                      user.id);
+
+                                              if (result?.length != null &&
+                                                  result!.length > 0) {
+                                                liked = true;
+                                              } else {
+                                                liked = false;
+                                              }
+                                            }
+
                                             return Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 1.0),
                                               child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
+                                                    MainAxisAlignment.start,
                                                 children: [
-                                                  IconButton(
-                                                      iconSize: 20,
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              2.0),
-                                                      icon:
-                                                          Icon(Typicons.heart),
-                                                      onPressed: () {}),
-                                                  IconButton(
-                                                      iconSize: 20,
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              2.0),
-                                                      color: controller
-                                                                  .commentIndex ==
-                                                              index
-                                                          ? color_colorPrimary
-                                                          : black,
-                                                      icon: Icon(
-                                                          Typicons.comment),
-                                                      onPressed: () {
-                                                        controller
-                                                            .startCommentThread(
-                                                                index);
-                                                      })
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      IconButton(
+                                                          iconSize: 20,
+                                                          color: black,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          icon: Icon(liked
+                                                              ? Typicons
+                                                                  .heart_filled
+                                                              : Typicons.heart),
+                                                          onPressed: () async {
+                                                            await controller
+                                                                .like(
+                                                                    thread: list[
+                                                                        index]);
+                                                          }),
+                                                      text(
+                                                          "${list[index].threadLikes?.length ?? 0}"),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      IconButton(
+                                                          iconSize: 20,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(2.0),
+                                                          color: black,
+                                                          icon: Icon(
+                                                              Typicons.comment),
+                                                          onPressed: null),
+                                                      text(
+                                                          "${list[index].replies?.length}"),
+                                                    ],
+                                                  )
                                                 ],
                                               ),
                                             );
                                           }),
-                                          Observer(builder: (c) {
-                                            if (controller.commentIndex !=
-                                                    null &&
-                                                controller.commentIndex ==
-                                                    index)
-                                              return TextField(
-                                                  autofocus: true,
-                                                  textInputAction:
-                                                      TextInputAction.send,
-                                                  style: TextStyle(
-                                                      fontSize: textSizeMedium,
-                                                      fontFamily: fontRegular),
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.fromLTRB(
-                                                            16, 22, 16, 22),
-                                                    hintText:
-                                                        "Escreve uma resposta",
-                                                    border: InputBorder.none,
-                                                    hintStyle: TextStyle(
-                                                        color:
-                                                            color_textColorSecondary),
-                                                  ),
-                                                  readOnly: false,
-                                                  onSubmitted: (value) {
-                                                    controller
-                                                        .sendCommentThread(
-                                                            comment: value,
-                                                            thread:
-                                                                list[index]);
-                                                  });
-                                            return Container();
-                                          })
                                         ],
                                       ),
                                     ],

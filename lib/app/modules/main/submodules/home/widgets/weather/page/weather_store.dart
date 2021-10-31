@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/repositories/weather_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/repositories/weather_repository.dart';
 
 part 'weather_store.g.dart';
 
@@ -22,9 +22,6 @@ abstract class _WeatherStoreBase with Store {
   @action
   loadWeather() async {
     try {
-      print("CARREGANDO TEMPO");
-      print(this.isLoading);
-      print(this.wheater);
       this.isLoading = true;
       this.wheater = await weatherRepository.get();
     } catch (e) {

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/models/models/paginate_model.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/models/models/paginate_model.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import '../models/ebook_model.dart';
 
 part 'ebook_repository.g.dart';
@@ -46,15 +46,12 @@ class EbookRepository with Store implements EbookDatasource {
         });
       }
 
-      print(listaEbooks);
-
       return PaginateModel(
           currentPage: jsonResponse['data']['currentPage'],
           totalPages: jsonResponse['data']['totalPages'],
           totalItems: jsonResponse['data']['totalItems'],
           items: listaEbooks);
     } catch (e) {
-      print("erro");
       print(e);
 
       return PaginateModel(

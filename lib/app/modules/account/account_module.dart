@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/modules/account/submodules/producer_user/producer_user_register_store.dart';
-import 'package:plant_care/app/modules/account/submodules/producer_user/repositories/producer_user_repository.dart';
-import 'package:plant_care/app/modules/account/submodules/profile/profile_page.dart';
-import 'package:plant_care/app/modules/account/submodules/profile/profile_store.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/modules/account/submodules/producer_user/producer_user_register_store.dart';
+import 'package:agro_tools/app/modules/account/submodules/producer_user/repositories/producer_user_repository.dart';
+import 'package:agro_tools/app/modules/account/submodules/profile/profile_page.dart';
+import 'package:agro_tools/app/modules/account/submodules/profile/profile_store.dart';
 import 'repositories/account_repository.dart';
 import 'submodules/auth/auth_module.dart';
 import 'submodules/producer_user/register_page.dart';

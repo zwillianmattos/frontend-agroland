@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/account/submodules/profile/profile_edit_store.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/submodules/profile/profile_edit_store.dart';
 
 class ProfileEditPage extends StatefulWidget {
   @override
@@ -81,6 +81,8 @@ class _ProfileEditPageState
                             "Email",
                             onSaved: (String? value) {},
                             suffixIcon: Icons.mail_outline,
+                            isEnabled: false,
+                            initialValue: controller.account?.email
                           ).paddingBottom(spacing_standard_new),
                           formField(
                             context,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
 import './ebook_page_store.dart';
 import './../models/ebook_model.dart';
 import 'package:universal_io/io.dart' as IO;
@@ -19,7 +19,7 @@ class _EbookPageState extends ModularState<EbookPage, EbookPageStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: text("Ebooks"),
+        title: text("Livros"),
         backgroundColor: color_colorPrimary,
       ),
       body: Observer(
@@ -48,11 +48,12 @@ class _EbookPageState extends ModularState<EbookPage, EbookPageStore> {
                     ],
                   ),
                   onTap: () async {
-                    Modular.to.pushNamed('view/${ebook.id}',
+                    await Modular.to.pushNamed('view/${ebook.id}',
                         arguments: ebook,
                         forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
                             ? true
                             : false);
+                    await controller.loadEbooks();
                   },
                 );
               },

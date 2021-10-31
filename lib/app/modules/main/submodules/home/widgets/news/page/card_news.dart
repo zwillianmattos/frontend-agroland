@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/news.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
 
 class CardNewsWidget extends StatelessWidget {
-
   final NewsModel newsModel;
   final bool horizontal;
   final Function()? callback;
 
-
-  CardNewsWidget({Key? key, required this.newsModel, this.horizontal = true, this.callback, }) : super(key: key);
+  CardNewsWidget({
+    Key? key,
+    required this.newsModel,
+    this.horizontal = true,
+    this.callback,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RelativeBuilder(builder: (context, height, width, sy, sx) {
       return Container(
         margin: EdgeInsets.only(
-            left: width >= 1024 ? 0 : 16,
-            right: 16,
-            bottom: 24,
-            top: 0),
+            left: width >= 1024 ? 0 : 13, right: 1, bottom: 5, top: 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
           color: white,

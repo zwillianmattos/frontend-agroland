@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'weather_store.dart';
 
@@ -143,63 +143,6 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
                             ),
                           ],
                         ),
-                        // SingleChildScrollView(
-                        //   scrollDirection: Axis.horizontal,
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //     crossAxisAlignment: CrossAxisAlignment.center,
-                        //     children: w.results!.forecast!
-                        //         .map((foreCast) => Container(
-                        //               padding: EdgeInsets.all(16.0),
-                        //               child: Column(
-                        //                   mainAxisAlignment:
-                        //                       MainAxisAlignment.spaceAround,
-                        //                   crossAxisAlignment:
-                        //                       CrossAxisAlignment.center,
-                        //                   children: [
-                        //                     Text(
-                        //                       "${foreCast.date}",
-                        //                       style: TextStyle(
-                        //                           fontSize: 16,
-                        //                           fontWeight: FontWeight.bold),
-                        //                     ),
-                        //                     Container(
-                        //                       child: Row(
-                        //                         crossAxisAlignment:
-                        //                             CrossAxisAlignment.start,
-                        //                         children: [
-                        //                           Text(
-                        //                             "${foreCast.max}",
-                        //                             style: TextStyle(fontSize: 12),
-                        //                           ),
-                        //                           Text(
-                        //                             "°c",
-                        //                             style: TextStyle(fontSize: 10),
-                        //                           ),
-                        //                         ],
-                        //                       ),
-                        //                     ),
-                        //                     Container(
-                        //                       child: Row(
-                        //                         crossAxisAlignment:
-                        //                             CrossAxisAlignment.start,
-                        //                         children: [
-                        //                           Text(
-                        //                             "${foreCast.min}",
-                        //                             style: TextStyle(fontSize: 12),
-                        //                           ),
-                        //                           Text(
-                        //                             "°c",
-                        //                             style: TextStyle(fontSize: 10),
-                        //                           ),
-                        //                         ],
-                        //                       ),
-                        //                     ),
-                        //                   ]),
-                        //             ))
-                        //         .toList(),
-                        //   ),
-                        // )
                       ],
                     ),
                   ),

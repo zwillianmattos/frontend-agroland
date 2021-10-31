@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/home/page/home_page.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_view_more_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/page/home_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/page/news_view_more_page.dart';
 import 'page/news_view_page.dart';
 import 'repositories/news_repository.dart';
 import 'page/news_store.dart';

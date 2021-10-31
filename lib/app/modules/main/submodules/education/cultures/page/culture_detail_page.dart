@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/page/culture_detail_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/page/culture_detail_store.dart';
 import 'package:universal_io/io.dart' as IO;
 
 class CultureDetailPage extends StatefulWidget {
@@ -22,11 +22,13 @@ class _CultureDetailPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         title: Observer(builder: (_) {
           return Text(
               '${controller.culturesCategoriesRels?.culturesCategory?.description ?? ""}');
         }),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Observer(builder: (_) {
         if (controller.isLoading)

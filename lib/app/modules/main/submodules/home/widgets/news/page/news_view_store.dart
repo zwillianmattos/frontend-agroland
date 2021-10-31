@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/services/local_storage/local_storage.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/source.dart';
+import 'package:agro_tools/app/core/services/local_storage/local_storage.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/source.dart';
 
 part 'news_view_store.g.dart';
 
@@ -31,7 +31,7 @@ abstract class _NewsViewStoreBase with Store {
 
       news = Modular.args?.data as NewsModel?;
       var newsSaved = await LocalStorage.getValue<String>('news_data');
-      print(newsSaved);
+
       if (newsSaved != null && newsSaved.isNotEmpty && newsSaved != '') {
         List<dynamic> list =
             jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
@@ -58,7 +58,7 @@ abstract class _NewsViewStoreBase with Store {
   saveNotice() async {
     try {
       var newsSaved = await LocalStorage.getValue<String>('news_data');
-      
+
       if (newsSaved != '' && newsSaved.isNotEmpty) {
         List<dynamic> list =
             jsonDecode(newsSaved).map((e) => NewsModel.fromJson(e)).toList();
@@ -74,9 +74,7 @@ abstract class _NewsViewStoreBase with Store {
         await LocalStorage.setValue<String>('news_data', jsonEncode(list));
       } else {
         List<dynamic> list = [news!];
-        
         list = list.map((e) => e.toJson()).toList();
-        print(list);
         await LocalStorage.setValue<String>('news_data', jsonEncode(list));
         favorite = true;
       }

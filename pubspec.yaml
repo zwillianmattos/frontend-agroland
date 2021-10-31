@@ -1,5 +1,5 @@
-name: plant_care
-description: A new Flutter project.
+name: agro_tools
+description: Agro no bolso
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -25,7 +25,7 @@ dependencies:
   dio: 4.0.0
   nb_utils: 4.2.3
   flutter_svg:
-  camera: ^0.8.1
+  camera: 0.8.1+7
   weather: ^2.0.0
   geolocator: ^7.0.3
   fluttericon: ^2.0.0
@@ -46,12 +46,16 @@ dependencies:
   flutter_staggered_grid_view: ^0.4.0
   share_plus: ^2.1.4
   universal_io: ^2.0.4
-  youtube_player_iframe: ^2.2.1
+  youtube_player_iframe: ^2.2.2
   video_player: ^2.1.12
   youtube_player_flutter: ^8.0.0
   flutter_zoom_drawer: ^2.1.0
   image_picker: ^0.8.3+2
-  onesignal_flutter: ^3.2.1
+  onesignal_flutter: ^3.2.3
+  flutter_rating_bar: ^4.0.0
+  tflite_flutter: ^0.9.0
+  tflite_flutter_helper: ^0.3.0
+
   
 dev_dependencies:
   flutter_modular_test: 1.0.1
@@ -66,7 +70,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "images/icon.png"
+  image_path: "images/logo_tcc3.png"
 
 flutter:
 
@@ -77,6 +81,10 @@ flutter:
     - images/logo.png
     - images/background.jpg
     - images/LikeButton/image/grey.jpg
+    - assets/apple_label.txt
+    - assets/apple.tflite
+    - assets/data.tflite
+    - assets/label.txt
   fonts:
     - family: Product Sans
       fonts:

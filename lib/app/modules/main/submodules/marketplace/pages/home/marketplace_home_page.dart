@@ -5,9 +5,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
 import '../../widgets.dart';
 import 'marketplace_home_store.dart';
 
@@ -38,7 +38,7 @@ class _MarketplaceHomePageState
         drawer: MarketplaceDrawer(),
         appBar: AppBar(
           elevation: 0,
-          // backgroundColor: color_app_background,
+          backgroundColor: Colors.transparent,
           centerTitle: true,
           title: text("Marketplace",
               fontSize: 20.0, textColor: color_textColorPrimary),
@@ -194,37 +194,6 @@ class _MarketplaceHomePageState
                   ],
                 ),
               ),
-              Observer(
-                builder: (_) {
-                  if (controller.categories == null) {
-                    return Container();
-                  }
-
-                  return Container(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: controller.categories!
-                              .map((element) => appButton2(
-                                    onPressed: () {
-                                      controller.selectCategory(element);
-                                    },
-                                    textContent: element.description.toString(),
-                                    radius: 0.0,
-                                    color: Theme.of(context).textTheme.bodyText1!.color,
-                                    bgColors: controller.indexCategory ==
-                                            controller.categories!
-                                                .indexOf(element)
-                                        ? Theme.of(context).primaryColor
-                                        : Theme.of(context).backgroundColor,
-                                  ))
-                              .toList()),
-                    ),
-                  );
-                },
-              ),
               appLabelViewAll("Mais Recentes"),
               Observer(builder: (_) {
                 if (controller.isLoading) {
@@ -260,8 +229,6 @@ class _MarketplaceHomePageState
                   ),
                 );
               }),
-              appLabelViewAll("Visto recentemente"),
-              appLabelViewAll("Favoritos"),
             ],
           ),
         ),

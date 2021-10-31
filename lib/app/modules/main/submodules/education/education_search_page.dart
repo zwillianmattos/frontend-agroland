@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/education/education_search_store.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/education_search_store.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:universal_io/io.dart' as IO;
 
@@ -114,7 +114,6 @@ class _EducationSearchPageState
                               children: controller.searchResults
                                   .map((element) => ListTile(
                                         onTap: () {
-                                          print("clicando");
                                           Modular.to.pushNamed(
                                               'ebook/view/${element.id}',
                                               arguments: element,

@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/culture.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/models/cultures_categories_rels.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/repositories/cultures_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/models/culture.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/models/cultures_categories_rels.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/repositories/cultures_repository.dart';
 
 part 'culture_detail_store.g.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import 'package:universal_io/io.dart' as IO;
 part 'bottom_navigator_store.g.dart';
 
@@ -17,7 +17,6 @@ abstract class _BottomNavigatorStoreBase with Store {
 
   _BottomNavigatorStoreBase() {
     if (Modular.args!.params.isNotEmpty && Modular.args!.params.length > 0) {
-      print("PARAMETROS ${Modular.args?.params}");
       Modular.to.navigate(Modular.to.modulePath);
       Modular.to.pushNamed(Modular.to.path,
           forRoot: Modular.to.path.contains("/view") &&
@@ -63,19 +62,10 @@ abstract class _BottomNavigatorStoreBase with Store {
     } else if (index == 2) {
       Modular.to.navigate('/community', arguments: arguments ?? {});
     } else if (index == 3) {
-      Modular.to.navigate('/education', arguments: arguments ?? {});
-    } else if (index == 4) {
-      if (Modular.get<UserPreferencesStore>().getUser != null ) {
-        await Modular.to.pushNamed('/account/profile',
-            forRoot:
-                (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
-      } else {
-        await Modular.to.pushNamed('/account/auth',
-            forRoot:
-                (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
-      }
+      Modular.to.pushNamed('/account/profile',
+          forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
       currentIndex = 0;
-      Modular.to.navigate('/home', arguments: arguments ?? {});
+      // Modular.to.navigate('/home', arguments: arguments ?? {});
     }
   }
 

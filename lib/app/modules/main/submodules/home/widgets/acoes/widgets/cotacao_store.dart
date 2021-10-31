@@ -1,6 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/acoes/models/cotacao_model.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/acoes/repositories/cotacao_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/acoes/models/cotacao_model.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/acoes/repositories/cotacao_repository.dart';
 
 part 'cotacao_store.g.dart';
 

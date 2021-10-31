@@ -39,6 +39,13 @@ mixin _$EbookPageStore on _EbookPageStoreBase, Store {
     });
   }
 
+  final _$loadEbooksAsyncAction = AsyncAction('_EbookPageStoreBase.loadEbooks');
+
+  @override
+  Future loadEbooks() {
+    return _$loadEbooksAsyncAction.run(() => super.loadEbooks());
+  }
+
   @override
   String toString() {
     return '''

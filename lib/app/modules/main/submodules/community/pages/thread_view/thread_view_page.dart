@@ -5,11 +5,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
-import 'package:plant_care/app/modules/main/submodules/community/models/replies_model.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/account/models/user.dart';
+import 'package:agro_tools/app/modules/main/submodules/community/models/replies_model.dart';
+import 'package:universal_io/io.dart' as IO;
 
 import 'thread_view_store.dart';
 
@@ -27,7 +29,7 @@ class _ThreadViewPageState
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        // backgroundColor: color_colorPrimary,
+        backgroundColor: Colors.transparent,
         title: Observer(builder: (_) {
           if (!controller.isLoading && controller.thread != null) {
             return Text(controller.thread!.title!);
@@ -45,15 +47,18 @@ class _ThreadViewPageState
           }
 
           if (controller.thread == null)
-            return RetryWidget(onRetry: controller.loadThreadDetail,);
+            return RetryWidget(
+              onRetry: controller.loadThreadDetail,
+            );
 
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 Container(
+                  padding: EdgeInsets.only(left: 8.0, right: 8.0),
                   decoration: BoxDecoration(
-                    color:  Theme.of(context).backgroundColor,
+                    color: Theme.of(context).backgroundColor,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.15),
@@ -74,51 +79,112 @@ class _ThreadViewPageState
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text(controller.thread!.user!.name.toString()),
-                            Spacer(),
+                            Container(
+                              child: Card(
+                                semanticContainer: true,
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: Image.network(
+                                  "${controller.thread!.user?.imgLogo}",
+                                  width: 30,
+                                ),
+                              ),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(controller.thread!.user!.name.toString()),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: Text(
+                                    controller.thread!.createdAt.toString(),
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 11.0),
+                                  ),
+                                ),
+                              ],
+                            ),
                             Spacer(),
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Text(
-                            controller.thread!.createdAt.toString(),
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 11.0),
-                          ),
-                        ),
+
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
-                            // Posted Timestamp
-                            Text(
-                              controller.thread!.title.toString(),
-                              textAlign: TextAlign.justify,
-                            ),
                             Html(
                               data: controller.thread!.body,
                               shrinkWrap: true,
                             ),
 
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  IconButton(
-                                      icon: Icon(Typicons.heart),
-                                      onPressed: () {}),
-                                  IconButton(
-                                      color: controller.comment
-                                          ? color_colorPrimary
-                                          : black,
-                                      icon: Icon(Typicons.comment),
-                                      onPressed: controller.startComment)
-                                ],
-                              ),
-                            ),
+                            Observer(builder: (_) {
+                              User? user =
+                                  Modular.get<UserPreferencesStore>().getUser;
+                              bool liked = false;
+
+                              if (user != null) {
+                                var result = controller.thread?.threadLikes
+                                    ?.where((element) =>
+                                        element.user?.id == user.id);
+                                if (result?.length != null &&
+                                    result!.length > 0) {
+                                  liked = true;
+                                } else {
+                                  liked = false;
+                                }
+                              }
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 1.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        IconButton(
+                                            iconSize: 20,
+                                            color: black,
+                                            padding: const EdgeInsets.all(2.0),
+                                            icon: Icon(liked
+                                                ? Typicons.heart_filled
+                                                : Typicons.heart),
+                                            onPressed: () async {
+                                              await controller.like(
+                                                  thread: controller.thread!);
+                                            }),
+                                        text(
+                                            "${controller.thread!.threadLikes?.length ?? 0}"),
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        IconButton(
+                                            iconSize: 20,
+                                            padding: const EdgeInsets.all(2.0),
+                                            color: black,
+                                            icon: Icon(Typicons.comment),
+                                            onPressed: () {
+                                              controller.startComment();
+                                            }),
+                                        text(
+                                            "${controller.thread!.replies?.length}"),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            }),
 
                             // quill.QuillToolbar.basic(
                             //     controller: controller.commentController),
@@ -161,75 +227,131 @@ class _ThreadViewPageState
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: controller.thread!.replies!
                           .map((Replies replie) => replie.body != null
-                              ? Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 16.0, right: 16.0, bottom: 16.0),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: <Widget>[
-                                        Container(
-                                          margin: const EdgeInsets.only(
-                                            left: 0.0,
-                                          ),
-                                          child: Image.network(
-                                            Modular.get<UserPreferencesStore>().getUser?.imgLogo ?? "",
-                                            width: 30,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            margin: const EdgeInsets.only(
-                                              left: 16.0,
-                                              bottom: 4.0,
-                                            ),
-                                            padding: EdgeInsets.all(16.0),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(8)),
-                                              color: Theme.of(context).backgroundColor,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Theme.of(context).shadowColor
-                                                      .withOpacity(0.15),
-                                                  spreadRadius: 0,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0,
-                                                      0), // changes position of shadow
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                              ? InkWell(
+                                  onLongPress: () {
+                                    User? user =
+                                        Modular.get<UserPreferencesStore>()
+                                            .getUser;
+
+                                    if (user != null &&
+                                        replie.user?.id == user.id)
+                                      showModalBottomSheet(
+                                          context: context,
+                                          builder: (context) {
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
-                                                text("${replie.user?.name}"),
-                                                Html(
-                                                  style: {
-                                                    "p": Style(
-                                                        textAlign:
-                                                            TextAlign.justify),
+                                                ListTile(
+                                                  leading: new Icon(
+                                                      Icons.remove_circle),
+                                                  title: new Text('Remover'),
+                                                  onTap: () {
+                                                    controller.removeComment(
+                                                        replie.id.toString());
+                                                    Navigator.pop(context);
                                                   },
-                                                  data: replie.body!.toString(),
                                                 ),
-                                                SizedBox(height: 10),
-                                                Text(
-                                                  replie.createdAt.toString(),
-                                                  style: TextStyle(
-                                                      color: Colors.grey,
-                                                      fontSize: 11.0),
+                                                ListTile(
+                                                  leading: new Icon(Icons.edit),
+                                                  title: new Text('Editar'),
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
                                                 ),
                                               ],
+                                            );
+                                          });
+                                  },
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 16.0,
+                                          right: 16.0,
+                                          bottom: 16.0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Container(
+                                            margin: const EdgeInsets.only(
+                                              left: 0.0,
+                                            ),
+                                            child: Card(
+                                              semanticContainer: true,
+                                              clipBehavior:
+                                                  Clip.antiAliasWithSaveLayer,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                              ),
+                                              child: Image.network(
+                                                "${replie.user?.imgLogo}",
+                                                width: 30,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                          Expanded(
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                left: 16.0,
+                                                bottom: 4.0,
+                                              ),
+                                              padding: EdgeInsets.all(16.0),
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(8)),
+                                                color: Theme.of(context)
+                                                    .backgroundColor,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.15),
+                                                    spreadRadius: 0,
+                                                    blurRadius: 5,
+                                                    offset: Offset(0,
+                                                        0), // changes position of shadow
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: <Widget>[
+                                                  if (replie.user?.name != null)
+                                                    text(
+                                                      "${replie.user?.name ?? ""}",
+                                                      fontSize: 14,
+                                                    ),
+                                                  Html(
+                                                    style: {
+                                                      "p": Style(
+                                                          textAlign: TextAlign
+                                                              .justify),
+                                                    },
+                                                    data:
+                                                        replie.body!.toString(),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                    replie.createdAt.toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 11.0),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )

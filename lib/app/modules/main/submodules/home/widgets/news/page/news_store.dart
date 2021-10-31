@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
 import '../models/news.dart';
 
 part 'news_store.g.dart';

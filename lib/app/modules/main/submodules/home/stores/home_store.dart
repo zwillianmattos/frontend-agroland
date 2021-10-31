@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/repositories/news_repository.dart';
 import 'package:universal_io/io.dart' as IO;
 part 'home_store.g.dart';
 

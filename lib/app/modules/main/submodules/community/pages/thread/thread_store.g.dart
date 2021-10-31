@@ -24,6 +24,36 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
     });
   }
 
+  final _$currentPageAtom = Atom(name: 'ThreadStorePageBase.currentPage');
+
+  @override
+  int get currentPage {
+    _$currentPageAtom.reportRead();
+    return super.currentPage;
+  }
+
+  @override
+  set currentPage(int value) {
+    _$currentPageAtom.reportWrite(value, super.currentPage, () {
+      super.currentPage = value;
+    });
+  }
+
+  final _$totalPageAtom = Atom(name: 'ThreadStorePageBase.totalPage');
+
+  @override
+  int get totalPage {
+    _$totalPageAtom.reportRead();
+    return super.totalPage;
+  }
+
+  @override
+  set totalPage(int value) {
+    _$totalPageAtom.reportWrite(value, super.totalPage, () {
+      super.totalPage = value;
+    });
+  }
+
   final _$threadsAtom = Atom(name: 'ThreadStorePageBase.threads');
 
   @override
@@ -56,6 +86,21 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
     });
   }
 
+  final _$paginateModelAtom = Atom(name: 'ThreadStorePageBase.paginateModel');
+
+  @override
+  PaginateModel get paginateModel {
+    _$paginateModelAtom.reportRead();
+    return super.paginateModel;
+  }
+
+  @override
+  set paginateModel(PaginateModel value) {
+    _$paginateModelAtom.reportWrite(value, super.paginateModel, () {
+      super.paginateModel = value;
+    });
+  }
+
   final _$commentIndexAtom = Atom(name: 'ThreadStorePageBase.commentIndex');
 
   @override
@@ -69,6 +114,13 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
     _$commentIndexAtom.reportWrite(value, super.commentIndex, () {
       super.commentIndex = value;
     });
+  }
+
+  final _$refreshAsyncAction = AsyncAction('ThreadStorePageBase.refresh');
+
+  @override
+  Future refresh() {
+    return _$refreshAsyncAction.run(() => super.refresh());
   }
 
   final _$loadThreadsAsyncAction =
@@ -86,6 +138,21 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
   Future sendCommentThread({required String comment, required Thread thread}) {
     return _$sendCommentThreadAsyncAction
         .run(() => super.sendCommentThread(comment: comment, thread: thread));
+  }
+
+  final _$likeAsyncAction = AsyncAction('ThreadStorePageBase.like');
+
+  @override
+  Future<void> like({required Thread thread}) {
+    return _$likeAsyncAction.run(() => super.like(thread: thread));
+  }
+
+  final _$removeThreadAsyncAction =
+      AsyncAction('ThreadStorePageBase.removeThread');
+
+  @override
+  Future removeThread(Thread thread) {
+    return _$removeThreadAsyncAction.run(() => super.removeThread(thread));
   }
 
   final _$ThreadStorePageBaseActionController =
@@ -117,8 +184,11 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
   String toString() {
     return '''
 isLoading: ${isLoading},
+currentPage: ${currentPage},
+totalPage: ${totalPage},
 threads: ${threads},
 threadScrollController: ${threadScrollController},
+paginateModel: ${paginateModel},
 commentIndex: ${commentIndex}
     ''';
   }

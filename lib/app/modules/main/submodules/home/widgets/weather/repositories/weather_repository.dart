@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:location/location.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/services/location/location_service.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/services/location/location_service.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/models/weather.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:path_provider/path_provider.dart' as pp;
 
@@ -21,7 +21,7 @@ class WeatherRepository extends Disposable {
   init() async {
     try {
       var dir = await pp.getApplicationDocumentsDirectory();
-      cacheStore = DbCacheStore(databasePath: dir.path, logStatements: true);
+      cacheStore = DbCacheStore(databasePath: dir.path, logStatements: false);
       cacheOptions = CacheOptions(
         store: cacheStore,
         policy: CachePolicy.request,
@@ -42,7 +42,7 @@ class WeatherRepository extends Disposable {
 
   Future<Weather?> get() async {
     LocationData location = await _locationService.locationData;
-    print(location);
+
     Options? options;
 
     if (cacheOptions != null) {
@@ -53,9 +53,6 @@ class WeatherRepository extends Disposable {
     Response response = await _http.get(
         'https://api.hgbrasil.com/weather?format=json-cors&key=${API_WEATHER_KEY}&lat=${location.latitude}&lon=${location.longitude}',
         options: options);
-    print("resposta localizacao");
-    print(response);
-
     if (response == null) {
       return null;
     }

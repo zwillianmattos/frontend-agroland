@@ -8,12 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/env/variables.dart';
-import 'package:plant_care/app/core/utils/user_preferences_store.dart';
-import 'package:plant_care/app/modules/main/bottom_navigator_store.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/models/video_model.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/env/variables.dart';
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
+import 'package:agro_tools/app/modules/main/bottom_navigator_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/videos/models/video_model.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -21,7 +21,7 @@ import 'percent_indicator.dart';
 
 Widget logoTitle(context) {
   return Image.asset(
-    'images/logo.png',
+    'images/logo_tcc2.png',
     width: MediaQuery.of(context).size.width * 0.3,
     height: 53,
   );
@@ -48,9 +48,12 @@ TextFormField appEditTextStyle(var hintText,
       contentPadding: EdgeInsets.fromLTRB(16, 8, 4, 8),
       labelText: enableLabel ? hintText : null,
       hintText: hintText,
+      fillColor: color_colorPrimary.withOpacity(0.1),
+      filled: true,
       border: enableBorder
           ? new OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.teal))
+            borderRadius: BorderRadius.all(Radius.circular(18)),
+              borderSide: new BorderSide(color: color_textColorSecondary.withOpacity(0.1)))
           : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
@@ -171,7 +174,7 @@ class text extends StatelessWidget {
         fontFamily: fontFamily ?? fontRegular,
         fontSize: fontSize,
         fontWeight: bold ? FontWeight.bold : null,
-        color: Theme.of(context).textTheme.button!.color,
+        color: textColor ?? Theme.of(context).textTheme.button!.color,
         height: 1.5,
         letterSpacing: latterSpacing,
         decoration:
@@ -428,7 +431,6 @@ Widget appLabelViewAll(var texto, {bool limiter = false}) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             text(texto,
-                textColor: black,
                 fontSize: textSizeNormal,
                 fontFamily: fontBold),
           ],
@@ -470,7 +472,7 @@ class appButtonState2 extends State<appButton2> {
         padding: EdgeInsets.fromLTRB(16, 6, 16, 6),
         alignment: Alignment.center,
         child: text(widget.textContent,
-            textColor: widget.isStroked ? color_textColorPrimary : color_white,
+            textColor: Theme.of(context).dialogBackgroundColor,
             fontSize: textSizeLargeMedium,
             isCentered: true,
             fontFamily: fontSemibold,
@@ -508,6 +510,7 @@ class appButton3State extends State<appButton3> {
     return GestureDetector(
       onTap: widget.onPressed,
       child: Container(
+        height: widget.height,
         padding: EdgeInsets.fromLTRB(16, 6, 16, 6),
         alignment: Alignment.center,
         child: text(widget.textContent,
@@ -610,7 +613,7 @@ class CardButton extends StatelessWidget {
       return InkWell(
         onTap: onPressed,
         child: Container(
-          margin: EdgeInsets.only(left: 13, right: 13, bottom: 16, top: 16),
+          margin: EdgeInsets.only(left: 13, right: 1, bottom: 16, top: 16),
           padding: EdgeInsets.only(left: 16, right: 13, bottom: 16, top: 16),
           width: sx(width) > 500 ? sx(100) : width / 2.35,
           decoration: BoxDecoration(
@@ -795,7 +798,11 @@ Widget itemSubTitle(BuildContext context, var titleText,
     fontSize: fontsize,
     fontFamily: fontFamily,
     isLongText: isLongText,
-    textColor: colorThird ? textPrimaryColor : textSecondaryColor,
+    textColor: colorThird ? Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor : Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,
     maxLine: 10,
   );
 }
@@ -804,8 +811,7 @@ Widget itemTitle(BuildContext context, var titleText,
     {var fontfamily = fontMedium}) {
   return text(titleText,
       fontSize: textSizeNormal,
-      fontFamily: fontfamily,
-      textColor: textPrimaryColor);
+      fontFamily: fontfamily,);
 }
 
 Widget subType(context, key, VoidCallback callback, icon) {
@@ -854,8 +860,10 @@ Widget formField(
   IconData? suffixIcon,
   maxLine = 1,
   suffixIconSelector,
+  String? initialValue,
 }) {
   return TextFormField(
+    enabled: isEnabled,
     controller: controller,
     obscureText: isPassword && isPasswordVisible,
     cursorColor: color_colorPrimary,
@@ -870,14 +878,21 @@ Widget formField(
         FocusScope.of(context).requestFocus(nextFocus);
       }
     },
+    initialValue: initialValue ?? "",
     decoration: InputDecoration(
       focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: color_colorPrimary)),
+          borderSide: BorderSide(color: Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,)),
       enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: t8_textColorPrimary)),
+          borderSide: BorderSide(color: Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,)),
       labelText: hint,
       labelStyle:
-          TextStyle(fontSize: textSizeNormal, color: t8_textColorPrimary),
+          TextStyle(fontSize: textSizeNormal, color: Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,),
       suffixIcon: isPassword && isPasswordVisible
           ? GestureDetector(
               onTap: suffixIconSelector,
@@ -887,7 +902,9 @@ Widget formField(
     ),
     style: TextStyle(
         fontSize: textSizeNormal,
-        color: isDummy ? Colors.transparent : t8_textColorPrimary,
+        color: isDummy ? Colors.transparent : Modular.get<UserPreferencesStore>().darkTheme
+            ? color_white
+            : blackColor,
         fontFamily: fontRegular),
   );
 }
@@ -1063,29 +1080,29 @@ Widget hdWidget(context) {
   );
 }
 
-Widget headingWidViewAll(BuildContext context, var titleText, Function()? callback, {
-  limiter = false
-}) {
+Widget headingWidViewAll(
+    BuildContext context, var titleText, Function()? callback,
+    {limiter = false, desativaBotao = false}) {
   return RelativeBuilder(builder: (context, height, width, sy, sx) {
     return Container(
       width: width >= 1024 && limiter ? 1024 : width,
       padding:
-          width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.all(16.0),
+          width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 6.0),
       child: Row(
         children: <Widget>[
           Expanded(
             child: text(titleText,
-                textColor: black,
                 fontSize: textSizeNormal,
                 fontFamily: fontBold),
           ),
-          InkWell(
-              onTap: callback,
-              child: itemSubTitle(context, "Ver mais",
-                      fontsize: textSizeMedium,
-                      fontFamily: fontMedium,
-                      colorThird: true)
-                  .paddingAll(spacing_control_half))
+          if (!desativaBotao)
+            InkWell(
+                onTap: callback,
+                child: itemSubTitle(context, "Ver mais",
+                        fontsize: textSizeMedium,
+                        fontFamily: fontMedium,
+                        colorThird: true)
+                    .paddingAll(spacing_control_half))
         ],
       ),
     );
@@ -1141,15 +1158,13 @@ Widget moviePost(videoController) {
       });
     }
 
-    return Observer(builder: (_) {
-      return YoutubePlayerControllerProvider(
-        // Provides controller to all the widget below it.
-        controller: controller,
-        child: YoutubePlayerIFrame(
-          aspectRatio: 16 / 9,
-        ),
-      );
-    });
+    return YoutubePlayerControllerProvider(
+      // Provides controller to all the widget below it.
+      controller: controller,
+      child: YoutubePlayerIFrame(
+        aspectRatio: 16 / 9,
+      ),
+    );
   }).paddingAll(spacing_standard_new);
 }
 

@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
-import 'package:plant_care/app/modules/main/submodules/education/education_page.dart';
-import 'package:plant_care/app/modules/main/submodules/education/education_search_page.dart';
-import 'package:plant_care/app/modules/main/submodules/education/education_search_store.dart';
-import 'package:plant_care/app/modules/main/submodules/education/education_store.dart';
-import 'package:plant_care/app/modules/main/submodules/education/videos/videos_module.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/ebook/repositories/ebook_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/education_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/education_search_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/education_search_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/education_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/videos/videos_module.dart';
 
 import 'ebook/ebook_module.dart';
 

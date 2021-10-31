@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_categories.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/models/product_sell.dart';
-import 'package:plant_care/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_categories.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/models/product_sell.dart';
+import 'package:agro_tools/app/modules/main/submodules/marketplace/repositories/marketplace_repository.dart';
 
 part 'announce_view_store.g.dart';
 

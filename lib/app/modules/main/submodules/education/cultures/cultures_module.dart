@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/page/culture_detail_view_store.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/page/cultures_list_page.dart';
-import 'package:plant_care/app/modules/main/submodules/education/cultures/page/cultures_list_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/page/culture_detail_view_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/page/cultures_list_page.dart';
+import 'package:agro_tools/app/modules/main/submodules/education/cultures/page/cultures_list_store.dart';
 
 import 'page/culture_detail_page.dart';
 import 'page/culture_detail_store.dart';

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fluttericon/typicons_icons.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/models/news.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/models/news.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:plant_care/app/modules/main/submodules/home/widgets/news/page/news_view_store.dart';
+import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/page/news_view_store.dart';
 
 class NewsViewPage extends StatefulWidget {
   const NewsViewPage({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class _NewsViewPageState extends ModularState<NewsViewPage, NewsViewStore> {
             SliverAppBar(
               pinned: false,
               title: innerBoxIsScrolled ? Text(controller.news!.title!) : null,
-              backgroundColor: color_colorPrimary,
+              backgroundColor: Theme.of(context).colorScheme.background,
               expandedHeight: 250.0,
               flexibleSpace: Container(
                 decoration: BoxDecoration(
@@ -44,7 +44,7 @@ class _NewsViewPageState extends ModularState<NewsViewPage, NewsViewStore> {
                         0.3
                       ],
                           colors: [
-                        color_app_background.withOpacity(1),
+                        Theme.of(context).scaffoldBackgroundColor,
                         Colors.transparent,
                       ])),
                 ),

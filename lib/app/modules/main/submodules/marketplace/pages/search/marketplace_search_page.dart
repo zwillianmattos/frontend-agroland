@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:plant_care/app/core/consts/colors.dart';
-import 'package:plant_care/app/core/consts/texts.dart';
-import 'package:plant_care/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/core/consts/colors.dart';
+import 'package:agro_tools/app/core/consts/texts.dart';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'marketplace_search_store.dart';
@@ -25,9 +25,10 @@ class _MarketplaceSearchPageState
     return Observer(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: text("Pesquisar marketplace"),
-          backgroundColor: color_colorPrimary,
           elevation: 0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: text("Pesquisar marketplace"),
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 45),
             child: Container(
@@ -113,7 +114,6 @@ class _MarketplaceSearchPageState
                               children: controller.searchResults
                                   .map((element) => ListTile(
                                         onTap: () {
-                                          print("clicando");
                                           Modular.to.pushNamed(
                                               '/marketplace/view',
                                               arguments: element,
