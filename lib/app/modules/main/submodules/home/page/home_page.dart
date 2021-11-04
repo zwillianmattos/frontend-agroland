@@ -21,6 +21,7 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: color_app_background,
+      extendBodyBehindAppBar: true,
       body: RelativeBuilder(builder: (context, height, width, sy, sx) {
         return NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {

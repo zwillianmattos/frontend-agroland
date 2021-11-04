@@ -1,3 +1,4 @@
+import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -34,7 +35,10 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
             child: text("Entrar",
                     textColor: controller.isSignIn == true
                         ? color_colorPrimary
-                        : textPrimaryColor,
+                        : Theme.of(context)
+                            .primaryTextTheme
+                            .headline6
+                            ?.backgroundColor,
                     fontSize: textSizeLargeMedium,
                     fontFamily: fontBold)
                 .paddingAll(spacing_standard_new)
@@ -48,7 +52,10 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
             child: text("Inscrever-se",
                     textColor: controller.isSignUp == true
                         ? color_colorPrimary
-                        : textPrimaryColor,
+                        : Theme.of(context)
+                            .primaryTextTheme
+                            .headline6
+                            ?.backgroundColor,
                     fontSize: textSizeLargeMedium,
                     fontFamily: fontBold)
                 .paddingAll(spacing_standard_new)
@@ -62,12 +69,14 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
     });
 
     return Scaffold(
-      backgroundColor: color_white,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Image.asset(
-          'images/logo_tcc.png',
+          Modular.get<UserPreferencesStore>().darkTheme
+              ? 'images/logo_tcc4.png'
+              : 'images/logo_tcc.png',
           width: width * 0.5,
         ),
         centerTitle: true,
@@ -88,7 +97,7 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
                 Container(
                   width: width,
                   decoration: BoxDecoration(
-                    color: color_white,
+                    color: Theme.of(context).backgroundColor,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(8.0),
                       bottomRight: const Radius.circular(8.0),
@@ -97,7 +106,9 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
                     ),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: color_ShadowColor,
+                          color: Theme.of(context)
+                              .dialogBackgroundColor
+                              .withOpacity(0.2),
                           blurRadius: 20.0,
                           offset: Offset(0.0, 0.9)),
                     ],
@@ -114,7 +125,8 @@ class _AuthPageState extends ModularState<AuthPage, AuthStore> {
                 ),
                 SizedBox(
                   height: spacing_xxLarge,
-                ),SizedBox(
+                ),
+                SizedBox(
                   height: spacing_xxLarge,
                 ),
               ],

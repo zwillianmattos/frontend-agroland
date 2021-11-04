@@ -53,6 +53,9 @@ abstract class _UserPreferencesStoreBase with Store {
     }
   }
 
+  @computed
+  bool get isDarkThemeEnabled => darkTheme;
+
   @action
   setUser(AccountModel user) => this.accountModel = user;
 

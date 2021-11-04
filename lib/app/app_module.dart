@@ -1,3 +1,4 @@
+import 'package:agro_tools/app/modules/splash/splash_store.dart';
 import 'package:dio/dio.dart';
 import 'package:agro_tools/app/core/services/location/location_service.dart';
 import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
@@ -20,6 +21,7 @@ class AppModule extends Module {
     BindInject((i) => UserPreferencesStore(i<AccountRepository>()),
         isSingleton: true, isLazy: false),
     BindInject((i) => NotificationService(), isSingleton: true, isLazy: false),
+    BindInject((i) => SplashStore(i<UserPreferencesStore>())),
   ];
 
   @override

@@ -52,8 +52,9 @@ TextFormField appEditTextStyle(var hintText,
       filled: true,
       border: enableBorder
           ? new OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(18)),
-              borderSide: new BorderSide(color: color_textColorSecondary.withOpacity(0.1)))
+              borderRadius: BorderRadius.all(Radius.circular(18)),
+              borderSide: new BorderSide(
+                  color: color_textColorSecondary.withOpacity(0.1)))
           : InputBorder.none,
       hintStyle: TextStyle(color: color_textColorSecondary),
     ),
@@ -430,9 +431,7 @@ Widget appLabelViewAll(var texto, {bool limiter = false}) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            text(texto,
-                fontSize: textSizeNormal,
-                fontFamily: fontBold),
+            text(texto, fontSize: textSizeNormal, fontFamily: fontBold),
           ],
         ),
       );
@@ -689,10 +688,11 @@ class PlatformSvg {
 
 class RetryWidget extends StatefulWidget {
   final String? message;
-  final Function onRetry;
+  final Function? onRetry;
+  final Function? callBack;
   final String icon = "images/danger.svg";
 
-  const RetryWidget({Key? key, this.message, required this.onRetry})
+  const RetryWidget({Key? key, this.message, this.onRetry, this.callBack})
       : super(key: key);
 
   @override
@@ -726,9 +726,11 @@ class _RetryWidgetState extends State<RetryWidget> {
               children: [
                 appButton(
                   textContent: "Tentar novamente",
-                  onPressed: () {
-                    widget.onRetry();
-                  },
+                  onPressed: (widget.callBack != null)
+                      ? widget.callBack!()
+                      : () {
+                          widget.onRetry!();
+                        },
                 ),
               ],
             ),
@@ -798,9 +800,11 @@ Widget itemSubTitle(BuildContext context, var titleText,
     fontSize: fontsize,
     fontFamily: fontFamily,
     isLongText: isLongText,
-    textColor: colorThird ? Modular.get<UserPreferencesStore>().darkTheme
+    textColor: colorThird
+        ? Modular.get<UserPreferencesStore>().darkTheme
             ? color_white
-            : blackColor : Modular.get<UserPreferencesStore>().darkTheme
+            : blackColor
+        : Modular.get<UserPreferencesStore>().darkTheme
             ? color_white
             : blackColor,
     maxLine: 10,
@@ -809,9 +813,11 @@ Widget itemSubTitle(BuildContext context, var titleText,
 
 Widget itemTitle(BuildContext context, var titleText,
     {var fontfamily = fontMedium}) {
-  return text(titleText,
-      fontSize: textSizeNormal,
-      fontFamily: fontfamily,);
+  return text(
+    titleText,
+    fontSize: textSizeNormal,
+    fontFamily: fontfamily,
+  );
 }
 
 Widget subType(context, key, VoidCallback callback, icon) {
@@ -881,18 +887,24 @@ Widget formField(
     initialValue: initialValue ?? "",
     decoration: InputDecoration(
       focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Modular.get<UserPreferencesStore>().darkTheme
+          borderSide: BorderSide(
+        color: Modular.get<UserPreferencesStore>().darkTheme
             ? color_white
-            : blackColor,)),
+            : blackColor,
+      )),
       enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Modular.get<UserPreferencesStore>().darkTheme
+          borderSide: BorderSide(
+        color: Modular.get<UserPreferencesStore>().darkTheme
             ? color_white
-            : blackColor,)),
+            : blackColor,
+      )),
       labelText: hint,
-      labelStyle:
-          TextStyle(fontSize: textSizeNormal, color: Modular.get<UserPreferencesStore>().darkTheme
+      labelStyle: TextStyle(
+        fontSize: textSizeNormal,
+        color: Modular.get<UserPreferencesStore>().darkTheme
             ? color_white
-            : blackColor,),
+            : blackColor,
+      ),
       suffixIcon: isPassword && isPasswordVisible
           ? GestureDetector(
               onTap: suffixIconSelector,
@@ -902,9 +914,11 @@ Widget formField(
     ),
     style: TextStyle(
         fontSize: textSizeNormal,
-        color: isDummy ? Colors.transparent : Modular.get<UserPreferencesStore>().darkTheme
-            ? color_white
-            : blackColor,
+        color: isDummy
+            ? Colors.transparent
+            : Modular.get<UserPreferencesStore>().darkTheme
+                ? color_white
+                : blackColor,
         fontFamily: fontRegular),
   );
 }
@@ -1086,14 +1100,14 @@ Widget headingWidViewAll(
   return RelativeBuilder(builder: (context, height, width, sy, sx) {
     return Container(
       width: width >= 1024 && limiter ? 1024 : width,
-      padding:
-          width >= 1024 && limiter ? EdgeInsets.all(0) : EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 6.0),
+      padding: width >= 1024 && limiter
+          ? EdgeInsets.all(0)
+          : EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0, top: 6.0),
       child: Row(
         children: <Widget>[
           Expanded(
-            child: text(titleText,
-                fontSize: textSizeNormal,
-                fontFamily: fontBold),
+            child:
+                text(titleText, fontSize: textSizeNormal, fontFamily: fontBold),
           ),
           if (!desativaBotao)
             InkWell(

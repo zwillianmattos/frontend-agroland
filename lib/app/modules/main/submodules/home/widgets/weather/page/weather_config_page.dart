@@ -24,6 +24,11 @@ class _WeatherConfigPageState
         isScrollControlled: true,
         builder: (BuildContext bc) {
           return Observer(builder: (_) {
+            if (controller.estados == null)
+              return RetryWidget(
+                onRetry: controller.carregaEstados,
+              );
+
             if (controller.isLoading)
               return Center(
                 child: CircularProgressIndicator(),
@@ -34,7 +39,7 @@ class _WeatherConfigPageState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (IO.Platform.isIOS) SizedBox(height: 40),
+                  SizedBox(height: 40),
                   headingWidViewAll(context, "Selecione o seu estado", () {
                     Navigator.pop(context);
                   }, itemSubText: "Voltar"),
@@ -90,6 +95,12 @@ class _WeatherConfigPageState
         isScrollControlled: true,
         builder: (BuildContext bc) {
           return Observer(builder: (_) {
+            if (controller.cidades == null)
+              return RetryWidget(
+                callBack: () {
+                  Navigator.pop(context);
+                },
+              );
             if (controller.isLoading)
               return Center(
                 child: CircularProgressIndicator(),
@@ -100,7 +111,7 @@ class _WeatherConfigPageState
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (IO.Platform.isIOS) SizedBox(height: 40),
+                  SizedBox(height: 40),
                   headingWidViewAll(context, "Selecione o sua cidade",
                       () async {
                     Navigator.pop(context);

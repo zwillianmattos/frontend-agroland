@@ -8,7 +8,7 @@ class ToolsModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(Modular.initialRoute, child: (_, __) => HomeView()),
-    //ChildRoute(Modular.initialRoute, child: (_, __) => CameraStream()),
+    //ChildRoute(Modular.initialRoute, child: (_, __) => HomeView()),
+    ChildRoute(Modular.initialRoute, child: (_, __) => CameraStream()),
   ];
 }
