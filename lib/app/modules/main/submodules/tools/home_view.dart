@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -66,49 +68,60 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:
-            Text('Análise de doenças', style: TextStyle(color: Colors.white)),
-      ),
-      body: _image == null
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              children: <Widget>[
-                Center(
-                  child: Container(
-                    constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height / 2),
-                    decoration: BoxDecoration(
-                      border: Border.all(),
+      body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                pinned: false,
+                title: innerBoxIsScrolled
+                    ? text(
+                        'Resultado',
+                        isCentered: true,
+                      )
+                    : null,
+                backgroundColor: Theme.of(context).colorScheme.background,
+                expandedHeight: 250.0,
+                flexibleSpace: _image == null
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : Container(
+                        constraints: BoxConstraints(
+                            maxHeight: MediaQuery.of(context).size.height / 2),
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                        ),
+                        child: _imageWidget,
+                      ),
+              ),
+            ];
+          },
+          body: _image == null
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  // color: color_app_background,
+                  child: Column(children: [
+                    SizedBox(
+                      height: 36,
                     ),
-                    child: _imageWidget,
-                  ),
-                ),
-                SizedBox(
-                  height: 36,
-                ),
-                Text(
-                  category != null ? category!.label : '',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  category != null
-                      ? 'Precisão: ${category!.score.toStringAsFixed(3)}'
-                      : '',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ],
-            ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: getImage,
-      //   tooltip: 'Tirar foto',
-      //   child: Icon(Icons.add_a_photo),
-      // ),
+                    Text(
+                      category != null ? category!.label : '',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      category != null
+                          ? 'Precisão: ${category!.score.toStringAsFixed(3)}'
+                          : '',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ]),
+                )),
     );
   }
 }
