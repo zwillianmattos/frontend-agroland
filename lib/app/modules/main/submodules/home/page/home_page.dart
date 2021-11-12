@@ -10,7 +10,6 @@ import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:relative_scale/relative_scale.dart';
 import 'package:universal_io/io.dart' as IO;
 
-
 class DashboardPage extends StatefulWidget {
   @override
   _DashboardPageState createState() => _DashboardPageState();
