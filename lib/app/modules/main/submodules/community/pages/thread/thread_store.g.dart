@@ -127,7 +127,7 @@ mixin _$ThreadStorePage on ThreadStorePageBase, Store {
       AsyncAction('ThreadStorePageBase.loadThreads');
 
   @override
-  Future loadThreads({dynamic query = "?size=10"}) {
+  Future loadThreads({dynamic query = "?size=100"}) {
     return _$loadThreadsAsyncAction.run(() => super.loadThreads(query: query));
   }
 

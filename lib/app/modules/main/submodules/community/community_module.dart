@@ -1,3 +1,5 @@
+import 'package:agro_tools/app/modules/main/submodules/community/pages/thread/thread_new_post.dart';
+import 'package:agro_tools/app/modules/main/submodules/community/pages/thread/thread_new_post_store.dart';
 import 'package:dio/dio.dart';
 import 'package:agro_tools/app/core/env/variables.dart';
 import 'package:agro_tools/app/modules/main/submodules/community/repositories/thread_repository.dart';
@@ -23,11 +25,15 @@ class CommunityModule extends Module {
     BindInject(
       (i) => ThreadViewStorePage(i<ThreadRepository>()),
     ),
+    BindInject(
+      (i) => ThreadNewPostStore(i<ThreadRepository>()),
+    ),
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute(Modular.initialRoute, child: (_, __) => ThreadPage()),
     ChildRoute('view/:channel/:thread', child: (_, __) => ThreadViewPage()),
+    ChildRoute('newPost', child: (_, __) => ThreadNewPostPage()),
   ];
 }

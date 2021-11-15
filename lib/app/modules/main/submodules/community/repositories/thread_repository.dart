@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -12,7 +13,7 @@ part 'thread_repository.g.dart';
 
 abstract class ThreadDatasource {
   Future<PaginateModel> load();
-  Future<List<dynamic>?> store();
+  Future<Thread?> store({required Thread thread});
   Future<List<dynamic>?> delete(
       {required String channelId,
       required String threadId,
@@ -78,7 +79,18 @@ class ThreadRepository implements ThreadDatasource {
   }
 
   @override
-  Future<List<dynamic>?> store() async {}
+  Future<Thread?> store({required Thread thread}) async {
+    try {
+      print({'channel_id': 1, 'body': jsonEncode(thread.body)});
+      Response response = await dio.post("threads",
+          options: await Modular.get<UserPreferencesStore>().authHeader,
+          data: {'channel_id': 1, 'body': jsonEncode(thread.body)});
+      var jsonResponse = response.data;
+      return Thread.fromJson(jsonResponse['thread']);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Future<List<dynamic>?> delete(
@@ -87,6 +99,19 @@ class ThreadRepository implements ThreadDatasource {
       required String replieId}) async {
     Response response = await dio.delete(
       "threads/$channelId/$threadId/$replieId",
+      options: await Modular.get<UserPreferencesStore>().authHeader,
+    );
+    var jsonResponse = response.data;
+    if (jsonResponse['status'] != true) throw (jsonResponse['message']);
+  }
+
+  @override
+  Future<List<dynamic>?> removeThread({
+    required String channelId,
+    required String threadId,
+  }) async {
+    Response response = await dio.delete(
+      "threads/$channelId/$threadId",
       options: await Modular.get<UserPreferencesStore>().authHeader,
     );
     var jsonResponse = response.data;
@@ -132,5 +157,24 @@ class ThreadRepository implements ThreadDatasource {
     }
 
     return false;
+  }
+
+  Future<String?> uploadFile(String filePath, String fileName) async {
+    try {
+      var form =
+          FormData.fromMap({'file': MultipartFile.fromFileSync(filePath)});
+
+      Response response = await dio.post("upload/document",
+          options: await Modular.get<UserPreferencesStore>().authHeader,
+          data: form);
+
+      var jsonResponse = response.data;
+      if (jsonResponse['status'] == true)
+        return jsonResponse['data']['file_cloudinary'];
+    } catch (e) {
+      print(e);
+    }
+
+    return null;
   }
 }

@@ -71,10 +71,10 @@ abstract class ThreadStorePageBase with Store {
 
   @action
   loadThreads({
-    query: "?size=10",
+    query: "?size=100",
   }) async {
     paginateModel = await this.repository.load(
-          query: "?size=10&page=$currentPage",
+          query: "?size=100&page=$currentPage",
         );
     if (paginateModel.items is List<Thread>) {
       var data = paginateModel.items;
@@ -110,7 +110,16 @@ abstract class ThreadStorePageBase with Store {
 
   @action
   removeThread(Thread thread) async {
-
-    await refresh();
+    try {
+      isLoading = true;
+      await repository.removeThread(
+          channelId: thread.channel!.id.toString(),
+          threadId: thread.id.toString());
+    } catch (e) {
+      print(e);
+    } finally {
+      await refresh();
+      isLoading = false;
+    }
   }
 }
