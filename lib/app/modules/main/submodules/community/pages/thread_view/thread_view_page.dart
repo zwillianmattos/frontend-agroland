@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutter_quill/flutter_quill.dart' as quill;
+import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:agro_tools/app/core/consts/colors.dart';
@@ -30,13 +32,7 @@ class _ThreadViewPageState
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Observer(builder: (_) {
-          if (!controller.isLoading && controller.thread != null) {
-            return Text(controller.thread!.title!);
-          }
-
-          return Text("-");
-        }),
+        title: text("Detalhes"),
       ),
       body: Observer(
         builder: (_) {
@@ -51,6 +47,33 @@ class _ThreadViewPageState
               onRetry: controller.loadThreadDetail,
             );
 
+          Widget? content;
+          try {
+            var myJSON = jsonDecode(controller.thread!.body!);
+
+            var c = QuillController(
+                document: Document.fromJson(jsonDecode(myJSON)),
+                selection: TextSelection(
+                  baseOffset: 0,
+                  extentOffset: 0,
+                ));
+            content = QuillEditor(
+              autoFocus: false,
+              readOnly: true,
+              showCursor: false,
+              controller: c,
+              expands: false,
+              padding: EdgeInsets.all(8.0),
+              focusNode: new FocusNode(),
+              scrollable: false,
+              scrollController: new ScrollController(),
+            );
+          } on FormatException catch (e) {
+            content = Html(
+              data:  controller.thread!.body,
+              shrinkWrap: true,
+            );
+          }
           return SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
@@ -115,11 +138,7 @@ class _ThreadViewPageState
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
-                            Html(
-                              data: controller.thread!.body,
-                              shrinkWrap: true,
-                            ),
-
+                            content,
                             Observer(builder: (_) {
                               User? user =
                                   Modular.get<UserPreferencesStore>().getUser;

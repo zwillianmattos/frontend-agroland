@@ -55,7 +55,8 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   tflite_flutter: ^0.9.0
   tflite_flutter_helper: ^0.3.0
-  
+  filesystem_picker: ^2.0.0
+
 dev_dependencies:
   flutter_modular_test: 1.0.1
   modular_codegen: 3.0.0

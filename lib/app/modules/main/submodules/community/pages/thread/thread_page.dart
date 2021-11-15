@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:agro_tools/app/core/consts/colors.dart';
@@ -62,6 +65,35 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                           physics: BouncingScrollPhysics(),
                           itemCount: list.length,
                           itemBuilder: (BuildContext context, int index) {
+                            Widget? content;
+                            try {
+                              var myJSON = jsonDecode(list[index].body!);
+
+                              var controller = QuillController(
+                                  document:
+                                      Document.fromJson(jsonDecode(myJSON)),
+                                  selection: TextSelection(
+                                    baseOffset: 0,
+                                    extentOffset: 0,
+                                  ));
+                              content = QuillEditor(
+                                autoFocus: false,
+                                readOnly: true,
+                                showCursor: false,
+                                controller: controller,
+                                expands: false,
+                                padding: EdgeInsets.all(8.0),
+                                focusNode: new FocusNode(),
+                                scrollable: false,
+                                scrollController: new ScrollController(),
+                              );
+                            } on FormatException catch (e) {
+                              content = Html(
+                                data: list[index].body,
+                                shrinkWrap: true,
+                              );
+                            }
+
                             return InkWell(
                               onTap: () {
                                 Modular.to.pushNamed(
@@ -175,18 +207,9 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                           Spacer(),
                                         ],
                                       ),
-
                                       Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
                                         children: <Widget>[
-                                          Html(
-                                            data: list[index].body,
-                                            shrinkWrap: true,
-                                          ),
-
+                                          content,
                                           // butttons
                                           Observer(builder: (_) {
                                             User? user = Modular.get<
@@ -288,6 +311,15 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
             );
           });
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Modular.to.pushNamed('/community/newPost',
+              forRoot:
+                  (IO.Platform.isAndroid || IO.Platform.isIOS) ? true : false);
+          await controller.refresh();
+        },
+        child: Icon(Icons.post_add),
       ),
     );
   }
