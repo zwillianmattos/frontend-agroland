@@ -7,8 +7,6 @@ import 'bottom_navigator_widget.dart';
 import 'submodules/community/community_module.dart';
 import 'submodules/configurations/configurations_page.dart';
 import 'submodules/education/education_module.dart';
-import 'submodules/tools/tools_module.dart';
-
 class MainModule extends Module {
   @override
   final List<Bind> binds = [
@@ -39,8 +37,6 @@ class MainModule extends Module {
           '/configurations',
           child: (_, __) => ConfigurationPage(),
         ),
-        ModuleRoute('/tools',
-            module: ToolsModule(), transition: TransitionType.fadeIn),
       ],
     ),
   ];

@@ -4,6 +4,7 @@ import 'package:agro_tools/app/modules/main/submodules/home/widgets/news/page/ne
 import 'package:agro_tools/app/modules/main/submodules/home/widgets/weather/page/weather_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:agro_tools/app/core/consts/texts.dart';
 import 'package:agro_tools/app/core/widgets/widgets.dart';
@@ -57,11 +58,9 @@ class _DashboardPageState extends ModularState<DashboardPage, HomeStore> {
                           children: [
                             InkWell(
                               onTap: () {
-                                Modular.to.pushNamed('/tools',
-                                    forRoot: (IO.Platform.isAndroid ||
-                                            IO.Platform.isIOS)
-                                        ? true
-                                        : false);
+                                EasyLoading.showError(
+                                    "Funcionalidade Indisponível na versão Web",
+                                    duration: Duration(seconds: 4));
                               },
                               child: Container(
                                 padding: EdgeInsets.all(15),

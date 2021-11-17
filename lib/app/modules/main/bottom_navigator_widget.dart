@@ -35,7 +35,7 @@ class BottomNavigatorPageState
                         children: [
                           Image.asset(
                             'images/logo_tcc.png',
-                            scale: 2.5,
+                            scale: 5.0,
                           ),
                           DrawerListTile(
                             icon: 'images/home_bulk.svg',
@@ -58,7 +58,7 @@ class BottomNavigatorPageState
                           DrawerListTile(
                             icon: 'images/user_bulk_black.svg',
                             store: controller,
-                            index: 4,
+                            index: 3,
                             title: 'Minha Conta',
                           ),
                         ],
