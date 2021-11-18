@@ -67,6 +67,21 @@ abstract class ThreadNewPostStoreBase with Store {
     return copiedFile.path.toString();
   }
 
+  // Renders the video picked by imagePicker from local file storage
+  // You can also upload the picked video to any server (eg : AWS s3
+  // or Firebase) and then return the uploaded video URL.
+  @action
+  Future<String> onFilePickCallback(File file) async {
+    isLoading = true;
+    // Copies the picked file from temporary cache to applications directory
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final copiedFile =
+        await file.copy('${appDocDir.path}/${basename(file.path)}');
+    return copiedFile.path.toString();
+  }
+
+  
+
   @action
   Future<void> loadFromAssets() async {
     isLoading = true;

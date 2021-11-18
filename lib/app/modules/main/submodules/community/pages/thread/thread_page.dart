@@ -68,7 +68,6 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                             Widget? content;
                             try {
                               var myJSON = jsonDecode(list[index].body!);
-
                               var controller = QuillController(
                                   document:
                                       Document.fromJson(jsonDecode(myJSON)),
@@ -87,7 +86,8 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
                                 scrollable: false,
                                 scrollController: new ScrollController(),
                               );
-                            } on FormatException catch (e) {
+                            } on Exception catch (e) {
+                              print(e);
                               content = Html(
                                 data: list[index].body,
                                 shrinkWrap: true,

@@ -27,6 +27,15 @@ mixin _$ThreadNewPostStore on ThreadNewPostStoreBase, Store {
         .run(() => super.onVideoPickCallback(file));
   }
 
+  final _$onFilePickCallbackAsyncAction =
+      AsyncAction('ThreadNewPostStoreBase.onFilePickCallback');
+
+  @override
+  Future<String> onFilePickCallback(IO.File file) {
+    return _$onFilePickCallbackAsyncAction
+        .run(() => super.onFilePickCallback(file));
+  }
+
   final _$loadFromAssetsAsyncAction =
       AsyncAction('ThreadNewPostStoreBase.loadFromAssets');
 

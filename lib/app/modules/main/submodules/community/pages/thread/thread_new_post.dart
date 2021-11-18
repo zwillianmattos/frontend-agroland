@@ -129,6 +129,24 @@ class _ThreadNewPostPageState
     }
     var toolbar = QuillToolbar.basic(
       controller: controller.quillController!,
+      toolbarIconSize: 32,
+      showCameraButton: false,
+      showIndent: false,
+      showHistory: false,
+      showBoldButton: false,
+      showHeaderStyle: false,
+      showListNumbers: false,
+      showQuote: false,
+      showItalicButton: false,
+      showCodeBlock: false,
+      showUnderLineButton: false,
+      showListCheck: false,
+      showListBullets: false,
+      showLink: false,
+      showStrikeThrough: false,
+      showClearFormat: false,
+      showColorButton: false,
+      showBackgroundColorButton: false,
       // provide a callback to enable picking images from device.
       // if omit, "image" button only allows adding images from url.
       // same goes for videos.

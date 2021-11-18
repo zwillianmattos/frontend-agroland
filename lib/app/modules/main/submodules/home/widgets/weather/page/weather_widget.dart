@@ -25,9 +25,13 @@ class _WeatherWidgetState extends ModularState<WeatherWidget, WeatherStore> {
       if (controller.isLoading)
         return Center(child: CircularProgressIndicator());
 
-      if (controller.localizacoesLista == null)
-        return RetryWidget(
-          onRetry: controller.loadWeather,
+      if (controller.localizacoesLista == null ||
+          controller.localizacoesLista?.isEmpty == true)
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: RetryWidget(
+            onRetry: controller.loadWeather,
+          ),
         );
 
       return SingleChildScrollView(
