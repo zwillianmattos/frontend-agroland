@@ -1,3 +1,4 @@
+import 'package:agro_tools/app/modules/main/submodules/education/calendars/pages/events.dart';
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:agro_tools/app/core/consts/colors.dart';
 import 'package:agro_tools/app/core/consts/texts.dart';
 import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:agro_tools/app/modules/main/submodules/education/education_store.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:universal_io/io.dart' as IO;
 import 'package:nb_utils/nb_utils.dart';
 
@@ -32,11 +34,11 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
     if (Modular.args?.data['tab_index'] != null) {
       tabController = TabController(
         initialIndex: Modular.args?.data['tab_index'] ?? 0,
-        length: 3,
+        length: 4,
         vsync: this,
       );
     } else {
-      tabController = new TabController(length: 3, vsync: this);
+      tabController = new TabController(length: 4, vsync: this);
     }
     // TODO: implement initState
     super.initState();
@@ -195,7 +197,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
         : Container();
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -239,6 +241,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                   Tab(child: text("Home")),
                   Tab(child: text("Livros")),
                   Tab(child: text("Vídeos")),
+                  Tab(child: text("Eventos")),
                 ],
               ),
             ),
@@ -377,7 +380,7 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                 ),
                 SizedBox(
                   height: spacing_standard_new,
-                )
+                ),
               ],
             ),
             Observer(builder: (_) {
@@ -470,6 +473,20 @@ class _EducationPageState extends ModularState<EducationPage, EducationStore>
                   SizedBox(
                     height: spacing_standard_new,
                   )
+                ],
+              );
+            }),
+            Observer(builder: (_) {
+              return ListView(
+                physics: BouncingScrollPhysics(),
+                controller: controller.ebooksController,
+                children: <Widget>[
+                  appLabelViewAll("Eventos da semana"),
+                  TableCalendar(
+                    firstDay: DateTime.utc(2010, 10, 16),
+                    lastDay: DateTime.utc(2030, 3, 14),
+                    focusedDay: DateTime.now(),
+                  ),
                 ],
               );
             }),

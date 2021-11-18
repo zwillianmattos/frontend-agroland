@@ -56,6 +56,7 @@ dependencies:
   tflite_flutter: ^0.9.0
   tflite_flutter_helper: ^0.3.0
   filesystem_picker: ^2.0.0
+  table_calendar: ^3.0.3
 
 dev_dependencies:
   flutter_modular_test: 1.0.1

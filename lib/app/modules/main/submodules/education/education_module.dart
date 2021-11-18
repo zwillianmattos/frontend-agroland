@@ -22,6 +22,5 @@ class EducationModule extends Module {
     ChildRoute(Modular.initialRoute, child: (_, __) => EducationPage()),
     ChildRoute('search', child: (_, __) => EducationSearchPage()),
     ModuleRoute('ebook', module: EbookModule()),
-    ModuleRoute('videos', module: VideosModule())
   ];
 }
