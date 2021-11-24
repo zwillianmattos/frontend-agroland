@@ -31,6 +31,7 @@ class _ThreadViewPageState
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         title: text("Detalhes"),
       ),

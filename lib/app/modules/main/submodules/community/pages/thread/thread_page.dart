@@ -33,6 +33,7 @@ class _ThreadPageState extends ModularState<ThreadPage, ThreadStorePage> {
         elevation: 0,
         title: text("Comunidade"),
         backgroundColor: Colors.transparent,
+        centerTitle: true,
       ),
       body: Observer(
         builder: (_) {
