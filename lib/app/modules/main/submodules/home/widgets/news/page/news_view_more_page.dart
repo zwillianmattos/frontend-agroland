@@ -43,8 +43,8 @@ class _NewsViewMorePageState
                   labelPadding: EdgeInsets.only(
                       left: spacing_large, right: spacing_large),
                   tabs: [
-                    Tab(child: text("News")),
-                    Tab(child: text("Salvos")),
+                    Tab(child: text("Recentes")),
+                    Tab(child: text("Favoritos")),
                   ],
                 ),
               ),

@@ -35,7 +35,7 @@ class _MarketplaceClassificadoViewPageState
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: text("Marketplace",
+        title: text("Loja",
             fontSize: 20.0, textColor: color_textColorPrimary),
         actions: <Widget>[
           IconButton(

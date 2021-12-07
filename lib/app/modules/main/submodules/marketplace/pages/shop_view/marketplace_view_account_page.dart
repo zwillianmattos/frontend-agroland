@@ -65,18 +65,22 @@ class _MarketplaceViewAccountPageState extends ModularState<
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                text(
-                                    "${controller.logista.fantasyName ?? controller.logista.corporateName}",
-                                    fontSize: textSizeNormal,
-                                    isLongText: true),
-                                text(
-                                  "${controller.logista.phone!}",
-                                  fontSize: textSizeSmall,
-                                ),
-                                text(
-                                  "${controller.logista.cnpj}",
-                                  fontSize: textSizeSmall,
-                                ),
+                                if (controller.logista.fantasyName != null ||
+                                    controller.logista.corporateName != null)
+                                  text(
+                                      "${controller.logista.fantasyName ?? controller.logista.corporateName}",
+                                      fontSize: textSizeNormal,
+                                      isLongText: true),
+                                if (controller.logista.phone != null)
+                                  text(
+                                    "${controller.logista.phone}",
+                                    fontSize: textSizeSmall,
+                                  ),
+                                if (controller.logista.cnpj != null)
+                                  text(
+                                    "${controller.logista.cnpj}",
+                                    fontSize: textSizeSmall,
+                                  ),
                               ],
                             ),
                           ),
@@ -87,11 +91,12 @@ class _MarketplaceViewAccountPageState extends ModularState<
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(16.0),
-              child: text("${controller.logista.description}",
-                  fontSize: textSizeSmall, maxLine: 10, justifyText: true),
-            ),
+            if (controller.logista.description != null)
+              Container(
+                padding: EdgeInsets.all(16.0),
+                child: text("${controller.logista.description}",
+                    fontSize: textSizeSmall, maxLine: 10, justifyText: true),
+              ),
             DefaultTabController(
               length: 1,
               initialIndex: 0,

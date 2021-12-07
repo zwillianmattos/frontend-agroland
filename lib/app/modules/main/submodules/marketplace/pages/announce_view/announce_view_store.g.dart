@@ -10,6 +10,21 @@ part of 'announce_view_store.dart';
 
 mixin _$MarketplaceAnnounceViewStore
     on _MarketplaceAnnounceViewStoreBase, Store {
+  final _$imagesAtom = Atom(name: '_MarketplaceAnnounceViewStoreBase.images');
+
+  @override
+  ObservableList<String> get images {
+    _$imagesAtom.reportRead();
+    return super.images;
+  }
+
+  @override
+  set images(ObservableList<String> value) {
+    _$imagesAtom.reportWrite(value, super.images, () {
+      super.images = value;
+    });
+  }
+
   final _$isLoadingAtom =
       Atom(name: '_MarketplaceAnnounceViewStoreBase.isLoading');
 
@@ -49,9 +64,33 @@ mixin _$MarketplaceAnnounceViewStore
     return _$addAsyncAction.run(() => super.add());
   }
 
+  final _$addPhotoAsyncAction =
+      AsyncAction('_MarketplaceAnnounceViewStoreBase.addPhoto');
+
+  @override
+  Future addPhoto() {
+    return _$addPhotoAsyncAction.run(() => super.addPhoto());
+  }
+
+  final _$_MarketplaceAnnounceViewStoreBaseActionController =
+      ActionController(name: '_MarketplaceAnnounceViewStoreBase');
+
+  @override
+  dynamic removePhoto(String index) {
+    final _$actionInfo = _$_MarketplaceAnnounceViewStoreBaseActionController
+        .startAction(name: '_MarketplaceAnnounceViewStoreBase.removePhoto');
+    try {
+      return super.removePhoto(index);
+    } finally {
+      _$_MarketplaceAnnounceViewStoreBaseActionController
+          .endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+images: ${images},
 isLoading: ${isLoading},
 productSell: ${productSell}
     ''';

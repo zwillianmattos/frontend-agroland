@@ -35,4 +35,12 @@ abstract class _MarketplaceAnnouncesStoreBase with Store {
     announces = data!.asObservable();
     isLoading = false;
   }
+
+  @action
+  removeAnnounce(int id) async {
+    isLoading = true;
+    await this.repository.delete(announces![id]);
+    await loadAnnounces();
+    isLoading = false;
+  }
 }

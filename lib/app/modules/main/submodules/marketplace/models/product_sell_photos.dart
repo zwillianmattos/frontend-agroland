@@ -1,6 +1,6 @@
 class ProductSellPhotos {
   int? id;
-  int? productId;
+  dynamic? productId;
   String? imgPath;
   dynamic description;
   int? excluded;
@@ -25,7 +25,7 @@ class ProductSellPhotos {
   factory ProductSellPhotos.fromJson(Map<String, dynamic> json) =>
       ProductSellPhotos(
         id: json['id'] as int?,
-        productId: json['productId'] as int?,
+        productId: json['productId'] as dynamic?,
         imgPath: json['imgPath'] as String?,
         description: json['description'],
         excluded: json['excluded'] as int?,
@@ -45,7 +45,7 @@ class ProductSellPhotos {
 
   ProductSellPhotos copyWith({
     int? id,
-    int? productId,
+    dynamic? productId,
     String? imgPath,
     dynamic description,
     int? excluded,

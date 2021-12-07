@@ -4,7 +4,7 @@ class CidadeModel {
     required this.nome,
     required this.estado,
   });
-  late final int id;
+  late final dynamic id;
   late final String nome;
   late final CidadeModel estado;
 

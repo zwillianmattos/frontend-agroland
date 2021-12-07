@@ -28,7 +28,7 @@ class _MarketplaceSearchPageState
           elevation: 0,
           backgroundColor: Colors.transparent,
           centerTitle: true,
-          title: text("Pesquisar marketplace"),
+          title: text("Pesquisar na Loja"),
           bottom: PreferredSize(
             preferredSize: Size(double.infinity, 45),
             child: Container(

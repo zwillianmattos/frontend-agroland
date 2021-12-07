@@ -21,7 +21,7 @@ class _MarketplaceAnnouncesPageState
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text('Marketplace Announces'),
+        title: Text('Anúncios'),
       ),
       body: Observer(builder: (_) {
         if (controller.isLoading) {
@@ -30,10 +30,35 @@ class _MarketplaceAnnouncesPageState
           );
         }
 
+        if( controller.announces?.length == 0 ) {
+          return Center(
+            child: Text('Nenhum anúncio encontrado'),
+          );
+        }
+
         return ListView.builder(
           itemCount: controller.announces!.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
+              onLongPress: () {
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            leading: new Icon(Icons.remove_circle),
+                            title: new Text('Remover'),
+                            onTap: () {
+                              controller.removeAnnounce(index);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      );
+                    });
+              },
               title: Text(controller.announces![index].title.toString()),
               subtitle: Text("R\$ ${controller.announces![index].price}"),
               onTap: () async {

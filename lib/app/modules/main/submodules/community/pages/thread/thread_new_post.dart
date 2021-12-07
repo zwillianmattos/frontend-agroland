@@ -38,7 +38,7 @@ class _ThreadNewPostPageState
           elevation: 0,
           centerTitle: false,
           title: text(
-            'Nova publicacao',
+            'Nova publicação',
           ),
           actions: [
             IconButton(

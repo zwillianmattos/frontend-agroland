@@ -39,7 +39,7 @@ class _CulturesCategoryPageState
               return InkWell(
                 onTap: () {
                   Modular.to.pushNamed(
-                      "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].id}/items",
+                      "/cultures/${_culture.id}/${_culture.culturesCategoriesRels?[index].cultureCategory}/items",
                       forRoot: (IO.Platform.isAndroid || IO.Platform.isIOS)
                           ? true
                           : false,

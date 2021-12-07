@@ -12,6 +12,7 @@ class ProductSell {
   ProducerUser? producerUser;
   List<ProductCategories>? productCategories;
   List<ProductSellPhotos>? productSellPhotos;
+  int? excluded;
 
   ProductSell({
     this.id,
@@ -23,6 +24,7 @@ class ProductSell {
     this.producerUser,
     this.productCategories,
     this.productSellPhotos,
+    this.excluded,
   });
 
   @override
@@ -54,6 +56,7 @@ class ProductSell {
                     ProductSellPhotos.fromJson(e as Map<String, dynamic>))
                 .toList()
             : null,
+        excluded: json['excluded'] as int?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,6 +70,7 @@ class ProductSell {
         'product_sell_categories':
             productCategories?.map((e) => e.toJson()).toList(),
         'ProductSellPhotos': productSellPhotos?.map((e) => e.toJson()).toList(),
+        'excluded': excluded,
       };
 
   ProductSell copyWith({
@@ -79,6 +83,7 @@ class ProductSell {
     ProducerUser? producerUser,
     List<ProductCategories>? productCategories,
     List<ProductSellPhotos>? productSellPhotos,
+    int? excluded,
   }) {
     return ProductSell(
       id: id ?? this.id,
@@ -91,6 +96,7 @@ class ProductSell {
       producerUser: this.producerUser,
       productCategories: productCategories ?? this.productCategories,
       productSellPhotos: productSellPhotos ?? this.productSellPhotos,
+      excluded: excluded ?? this.excluded,
     );
   }
 }

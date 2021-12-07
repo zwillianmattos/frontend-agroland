@@ -82,21 +82,39 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      itemSubTitle(context, "Configurações", colorThird: false)
-                          .paddingOnly(
-                              left: spacing_standard_new,
-                              right: spacing_standard_new,
-                              top: 12,
-                              bottom: 12),
-                      subType(context, "Configurações de Conta", () {
-                        // AccountSettingsScreen().launch(context);
-                      },
+                     
+                      Row(
+                        children: <Widget>[
                           Icon(
                             Icons.settings,
                             color: Modular.get<UserPreferencesStore>().darkTheme
                                 ? color_white
                                 : blackColor,
-                          )),
+                          ).paddingRight(spacing_standard),
+                          Expanded(child: itemTitle(context, "Receber notificações")),
+                          Theme(
+                            data: Theme.of(context).copyWith(
+                              unselectedWidgetColor: color_textColorPrimary,
+                            ),
+                            child: Checkbox(
+                              activeColor: color_colorPrimary,
+                              checkColor: color_app_background,
+                              value: true,
+                              onChanged: (value) {
+                                print(value);
+                              
+                              },
+                            ),
+                          )
+                        ],
+                      )
+                          .paddingOnly(
+                              left: spacing_standard_new,
+                              right: spacing_control,
+                              top: spacing_control,
+                              bottom: spacing_control)
+                          .onTap(() {
+                      }),
                       Row(
                         children: <Widget>[
                           Icon(
@@ -130,34 +148,39 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                           .onTap(() {
                         Modular.get<UserPreferencesStore>().darkMode();
                       }),
-                      subType(
-                          context,
-                          "Linguagem",
-                          () {},
-                          Icon(
-                            Icons.language,
-                            color: Modular.get<UserPreferencesStore>().darkTheme
-                                ? color_white
-                                : blackColor,
-                          )),
-                      subType(context, "Ajuda", () {
-                        // HelpScreen().launch(context);
-                      },
-                          Icon(
-                            Icons.help,
-                            color: Modular.get<UserPreferencesStore>().darkTheme
-                                ? color_white
-                                : blackColor,
-                          )),
-                      itemSubTitle(context, "Termos").paddingOnly(
+                      // subType(
+                      //     context,
+                      //     "Linguagem",
+                      //     () {},
+                      //     Icon(
+                      //       Icons.language,
+                      //       color: Modular.get<UserPreferencesStore>().darkTheme
+                      //           ? color_white
+                      //           : blackColor,
+                      //     )),
+                      // subType(context, "Ajuda", () {
+                      //   // HelpScreen().launch(context);
+                      // // },
+                      //     Icon(
+                      //       Icons.help,
+                      //       color: Modular.get<UserPreferencesStore>().darkTheme
+                      //           ? color_white
+                      //           : blackColor,
+                      //     )),
+                      itemSubTitle(context, "Sobre").paddingOnly(
                           left: spacing_standard_new,
                           right: 12,
                           top: spacing_standard_new,
                           bottom: spacing_control),
-                      subType(context, "Termos e Condições", () {
-                        // TermsConditionsScreen().launch(context);
-                      }, null),
-                      subType(context, "Política De Privacidade", () {
+                       itemSubTitle(context, "Build 0.101").paddingOnly(
+                          left: spacing_standard_new,
+                          right: 12,
+                          top: spacing_standard_new,
+                          bottom: spacing_control),
+                      // subType(context, "Termos e Condições", () {
+                      //   // TermsConditionsScreen().launch(context);
+                      // }, null),
+                      subType(context, "Desenvolvedores", () {
                         // TermsConditionsScreen().launch(context);
                       }, null),
                       subType(context, "Sair", () {

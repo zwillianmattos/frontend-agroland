@@ -74,7 +74,9 @@ class _CultureDetailPageState
                       text(
                         "${controller.culturesCategoriesRels?.culturesContents?[i].description}",
                         bold: true,
-                        fontSize: 16,
+                        fontSize: 14,
+                        maxLine: 2,
+                        isLongText: true
                       ),
                     ],
                   ),

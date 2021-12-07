@@ -156,7 +156,7 @@ class _WeatherDetailPageState
                               children: [
                                 Column(children: [
                                   text(
-                                    "Sunrise",
+                                    "Nascer do Sol",
                                     fontSize: 14.0,
                                     bold: true,
                                   ),
@@ -167,7 +167,7 @@ class _WeatherDetailPageState
                                 ]),
                                 Column(children: [
                                   text(
-                                    "Sunset",
+                                    "Pôr do Sol",
                                     fontSize: 14.0,
                                     bold: true,
                                   ),
@@ -184,7 +184,7 @@ class _WeatherDetailPageState
                       SizedBox(
                         height: 22,
                       ),
-                      headingWidViewAll(context, "Proximos dias", () {},
+                      headingWidViewAll(context, "Próximos dias", () {},
                           desativaBotao: true),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,

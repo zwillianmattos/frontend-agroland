@@ -49,6 +49,14 @@ mixin _$MarketplaceAnnouncesStore on _MarketplaceAnnouncesStoreBase, Store {
     return _$loadAnnouncesAsyncAction.run(() => super.loadAnnounces());
   }
 
+  final _$removeAnnounceAsyncAction =
+      AsyncAction('_MarketplaceAnnouncesStoreBase.removeAnnounce');
+
+  @override
+  Future removeAnnounce(int id) {
+    return _$removeAnnounceAsyncAction.run(() => super.removeAnnounce(id));
+  }
+
   @override
   String toString() {
     return '''
