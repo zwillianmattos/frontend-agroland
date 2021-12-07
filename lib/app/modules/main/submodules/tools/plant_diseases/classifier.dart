@@ -21,7 +21,7 @@ abstract class Classifier implements IRecognition {
 
   final String _labelsFileName = 'assets/label.txt';
 
-  final int _labelsLength = 1001;
+  final int _labelsLength = 16;
 
   late var _probabilityProcessor;
 
@@ -102,9 +102,18 @@ abstract class Classifier implements IRecognition {
         .getMapWithFloatValue();
 
     print("$labeledProb");
-    final pred = getTopProbability(labeledProb);
+    
+    List<Category> categories = [];
 
-    return Category(pred.key, pred.value);
+    labeledProb.forEach((key, value) {
+      categories.add(Category(key, value));
+    });
+
+    categories.sort((a, b) => b.score.compareTo(a.score));
+    return categories;
+    // final pred = getTopProbability(labeledProb);
+
+    // return Category(pred.key, pred.value);
   }
 
   void close() {

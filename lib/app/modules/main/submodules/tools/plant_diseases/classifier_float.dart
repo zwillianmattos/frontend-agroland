@@ -12,5 +12,5 @@ class ClassifierFloat extends Classifier {
   NormalizeOp get preProcessNormalizeOp => NormalizeOp(127.5, 127.5);
 
   @override
-  NormalizeOp get postProcessNormalizeOp => NormalizeOp(0, 1);
+  NormalizeOp get postProcessNormalizeOp => NormalizeOp(0, 255);
 }

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:image/image.dart' as img;
+import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 import './plant_diseases/classifier.dart'
     if (dart.library.io) './plant_diseases/classifier.dart'
@@ -36,22 +37,25 @@ class _HomeViewState extends State<HomeView> {
 
   img.Image? fox;
 
-  dynamic category;
+  List<Category>? category;
 
   @override
   void initState() {
     super.initState();
-    _classifier = ClassifierQuant(numThreads: 4);
 
-    getImage();
+    setState(() {
+      _classifier = ClassifierQuant(numThreads: 4);
+      getImage();
+    });
   }
 
   Future getImage() async {
-    var directory = await getTemporaryDirectory();
-    await widget.imageParam.saveTo(directory.path + 'test.jpg');
+    Directory directory = await getTemporaryDirectory();
+    await widget.imageParam
+        .saveTo(directory.path + 'test${directory.hashCode}.jpg');
 
     setState(() {
-      _image = File(directory.path + 'test.jpg');
+      _image = new File(directory.path + 'test${directory.hashCode}.jpg');
       _imageWidget = Image.file(_image!);
       _predict();
     });
@@ -59,7 +63,8 @@ class _HomeViewState extends State<HomeView> {
 
   void _predict() async {
     img.Image imageInput = img.decodeImage(_image!.readAsBytesSync())!;
-    var pred = _classifier.predict(imageInput);
+    List<Category> pred = _classifier.predict(imageInput);
+
     setState(() {
       this.category = pred;
     });
@@ -102,26 +107,32 @@ class _HomeViewState extends State<HomeView> {
                 )
               : Container(
                   // color: color_app_background,
-                  child: Column(children: [
-                    SizedBox(
-                      height: 36,
-                    ),
-                    Text(
-                      category != null ? category!.label : '',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      category != null
-                          ? 'Precisão: ${category!.score.toStringAsFixed(3)}'
-                          : '',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ]),
-                )),
+                  child: ListView.builder(
+                  itemBuilder: (_, i) {
+                    return ListTile(
+                      title: text(
+                        category![i].label.toString(),
+                        fontSize: 14,
+                      ),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: LinearProgressIndicator(
+                              value: category![i].score,
+                              semanticsLabel: category![i].score.toStringAsFixed(3),  
+                            ),
+                          ),
+                          text(
+                        "${category![i].score.toStringAsFixed(2)}%",
+                        fontSize: 14,
+                      ),
+                        ],
+                      ),
+                    );
+                  },
+                  itemCount: category?.length,
+                ))),
     );
   }
 }

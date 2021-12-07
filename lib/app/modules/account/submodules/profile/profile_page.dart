@@ -1,3 +1,4 @@
+import 'package:agro_tools/app/core/services/notifications/notification_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -99,10 +100,9 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                             child: Checkbox(
                               activeColor: color_colorPrimary,
                               checkColor: color_app_background,
-                              value: true,
+                              value: Modular.get<NotificationService>().requiresConsent,
                               onChanged: (value) {
-                                print(value);
-                              
+                                Modular.get<NotificationService>().setRequiresConsent(value ?? false);
                               },
                             ),
                           )
@@ -114,6 +114,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                               top: spacing_control,
                               bottom: spacing_control)
                           .onTap(() {
+                            Modular.get<NotificationService>().setRequiresConsent(!Modular.get<NotificationService>().requiresConsent);
                       }),
                       Row(
                         children: <Widget>[

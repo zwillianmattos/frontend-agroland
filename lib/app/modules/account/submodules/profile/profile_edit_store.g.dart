@@ -54,6 +54,21 @@ mixin _$ProfileEditStore on _ProfileEditStoreBase, Store {
     });
   }
 
+  final _$formKeyAtom = Atom(name: '_ProfileEditStoreBase.formKey');
+
+  @override
+  GlobalKey<FormState> get formKey {
+    _$formKeyAtom.reportRead();
+    return super.formKey;
+  }
+
+  @override
+  set formKey(GlobalKey<FormState> value) {
+    _$formKeyAtom.reportWrite(value, super.formKey, () {
+      super.formKey = value;
+    });
+  }
+
   final _$uploadPhotoAsyncAction =
       AsyncAction('_ProfileEditStoreBase.uploadPhoto');
 
@@ -67,7 +82,8 @@ mixin _$ProfileEditStore on _ProfileEditStoreBase, Store {
     return '''
 isLoading: ${isLoading},
 account: ${account},
-userPhotoUrl: ${userPhotoUrl}
+userPhotoUrl: ${userPhotoUrl},
+formKey: ${formKey}
     ''';
   }
 }

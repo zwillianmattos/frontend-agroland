@@ -75,11 +75,14 @@ class _ProfileEditPageState
                       children: <Widget>[
                         profilePhoto,
                         Form(
+                          key: controller.formKey,
                             child: Column(children: <Widget>[
                           formField(
                             context,
                             "Email",
-                            onSaved: (String? value) {},
+                            onSaved: (String? value) {
+                              controller.account?.email = value;
+                            },
                             suffixIcon: Icons.mail_outline,
                             isEnabled: false,
                             initialValue: controller.account?.email
@@ -87,7 +90,9 @@ class _ProfileEditPageState
                           formField(
                             context,
                             "Senha",
-                            onSaved: (String? value) {},
+                            onSaved: (String? value) {
+                              controller.account?.password = value;
+                            },
                             suffixIcon: Icons.mail_outline,
                           ).paddingBottom(spacing_standard_new),
                         ])).paddingOnly(
@@ -99,7 +104,9 @@ class _ProfileEditPageState
                           width: double.infinity,
                           child: appButton(
                             textContent: "Salvar",
-                            onPressed: () {},
+                            onPressed: () {
+                              // controller.updateAccount();
+                            },
                           ).paddingOnly(
                               top: 30, left: 18, right: 18, bottom: 30),
                         )
