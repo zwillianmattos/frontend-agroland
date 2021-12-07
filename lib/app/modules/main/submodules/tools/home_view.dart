@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:agro_tools/app/core/widgets/widgets.dart';
+import 'package:agro_tools/app/modules/main/submodules/tools/plant_diseases/classifier_float.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
