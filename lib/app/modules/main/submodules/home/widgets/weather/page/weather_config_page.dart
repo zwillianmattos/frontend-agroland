@@ -199,7 +199,7 @@ class _WeatherConfigPageState
                           text(
                               "${element.results?.cid == 'local_atual' ? 'Local Atual - ' : ''} ${element.results?.cityName} "),
                           text(
-                            "${element.results?.temp}",
+                            "${element.results?.temp}°c",
                             fontSize: 32,
                           ),
                         ],

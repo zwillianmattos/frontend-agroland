@@ -11,6 +11,7 @@ import 'package:agro_tools/app/core/utils/user_preferences_store.dart';
 import 'package:agro_tools/app/core/widgets/widgets.dart';
 import 'package:agro_tools/app/modules/account/models/user.dart';
 import 'package:agro_tools/app/modules/account/submodules/profile/profile_store.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -61,9 +62,11 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                               fontSize: textSizeNormal,
                               fontFamily: fontBold,
                             ),
-                            text(controller.account!.email!,
-                                fontSize: textSizeSmall,
-                                fontFamily: fontMedium,)
+                            text(
+                              controller.account!.email!,
+                              fontSize: textSizeSmall,
+                              fontFamily: fontMedium,
+                            )
                           ],
                         ),
                       ),
@@ -83,7 +86,6 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                     
                       Row(
                         children: <Widget>[
                           Icon(
@@ -92,7 +94,9 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                                 ? color_white
                                 : blackColor,
                           ).paddingRight(spacing_standard),
-                          Expanded(child: itemTitle(context, "Receber notificações")),
+                          Expanded(
+                              child:
+                                  itemTitle(context, "Receber notificações")),
                           Theme(
                             data: Theme.of(context).copyWith(
                               unselectedWidgetColor: color_textColorPrimary,
@@ -100,9 +104,11 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                             child: Checkbox(
                               activeColor: color_colorPrimary,
                               checkColor: color_app_background,
-                              value: Modular.get<NotificationService>().requiresConsent,
+                              value: Modular.get<NotificationService>()
+                                  .requiresConsent,
                               onChanged: (value) {
-                                Modular.get<NotificationService>().setRequiresConsent(value ?? false);
+                                Modular.get<NotificationService>()
+                                    .setRequiresConsent(value ?? false);
                               },
                             ),
                           )
@@ -114,7 +120,9 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                               top: spacing_control,
                               bottom: spacing_control)
                           .onTap(() {
-                            Modular.get<NotificationService>().setRequiresConsent(!Modular.get<NotificationService>().requiresConsent);
+                        Modular.get<NotificationService>().setRequiresConsent(
+                            !Modular.get<NotificationService>()
+                                .requiresConsent);
                       }),
                       Row(
                         children: <Widget>[
@@ -173,16 +181,38 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileStore> {
                           right: 12,
                           top: spacing_standard_new,
                           bottom: spacing_control),
-                       itemSubTitle(context, "Build 0.101").paddingOnly(
-                          left: spacing_standard_new,
-                          right: 12,
-                          top: spacing_standard_new,
-                          bottom: spacing_control),
-                      // subType(context, "Termos e Condições", () {
-                      //   // TermsConditionsScreen().launch(context);
-                      // }, null),
+                      subType(context, "Faculdades Integradas de Bauru", () async {
+                        await launch("https://fibbauru.br/");
+                      }, null),
                       subType(context, "Desenvolvedores", () {
-                        // TermsConditionsScreen().launch(context);
+                        showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (BuildContext bc) {
+                              return Observer(builder: (_) {
+                                return Container(
+                                  child: ListView(
+                                    children: [
+                                      SizedBox(height: 40),
+                                      headingWidViewAll(
+                                          context, "Desenvolvedores", () {
+                                        Navigator.pop(context);
+                                      }, itemSubText: "Voltar"),
+                                      ListTile(
+                                        title: text("WILLIAN DE MATTOS SILVA"),
+                                      ),
+                                      ListTile(
+                                        title: text("LEONARDO NARCIZO BUENO"),
+                                      ),
+                                      ListTile(
+                                        title: Image.network(
+                                            "https://seeklogo.com/images/F/FIB_-_FACULDADES_INTEGRADAS_DE_BAURU-logo-518F6A8F50-seeklogo.com.png"),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              });
+                            });
                       }, null),
                       subType(context, "Sair", () {
                         Modular.get<UserPreferencesStore>().logOff();
